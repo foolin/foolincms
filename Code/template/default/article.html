@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /}</title>
+
+<style type="text/css">
+<!--
+.list {
+	font-size: 14px;
+	background:#CCC;
+}
+table.list{
+	border-collapse:collapse;
+}
+table.list td {
+	border:#093 2px solid;
+}
+-->
+</style>
+</head>
+
+<body>
+===========  文章 ================<br /><br /><br /><br />
+标题field：{field:title /}<br />
+内容field：{field : Content }<br />
+标题art：{art:title /}<br />
+标题article：{article:title /}<br /><br /><br /><br /><br />
+===========  图片 ================<br />
+标题：{field: Title /}<br />
+内容：{field: Intro }<br />
+标题pic：{pic:title /}<br />
+标题picture：{picture:title /}<br />
+标题img：{img:title /}<br />
+标题image：{img : title /}<br />
+-----------------------<br /><br /><br /><br />
+
+===========  公共属性 ================<br />
+	上一篇link：{tag:pre type="link"}<br />
+    上一篇title：{tag:pre type="title"}<br />
+    上一篇url：{tag:pre type="url"}<br />
+    上一篇id：{tag:pre type="id"}<br /><br /><br />
+------------------------------------<br />
+    下一篇link：{tag:next type="link"}<br />
+    下一篇title：{tag:next type="title"}<br />
+    下一篇url：{tag:next type="url"}<br />
+    下一篇id：{tag:next type="id"}<br />
+    下一篇：{tag:next}<br /><br /><br /><br /><br />
+===========  公共属性 ================<br /><br /><br /><br /><br />
+
+===========  文章属性 ================<br />
+	上一篇link：{art:pre type="link"}<br />
+    上一篇title：{art:pre type="title"}<br />
+    上一篇url：{art:pre type="url"}<br />
+    上一篇id：{article:pre type="id"}<br />
+------------------------------------<br />
+    下一篇link：{art:next type="link"}<br />
+    下一篇title：{article:next type="title"}<br />
+    下一篇url：{article:next type="url"}<br />
+    下一篇id：{article:next type="id"}<br />
+    下一篇：{article:next}<br />
+===========  文章属性 ================<br /><br /><br /><br /><br /><br /><br />
+
+===========  图片属性 ================<br />
+	上一篇link：{picture:pre type="link"}<br />
+    上一篇title：{pic:pre type="title"}<br />
+    上一篇url：{pic:pre type="url"}<br />
+    上一篇id：{pic:pre type="id"}<br /><br /><br />
+------------------------------------<br />
+    下一篇link：{pic:next type="link"}<br />
+    下一篇title：{picture:next type="title"}<br />
+    下一篇url：{picture:next type="url"}<br />
+    下一篇id：{picture:next type="id"}<br />
+    下一篇：{picture:next}<br />{tag:next}<br />>
+===========  图片属性 ================<br /><br /><br /><br /><br />
+{field:PicPath}<br />
+
+{if:True} True {else} False {/if}
+</body>
+</html>

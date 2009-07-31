@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /}</title>
+
+<style type="text/css">
+<!--
+.list {
+	font-size: 14px;
+	background:#CCC;
+}
+table.list{
+	border-collapse:collapse;
+}
+table.list td {
+	border:#093 2px solid;
+}
+-->
+</style>
+</head>
+
+<body>
+您的位置为：{sys:sitepath /}
+<div class="page">
+{tag:page/}
+</div>
+
+{list:list mode="sql" cache="1" row="1" Col="1" width="80%" class="list" ispage="1" sql="select * from mytags order by id desc" }
+
+	<div style="background:#CCC;">
+    [list:code len="111" clearhtml="true"]
+<br /><br /><br /><br /><br /><br /><br />
+    [list:field name="code" clearhtml="true"]<br />
+    </div>
+{/list:list}
+<div class="page">
+{tag:page/}
+</div>
+</body>
+</html>

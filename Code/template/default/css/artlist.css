@@ -1,0 +1,105 @@
+/*
+ Author: Foolin
+ E-mail: Foolin@126.com
+ Create Date: 2009-5-27
+*/
+.column_side {
+	float:left;
+	width:250px;
+}
+
+.column_main {
+	float:left;
+	width:650px;
+}
+
+.box{
+	margin:2px 2px 5px 2px;
+	border:2px solid #bfe599;
+	padding:1px;
+}
+
+.box .title{
+	height:25px;
+	background:#cbe8bb url(../images/box_title_bg.jpg);
+	padding:0px 5px;
+	line-height:25px;
+	color:#3fb14f;
+}
+
+.box .title .titletxt{
+	float:left;
+	padding-left:10px;
+	font-weight:bold;
+	font-size:14px;
+}
+
+.box .title .more{
+	float:right;
+}
+
+.box .content{
+	margin:0px;
+	padding:2px;
+	background:#e0efd1;
+	line-height:22px;
+}
+.box .content ul{
+	margin:0px;
+	padding:0px 5px;
+}
+.box .content li{
+	margin:0px;
+	padding:0px;
+	border-bottom:#CCC 1px dashed;
+	list-style:url(../images/dot.jpg) inside;
+}
+
+.list{
+	margin:2px 2px 5px 2px;
+	border:2px solid #bfe599;
+	font-size:14px;
+}
+
+.list .list_title{
+	background:url(../images/list_title.gif);
+	line-height:28px;
+	color:#FFF;
+	font-size:14px;
+	font-weight:bold;
+	padding-left:20px;
+}
+
+.list ul{
+	margin:0px;
+	padding:0px;
+}
+
+.list li{
+	margin:0px;
+	padding:0px;
+	line-height:25px;
+	border-bottom:#CCC 1px dashed;
+	list-style:url(../images/dot.jpg) inside;
+}
+
+.list table{
+	width:100%;
+}
+.list td{
+	line-height:22px;
+	border-bottom:#CCC 1px dashed;
+}
+.list .article{
+	background:url(../images/dot.jpg) no-repeat;
+	padding-left:18px;
+}
+
+.list .time{
+	width:15%;
+}
+
+.list .pagebar{
+	text-align:center;
+	padding:10px 0px;
+}

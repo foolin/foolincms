@@ -67,7 +67,7 @@ End Function
 '		getType -- 获取类型: 0 - id, 1 - Title, 2 - Url, 3 - Link
 '================================================================
 Function GetPreLink(ByVal id, ByVal srcType, ByVal getType)
-	Dim Rs,strSql,strTemp, tempLinkUrl, titleLength: titleLength = 15		'标题长度
+	Dim Rs,strSql,strTemp, tempLinkUrl, titleLength: titleLength = 25		'标题长度
 	If CInt(srcType) = 1  Then
 		tempLinkUrl = "picture.asp"
 		strSql = "Select top 1 ID,Title from Picture  where ID < " & id & " order by ID desc"
@@ -114,7 +114,7 @@ End Function
 '		getType -- 获取类型: 0 - id, 1 - Title, 2 - Url, 3 - Link
 '================================================================
 Function GetNextLink(ByVal id, ByVal srcType, ByVal getType)
-	Dim Rs,strSql,strTemp, tempLinkUrl, titleLength: titleLength = 15		'标题长度
+	Dim Rs,strSql,strTemp, tempLinkUrl, titleLength: titleLength = 25		'标题长度
 	If CInt(srcType) = 1 Then
 		tempLinkUrl = "picture.asp"
 		strSql = "Select top 1 ID,Title from Picture where ID > " & ID & " order by ID"
@@ -177,7 +177,7 @@ Function GetColLink(ByVal id, ByVal colType)
 			strLink =  GetColLink(Rs("ParentID"), colType) & SitePathSplit & strLink
 		End If
 	Else
-		strLink = ""
+		strLink = "<a href=""" & strUrl & """>列表</a>"
 	End If
 	Rs.Close: Set Rs = Nothing
 	GetColLink = strLink

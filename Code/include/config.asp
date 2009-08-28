@@ -9,17 +9,22 @@ Dim DBPath			'Access数据库路径
 Dim SiteName		'网站名称
 	SiteName = "E酷网"
 	
-Dim HttpUrl			'网站网址
-	HttpUrl = "http://localhost/"
-	
-Dim InstallDir		'安装目录，前面不用加/
-	InstallDir = "test/"
-		
-Dim TemplatePath	'模板路径，前面不用加/
-	TemplatePath = "template/default/"
 	
 Dim SiteKeywords	'网站关键词，多用逗号分隔。
 	SiteKeywords = "E酷网,E酷工作室,CMS,eekku.com"
+	
+Dim HttpUrl			'网站网址前缀，前面要加http
+	HttpUrl = "http://localhost/"
+	
+Dim InstallDir		'安装目录，后面不用加/
+	InstallDir = "/eekku"
+		
+Dim TemplatePath	'模板路径，后面不用加/
+	TemplatePath = "/template/default"
+
+	
+Dim IsHideTempPath	'是否隐藏模板路径，若隐藏路径，则相对页面载入速度会慢一些
+	IsHideTempPath = 0
 
 Dim IsCache	'是否缓存模板, 1表示缓存，0表示不缓存
 	IsCache = 0

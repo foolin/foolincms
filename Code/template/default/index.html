@@ -3,39 +3,245 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>{sys:sitename /}</title>
-
-<style type="text/css">
-<!--
-.list {
-	font-size: 14px;
-	background:#CCC;
-}
-table.list{
-	border-collapse:collapse;
-}
-table.list td {
-	border:#093 2px solid;
-}
--->
-</style>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-您的位置为：{sys:sitepath /}
-<div class="page">
-{tag:page/}
-</div>
-
-{list:list mode="sql" cache="1" row="1" Col="1" width="80%" class="list" ispage="1" sql="select * from mytags order by id desc" }
-
-	<div style="background:#CCC;">
-    [list:code len="111" clearhtml="true"]
-<br /><br /><br /><br /><br /><br /><br />
-    [list:field name="code" clearhtml="true"]<br />
+<div id="wrapper">
+    {include file="header.html"/}
+    <!--menu start--->
+    <div id="menu">
+            <div class="pannel">
+                    <ul>
+                    <li class="on"><a href="index.asp">首页</a></li>
+                    <li><a href="{sys:pluginurl /}blog">博客</a></li>
+                    <li><a href="artlist.asp">日志</a></li>
+                    <li><a href="piclist.asp">图片相册</a></li>
+                    <li><a href="#">作品下载</a></li>
+                    <li><a href="#">个人档案</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">留言板</a></li>
+                    <li><a href="http://www.gzhu.edu.cn" target="_blank">友情链接</a></li>
+                    <li><a href="list.html">网站地图</a></li>
+                    </ul>
+                    <div class="clear"></div>
+            </div>
     </div>
-{/list:list}
-<div class="page">
-{tag:page/}
+    <!--menu end--->
+    
+    <!--main start--->
+    <div id="main">
+    
+          <!--container1 start--->
+          <div class="container">
+            
+                <!--notice--->
+                <div class="notice"><marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollAmount="4" scrollDelay="80">这是滚动公告栏：最新新闻和消息新闻，The last news is here!</marquee></div>
+                    
+                    <!--column_A start--->
+                <div class="column_A">
+                            <!--栏目-->
+                            <div class="box fixheight">
+                              <div class="title"><span class="titletxt">图片新闻</span><span class="more"><a href="list.html">更多>></a></span></div>
+                                <div class="content">
+                                    <!-- picnews start -->
+                                    <div class="picnews">
+                                        
+            <SCRIPT type=text/javascript>
+            <!--
+            var order=new Array('','1','2','3','4','5');var xb;
+            var pics="";
+            var links="";
+            var texts="";
+            var imgUrl=new Array();
+            var imgLink=new Array();
+            var imgText=new Array();
+			{list:imgart src="imgart" row="5" col="1"}
+            imgText[[imgart:i]]='[imgart:title]';
+            imgUrl[[imgart:i]]='[imgart:picpath]';
+            imgLink[[imgart:i]]='[imgart:url]';
+			{/list:imgart}
+
+
+            var focus_width=285;
+            var focus_height=230;
+            var text_height=30;
+        //如果是IE浏览器
+        if (navigator.userAgent.indexOf("MSIE")>= 0) {
+          focus_width=285;
+          focus_height=215;
+          text_height=25;
+        }
+            var swf_height = focus_height+text_height
+            var j=0;
+                for (i=1;i<=5;i++) {
+                        xb=order[i];
+                    if( (imgUrl[xb]!='') && (imgLink[xb]!='') ) {
+                                     if(j !=0){
+                             pics=pics+'|';
+                             links=links+'|';
+                             texts=texts+'|';
+                          }
+              pics=pics+imgUrl[xb];
+                                     links=links+imgLink[xb];
+                                      texts=texts+imgText[xb];
+                          j++;
+                    } 
+                }	
+             document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'">');
+             document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="images/pixviewer.swf"><param name="quality" value="high"><param name="bgcolor" value="#e0efd1">');
+            document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+            document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">');
+            document.write('<embed src="images/pixviewer.swf" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'" menu="false" bgcolor="#e0efd1" quality="high" width="'+ focus_width +'" height="'+ focus_height +'" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');		document.write('</object>');
+            //-->
+            </SCRIPT>
+                          </div>
+                                        <!-- picnews end -->
+                                </div>
+                            </div>
+                            
+                            <!--栏目-->
+                       {list:column mode="table" table="ArtColumn"  Where="ParentID=0"  row="10" order="ID"}
+                       	{if:[column:i] mod 2 = 0}
+                            <div class="box fixheight">
+                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
+                                <div class="content">
+                                  <ul>
+                                  {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
+                                      <li><a href="[art:url]" title="">[art:title len="15" lenext="..."]</a></li>
+                                  {/list:art}
+                                    </ul>
+                                </div>
+                            </div>
+                       {/if}
+   					{/list:column}
+                            
+
+                    </div>
+                    <!--column_A end--->
+                    
+                    <!--column_main start--->
+                    <div class="column_main">
+                            <!--栏目-->
+                       {list:column mode="table" table="ArtColumn" Where="ParentID=0" row="10" order="ID"}
+                       
+                       	<!--输出最新栏目-->
+                       	{if: [column:num] > 1 And [column:num] mod 2 = 0 And [column:i] = 1}
+                            <div class="box fixheight">
+                              <div class="title"><span class="titletxt">最新文章</span><span class="more"><a href="artlist.asp">更多>></a></span></div>
+                                <div class="content">
+                                  <table>
+                                  {list:art src="art" row="10" col="1" order="last"}
+                                      <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
+                                  {/list:art}
+                                    </table>
+                                </div>
+                            </div>
+                       {/if}
+                       
+                       	<!--输出奇数栏目-->
+                       	{if: [column:i] mod 2 = 1}
+                            <div class="box fixheight">
+                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
+                                <div class="content">
+                                  <table>
+                                  {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
+                                      <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
+                                  {/list:art}
+                                    </table>
+                                </div>
+                            </div>
+                       {/if}
+   					{/list:column}
+
+                 
+                    </div>
+                    <!--column_main end--->
+                    
+                    <!--column_B start--->
+                    <div class="column_B">
+                            <!--栏目-->
+                            <div class="box fixheight">
+                                    <div class="title">相关导航</div>
+                                    <div class="content">
+                                            <div class="friendlinks">
+                                                  <a href="#"> -==- 广大校史 -==- </a><br />
+                                                  <a href="#"> -==- 数字档案馆 -==- </a> <br />
+                                                  <a href="#"> -==- 专题展览 -==- </a><br />
+                                            </div>
+                                    </div>
+                                    <div class="title">名人档案</div>
+                                    <div class="content">
+                                            <div class="friendlinks">
+                                                  <a href="#"> -==- 历任校馆领导 -==- </a><br />
+                                                  <a href="#"> -==- 院士 -==- </a> <br />
+                                                  <a href="#"> -==- 资深教授 -==- </a><br />
+                                                  <a href="#"> -==- 杰出校友 -==- </a><br />
+                                            </div>
+                                    </div>
+                            </div>  
+                            <!--栏目-->
+                            <div class="box fixheight">
+                                    <div class="title">联系方式</div>
+                                    <div class="content">
+                                            <div class="friendlinks">
+                                                    地点：广州大学图书馆后门 <br />
+                                                    电话：39341141 <br /><br /><br />
+                                                    
+                                            </div>
+                                    </div>
+                                    <div class="title">校内连接</div>
+                                    <div class="content">
+                                            <div class="friendlinks">
+                                                  <a href="http://www.gzhu.edu.cn"> -==- 广州大学主页 -==- </a><br />
+                                                  <a href="http://lib.gzhu.edu.cn"> -==- 广大图书馆 -==- </a> <br />
+                                                  <a href="http://news.gzhu.edu.cn"> -==- 广大新闻网 -==- </a><br />
+                                                  <a href="http://bbs.gzhu.edu.cn"> -==- 广州大学论坛 -==- </a><br />
+                                            </div>
+                                    </div>
+                            </div>
+                            
+                            <!--栏目-->
+                            <div class="box">
+                                    <div class="title">友情连接</div>
+                                      <div class="content">
+                                          <div class="friendlinks">
+												{my:indexFriendLink /}
+                                            </div>
+                                      </div>
+                            </div>
+                            
+                    </div>
+                   <!--column_B end--->
+                   <div class="clear"></div>
+            </div>
+            <!--container1 end--->
+            
+            
+          <!--container start--->
+          <div class="container">
+                    <!--栏目-->
+                    <div class="box">
+                            <div class="title">最新图片</div>
+                            <div class="content">
+                                <div style="text-align:center;">
+                                {list:pic src="pic" row="5" col="5" order="last"}
+                                <a href="[pic:url]"><img src="[pic:SmallPicPath]" class="img" width="140" height="100" /></a> 
+                                {/list:pic}
+                                </div>
+                            </div>
+                    </div>
+          </div>
+          <!--container2 end--->
+      
+    </div>
+    <!--main end--->
+    
+    <!--footer start--->
+	{include file="footer.html" /}
+    <!--footer end--->
 </div>
 </body>
 </html>
+<!--- 制作：刘付灵  E-mail:Foolin@126.com --->

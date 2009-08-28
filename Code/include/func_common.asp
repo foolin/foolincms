@@ -28,9 +28,9 @@ Function DB(Byval SqlStr, Byval SQLType)
 End Function
 
 '关闭数据库
-Sub Cclose()
-	conn.close
-	set conn=Nothing
+Sub ConnClose()
+	'根据测试：关闭后VarType(conn)=9，而不关闭，则为VarType(conn)=8
+	If VarType(conn) = 8 Then Conn.close: Set Conn = Nothing
 End Sub
 
 '过滤SQL非法字符
@@ -44,7 +44,7 @@ Function FilterStr(ChkStr)
 	   Str = replace(Str,"'","")
 	   Str = replace(Str,";","")
 	   Str = replace(Str,"-","")
-	   checkStr = Str
+	   FilterStr = Str
 	End If
 End Function
 
@@ -90,6 +90,12 @@ End Function
 '警告字符：strWarn-输入需要警告的文字，返回红色字体
 Function Warn(strWarn)
 	Warn = "<font color=red>" & strWarn & "</font>"
+End Function
+
+'警告字符：strWarn-输入需要警告的文字，返回红色字体
+Function ErrMsg(str)
+	Response.Write("<font color=red>" & str & "</font>")
+	Response.End()
 End Function
 
 ' IIF
@@ -276,7 +282,7 @@ Function ArtPath(ByVal id)
 		strPath = ToPath(IndexPath, GetColLink(Rs("ColID"), 0))
 		strPath = ToPath(strPath, "文章浏览")
 	Else
-		strPath = ""
+		strPath = "文章浏览"
 	End If
 	Rs.Close: Set Rs = Nothing
 	ArtPath = strPath
@@ -296,10 +302,29 @@ Function PicPath(ByVal id)
 		strPath = ToPath(IndexPath, GetColLink(Rs("ColID"), 1))
 		strPath = ToPath(strPath, "图片浏览")
 	Else
-		strPath = ""
+		strPath = "图片浏览"
 	End If
 	Rs.Close: Set Rs = Nothing
 	PicPath = strPath
+End Function
+
+'---------------------------------------------------
+'	函数：	DiyPagePath
+'	功能：	栏目链接导航
+'	参数：	id - 页面id
+'---------------------------------------------------
+Function DiyPagePath(ByVal id)
+	Dim Rs, strSql, strPath
+	If Len(id) = 0 Or Not IsNumeric(id) Then DiyPagePath = "": Exit Function
+	strSql = "SELECT Title FROM DiyPage WHERE ID = " & id
+	Set Rs = DB(strSql, 1)
+	If Not Rs.Eof Then
+		strPath = ToPath(IndexPath, Rs("Title"))
+	Else
+		strPath = "自定义页面"
+	End If
+	Rs.Close: Set Rs = Nothing
+	DiyPagePath = strPath
 End Function
 
 '---------------------------------------------------

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /}</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/artlist.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.picList {
+	font-size: 14px;
+	padding:0px;
+}
+.picList dl{ margin:5px;}
+.picList dl dd{ margin:5px;}
+-->
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+	<!--header start--->
+    {include file="header.html"/}
+    <!--header end--->
+    
+    <!--menu start--->
+    <div id="menu">
+            <div class="pannel">
+                    <ul>
+                    <li><a href="index.asp">首页</a></li>
+                    <li><a href="blog.asp">博客</a></li>
+                    <li><a href="artlist.asp">日志</a></li>
+                    <li class="on"><a href="piclist.asp">图片相册</a></li>
+                    <li><a href="#">作品下载</a></li>
+                    <li><a href="#">个人档案</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">留言板</a></li>
+                    <li><a href="http://www.gzhu.edu.cn" target="_blank">友情链接</a></li>
+                    <li><a href="list.html">网站地图</a></li>
+                    </ul>
+                    <div class="clear"></div>
+            </div>
+    </div>
+    <!--menu end--->
+    
+    <!--main start--->
+    <div id="main">
+    	<div class="container">
+        
+        		<!--notice--->
+        		<div class="location">
+                	你现在的位置：{sys:sitepath /}
+                </div>
+                
+				<div class="column_side">
+                
+                        <!--栏目-->
+                        <div class="box">
+                          <div class="title"><span class="titletxt">栏目导航</span></div>
+                            <div class="content">
+                                <ul>
+                                {list:column mode="table" row="10" col="1"  table="PicColumn" where="ParentID={sys:id /}" order="id"}
+                                	<li><a href="artlist.asp?id=[column:id]" title="">[column:name]</a></li>
+                                    {if: [column:ParentID] = 0}
+                                        {list:child mode="table" row="10" col="1"  table="PicColumn" where="ParentID=[column:id]" order="id"}
+                                        <li>|-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
+                                        {/list:child} 	
+                                    {/if}
+								{/list:column}
+                                {if: {sys:id /} <> 0 }
+                                 	<li> <== <a href="artlist.asp" title="">返回父栏目</a></li>
+                                 {/if}
+                                </ul>
+                            </div>
+                        </div>
+                
+                        
+                </div>
+                <div class="column_main">
+                		<div class="list">
+                            <div class="list_title">图片列表</div>
+                                {list:pic src="pic" column="auto" class="picList"  row="5" col="3" ispage="true"}
+                                    <dl>
+                                    <dd><a href="[pic:url]"><img src="[pic:SmallPicPath]" class="img" width="140" height="100" /></a> </dd>
+                                    <dd><a href="[pic:url]">[pic:title]</a> </dd>
+                                    </dl>
+                                {/list:pic}
+                           <div class="pagebar">{tag:page /}</div>
+                        </div>
+               </div>
+               <div class="clear"></div>
+        </div>
+    </div>
+    <!--main end--->
+    
+    <!--footer start--->
+	{include file="footer.html" /}
+    <!--footer end--->
+</div>
+</body>
+</html>
+<!--- 制作：刘付灵  E-mail:Foolin@126.com --->

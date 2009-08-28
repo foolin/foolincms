@@ -1,21 +1,18 @@
 <!--#include file="include/include.asp"-->
 <%
-Dim page: page = CPage(request("page"))
-Dim id: id = CInt(Request("id"))
+Dim page: page = CPage(Req("page"))	'当前页数
+Dim id: id = Req("id")
+If Len(id) = 0 Or Not IsNumeric(id) Then ErrMsg("id参数错误！")
+If InStr(id, ",") > 0 Then id = Mid(id, 1, InStr(id, ",") - 1)
+Dim SitePath: SitePath = ArtPath(id)	'当前路径
 
 Dim tpl	'模板类实例
-Set tpl = New TemplateClass
-	tpl.Page = page					'设置当前页
+Set tpl = New ClassTemplate
+	tpl.Page = page						'设置当前页
 	Call tpl.Load("article.html")		'载入模板
-	'Call tpl.Parser_Run()			'运行标签分析
-	Call tpl.Parser_Field(id, False)	'运行标签field分析
-	Response.Write(tpl.Content)		'输出内容
+	Call tpl.Compile_Field(id, False)	'运行标签分析
+	Response.Write(tpl.Content)			'输出内容
 Set tpl = Nothing
 
-Response.Write GetPreLink(10, 0, 2) & "<br>"
-
-Response.Write GetNextLink(10, 0, 2) & "<br>"
-
-Response.Write( "运行速度" & RunTime() & "毫秒")
-
+Call ConnClose()	'关闭连接
 %>

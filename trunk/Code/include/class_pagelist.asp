@@ -1,13 +1,13 @@
 <%
 '======================================
-' File Name：	class_pagelist.asp
+' File Name：	ClassPagelist.asp
 ' Purpose：		分页类
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Createed on: 	2009-7-21 11:08:14
 ' Updated on: 	2009-7-23 11:39:51(修正GetPageUrl网址带参数出现丢失参数bug)
 '======================================
-Class PageListClass
+Class ClassPageList
     Dim ID ' 主键,默认为 ID
     Dim Field ' 字段,默认为 *
     Dim Table ' 数据表,不可为空

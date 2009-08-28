@@ -1,6 +1,6 @@
 <%
 '=========================================================
-' File Name：	class_template.asp
+' File Name：	ClassTemplate.asp
 ' Purpose：		模板类，处理标签解析执行
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
@@ -10,7 +10,7 @@
 ' Notice:			
 '=========================================================
 
-Class TemplateClass
+Class ClassTemplate
 	
 	'类成员
 	Private mReg		'正则表达式对象
@@ -51,13 +51,34 @@ Class TemplateClass
 	
 	'--------------------------------------------------------------
 	' Function name：	Load()
-	' Description: 		载入模板
+	' Description: 		载入模板方式一（要写路径）
 	' Params: 			templtateFile - 载入的模板路径
 	' Create on: 		2009-7-17 18:23:45
 	' Notice:			
 	'--------------------------------------------------------------
-	Public Function Load(ByVal templateFile)
-		mTemplate = TemplatePath & templateFile
+	Public Function Load(ByVal tplFile)
+		mTemplate = tplFile
+		If IsCache = 1 Then
+			If ChkCache("Template_" & Server.Mappath(mTemplate)) Then
+				mContent = GetCache("Template_" & Server.Mappath(mTemplate))
+			Else
+				Call LoadTemplate()
+				Call SetCache("Template_" & Server.Mappath(mTemplate), mContent)
+			End If
+		Else
+			Call LoadTemplate()
+		End If
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	LoadTpl()
+	' Description: 		载入模板方式二，直接写模板名称即可
+	' Params: 			templtateFile - 载入的模板文件名
+	' Create on: 		2009-7-17 18:23:45
+	' Notice:			
+	'--------------------------------------------------------------
+	Public Function LoadTpl(ByVal tplFile)
+		mTemplate = TemplatePath & "/" & tplFile
 		If IsCache = 1 Then
 			If ChkCache("Template_" & Server.Mappath(mTemplate)) Then
 				mContent = GetCache("Template_" & Server.Mappath(mTemplate))
@@ -72,20 +93,87 @@ Class TemplateClass
 	
 	
 	'--------------------------------------------------------------
-	' Function name：	Parser_Compile()	
-	' Purpose: 			调用分析标签执行
+	' Function name：	Compile_Index()	
+	' Purpose: 			首页调用标签执行，注意执行顺序
+	' Author:			Foolin
+	' Create on: 		2009-7-31 19:07:19
+	' Params:	
+	' Return:							
+	'--------------------------------------------------------------
+	Public Function Compile_Index()
+		Call Parser_Include(3)	'执行包含文件分析处理
+		Call Parser_MyTag()		'执行自定义标签分析处理
+		Call Parser_Sys()		'执行系统标签分析处理
+		Call Parser_List(0)		'执行List列表标签分析
+		Call Parser_IF()		'调用If标签分析
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	Compile_List()	
+	' Purpose: 			图片（文章）列表调用标签执行，注意执行顺序
+	' Author:			Foolin
+	' Create on: 		2009-7-31 19:12:02
+	' Params:			ColId - 栏目名称
+	' Return:							
+	'--------------------------------------------------------------
+	Public Function Compile_List(ByVal ColId)
+		Call Parser_Include(3)	'执行包含文件分析处理
+		Call Parser_MyTag()		'执行自定义标签分析处理
+		Call Parser_Sys()		'执行系统标签分析处理
+		Call Parser_List(ColId)		'执行List列表标签分析
+		Call Parser_IF()	
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	Compile_Field()	
+	' Purpose: 			文章（图片）调用标签执行，注意执行顺序
 	' Author:			Foolin
 	' Create on: 		2009-7-18 21:23:58
-	' Params:	
+	' Params:			id - 图片或者文章id, blnIsPic --- 布尔值：True -- 图片，False -- 文章
 	' Return:			
 	' Modify log:					
 	'--------------------------------------------------------------
-	Public Function Parser_Compile()
-		Call Parser_Include(2)	'执行包含文件分析处理
-		Call Parser_MyTag()	'执行自定义标签分析处理
+	Public Function Compile_Field(ByVal id, ByVal blnIsPic)
+		Call Parser_Include(3)	'执行包含文件分析处理
+		Call Parser_MyTag()		'执行自定义标签分析处理
 		Call Parser_Sys()		'执行系统标签分析处理
-		Call Parser_List()		'执行List列表标签分析
+		Call Parser_List(-1)		'执行List列表标签分析
+		Call Parser_Field(id, blnIsPic)	'执行Field标签标签分析
 		Call Parser_IF()	
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	Compile_Field()	
+	' Purpose: 			文章（图片）调用标签执行，注意执行顺序
+	' Author:			Foolin
+	' Create on: 		2009-7-31 19:12:08
+	' Params:			id - 页面id
+	' Return:			
+	' Modify log:					
+	'--------------------------------------------------------------
+	Public Function Compile_DiyPage(ByVal id)
+		Call Parser_DiyPage(id)		'执行DiyPage标签分析
+		Call Parser_Include(3)	'执行包含文件分析处理
+		Call Parser_MyTag()		'执行自定义标签分析处理
+		Call Parser_Sys()		'执行系统标签分析处理
+		Call Parser_List(-1)		'执行List列表标签分析
+		Call Parser_IF()	
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	Compile_Plugin()	
+	' Purpose: 			插件调用标签执行，注意执行顺序
+	' Author:			Foolin
+	' Create on: 		2009-8-7
+	' Params:	
+	' Return:							
+	'--------------------------------------------------------------
+	Public Function Compile_Plugin()
+		Call Parser_Include(3)	'执行包含文件分析处理
+		Call Parser_MyTag()		'执行自定义标签分析处理
+		Call Parser_Sys()		'执行系统标签分析处理
+		Call Parser_List(0)		'执行List列表标签分析
+		Call Parser_IF()		'调用If标签分析
 	End Function
 	
 
@@ -133,7 +221,7 @@ Class TemplateClass
 			mContent = Replace(mContent, Match.Value, incContent) ' 替换
 			If Err Then Err.Clear: Response.Write Err.Description & Warn("{include}格式不合法，请检查！"): Response.End
 		Next
-		Call Parser_Include(nLayer - 1)	'递归调用
+		If RegExists("\{include(.+?)\}", mContent) Then Call Parser_Include(nLayer - 1)	'递归调用
 	End Function
 	
 
@@ -213,7 +301,7 @@ Class TemplateClass
 				tagValue = ""
 			End If
 			mContent = Replace(mContent, Match.Value, tagValue) ' 替换
-			If Err Then Err.Clear: Response.Write Warn("{my}格式不合法，请检查！"): Response.End
+			If Err Then Response.Write Warn("{my}格式不合法，请检查！" & Err.Number & Err.Source  & Err.Description & Err ): Err.Clear: Response.End
 		Next
 	End Function
 	
@@ -246,7 +334,12 @@ Class TemplateClass
 			If Err Then Err.Clear: Response.Write Warn("{sys}格式不合法，请检查！"): Response.End
 		Next
 		mReg.pattern = "<(.*?)(src=|href=|value=)""(images/|css/|js/|scripts/)(.*?)""(.*?)>"
-		mContent = mReg.replace(mcontent, "<$1$2""skin.asp?path=$3$4""$5>")
+		If IsHideTempPath = 1 Then
+			mContent = mReg.replace(mcontent, "<$1$2""skin.asp?path=$3$4""$5>")
+		Else
+			mContent = mReg.replace(mcontent, "<$1$2""" & TemplatePath & "/$3$4""$5>")
+		End If
+		
 	End Function
 		
 	
@@ -257,10 +350,10 @@ Class TemplateClass
 	' Create on: 		2009-7-21 18:26:31
 	' Params:			none
 	' Return:			none
-	' Modify log:		
+	' Modify log:		增加ColId参数，增加列表Column="auto"功能。
 	' Notice:						
 	'--------------------------------------------------------------
-	Public Function Parser_List()
+	Public Function Parser_List(ByVal ColId)
 		On Error Resume Next
 		Dim Matches, Match, strListName, strAtrr, strInnerText
 		Dim tagMode, tagCache, tagRow, tagCol, tagClass, tagWidth, tagIsPage	'公共属性
@@ -323,19 +416,27 @@ Class TemplateClass
 					tagWhere = " State = 1 "
 				End If
 				If Len(tagColumn) > 0 Then
-					 tagWhere = tagWhere & " AND ColID IN (" & tagColumn & ") "
+					If LCase(tagColumn) <> "auto" Then
+						tagWhere = tagWhere & " AND ColID IN (" & tagColumn & ") "
+					ElseIf  LCase(tagColumn) = "auto" And ColId > 0 Then
+					 	tagWhere = tagWhere & " AND ColID IN (" & ColId & ") "
+					End If
 				End If
 				Select Case LCase(tagSrc)
 					Case "image", "pic", "picture"
 						tagTable = "Picture"
-						If Len(tagColumn) > 0 Then
-							tagWhere = tagWhere & " AND "
-							If Not IsNumeric(tagColumn) Then
-								tagWhere = " ColID In (" & tagColumn & ") "
-							Else
-								tagWhere = " ColID=" & tagColumn & " "
-							End If
-						End If
+						'If Len(tagColumn) > 0 Then
+							'tagWhere = tagWhere & " AND "
+							'If Not IsNumeric(tagColumn) Then
+								'tagWhere = " ColID In (" & tagColumn & ") "
+							'Else
+								'tagWhere = " ColID=" & tagColumn & " "
+							'End If
+							'If IsNumeric(tagColumn) Then
+								'tagWhere = " ColID=" & tagColumn & " "
+							'End If
+
+						'End If
 					Case "imgart", "picart"
 						tagTable = "Article"
 						tagWhere = tagWhere & " AND PicPath<>'' "
@@ -373,7 +474,7 @@ Class TemplateClass
 				strTempValue = ""
 				'是否为分页
 				If tagIsPage = True Then
-					Set objRs = New PageListClass
+					Set objRs = New ClassPageList
 					objRs.Result = 1
 					objRs.Sql = tagSQL
 					objRs.PageSize = tagRow * tagCol 
@@ -385,7 +486,14 @@ Class TemplateClass
 				If Err Then Response.Write Warn("模板中{list}标签属性SQL出错[" & tagSQL & "] <br /><br />错误描述 : " & Err.Description): Response.End
 				'如果tagCol＞1则表格形式输出
 				If tagCol > 1 Then strTempValue = strTempValue & "<table width=""" & tagWidth & """ " & tagClass & ">" & vbCrLf
+
 				Session(CacheFlag & "List_i")  = 0
+				If tagIsPage = True Then	'判断是否分页
+					Session(CacheFlag & "List_num") = objRs.Data.RecordCount 
+				Else
+					Session(CacheFlag & "List_num") = objRs.RecordCount 
+				End If
+				If Session(CacheFlag & "List_num") > tagRow * tagCol Then Session(CacheFlag & "List_num") = tagRow * tagCol
 				j = 0	'判断col变量
 				For i = 1 To tagRow * tagCol	'循环输出记录
 					If tagIsPage = True Then	'判断是否分页
@@ -446,7 +554,7 @@ Class TemplateClass
 			If Err Then Response.Write Err.Description & "<br />" : Err.Clear: Response.Write  Warn("{list}格式不合法，请检查！"): Response.End
 		Next
 		' 多次调用，列表嵌套
-		If RegExists("\{list:([\S^\}]*)(.+?)\}([\s\S]*?)\{/list:\1\}", mContent) Then Call Parser_List()
+		If RegExists("\{list:([\S^\}]*)(.+?)\}([\s\S]*?)\{/list:\1\}", mContent) Then Call Parser_List(ColId)
 	End Function
 	
 
@@ -472,6 +580,12 @@ Class TemplateClass
 		End If
 		Set objRs = DB(strSql, 1)
 		If objRs.Eof Then Response.Write  Warn("不存在id[" & id & "]记录！"): Response.End
+		'更新点击率
+		If blnIsPic Then
+			Call DB("UPDATE Picture SET Hits = Hits + 1 WHERE ID = " & objRs("ID"), 1)
+		Else
+			Call DB("UPDATE Article SET Hits = Hits + 1 WHERE ID = " & objRs("ID"), 1)
+		End If
 		'判断是否存在{field}
 		Call ReplaceFieldTags(objRs, "field", blnIsPic)
 		Call ReplaceFieldTags(objRs, "tag", blnIsPic)
@@ -545,7 +659,7 @@ Class TemplateClass
 			'If Len(tagName) = 0 Then Exit For	'标签名称
 			tagAttrs = Trim(Match.SubMatches(0)) 	'标签属性
 			Select Case LCase(tagName)
-			Case "titleurl"
+			Case "url"
 				If srcType = "article" Then
 					strTemp = Replace(strTemp, Match.Value, "article.asp?id=" & objRs("ID"))
 				ElseIf srcType = "picture" Then
@@ -569,8 +683,10 @@ Class TemplateClass
 				Else
 					strTemp = Replace(strTemp, Match.Value, Warn(Match.Value))
 				End If
-			Case "i"
+			Case "i"	'i为输出序号
 				strTemp = Replace(strTemp, Match.Value, Session(CacheFlag & "List_i"))
+			Case "num"	'记录总数
+				strTemp = Replace(strTemp, Match.Value, Session(CacheFlag & "List_num"))
 			Case "field"	'字段名：格式[listname:field name=""]
 				If Len(tagAttrs) > 0 Then tagName = GetAttrValue(tagAttrs, "name", False)
 				If Len(tagName) > 0 Then

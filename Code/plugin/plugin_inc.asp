@@ -1,0 +1,10 @@
+<!--#include file="../include/config.asp"-->
+<!--#include file="../include/const.asp"-->
+<!--#include file="plugin_conn.asp"-->
+<!--#include file="../include/func_common.asp"-->
+<!--#include file="../include/func_cache.asp"-->
+<!--#include file="../include/func_file.asp"-->
+<!--#include file="../include/func_db.asp"-->
+<!--#include file="../include/class_pagelist.asp"-->
+<!--#include file="../include/class_template.asp"-->
+<!--#include file="../include/class_plugin.asp"-->

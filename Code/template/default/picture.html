@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /}</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/article.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+<!--
+function fontZoom(size){
+	document.getElementById('content').style.fontSize=size+'px';
+
+}
+-->
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+	<!--header start--->
+    {include file="header.html"/}
+    <!--header end--->
+    
+    <!--menu start--->
+    <div id="menu">
+            <div class="pannel">
+                    <ul>
+                    <li><a href="index.asp">首页</a></li>
+                    <li><a href="blog.asp">博客</a></li>
+                    <li><a href="artlist.asp">日志</a></li>
+                    <li class="on"><a href="piclist.asp">图片</a></li>
+                    <li><a href="#">作品下载</a></li>
+                    <li><a href="#">个人档案</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">留言板</a></li>
+                    <li><a href="#">友情链接</a></li>
+                    <li><a href="#">网站地图</a></li>
+                    </ul>
+                    <div class="clear"></div>
+            </div>
+    </div>
+    <!--menu end--->
+    
+    <!--main start--->
+    <div id="main">
+    	<div class="container">
+        
+        		<!--notice--->
+        		<div class="location">
+       	  你现在的位置：{sys:sitepath /}</div>
+                
+				<div class="column_side">
+                
+                        <!--栏目-->
+                        <div class="box">
+                          <div class="title"><span class="titletxt">热门新闻</span><span class="more"><a href="list.html">更多>></a></span></div>
+                            <div class="content">
+                                <ul>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                </div>
+                <div class="column_main">
+                		<div class="article">
+                        		<h1 class="arttitle">{pic:title /}</h1>
+                                <div class="artinfo">
+                                 作者：{pic:author /}   来源：{pic:Source /} 点击次数：{pic:hits /}　时间：{pic:createtime/} 
+                    			</div>
+                                <div class="content" id="content">
+                                	<div style="text-align:center">
+										<img src="{pic:PicPath /}" />
+                                    </div>
+                                    <div style="padding:5px;">
+										图片介绍：{pic:Intro/}
+                                   	</div>
+                          		</div>
+                                <div class="preNext" style="text-align:center; margin-top:20px; margin-bottom:20px;">
+                                   上一张：{pic:pre /} 
+                                   <span style=" padding-left:20px; padding-right:40px;">&nbsp;</span> 
+                                   下一张：{pic:next /}
+                                </div>
+                        </div>
+               </div>
+               <div class="clear"></div>
+        </div>
+    </div>
+    <!--main end--->
+    
+    <!--footer start--->
+	{include file="footer.html" /}
+    <!--footer end--->
+</div>
+</body>
+</html>
+<!--- 制作：刘付灵  E-mail:Foolin@126.com --->

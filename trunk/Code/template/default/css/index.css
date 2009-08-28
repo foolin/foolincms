@@ -1,0 +1,70 @@
+/*
+ Author: Foolin
+ E-mail: Foolin@126.com
+ Create Date: 2009-5-27
+*/
+.notice {
+	clear:both;
+	line-height:25px;
+	padding-left:20px;
+	padding-right:20px;
+	font-size:12px;
+}
+.column_A {
+	float:left;
+	width:300px;
+}
+
+.column_main {
+	float:left;
+	width:400px;
+}
+
+.column_B{
+	float:right;
+	width:200px;
+}
+
+.column_main1 {
+	float:left;
+	width:700px;
+}
+
+.column_B1 {
+	float:left;
+	width:200px;
+}
+
+
+.picnews{
+	height:230px;
+	overflow:hidden;
+}
+
+.time{
+	width:20%;
+}
+
+.friendlinks{
+	padding-left:10px;
+}
+
+.box{}
+
+.fixheight{
+	height:270px;
+	overflow:hidden;
+}
+
+.box .content table{
+	width:100%;
+	border-collapse:collapse;
+	line-height:16px;
+}
+.box .content tr{
+	margin:0px;
+	padding:0px;
+}
+.box .content td{
+	border-bottom:#CCC 1px dashed;
+}

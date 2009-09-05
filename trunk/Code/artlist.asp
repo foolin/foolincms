@@ -1,4 +1,4 @@
-<!--#include file="include/include.asp"-->
+<!--#include file="inc/include.asp"-->
 <%
 Dim page: page = CPage(Req("page"))	'µ±Ç°Ò³Êý
 Dim id: id = Req("id")

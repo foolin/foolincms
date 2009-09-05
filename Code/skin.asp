@@ -1,4 +1,4 @@
-<!--#include file="include/include.asp"-->
+<!--#include file="inc/include.asp"-->
 <%	Dim serverUrl1, serverUrl2, strSkinPath, strTempCss
 	serverUrl1 = Cstr(Request.ServerVariables("HTTP_REFERER"))
 	serverUrl2 = Cstr(Request.ServerVariables("SERVER_NAME"))

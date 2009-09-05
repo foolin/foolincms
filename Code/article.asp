@@ -1,4 +1,4 @@
-<!--#include file="include/include.asp"-->
+<!--#include file="inc/include.asp"-->
 <%
 Dim page: page = CPage(Req("page"))	'当前页数
 Dim id: id = Req("id")
@@ -9,7 +9,7 @@ Dim SitePath: SitePath = ArtPath(id)	'当前路径
 Dim tpl	'模板类实例
 Set tpl = New ClassTemplate
 	tpl.Page = page						'设置当前页
-	Call tpl.Load("article.html")		'载入模板
+	Call tpl.LoadTpl("article.html")		'载入模板
 	Call tpl.Compile_Field(id, False)	'运行标签分析
 	Response.Write(tpl.Content)			'输出内容
 Set tpl = Nothing

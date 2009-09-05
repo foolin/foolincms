@@ -1,0 +1,197 @@
+@charset "gb2312";
+/*==============================================================*/
+/* Purpose:        Css for style of admin manage pages          */
+/* Author:         Foolin 					                    */
+/* E-mail:         Foolin@126.com				                */
+/* Created on:     2009-8-31 18:45:01                           */
+/*==============================================================*/
+
+body{
+	margin:0px;
+	font-size:12px;
+}
+a {
+	color:#000;
+	text-decoration:none;
+}
+a:hover{
+	color:#F00;
+	text-decoration:none;
+}
+
+#wrapper{
+	width:1000px;
+	margin:auto;
+}
+#header {
+	color:#08F;
+	font-size:16px;
+	font-weight:bold;
+	line-height:30px;
+	background:#E6F2FF;
+	height:50px;
+}
+#footer{
+	padding:5px;
+	text-align:center;
+	line-height:20px;
+	background:#CEE7FF;
+}
+#container{
+	width:100%;
+	border:1px #88C4FF solid;
+	background:#E6F2FF;
+	border-collapse:collapse;
+}
+#topNav{
+	margin:0px;
+	padding-bottom:0px;
+	background:#71B8FF;
+	line-height:30px;
+	font-size:14px;
+	font-weight:bold;
+	color:#FFF;
+}
+
+#topNav ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+
+#topNav li{
+	float:left;
+	margin-left:2px;
+	margin-right:2px;
+	text-align:center;
+	padding-bottom:0px;
+	cursor:pointer;
+}
+
+#topNav li a{
+	color:#FFF;
+	padding:8px;
+	text-decoration:none;
+}
+
+#topNav li a:hover{
+	background:#E6F2FF;
+	color:#39F;
+	padding:8px;
+	text-decoration:none;
+}
+
+#topNav .on a{
+	background:#E6F2FF;
+	color:#39F;
+	padding:8px;
+	text-decoration:none;
+}
+
+#topNav .off a{
+	color:#FFF;
+	padding:8px;
+	text-decoration:none;
+}
+#sidebar {
+	width:20%;
+	padding:3px 0px;
+}
+#content{ background:#FFF;}
+.content{ padding:5px;}
+ul.menu{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	background:#E6F2FF;
+	font-size:14px;
+	color:#09F;
+}
+ul.menu .mTitle{
+	margin:0px;
+	color:#FFF;
+	background:#97CBFF;
+	padding:6px 8px;
+	font-weight:bold;
+}
+ul.menu .mTitle a{
+	background:none;
+	padding:0px;
+	color:#FFF;
+}
+ul.menu .mTitle a:hover{
+	background:none;
+	padding:0px;
+	border-right:none;
+}
+ul.menu li a{
+	padding:6px 8px;
+	background:#E6F2FF;
+	color:#09F;
+	text-decoration:none;
+	display:block;
+	border-bottom:#97CBFF 1px dashed;
+	border-right:#97CBFF 1px dashed;
+}
+ul.menu li a:hover{
+	background:#FFF;
+	color:#F00;
+	text-decoration:none;
+	border-right:#FFF 1px dashed;
+}
+ul.menu .on a{
+	padding:6px 8px;
+	background:#FFF;
+	color:#09F;
+	text-decoration:none;
+	display:block;
+	border-right:#FFF 1px dashed;
+}
+dl.menu{
+	margin:0px;
+	font-size:12px;
+}
+dl.menu dt{
+	margin:0px;
+	color:#FFF;
+	background:#97CBFF;
+	padding:6px 8px;
+	font-size:14px;
+	font-weight:bold;
+}
+dl.menu dd{
+	margin:0px;
+	padding:6px 8px;
+	border-bottom:#97CBFF 1px dashed;
+	border-right:#97CBFF 1px dashed;
+}
+.clear{ clear:both;}
+.split{ height:5px;}
+
+table.list{
+	width:100%;
+	border:1px #88C4FF solid;
+	background:#F0F8FF;
+	border-collapse:collapse;
+}
+table.list th{
+	background:#6FB7FF;
+	color:#FFF;
+	border:#F0F8FF 1px solid;
+	padding:4px;
+	text-align:center;
+	font-size:14px;
+}
+table.list td{
+	border:#6FB7FF 1px solid;
+	padding:2px 5px;
+	line-height:20px;
+}
+.page{
+	margin:10px;
+	font-size:14px;
+	text-align:center;
+}
+.form{ margin:0px;}
+.status{ margin:2px 5px 5px 5px; padding:5px; border:#999 1px dashed; background:#E8F3FF; font-size:14px;}
+.status a{ text-decoration:underline;}

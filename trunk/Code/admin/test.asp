@@ -1,5 +1,6 @@
 <!--#include file="inc/admin.include.asp"-->
 <!--#include file="lib/class_admin.asp"-->
+<!--#include file="../inc/func_file.asp"-->
 <%
  If Request("action") = "admin" Then
  	Dim admin
@@ -11,8 +12,35 @@
 	End If
 	Set admin = Nothing
  End If
- 
+ Dim strTest: strTest = "aaa|bbb|ccc"
+ Dim arrPicPath, i
+	arrPicPath = Split(strTest, "|")
+	For i = 0 To UBound(arrPicPath)
+		'vPicPath = arrPicPath(i)
+		strTest = arrPicPath(i) & "<br />-------------------<br>"
+		Response.Write(strTest)
+	Next
+ Dim fileDir
+ 	fileDir = "HHH/EEE/KKKK/ZZZZ/DDDD/UUUU/abc.txt"
+	'Response.Write Left(fileDir, InStrRev(fileDir,"/"))
+ 'If CreateFile("aaaaaa" & chr(10) & chr(9) & "bbbbb" ,fileDir) = True Then Response.Write("HHH成功") else Response.Write("×××")
+ 'If CreateFolder(fileDir) = True Then Response.Write("HHH成功") else Response.Write("×××")
+ 'If DeleteFolder(fileDir) = True Then Response.Write("成功") else Response.Write("×××")
+ 'Response.Write GetFile(fileDir)
+ If DeleteFile(fileDir) = True Then Response.Write("Delete成功") else Response.Write("×××")
+ 'If ExistFolder(fileDir) = True Then Response.Write("存在") else Response.Write("×××")
+ 'If ExistFile(fileDir) = True Then Response.Write("存在") else Response.Write("×××")
 %>
+<script type="text/javascript" charset="gb2312" src="../inc/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+<!--
+//初始化编辑器
+KE.show({
+    id : 'Content1',
+	filterMode: false
+});
+//-->
+</script>
 	<form action="" method="post">
         <table width="100%">
           <tr>
@@ -29,7 +57,13 @@
           </tr>
           <tr>
             <td class="txtR">普通管理员：</td>
-            <td class="txtL"><input name="Level" class="input"  style="width:100px;"  type="text" /></td>
+            <td class="txtL"><input name="Level" class="input"  style="width:100px;"  type="text" />
+                                <textarea id="Content1" name="Content" style="width:100%;height:400px;visibility:hidden;">
+                    	aaaa
+                    </textarea>
+
+            
+            </td>
           </tr>
           <tr>
             <td colspan="2"><input type="submit" class="btn" value="登录" />
@@ -37,12 +71,3 @@
           </tr>
         </table>
 	</form>
-    
-<%
-Dim strCode, strUrl, iStart, iEnd
-    strCode = "<embed src=http://files2.17173.com/dzflash/qe.swf pluginspage=' type='application/x-shockwave-flash' width=300 height=200></embed></OBJECT>"
-    iStart = Instr(strCode, "src=") + 4
-    iEnd = Instr(strCode, "pluginspage=")
-    strUrl = Trim(Mid(strCode, iStart, iEnd - iStart))
-    Response.Write strUrl
-%>	

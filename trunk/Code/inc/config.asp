@@ -10,17 +10,17 @@ Dim SITENAME		'网站名称
 	SITENAME = "E酷网"
 	
 	
-Dim SITEKEYWORDS	'网站关键词，多用逗号分隔。
-	SITEKEYWORDS = "E酷网,E酷工作室,CMS,eekku.com"
-	
 Dim HTTPURL			'网站网址前缀，前面要加http
-	HTTPURL	 = "http://localhost/"
+	HTTPURL	 = "http://localhost"
 	
 Dim INSTALLDIR		'安装目录，后面不用加/
 	INSTALLDIR = "/eekku"
+	
+Dim SITEKEYWORDS	'网站关键词，多用逗号分隔。
+	SITEKEYWORDS = "E酷网,E酷工作室,CMS,eekku.com"
 		
-Dim TEMPLATEPATH	'模板路径，后面不用加/
-	TEMPLATEPATH = "/template/default"
+Dim TEMPLATEDIR	'模板目录
+	TEMPLATEDIR = "default"
 
 	
 Dim ISHIDETEMPPATH	'是否隐藏模板路径，若隐藏路径，则相对页面载入速度会慢一些
@@ -33,7 +33,7 @@ Dim CACHEFLAG		'缓存标志
 	CACHEFLAG = "EEKKU"
 
 Dim CACHETIME		'缓存时间,单位为分
-	CACHETIME = 0
+	CACHETIME = 60
 	
 Dim ISWEBLOG		'是否记录后台操作
 	ISWEBLOG = 0

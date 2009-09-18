@@ -1,8 +1,18 @@
 <%
+'=========================================================
+' File Name：	func_file.asp
+' Purpose：		文件常用操作函数
+' Auhtor: 		Foolin
+' E-mail: 		Foolin@126.com
+' Createed on: 	2009-9-13 14:59:09
+' Version:		v1.0.0 Build 20090913
+' CopyRight (c) 2009 E酷工作室（Foolin）All Rights Reserved
+'=========================================================
+
 ' 读取文件文件
 Function ReadFile(ByVal strFilePath)
-	Dim objFile, strTempConent
 	On Error Resume Next
+	Dim objFile, strTempConent
 	Set objFile = Server.CreateObject("adodb.stream")
 	With objFile
 		.Type = 2: .Mode = 3: .Open: .Charset = "GB2312" : .Position = objFile.Size: .Loadfromfile Server.Mappath(strFilePath): strTempConent = .ReadText: .Close
@@ -12,33 +22,70 @@ Function ReadFile(ByVal strFilePath)
 	ReadFile = strTempConent
 End Function
 
+'是否存在文件
+Function ExistFile(ByVal strFilePath)
+	Dim objFso, isExist
+	Set objFso =  CreateObject("Scripting.FileSystemObject")
+	If objFso.FileExists(Server.MapPath(strFilePath)) Then
+		isExist = True
+	Else
+		isExist = False
+	End If   
+	Set objFso=nothing 
+	If Err Then Err.clear
+	ExistFile = isExist
+End Function
 
-'删除文件函数 '2009-4-3
-Function DelFile(path)
-    set objfso=server.CreateObject("Scripting.FileSystemObject")
-    If objfso.fileExists(Server.MapPath(path)) Then
-        objfso.Deletefile(Server.MapPath(path))
-    End If
-    set objfso=Nothing
+'获取文件
+Function GetFile(ByVal strFilePath)
+	Dim objFso, txtFile, strContent
+	Set objFso =  CreateObject("Scripting.FileSystemObject")
+	If objFso.FileExists(Server.MapPath(strFilePath)) Then
+		Set txtFile = objFso.OpenTextFile(Server.MapPath(strFilePath))
+		While Not txtFile.AtEndOfStream
+			 strContent = strContent & txtFile.ReadLine & vbCrLf 
+		Wend
+	Else
+		strContent = "<font color='red'>不存在文件[" & strFilePath & "]，请检查！</font>"
+	End If   
+	Set objFso=nothing 
+	If Err Then Err.clear
+	GetFile = strContent
 End Function
 
 ' 创建文件
 Function CreateFile(Byval content,Byval fileDir)
+	On Error Resume Next	
+	Dim objFso, txtFile
 	fileDir = replace(fileDir, "\", "/") : fileDir = replace(fileDir, "//", "/")
-	If Right(fileDir, 1) = "/" Then fileDir = fileDir & "index." & Defaultext
-	call CreateFolder(fileDir)
+	If Right(fileDir, 1) = "/" Then CreateFile = False: Exit Function
+	Call CreateFolder(Left(fileDir, InStrRev(fileDir,"/")))	'自动创建文件夹
+	Set objFso =  Server.CreateObject("Scripting.FileSystemObject")
+	Set txtFile= objFso.CreateTextFile(Server.MapPath(fileDir),True)
+	txtFile.WriteLine content
+	txtFile.Close
+	Set objFso = Nothing
+	If Err Then Response.Write(Err.Description): Err.clear: CreateFile = False else CreateFile = True
+End Function
+
+
+' 删除文件
+Function DeleteFile(byval fileDir)
 	On Error Resume Next
-	Dim obj : Set obj = server.createobject("adodb.Stream")
-	obj.type = 2
-	obj.open
-	obj.charset = response.charset
-	obj.position = obj.Size
-	obj.writeText = content
-	obj.savetofile server.mappath(fileDir), 2
-	obj.close
-	If err Then err.clear: createfile = false else createfile = true
-	set obj = nothing
-end function
+	Dim objFso
+	If Len(fileDir) = 0 or IsNull(fileDir) Then Exit Function
+	fileDir = replace(fileDir, "\", "/") : fileDir = replace(fileDir, "//", "/")
+	If right(fileDir, 1) = "/" Then
+		DeleteFile = DeleteFolder(fileDir)
+	Else
+		Set objFso = Server.CreateObject("Scripting.FileSystemObject")
+		objFso.DeleteFile Server.Mappath(fileDir)
+		Set objFso = Nothing
+		If Err Then Err.Clear: DeleteFile = False Else DeleteFile = True
+	End If
+End Function
+
+
 
 '创建文件夹
 Function CreateFolder(Byval dirPath)
@@ -74,24 +121,35 @@ Function CreateFolder(Byval dirPath)
         End If 
 End Function  
 
-' 删除文件
-function deletefile(byval fileDir)
-	If len(fileDir) = 0 or isnull(fileDir) Then exit function
-	fileDir = replace(fileDir, "\", "/") : fileDir = replace(fileDir, "//", "/")
-	If right(fileDir, 1) = "/" Then
-		deletefile = deletefolder(fileDir)
-	else
-		on error resume next
-		fso.deletefile server.mappath(fileDir)
-		If err Then err.clear: deletefile = false else deletefile = true
-	end If
-end function
 
 ' 删除文件夹
-function deletefolder(byval dirpath)
-	on error resume next
-	fso.deletefolder server.mappath(dirpath)
-	If err Then err.clear: deletefolder = false else deletefolder = true
-end function
+Function DeleteFolder(byval dirPath)
+	On Error Resume Next
+	Dim objFso
+	dirPath = replace(dirPath, "\", "/") : dirPath = replace(dirPath, "//", "/")
+	dirPath = Server.Mappath(dirpath)
+	Set objFso = Server.CreateObject("Scripting.FileSystemObject")
+	If objFso.FolderExists(dirpath) Then 
+		objFso.DeleteFolder(dirpath)
+	Else
+		Response.Write("文件不存在")
+	End If
+	Set objFso = Nothing 
+	If Err Then Response.Write(Err.Description): Err.Clear: DeleteFolder = False Else DeleteFolder = True
+End Function
+
+'是否存在文件夹
+Function ExistFolder(ByVal strFilePath)
+	Dim objFso, isExist
+	Set objFso =  CreateObject("Scripting.FileSystemObject")
+	If objFso.FolderExists(Server.MapPath(strFilePath)) Then
+		isExist = True
+	Else
+		isExist = False
+	End If   
+	Set objFso=nothing 
+	If Err Then Err.clear
+	ExistFolder = isExist
+End Function
 
 %>

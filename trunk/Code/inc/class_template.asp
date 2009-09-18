@@ -244,7 +244,7 @@ Class ClassTemplate
 		strSql = "SELECT * FROM DiyPage WHERE State = 1 AND ID =  " & id
 		Set objRs = DB(strSql, 1)
 		If objRs.Eof Then Response.Write(Warn("²»´æÔÚid[" & id & "]Ò³Ãæ¡£")): Response.End()
-		If Len(Trim(objRs("Template"))) > 0 Or Not IsNull(objRs("Template")) Then
+		If Len(Trim(objRs("Template"))) > 0 Then
 			mTemplate = TemplatePath & "/" & objRs("Template")
 		Else
 			mTemplate = TemplatePath & "/diypage.html"
@@ -439,7 +439,7 @@ Class ClassTemplate
 						'End If
 					Case "imgart", "picart"
 						tagTable = "Article"
-						tagWhere = tagWhere & " AND PicPath<>'' "
+						tagWhere = tagWhere & " AND IsFocusPic = 1 AND FocusPic<>'' "
 					Case Else
 						tagTable = "Article"
 				End Select

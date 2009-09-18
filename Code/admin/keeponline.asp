@@ -6,6 +6,6 @@
 <title>Keep Online</title>
 </head>
 <body>
-<%Session.Timeout = 60	'设置过期时间为40分钟失效。%>
+<%Session.Timeout = 60	'设置过期时间为60分钟失效。%>
 </body>
 </html>

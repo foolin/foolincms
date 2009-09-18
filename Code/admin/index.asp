@@ -26,10 +26,11 @@ Call ChkLogin()
         </td></tr>
         <tr>
             <td id="sidebar" valign="top">
-                <ul class="menu">
-                
+            	<ul class="menu">
+                	<li class="on"><a href="index.asp">管理首页</a></li>
+                </ul>
                  <%Call MyInfo()%>
-                 
+                <ul class="menu">
                  <li class="mTitle">--== 文章管理 ==--</li>
                  <li><a href="admin_article.asp">文章管理</a></li>
                  <li><a href="admin_artcolumn.asp">栏目管理</a></li>
@@ -54,9 +55,53 @@ Call ChkLogin()
                 <%Call SysInfo()%>
                 
             </td>
-            <td id="content" valign="top">
-                Foolin，欢迎你进入后台管理，你的等级是普通管理员。
-                </div>
+            <td id="content" valign="top" height="100%">
+                    	 Foolin，欢迎你进入后台管理，你的等级是普通管理员。
+                  <table style="width:85%; border:1px solid #93C9FF; margin:5px;">
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td colspan="2" align=center class="td2">服务器相关参数</td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器名</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("SERVER_NAME")%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器IP</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("LOCAL_ADDR")%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器端口</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("SERVER_PORT")%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器时间</td>
+                        <td class="td">&nbsp;<%=now%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;IIS版本</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("SERVER_SOFTWARE")%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;脚本超时时间</td>
+                        <td class="td">&nbsp;<%=Server.ScriptTimeout%> 秒</td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;本文件路径</td>
+                        <td class="td">&nbsp;<%=server.mappath(Request.ServerVariables("SCRIPT_NAME"))%></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器CPU数量</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("NUMBER_OF_PROCESSORS")%> 个</td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器解译引擎</td>
+                        <td class="td">&nbsp;<%=ScriptEngine & "/"& ScriptEngineMajorVersion &"."&ScriptEngineMinorVersion&"."& ScriptEngineBuildVersion %></td>
+                      </tr>
+                      <tr bgcolor="#E8F1FF" height=18>
+                        <td align=center class="td">&nbsp;服务器操作系统</td>
+                        <td class="td">&nbsp;<%=Request.ServerVariables("OS")%></td>
+                      </tr>
+                  </table>
             </td>
         </tr>
     </table>

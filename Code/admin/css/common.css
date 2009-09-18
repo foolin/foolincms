@@ -10,6 +10,7 @@ body{
 	margin:0px;
 	font-size:12px;
 }
+html,body{height:100%;}
 a {
 	color:#000;
 	text-decoration:none;
@@ -20,7 +21,7 @@ a:hover{
 }
 
 #wrapper{
-	width:1000px;
+	width:99%;
 	margin:auto;
 }
 #header {
@@ -172,6 +173,7 @@ table.list{
 	width:100%;
 	border:1px #88C4FF solid;
 	background:#F0F8FF;
+	background:#E8F3FF;
 	border-collapse:collapse;
 }
 table.list th{

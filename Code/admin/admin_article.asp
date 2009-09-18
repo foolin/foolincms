@@ -1,5 +1,5 @@
 <!--#include file="inc/admin.include.asp"-->
-<!--#include file="lib/class_article.asp"-->
+<!--#include file="inc/lib/class_article.asp"-->
 <%
 '=========================================================
 ' File Name：	admin_article.asp
@@ -167,17 +167,6 @@ End Select
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title><%=SITENAME%>后台管理 - 文章管理 - <%=SYS%></title>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../inc/ckeditor/ckeditor.js"></script>
-<style type="text/css">
-<!--
-.green {color:green;}
-.red{ color:#F00;}
-.blue{ color:blue;}
-input{ background:#FFFFFF; border:#C4E1FF #84C1FF 1px solid; padding:3px;}
-.btn{ padding:3px; background:#F7FBFF;}
-form{ margin:0px;}
--->
-</style>
 <script type="text/javascript" src="inc/base.js"></script>
 <script language="javascript" type="text/javascript">
 <!--
@@ -330,6 +319,48 @@ function Dobatch(objSel){
 }
 //-->
 </script>
+<style type="text/css">
+<!--
+.green {color:green;}
+.red{ color:#F00;}
+.blue{ color:blue;}
+.btn{ padding:3px; background:#F7FBFF;}
+form{ margin:0px;}
+table.form{
+	width:100%;
+	border:1px #88C4FF solid;
+	background:#F0F8FF;
+	border-collapse:collapse;
+	line-height:30px;
+}
+table.form th{
+	background:#6FB7FF;
+	color:#FFF;
+	border:#F0F8FF 1px solid;
+	padding:4px;
+	text-align:center;
+	font-size:14px;
+	line-height:20px;
+}
+table.form td{
+	border:#ACD8FF 1px solid;
+	padding:2px 5px;
+	line-height:20px;
+}
+input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
+.ke-content {
+    font-family: Courier New;
+    font-size: 12px;
+    background-color: #ffffff;
+}
+#editor{ text-align:center; padding:2px;}
+#editor table td{
+	border:#6FB7FF 0px solid;
+	padding:0px;
+	line-height:normal;
+}
+-->
+</style>
 </head>
 
 <body>
@@ -341,15 +372,17 @@ function Dobatch(objSel){
         </td></tr>
         <tr>
             <td id="sidebar" valign="top">
+            	<ul class="menu">
+                	<li><a href="index.asp">管理首页</a></li>
+                </ul>
                 <ul class="menu">
                  <li class="mTitle">--== 文章管理 ==--</li>
                  <li <%If Request("action") = "create" Then Response.Write("class=""on""")%>><a href="admin_article.asp?action=create">添加文章</a></li>
                  <li <%If Request("action") <> "create" And Request("list") <> "trash"  Then Response.Write("class=""on""")%>><a href="admin_article.asp?action=list">管理文章</a></li>
                  <li <%If Request("list") = "trash" Then Response.Write("class=""on""")%>><a href="admin_article.asp?action=list&list=trash">文章回收站</a></li>
                  <li class="mTitle">--== 文章栏目 ==--</li>
-                 <li><a href="admin_artcolumn.asp">添加栏目</a></li>
+                 <li><a href="admin_artcolumn.asp?action=create">添加栏目</a></li>
                  <li><a href="admin_artcolumn.asp">管理栏目</a></li>
-                 <li><a href="admin_artcolumn.asp">栏目回收站</a></li>
                 </ul>
 				<%Call SysInfo()%>
             </td>
@@ -390,7 +423,7 @@ function Dobatch(objSel){
 Sub List()
 Dim mode: mode = LCase(Request("list"))
 %>
-	<form name="form1" action="" method="post">
+	<form name="form2" action="" method="post">
 	<table class="list">
     	<tr>
         	<th><input type="checkbox" name="GroupID" value="" onClick="Checked(this.form,'GroupID',this)"/></th>
@@ -417,7 +450,7 @@ Dim mode: mode = LCase(Request("list"))
 			Case Else
 				strSql = "SELECT * FROM [Article] WHERE State > -1 ORDER BY IsTop DESC,ID DESC"
 		End Select
-		Set Rs = DB(strSql, 1)
+		'Set Rs = DB(strSql, 1)
 		Set Rs = New ClassPageList
 		Rs.Result = 1
 		Rs.Sql = strSql
@@ -434,7 +467,8 @@ Dim mode: mode = LCase(Request("list"))
             <td><%=GetColName(Rs.Data("ColID"), "article")%></td>
 			<td>
             	<a href="admin_article.asp?action=modify&id=<%=Rs.Data("ID")%>"><%=Rs.Data("Title")%></a>
-				<%If Rs.Data("IsTop") = 1 Then Response.Write(" <font color=""red"">[顶]</font>")%>
+				<%If Rs.Data("IsTop") = 1 Then Echo(" <font color=""red"">[顶]</font>")%>
+                <%If Rs.Data("IsFocusPic") =1 And Rs.Data("FocusPic") <> "" Then Echo(" <font color=""red"">[图]</font>")%>
             </td>
             <td><%=Rs.Data("Author")%></td>
             <td><%=FDate(Rs.Data("CreateTime"), 2)%></td>
@@ -504,17 +538,17 @@ Sub ArtForm(ByVal id)
 		If objA.LetValue = False Then Call MsgBox("对不起，你编辑的文章不存在", "BACK")
 	End If
 %>
-	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" method="post" class="form">
+	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
-        <table class="list">
+        <table class="form" style="border:1px #88C4FF solid;">
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("添加")%>文章
             </th></tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
-            	<td align="right">标题：</td>
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            	<td align="right" width="15%">标题：</td>
             	<td><input type="text" name="Title" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">栏目：</td>
                 <td>
                 	<select name="ColID">
@@ -528,42 +562,50 @@ Sub ArtForm(ByVal id)
                     <span class="red">* 必选</span>
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">作者：</td>
                 <td><input type="text" name="Author" value="<%=objA.Author%>" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">来源：</td>
                 <td><input type="text" name="Source" value="<%=objA.Source%>" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
-                <td align="right">焦点图片：</td>
-                <td><input type="text" name="PicPath" value="<%=objA.PicPath%>" style="width:450px;" />上传文件</td>
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                <td align="right">焦点图片URL：</td>
+                <td>
+                	<input type="text" name="FocusPic" id="FocusPic" value="<%=objA.FocusPic%>" style="width:450px;" /> <a href="javascript:uploadFocusPic();">上传图片</a>
+                    <div id="uploadFocusPic" style="display:none;">
+                    <iframe frameborder="0" src="uploader/upload_focuspic.asp" width="80%" height="30"></iframe>
+                    </div>
+                </td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">关键词：</td>
                 <td><input type="text" value="<%=objA.Keywords%>" name="Keywords"  style="width:450px;" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">选项：</td>
                 <td>
                 	置顶<input type="checkbox" name="IsTop" value="1"  <%If objA.IsTop = 1 Then Echo("checked=""checked""")%> />  
                 	通过审核<input type="checkbox" name="State" value="1" <%If objA.State = 1 Then Echo("checked=""checked""")%> />
+                    焦点图片<input type="checkbox" name="IsFocusPic" value="1" <%If objA.IsFocusPic = 1 Then Echo("checked=""checked""")%> id="IsFocusPic" onclick="chkFocusPic()"/>
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">跳转地址：</td>
-                <td><input type="text" name="JumpUrl" id="JumpUrl" onfocus="chkJumpUrl()" onblur="chkJumpUrl()" value="<%=objA.JumpUrl%>"  style="width:450px;" /><span class="blue">（[内容] 和 [跳转地址] 二者只能选其一）</span></td>
+                <td><input type="text" name="JumpUrl" id="JumpUrl" onfocus="chkJumpUrl()" onblur="chkJumpUrl()" value="<%=objA.JumpUrl%>"  style="width:450px;" /></td>
             </tr>
             <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">内容：</td>
-                <td></td>
+                <td ><span class="red">( <span class="green">内容</span> 和 <span class="green">跳转地址</span> 二者只能选其一  )</span></td>
             </tr>
-            <tr  id="editor">
+            <tr>
                 <td colspan="2">
-                    <textarea class="ckeditor" cols="80" id="Content" name="Content" rows="50">
-                        <%=objA.Content%>
+                	<div id="editor">
+                    <textarea id="Content1" name="Content" style="width:100%;height:550px;visibility:hidden;">
+                    	<%=objA.Content%>
                     </textarea>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -574,9 +616,18 @@ Sub ArtForm(ByVal id)
             </tr>
         </table>
     </form>
+    </div>
     <div class="page">
     	<a href="javascript:history.go(-1)" onclick="return confirm('确定放弃编辑文章?')"><< == 返回 << == </a>
     </div>
+<script type="text/javascript" charset="utf-8" src="./../inc/editor/kindeditor.js"></script>
+<script type="text/javascript">
+//初始化编辑器
+KE.show({
+	id : 'Content1',
+	cssPath : './../inc/editor/editor.css'
+});
+</script>
 <script type="text/javascript">
 <!--
 var oInputs = document.getElementsByTagName("input");
@@ -607,6 +658,21 @@ function chkJumpUrl(){
 	else{
 		$("editor").style.display = "block";
 		//alert(2)
+	}
+}
+function uploadFocusPic(){
+	if ($("uploadFocusPic").style.display == "none"){
+		$("uploadFocusPic").style.display = "block";
+	}
+	else{
+		$("uploadFocusPic").style.display = "none";
+	}
+}
+function chkFocusPic(){
+	if ($("IsFocusPic").checked == true && $("FocusPic").value == ""){
+		alert("您尚未填写焦点图片URL，请先上传图片！");
+		$("IsFocusPic").checked = false;
+		$("FocusPic").focus();
 	}
 }
 //-->

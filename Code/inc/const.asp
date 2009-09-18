@@ -1,5 +1,6 @@
 <%
-TemplatePath = InstallDir & TemplatePath
+Dim TEMPLATEPATH	'模板路径
+	TemplatePath = InstallDir & "/template/" & TemplateDir
 
 Dim STARTTIME	'记录开始执行时间
 	STARTTIME = Timer()

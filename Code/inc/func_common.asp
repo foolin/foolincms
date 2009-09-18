@@ -32,6 +32,15 @@ Function Echo(Byval str)
 	Response.Write(str)
 End Function
 
+'循环输出
+Function LoopEcho(Byval str, Byval iLoop)
+	Dim i
+	If Not IsNumeric(iLoop) Or iLoop < 1 Then iLoop = 1
+	For i = 0 To iLoop
+		Response.Write(str)
+	Next
+End Function
+
 '关闭数据库
 Sub ConnClose()
 	'根据测试：关闭后VarType(conn)=9，而不关闭，则为VarType(conn)=8

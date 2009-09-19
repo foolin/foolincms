@@ -1,0 +1,11 @@
+<!--#include file="../../inc/config.asp"-->
+<!--#include file="../../inc/const.asp"-->
+<!--#include file="../../inc/md5.asp"-->
+<!--#include file="../../inc/func_common.asp"-->
+<!--#include file="../../inc/func_db.asp"-->
+<!--#include file="../../inc/func_file.asp"-->
+<!--#include file="../../inc/class_pagelist.asp"-->
+<!--#include file="admin.conn.asp"-->
+<!--#include file="admin.weblog.asp"-->
+<!--#include file="admin.func_page.asp"-->
+<!--#include file="admin.chklogin.asp"-->

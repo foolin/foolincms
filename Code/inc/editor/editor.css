@@ -1,0 +1,11 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+.ke-content {
+    font-family: Courier New;
+    font-size: 14px;
+    background-color: #ffffff;
+	padding:2px;
+}

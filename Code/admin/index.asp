@@ -8,6 +8,11 @@
 'Copyright:		E酷工作室(www.eekku.com)
 '===========================================
 Call ChkLogin()
+Dim Act: Act = Request("action")
+If LCase(Act) = "clearcache" Then
+	Call ClearCache()
+	Call MsgAndGo("更新缓存成功!", "REFRESH")
+End If 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,6 +107,11 @@ Call ChkLogin()
                         <td class="td">&nbsp;<%=Request.ServerVariables("OS")%></td>
                       </tr>
                   </table>
+                  <div >
+                  	<ul>
+                    	<li><a href="?action=clearcache">更新缓存</a></li>
+                    </ul>
+                  </div>
             </td>
         </tr>
     </table>

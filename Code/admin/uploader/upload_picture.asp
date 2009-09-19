@@ -32,7 +32,7 @@ if request.QueryString("act")="upload" then
  Dim strFolder:  strFolder = "upload/images/" & GetFolderName
 '===============================================================================
  set Upload=new AnUpLoad				 				'创建类实例
- Upload.SingleSize=1024*1024*1024            			'设置单个文件最大上传限制,按字节计；默认为不限制
+ Upload.SingleSize=200*1024            			'设置单个文件最大上传限制,按字节计；默认为不限制
  Upload.MaxSize=1024*1024*1024            				'设置最大上传限制,按字节计；默认为不限制
  Upload.Exe="bmp|rar|pdf|jpg|gif"          				'设置合法扩展名,以|分割,忽略大小写
  Upload.Charset="gb2312"								'设置文本编码，默认为gb2312
@@ -41,7 +41,9 @@ if request.QueryString("act")="upload" then
 '===============================================================================
 
  if Upload.ErrorID>0 then								'判断错误号,如果myupload.Err<=0表示正常
- 	response.write Upload.Description 					'如果出现错误,获取错误描述
+ 	Response.Write Upload.Description 					'如果出现错误,获取错误描述
+	Response.Write "[<a href='upload_picture.asp'>重新上传</a>]"
+	Response.End()
  else
  	if Upload.files(-1).count>0 then 					'这里判断你是否选择了文件
     		path=server.mappath("../../" & strFolder) 				'文件保存路径(这里是files文件夹)
@@ -51,7 +53,7 @@ if request.QueryString("act")="upload" then
     	    fName=tempCls.FileName
     		set tempCls=nothing
     else
-		response.Write "您没有上传任何文件！"
+		Response.Write "您没有上传任何文件！"
  	end if
  end if
  set Upload=nothing                   '销毁类实例

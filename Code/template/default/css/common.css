@@ -217,3 +217,13 @@ a:hover{
 a:hover .img{
 	background:#0C3;
 }
+
+.column_side {
+	float:left;
+	width:250px;
+}
+
+.column_main {
+	float:left;
+	width:650px;
+}

@@ -3,16 +3,6 @@
  E-mail: Foolin@126.com
  Create Date: 2009-5-27
 */
-.column_side {
-	float:left;
-	width:250px;
-}
-
-.column_main {
-	float:left;
-	width:650px;
-}
-
 .box{
 	margin:2px 2px 5px 2px;
 	border:2px solid #bfe599;

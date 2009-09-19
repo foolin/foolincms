@@ -103,8 +103,10 @@
 	' DIRTYWORDS变量
 	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "DIRTYWORDS = " & Chr(34) & DIRTYWORDS & Chr(34) & keyEnter
+	'标记结束
+	strTemp = strTemp & "%" & Chr(62) & Chr(10)
 	
-	If CreateFile(strTemp, "../inc/test_config.txt.asp") = True Then
+	If CreateFile(strTemp, "../inc/config.asp") = True Then
 		Call WebLog("配置网站成功!", "SESSION")
 		Call MsgAndGo("配置网站成功!", "REFRESH")
 	Else

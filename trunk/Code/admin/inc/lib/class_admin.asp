@@ -79,10 +79,10 @@ Class ClassAdmin
 	' Create on: 		2009-8-28 16:36:16
 	'--------------------------------------------------------------
 	Public Function SetValue()
-		vUsername = Request.Form("Username")
-		vNickname = Request.Form("Nickname")
-		vPassword = MD5(Request.Form("Password"))
-		vLevel = Request.Form("Level")
+		vUsername = Request.Form("fUsername")
+		vNickname = Request.Form("fNickname")
+		vPassword = MD5(Request.Form("fPassword"))
+		vLevel = Request.Form("fLevel")
 		If Len(vUsername) < 3 Or Len(vUsername) > 20 Then mLastError = "管理员帐号的长度请控制在 3 至 20 位" : SetValue = False : Exit Function
 		If Len(vPassword) < 3 Or Len(vPassword) > 50 Then mLastError = "管理员密码的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
 		If Not IsNumeric(Level) Then mLastError = "管理员等级必须为数字" : SetValue = False : Exit Function

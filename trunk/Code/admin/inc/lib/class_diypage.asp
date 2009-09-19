@@ -180,15 +180,9 @@ Class ClassDiyPage
 	'--------------------------------------------------------------
 	Public Function Delete()
 		Dim Rs
-		Set Rs = DB("Select ID,IsSystem From [DiyPage] Where [ID] IN(" & vID &")",3)
-		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你删除记录[" & vID & "]不存在!" : Delete = False : Exit Function
-		While Not Rs.Eof
-			If Rs("IsSystem") = 1 Then
-				mLastError = mLastError & "|无法删除[" & vID & "]"
-			Else
-				DB "Delete From [DiyPage] Where [ID] IN(" & Rs("ID") &")" ,0
-			End If
-		Wend
+		Set Rs = DB("Select ID,IsSystem From [DiyPage] Where IsSystem = 1 And [ID] IN(" & vID &")",3)
+		If Not Rs.Eof Then mLastError = "你删除记录[" & Rs("ID") & "]是系统定义页面!": Rs.Close: Set Rs = Nothing :  Delete = False : Exit Function
+		DB "Delete From [DiyPage] Where [ID] IN(" & Rs("ID") &")" ,0
 		Delete = True
 	End Function
 

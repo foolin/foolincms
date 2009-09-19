@@ -153,7 +153,14 @@ End Function
 
 '页面跳转，与JumpUrl.asp连用
 Function MsgAndGo(Byval Msg,Byval Url)
-	Response.Redirect "jumpurl.asp?msg=" & Msg & "&jumpurl=" & Url & "&time=3"
+	'Response.Redirect "jumpurl.asp?msg=" & Msg & "&jumpurl=" & Url & "&time=2"
+	If UCase(Url)="BACK" Then 	'返回不刷新页面
+		Response.write "<script type='text/javascript'>alert('"&Msg&"');history.go(-1);</script>"
+	ElseIf UCase(Url)="REFRESH" Then  '返回刷新页面
+		Response.write "<script type='text/javascript'>alert('"&Msg&"');this.location.href='"&request.ServerVariables("HTTP_REFERER")&"';</script>" 
+	Else	'地址重定向
+		Response.write "<script type='text/javascript'>alert('"&Msg&"');location.href='"&Url&"';</script>"
+	End If
 End Function
 
 '弹出确认对话框，Url1则为真时跳转，Url2为假时跳转
@@ -171,23 +178,6 @@ Function Confirm(Byval Msg,Byval Url1,Byval Url2)
 	End If
 	Response.write "<script type=""text/javascript"">If(confirm('"&Msg&"')){"&strUrl1&"}Else{"&strUrl2&"}</script>"
 	Response.End()
-End Function
-
-'创建编辑器
-Function CreateEditor(ByVal eName, ByVal eValue)
-	Dim oFCKeditor' 定义变量
-	Dim returnEditor
-	Set oFCKeditor = New FCKeditor' 类的初始化
-	oFCKeditor.config("AutoDetectLanguage") = false
-	oFCKeditor.config("DefaultLanguage") = "zh-cn"
-	oFCKeditor.BasePath = INSTALLDIR & "/admin/fckeditor/"' 定义路径（这是根路径：/FCKeditor/）
-	oFCKeditor.ToolbarSet = "Default"	'定义工具条（默认为：Default）
-	oFCKeditor.Width = "100%"	'定义宽度（默认宽度：100%）
-	oFCKeditor.Height = 450		'定义高度（默认高度：200）
-	oFCKeditor.Value = eValue	' 输入框的初始值
-	returnEditor = oFCKeditor.Create(eName)
-	Set oFCKeditor = Nothing
-	CreateEditor = returnEditor
 End Function
 
 

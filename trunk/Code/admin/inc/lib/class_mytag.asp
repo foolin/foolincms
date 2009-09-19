@@ -45,10 +45,10 @@ Class ClassMyTag
 	End Sub
 
 	Public Function Initialize()
-		vID = -1
+		vID = 0
 		vName = ""
 		vInfo = ""
-		vCode = "该页面暂无内容"
+		vCode = ""
 		mLastError = ""
 	End Function
 	
@@ -96,7 +96,7 @@ Class ClassMyTag
 	' Create on: 		2009-8-28 16:40:46
 	'--------------------------------------------------------------
 	Public Function Create()
-		If SetValue = False Then Create = False: Exit Function
+		'If SetValue = False Then Create = False: Exit Function
 		Dim Rs
 		Set Rs = DB("Select * From [MyTags]",3)
 		Rs.AddNew
@@ -137,7 +137,7 @@ Class ClassMyTag
 	' Create on: 		2009-8-28 16:58:31
 	'--------------------------------------------------------------
 	Public Function Delete()
-		DB "Delete From [MyTags] Where [ID] In" & vID ,0
+		DB "Delete From [MyTags] Where [ID] In(" & vID &")" ,0
 		Delete = True
 	End Function
 

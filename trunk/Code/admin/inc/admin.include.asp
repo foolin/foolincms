@@ -4,6 +4,7 @@
 <!--#include file="../../inc/func_common.asp"-->
 <!--#include file="../../inc/func_db.asp"-->
 <!--#include file="../../inc/func_file.asp"-->
+<!--#include file="../../inc/func_cache.asp"-->
 <!--#include file="../../inc/class_pagelist.asp"-->
 <!--#include file="admin.conn.asp"-->
 <!--#include file="admin.weblog.asp"-->

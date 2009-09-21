@@ -4,13 +4,11 @@
 
 ' «Â≥˝ª∫¥Ê
 Function ClearCache()
-	Dim objCache
-	Application.lock
-	For each objCache in Application.contents
-		If Cstr(left(objCache, len(CacheFlag))) = Cstr(CacheFlag) Then Application.contents.Remove (objCache)
-	Next
-	Application.unlock
-End Function
+	Application.Lock
+	Application.Contents.RemoveAll
+	Application.Unlock
+End Function	
+
 
 
 ' …Ë÷√ª∫¥Ê

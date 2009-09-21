@@ -5,7 +5,7 @@
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Createed on: 	2009-7-21 11:08:14
-' Updated on: 	2009-7-23 11:39:51(修正GetPageUrl网址带参数出现丢失参数bug)
+' Updated on: 	2009-9-14 19:26:26(修正GetUrl网址带参数出现bug)
 '======================================
 Class ClassPageList
     Dim ID ' 主键,默认为 ID
@@ -62,7 +62,7 @@ Class ClassPageList
 		Dim tempPages, tempPage, tempPageUrl
 		tempPages = PageCount
 		tempPage = AbsolutePage
-		tempPageUrl = GetPageUrl()
+		tempPageUrl = GetURL()
 		Page = PageBar(tempPages, tempPage, tempPageUrl)
 	End Function
 	
@@ -104,14 +104,27 @@ Class ClassPageList
 		PageBar = PageStr
 	End Function
 	
-	'==================================================================
-	'GetPageURL处理获取到的网址
-	'更据URL参数不同，获取不同的结果, 过滤原有的page=
-	'==================================================================
-	Private Function GetPageURL()
-		Dim curUrl, pageUrl, Reg
-		curUrl = GetUrl()
-		'Response.Write(curUrl): Response.End()
+	'获取当前的网址
+	Private Function GetURL() 
+		Dim rqUrl, curUrl, Reg
+		Dim strScriptName, strSubUrl, strRequestItem
+		strScriptName=CStr(Request.ServerVariables("SCRIPT_NAME"))
+		strSubUrl=""
+		If Request.QueryString<>"" Then
+		   strScriptName=strScriptName&"?"
+		   For Each strRequestItem In Request.QueryString
+			If InStr(strScriptName,strRequestItem)=0 Then
+			 If strSubUrl="" Then
+			  strSubUrl=strSubUrl&strRequestItem&"="&Server.URLEncode(Request.QueryString(""&strRequestItem&""))
+			 Else
+			  strSubUrl=strSubUrl&"&"&strRequestItem&"="&Server.URLEncode(Request.QueryString(""&strRequestItem&""))
+			 End If
+			End If
+		   Next
+		End If
+		rqUrl = strScriptName & strSubUrl
+		curUrl = Right(rqUrl, Len(rqUrl) - InstrRev(rqUrl,"/"))
+		'正则表达式获取参数
 		Set Reg = New RegExp
 		Reg.Ignorecase = True
 		Reg.Global = True
@@ -127,29 +140,9 @@ Class ClassPageList
 				curUrl = curUrl & "&"
 			End If
 		End If
-		GetPageURL = curUrl
-	End Function
-	
-	'获取当前的网址
-	Private Function GetUrl() 
-		Dim strHostName,strScriptName,strSubUrl,strRequestItem 
-		strHostName=CStr(Request.ServerVariables("LOCAL_ADDR"))
-		strScriptName=CStr(Request.ServerVariables("SCRIPT_NAME"))
-		strSubUrl=""
-		If Request.QueryString<>"" Then
-		   strScriptName=strScriptName&"?"
-		   For Each strRequestItem In Request.QueryString
-			If InStr(strScriptName,strRequestItem)=0 Then
-			 If strSubUrl="" Then
-			  strSubUrl=strSubUrl&strRequestItem&"="&Server.URLEncode(Request.QueryString(""&strRequestItem&""))
-			 Else
-			  strSubUrl=strSubUrl&"&"&strRequestItem&"="&Server.URLEncode(Request.QueryString(""&strRequestItem&""))
-			 End If
-			End If
-		   Next
-		End If
-		GetUrl="http://"&strHostName&strScriptName&strSubUrl
+		GetURL = curUrl
 	End Function
 End Class
 
 %>
+

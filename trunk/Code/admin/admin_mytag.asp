@@ -234,7 +234,7 @@ Sub List()
     </table>
     </form>
     <div class="page"><%=Rs.Page%></div>
-    <div style="font-size:14px; background:#EEC; padding:5px; border:#993 1px dashed;">帮助：在页面中加入<span class="red">{my:<u class="blue">标签名</u> /}</span>即可引用该标签。</div>
+    <div style="font-size:14px; background:#EEC; padding:5px; border:#993 1px dashed;">帮助：在您网站的模板页面中加入<span class="red">{my:<u class="blue">标签名</u> /}</span>即可引用该标签。</div>
 <script language="javascript" type="text/javascript">
 <!--
 // 表单全选或者取消

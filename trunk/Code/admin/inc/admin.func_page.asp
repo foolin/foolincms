@@ -15,10 +15,10 @@
      <li<%If act = "comment" Then Echo(" class=""on""")%>><a href="#admin_comment.asp">评论</a></li>
      <li<%If act = "mytag" Then Echo(" class=""on""")%>><a href="admin_mytag.asp">标签</a></li>
      <li<%If act = "diypage" Then Echo(" class=""on""")%>><a href="admin_diypage.asp">DIY页面</a></li>
-     <li<%If act = "user" Then Echo(" class=""on""")%>><a href="admin_user.asp">团队管理</a></li>
-     <li<%If act = "file" Then Echo(" class=""on""")%>><a href="#admin_uploadfile.asp">上传文件</a></li>
-     <li<%If act = "weblog" Then Echo(" class=""on""")%>><a href="admin_weblog.asp">操作记录</a></li>
-     <li<%If act = "webftp" Then Echo(" class=""on""")%>><a href="admin_webftp.asp">管理模板</a></li>
+<li<%If act = "webftp" Then Echo(" class=""on""")%>><a href="admin_webftp.asp">模板</a></li>
+     <li<%If act = "user" Then Echo(" class=""on""")%>><a href="admin_user.asp">团队</a></li>
+     <li<%If act = "file" Then Echo(" class=""on""")%>><a href="#admin_uploadfile.asp">文件</a></li>
+	 <li<%If act = "weblog" Then Echo(" class=""on""")%>><a href="admin_weblog.asp">管理日志</a></li>
      <li<%If act = "config" Then Echo(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
      <li<%If act = "password" Then Echo(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
      <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">帮助</a></li>

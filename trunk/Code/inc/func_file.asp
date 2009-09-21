@@ -65,7 +65,7 @@ Function CreateFile(Byval content,Byval fileDir)
 	txtFile.WriteLine content
 	txtFile.Close
 	Set objFso = Nothing
-	If Err Then Response.Write(Err.Description): Err.clear: CreateFile = False else CreateFile = True
+	If Err Then Err.clear: CreateFile = False else CreateFile = True
 End Function
 
 

@@ -8,19 +8,20 @@
 	act = LCase(act)
 %>
     <ul>
-     <li<%If act = "index" Then Response.Write(" class=""on""")%>><a href="index.asp">首页</a></li>
-     <li<%If act = "article" Then Response.Write(" class=""on""")%>><a href="admin_article.asp">文章</a></li>
-     <li<%If act = "picture" Then Response.Write(" class=""on""")%>><a href="admin_picture.asp">图片</a></li>
-     <li<%If act = "guestbook" Then Response.Write(" class=""on""")%>><a href="#admin_guestbook.asp">留言</a></li>
-     <li<%If act = "comment" Then Response.Write(" class=""on""")%>><a href="#admin_comment.asp">评论</a></li>
-     <li<%If act = "mytag" Then Response.Write(" class=""on""")%>><a href="admin_mytag.asp">标签</a></li>
-     <li<%If act = "diypage" Then Response.Write(" class=""on""")%>><a href="admin_diypage.asp">DIY页面</a></li>
-     <li<%If act = "user" Then Response.Write(" class=""on""")%>><a href="#admin_user.asp">团队管理</a></li>
-     <li<%If act = "config" Then Response.Write(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
-     <li<%If act = "file" Then Response.Write(" class=""on""")%>><a href="#admin_uploadfile.asp">上传文件</a></li>
-     <li<%If act = "weblog" Then Response.Write(" class=""on""")%>><a href="#admin_weblog.asp">操作记录</a></li>
-     <li<%If act = "password" Then Response.Write(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
-     <li<%If act = "help" Then Response.Write(" class=""on""")%>><a href="help.asp">帮助</a></li>
+     <li<%If act = "index" Then Echo(" class=""on""")%>><a href="index.asp">首页</a></li>
+     <li<%If act = "article" Then Echo(" class=""on""")%>><a href="admin_article.asp">文章</a></li>
+     <li<%If act = "picture" Then Echo(" class=""on""")%>><a href="admin_picture.asp">图片</a></li>
+     <li<%If act = "guestbook" Then Echo(" class=""on""")%>><a href="#admin_guestbook.asp">留言</a></li>
+     <li<%If act = "comment" Then Echo(" class=""on""")%>><a href="#admin_comment.asp">评论</a></li>
+     <li<%If act = "mytag" Then Echo(" class=""on""")%>><a href="admin_mytag.asp">标签</a></li>
+     <li<%If act = "diypage" Then Echo(" class=""on""")%>><a href="admin_diypage.asp">DIY页面</a></li>
+     <li<%If act = "user" Then Echo(" class=""on""")%>><a href="admin_user.asp">团队管理</a></li>
+     <li<%If act = "file" Then Echo(" class=""on""")%>><a href="#admin_uploadfile.asp">上传文件</a></li>
+     <li<%If act = "weblog" Then Echo(" class=""on""")%>><a href="admin_weblog.asp">操作记录</a></li>
+     <li<%If act = "webftp" Then Echo(" class=""on""")%>><a href="admin_webftp.asp">管理模板</a></li>
+     <li<%If act = "config" Then Echo(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
+     <li<%If act = "password" Then Echo(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
+     <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">帮助</a></li>
      <li><a href="logout.asp">退出</a></li>
     </ul>
 <%End Sub%>

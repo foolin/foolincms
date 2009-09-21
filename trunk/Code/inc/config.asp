@@ -1,46 +1,55 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
 <%
 Option Explicit		'强制声明
-'On Error Resume Next	'容错处理
+'On Error Resume Next		'容错处理
+'=========================================================
+' File Name：	config.asp
+' Purpose：		系统配置文件
+' Auhtor: 		Foolin
+' E-mail: 		Foolin@126.com
+' Created on: 	2009-9-9 10:27:17
+' Update on: 	2009-9-20 15:34:15
+' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
+'=========================================================
 
-Dim DBPATH			'Access数据库路径
+Dim DBPATH		'Access数据库路径
 	DBPATH = "database/data.mdb"
-	
+
 Dim SITENAME		'网站名称
 	SITENAME = "E酷网"
-	
-	
-Dim HTTPURL			'网站网址前缀，前面要加http
-	HTTPURL	 = "http://localhost"
-	
-Dim INSTALLDIR		'安装目录，后面不用加/
+
+Dim HTTPURL		'网站网址前缀
+	HTTPURL = "http://localhost"
+
+Dim INSTALLDIR		'网站安装目录，根目录则为：/
 	INSTALLDIR = "/eekku"
-	
-Dim SITEKEYWORDS	'网站关键词，多用逗号分隔。
+
+Dim SITEKEYWORDS		'网站关键词
 	SITEKEYWORDS = "E酷网,E酷工作室,CMS,eekku.com"
-		
-Dim TEMPLATEDIR	'模板目录
+
+Dim TEMPLATEDIR		'网站模板路径，例如：default表示template/default/
 	TEMPLATEDIR = "default"
 
-	
-Dim ISHIDETEMPPATH	'是否隐藏模板路径，若隐藏路径，则相对页面载入速度会慢一些
+Dim ISHIDETEMPPATH		'是否隐藏模板路径，隐藏则会影响载入速度
 	ISHIDETEMPPATH = 0
 
-Dim ISCACHE	'是否缓存模板, 1表示缓存，0表示不缓存
+Dim ISCACHE		'是否缓存，建议是，减轻服务器负载量
 	ISCACHE = 0
 
-Dim CACHEFLAG		'缓存标志
+Dim CACHEFLAG		'缓存标志，可以任意英文字母
 	CACHEFLAG = "EEKKU"
 
-Dim CACHETIME		'缓存时间,单位为分
+Dim CACHETIME		'缓存时间，默认是60分
 	CACHETIME = 60
-	
-Dim ISWEBLOG		'是否记录后台操作
+
+Dim ISWEBLOG		'是否记录后台管理操作记录
 	ISWEBLOG = 0
-	
-Dim LIMITIP			'限制访问IP，多IP用|分隔
+
+Dim LIMITIP		'限制IP
 	LIMITIP = "172.168.168.20|"
 
-Dim DIRTYWORDS		'非法（脏话）过滤，多词用|分隔
+Dim DIRTYWORDS		'脏话过滤
 	DIRTYWORDS = "江泽民|胡锦涛|温家宝|他妈的|操你妈|草你妈|妈逼|法轮功|李洪志|我操|我草"
+
 %>
+

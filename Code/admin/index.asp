@@ -34,29 +34,11 @@ End If
             	<ul class="menu">
                 	<li class="on"><a href="index.asp">管理首页</a></li>
                 </ul>
-                 <%Call MyInfo()%>
                 <ul class="menu">
-                 <li class="mTitle">--== 文章管理 ==--</li>
-                 <li><a href="admin_article.asp">文章管理</a></li>
-                 <li><a href="admin_artcolumn.asp">栏目管理</a></li>
-                 
-                 <li class="mTitle">--== 图片管理 ==--</li>
-                 <li><a href="admin_picture.asp">图片管理</a></li>
-                 <li><a href="admin_piccolumn.asp">栏目管理</a></li>
-                 
-                 <li class="mTitle">--== 事务管理 ==--</li>
-                 <li><a href="admin_guestbook.asp">留言管理</a></li>
-                 <li><a href="admin_comment.asp">评论管理</a></li>
-                 <li><a href="admin_uploadfile.asp">上传文件管理</a></li>
-                 
-                 <li class="mTitle">--== 系统管理 ==--</li>
-                 <li><a href="admin_config.asp">系统配置</a></li>
-                 <li><a href="admin_user.asp">团队管理</a></li>
-                 <li><a href="admin_mytag.asp">标签管理</a></li>
-                 <li><a href="admin_diypage.asp">DIY页面管理</a></li>
-                 <li><a href="admin_weblog.asp">操作记录管理</a></li>
+                 <li class="mTitle">--== 相关操作 ==--</li>
+                 <li><a href="?action=clearcache">更新缓存</a></li>
                 </ul>
-                
+                <%Call MyInfo()%>
                 <%Call SysInfo()%>
                 
             </td>

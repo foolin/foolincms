@@ -140,7 +140,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
         </tr>
 	<%
 		Dim strSql, Rs
-		strSql = "SELECT * FROM [WebLog] ORDER BY ID"
+		strSql = "SELECT * FROM [WebLog] ORDER BY ID DESC"
 		Set Rs = New ClassPageList
 		Rs.Result = 1
 		Rs.Sql = strSql

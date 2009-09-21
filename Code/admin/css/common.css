@@ -96,22 +96,23 @@ a:hover{
 }
 #sidebar {
 	width:20%;
-	padding:3px 0px;
+	padding:px;
 }
 #content{ background:#FFF;}
 .content{ padding:5px;}
+
 ul.menu{
 	margin:0px;
 	padding:0px;
 	list-style:none;
-	background:#E6F2FF;
+	background:#E7F0E6;
 	font-size:14px;
 	color:#09F;
 }
 ul.menu .mTitle{
 	margin:0px;
 	color:#FFF;
-	background:#97CBFF;
+	background:#5FB9C0;
 	padding:6px 8px;
 	font-weight:bold;
 }
@@ -128,7 +129,7 @@ ul.menu .mTitle a:hover{
 ul.menu li a{
 	padding:6px 8px;
 	background:#E6F2FF;
-	color:#09F;
+	color:#099;
 	text-decoration:none;
 	display:block;
 	border-bottom:#97CBFF 1px dashed;
@@ -143,10 +144,10 @@ ul.menu li a:hover{
 ul.menu .on a{
 	padding:6px 8px;
 	background:#FFF;
-	color:#09F;
+	color:#F00;
 	text-decoration:none;
 	display:block;
-	border-right:#FFF 1px dashed;
+	border-right:#FFF 0px dashed;
 }
 dl.menu{
 	margin:0px;
@@ -155,7 +156,7 @@ dl.menu{
 dl.menu dt{
 	margin:0px;
 	color:#FFF;
-	background:#97CBFF;
+	background:#5FB9C0;
 	padding:6px 8px;
 	font-size:14px;
 	font-weight:bold;
@@ -166,6 +167,8 @@ dl.menu dd{
 	border-bottom:#97CBFF 1px dashed;
 	border-right:#97CBFF 1px dashed;
 }
+
+
 .clear{ clear:both;}
 .split{ height:5px;}
 

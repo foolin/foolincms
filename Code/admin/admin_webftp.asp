@@ -18,8 +18,6 @@ body{
 	font-size:14px;
 }
 .css_table{ background:#F4FAFF; background:#F2F2F2; border:#68B4FF 1px solid;}
-a{text-decoration:none;color:#06F;}
-a:hover{ text-decoration:none; color:#F00;}
 .css_list{ background:#FFF;}
 .list { margin: 0px; padding: 0px;}
 .list li { list-style-image: none; list-style-type: none; float: left; text-align: center; padding:15px 15px 10px 15px; }
@@ -65,7 +63,7 @@ function saveCode(form){
 	<%Call Header()%>
     <table id="container">
         <tr><td id="topNav">
-			<%Call TopNav("config")%>
+			<%Call TopNav("webftp")%>
         </td></tr>
         <tr>
             <td id="content" valign="top" height="100%">	
@@ -91,7 +89,9 @@ If request("act") = "save" Then
 	SaveFile = Request("file")
 	SaveContent = Request("content")
 	Call CreateFile(SaveContent,SaveFile)
-	strTips = "恭喜保存文件成功！"
+	Call WebLog("修改模板["& SaveFile &"]成功！", "SESSION")
+	'Call MsgAndGo("修改自定义标签[id:"& id &"]成功！", "BACK")
+	strTips = "温馨提示：保存文件成功！" & Now()
 End If 
 
 Dim Fso: Set Fso = CreateObject("Scripting.FileSystemObject")

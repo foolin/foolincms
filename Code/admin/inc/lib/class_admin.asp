@@ -81,11 +81,13 @@ Class ClassAdmin
 	Public Function SetValue()
 		vUsername = Request.Form("fUsername")
 		vNickname = Request.Form("fNickname")
+		If Len(Request.Form("fPassword"))<>0 And Len(Request.Form("fPassword"))<6 Then mLastError = "密码至少要6位" : SetValue = False : Exit Function
+		If Len(Request.Form("fPassword"))<>0 And Request.Form("fPassword")<>Request.Form("fRePassword") Then mLastError = "密码前后不一致": SetValue = False : Exit Function
 		vPassword = MD5(Request.Form("fPassword"))
 		vLevel = Request.Form("fLevel")
 		If Len(vUsername) < 3 Or Len(vUsername) > 20 Then mLastError = "管理员帐号的长度请控制在 3 至 20 位" : SetValue = False : Exit Function
-		If Len(vPassword) < 3 Or Len(vPassword) > 50 Then mLastError = "管理员密码的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
-		If Not IsNumeric(Level) Then mLastError = "管理员等级必须为数字" : SetValue = False : Exit Function
+		If Len(vNickname) < 1 Or Len(vNickname) > 20 Then mLastError = "管理员帐号的长度请控制在 1 至 20 位" : SetValue = False : Exit Function
+		If Not IsNumeric(vLevel) Then mLastError = "管理员等级必须为数字" : SetValue = False : Exit Function
 		If Len(vNickname) = 0 Then vNickname = vUsername
 		vLoginTime = Now()
 		vLoginCount = 0
@@ -114,6 +116,18 @@ Class ClassAdmin
 		Rs.Close
 		Set Rs = Nothing
 		LetValue = True
+	End Function
+	
+	Public Function Exist(Byval tUsername)
+		Dim Rs, isExist
+		Set Rs = DB("Select * From [Admin] Where [Username]=" & tUsername,1)
+		If Rs.Eof Then
+			isExist = False
+		Else
+			isExist = True
+		End If
+		Rs.Close : Set Rs = Nothing
+		Exist = isExist
 	End Function
 
 	'--------------------------------------------------------------
@@ -144,7 +158,7 @@ Class ClassAdmin
 
 	'--------------------------------------------------------------
 	' Function name：	Modify()
-	' Description: 		修改帐号信息
+	' Description: 		修改帐号全部信息
 	' Params: 			none
 	' Return:			True|Flase
 	' Create on: 		2009-8-28 16:58:31
@@ -165,6 +179,48 @@ Class ClassAdmin
 		Set Rs = Nothing
 		Modify = True
 	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	ModifyPsw()
+	' Description: 		修改帐号密码
+	' Params: 			none
+	' Return:			True|Flase
+	' Create on: 		2009-8-28 16:58:31
+	'--------------------------------------------------------------
+	Public Function ModifyPsw()
+		Dim Rs
+		Set Rs = DB("Select * From [Admin] Where [ID]=" & vID,3)
+		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : ModifyPsw = False : Exit Function
+		Rs("Username") = vUsername
+		Rs("Nickname") = vNickname
+		Rs("Password") = vPassword
+		Rs("Level") = vLevel
+		Rs.Update
+		Rs.Close
+		Set Rs = Nothing
+		ModifyPsw = True
+	End Function
+	
+	'--------------------------------------------------------------
+	' Function name：	ModifyInfo()
+	' Description: 		修改帐号信息，不修改密码
+	' Params: 			none
+	' Return:			True|Flase
+	' Create on: 		2009-9-20 10:05:55
+	'--------------------------------------------------------------
+	Public Function ModifyInfo()
+		Dim Rs
+		Set Rs = DB("Select * From [Admin] Where [ID]=" & vID,3)
+		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : ModifyInfo = False : Exit Function
+		Rs("Username") = vUsername
+		Rs("Nickname") = vNickname
+		Rs("Level") = vLevel
+		Rs.Update
+		Rs.Close
+		Set Rs = Nothing
+		ModifyInfo = True
+	End Function
+	
 
 	'--------------------------------------------------------------
 	' Function name：	Delete()
@@ -174,9 +230,20 @@ Class ClassAdmin
 	' Create on: 		2009-8-28 16:58:31
 	'--------------------------------------------------------------
 	Public Function Delete()
-		DB "Delete From [Admin] Where [ID]=" & vID ,0
+		DB "Delete From [Admin] Where [ID] IN ("&  vID &")" ,0
 		Delete = True
 	End Function
-
+	
+	'冻结用户
+	Public Function Freeze()
+		Call DB("UPDATE [Admin] SET [Level]=-1 WHERE [ID] IN ("&  vID &")" ,0)
+		Freeze = True
+	End Function
+	
+	'解冻用户
+	Public Function Unfreeze()
+		Call DB("UPDATE [Admin] SET [Level]=0 WHERE [ID] IN ("&  vID &")" ,0)
+		Unfreeze = True
+	End Function
 End Class
 %>

@@ -47,27 +47,18 @@ End Sub
 Sub SetState()
 	Dim st: st = Request("state")
 	If Len(id) = 0 Or Not IsNumeric(id) Then Call MsgBox("id参数错误", "REFRESH")
-	Dim objA: Set objA = New ClassDiyPage
-	objA.ID = id
-	If objA.LetValue = False Then
-		Set objA = Nothing
-		Call MsgBox("错误：" & objA.LastError, "REFRESH")
-	End If
-	If LCase(st) = "hide" Then
-		objA.State = 0
-	ElseIf LCase(st) = "show" Then
-		objA.State = 1
-	Else
-		Set objA = Nothing
-		Call MsgBox("错误：参数非法", "REFRESH")
-	End If
-	If objA.Modify Then
-		Call WebLog("设置自定义页面["&objA.Title&"]状态为["&objA.State&"]成功！", "SESSION")
-		Call MsgAndGo("恭喜，操作成功！", "REFRESH")
-	Else
-		Call MsgBox("错误：" & objA.LastError, "REFRESH")
-	End If
-	Set objA = Nothing
+	Select Case LCase(st)
+		Case "show"
+			Call DB("UPDATE DiyPage SET State=1 WHERE ID IN ("& id &")" ,0)
+			Call WebLog("设置["& id &"]状态为[显示]成功！", "SESSION")
+			Call MsgAndGo("设置["& id &"]状态为[显示]成功", "REFRESH")
+		Case "hide"
+			Call DB("UPDATE DiyPage SET State=0 WHERE ID IN ("& id &")" ,0)
+			Call WebLog("设置["& id &"]状态为[隐藏]成功！", "SESSION")
+			Call MsgAndGo("设置["& id &"]状态为[隐藏]成功", "REFRESH")
+		Case Else
+			Call MsgBox("参数错误！", "BACK")
+	End Select
 End Sub
 
 '创建自定义页面
@@ -273,12 +264,14 @@ Sub List()
 	%>
         <tr>
         	<td colspan="9" style="padding:5px;">
-  				<input type="button" onClick="SelectAll(this.form,'GroupID')" value="全选" /> 
-                <input type="button" onClick="SelectOthers(this.form,'GroupID')" value="反选" /> 
+  				<input type="button" onClick="selectAll(this.form,'GroupID')" value="全选" /> 
+                <input type="button" onClick="selectOthers(this.form,'GroupID')" value="反选" /> 
                 &nbsp;&nbsp;
                 批量操作：
-                <select name="name" onChange="Dobatch(this)" style="line-height:25px; padding:5px;">
+                <select name="name" onChange="dobatch(this)" style="line-height:25px; padding:5px;">
                 	<option value=""> 选择操作 </option>
+                    <option value="show"> 显示 </option>
+                    <option value="hide"> 隐藏 </option>
                     <option value="delete"> 彻底删除 </option>
                 </select>
             </td>
@@ -303,7 +296,7 @@ function Checked(form, name, _this)
 }
 
 // 表单全选
-function SelectAll(form, name)
+function selectAll(form, name)
 {
 	for (var i = 0; i < form.elements.length; i++) {
 		var e = form.elements[i];
@@ -315,7 +308,7 @@ function SelectAll(form, name)
 
 
 // 表单反选
-function SelectOthers(form, name){	
+function selectOthers(form, name){	
 	
 	for (var i = 0; i < form.elements.length; i++) {
 		var e = form.elements[i];
@@ -326,7 +319,7 @@ function SelectOthers(form, name){
 }
 
 //获取ID
-function GetID(form){
+function getID(form){
 	var name = "GroupID";
 	var id = '';
 	var intCount = 0;
@@ -344,9 +337,29 @@ function GetID(form){
 	return id;
 }
 
+//批量显示
+function batchShow(form){
+	var id = getID(form);
+	if(!id){return;}
+	if(confirm('确定把选中选项设置为显示？')){	
+		form.action  = '?action=setstate&state=show&id=' + id;
+		form.submit(); 
+	}
+}
+
+//批量隐藏
+function batchHide(form){
+	var id = getID(form);
+	if(!id){return;}
+	if(confirm('确定把选中选项设置为隐藏？')){	
+		form.action  = '?action=setstate&state=hide&id=' + id;
+		form.submit(); 
+	}
+} 
+
 //批量删除
-function BatchDelete(form){
-	var id = GetID(form);
+function batchDelete(form){
+	var id = getID(form);
 	if(!id){return;}
 	if(confirm('删除将不能恢复！\n\n是否真的删除？')){	
 		form.action  = '?action=dodelete&id=' + id;
@@ -355,10 +368,16 @@ function BatchDelete(form){
 } 
 
 //批处理操作
-function Dobatch(objSel){
+function dobatch(objSel){
 	switch(objSel.options[objSel.selectedIndex].value){
+		case 'show':
+			batchShow(objSel.form);
+			break;
+		case 'hide':
+			batchHide(objSel.form);
+			break;
 		case 'delete':
-			BatchDelete(objSel.form);
+			batchDelete(objSel.form);
 			break;
 		default:
 			return false;

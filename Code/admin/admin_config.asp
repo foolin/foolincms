@@ -45,9 +45,9 @@
 	LIMITIP =  Replace(Req("LimitIp"), chr(34), "'")
 	DIRTYWORDS = Replace(Req("DirtyWords"), chr(34), "'")
 	If  Len(Req("IsWebLog")) <> 0 And Cint(Req("IsWebLog")) = 1 Then
-		ISCACHE = 1
+		ISWEBLOG = 1
 	Else
-		ISCACHE = 0
+		ISWEBLOG = 0
 	End If
 	
 	'系统信息

@@ -30,7 +30,7 @@ EekkuCMS 的官方网址是： www.eekku.com
 
 版本最新更新：2009年9月21日 By Foolin 
 
-作者：Foolin (真实姓名：刘付灵)
+作者：Foolin (负零)
 邮箱：Foolin@126.com
 主页：http://Ling.liufu.org
 官网：http://www.eekku.com

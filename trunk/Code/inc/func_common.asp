@@ -153,7 +153,7 @@ End Function
 
 '页面跳转，与JumpUrl.asp连用
 Function MsgAndGo(Byval Msg,Byval Url)
-	'Response.Redirect "jumpurl.asp?msg=" & Msg & "&jumpurl=" & Url & "&time=2"
+	Response.Redirect "jumpurl.asp?msg=" & Msg & "&jumpurl=" & Url & "&time=2"
 	If UCase(Url)="BACK" Then 	'返回不刷新页面
 		Response.write "<script type='text/javascript'>alert('"&Msg&"');history.go(-1);</script>"
 	ElseIf UCase(Url)="REFRESH" Then  '返回刷新页面

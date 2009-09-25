@@ -52,6 +52,37 @@
 .picArea a:hover{ color:#F00;}
 -->
 </style>
+<script type="text/javascript">
+<!--
+// 图片缩放
+//使用：<img src="images/a.jpg" onload="javascript:DrawImage(this);"/>
+function DrawImage(ImgD,iWidth){ 
+    var image=new Image();
+	if(iWidth<=0 || iWidth==null)
+	{
+		var iWidth = 600;
+	}
+    image.src=ImgD.src; 
+    if(image.width>0 && image.height>0){ 
+        flag=true; 
+      if(image.width>=iWidth){ 
+        ImgD.width=iWidth;
+        ImgD.height=(image.height*iWidth)/image.width; 
+
+        }else{ 
+            ImgD.width=image.width; 
+            ImgD.height=image.height; 
+        }  
+    } 
+} 
+//鼠标滚轮函数
+//使用：<img src="images/a.jpg" onmousewheel="return cgimg(this);" />
+function cgimg(o){
+var zoom=parseInt(o.style.zoom, 10)||100;zoom+=event.wheelDelta/12;if (zoom>0) o.style.zoom=zoom+'%';
+return false;
+}
+-->
+</script>
 </head>
 <body>
 
@@ -67,8 +98,10 @@
             <div class="picArea"> 
                 <div class="title">{pic:title /}</div> 
                 <div class="info"> 作者：{pic:author /}   来源：{pic:Source /} 点击次数：{pic:hits /}　时间：{pic:createtime/} 　</div>
-                <div class="content"> 
-                	<img src="{pic:PicPath /}" />
+                <div class="content">
+                	<a href="{pic:PicPath /}" target="_blank">
+                    <img src="{pic:PicPath /}" width="600" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);"/>
+                    </a>
                     <br />
                 	{pic:Intro/}
                     <br />

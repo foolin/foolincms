@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /} - {sys:siteurl /}</title>
+
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.picArea{
+	margin:10px 5px 15px 5px;
+	border:#C1E0FF 1px solid;
+}
+.picArea .title{
+	padding:10px;
+	font-size:16px;
+	font-weight:bold;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#000;
+}
+.picArea .content{
+	margin:0px;
+	padding:10px;
+	background:#fafafa;
+	background:#FFF;
+	line-height:25px;
+	font-size:14px;
+	text-align:center;
+}
+.picArea .content img{
+	margin:5px auto;
+	border:solid 1px #999;
+	background:#FFF;
+	padding:5px;
+}
+.picArea .content p{
+	margin:5px;
+	padding:5px;
+}
+.picArea .info{
+	height:28px;
+	line-height:28px;
+	padding-left:10px;
+	border-top:#CCC 1px dashed;
+	background:#fafafa;
+	color:#AAA;
+}
+.picArea  a{ color:#069; text-decoration:none;}
+.picArea .title a{color:#366d99; text-decoration:none;}
+.picArea a:hover{ color:#F00;}
+-->
+</style>
+</head>
+<body>
+
+	{include file="header.html" /}
+
+<div class="main">
+
+  		<div class="partMain part">
+        	
+            <div class="location">您现在的位置：{sys:sitepath /}</div>
+            
+            <!--栏目-->
+            <div class="picArea"> 
+                <div class="title">{pic:title /}</div> 
+                <div class="info"> 作者：{pic:author /}   来源：{pic:Source /} 点击次数：{pic:hits /}　时间：{pic:createtime/} 　</div>
+                <div class="content"> 
+                	<img src="{pic:PicPath /}" />
+                    <br />
+                	{pic:Intro/}
+                    <br />
+                </div>
+            </div> 
+            
+       	<div class="preNext" style="text-align:center; margin-top:20px; margin-bottom:20px;">
+           上一张：{pic:pre /} 
+           <span style="padding-left:20px; padding-right:40px;">&nbsp;</span> 
+           下一张：{pic:next /}
+        </div>
+            
+        </div>
+        <!-- partMain End -->
+        
+        <div class="partSider part">
+
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">相册分类</div> 
+                <div class="content"> 
+                    <ul>
+                    {list:pic mode="sql" sql="SELECT ID,Name FROM PicColumn WHERE ParentID = 0"}
+                     <li> <a href="piclist.asp?id=[pic:id]" >[pic:name]</a> </li>
+                    {/list:pic}
+                    </ul>
+                </div>
+            </div> 
+            
+            
+			
+        </div>
+        <!-- partSider End -->
+        <div class="clear"></div>
+        
+</div>
+<!-- Main End -->
+
+{include file="footer.html" /}
+
+</body>
+</html>

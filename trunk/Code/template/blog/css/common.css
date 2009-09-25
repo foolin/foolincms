@@ -1,0 +1,196 @@
+/* 	
+	Designer:	Foolin
+	Email: 		Foolin@126.com
+	Create on: 	2009-9-24 21:20:53
+*/
+body{
+	font-size:12px;
+	margin:0px auto;
+	background:#f7f7f7;
+	background:#EEE;
+	color:#333;
+	text-align:center;
+}
+a{ color:#333;}
+a:hover{ color:#F00;}
+.clear{ clear:both;}
+.img {
+	border:solid 1px #999;
+	background:#FFF;
+	padding:5px;
+}
+
+.header{
+	background:#09345e;
+}
+.top {
+	margin:0px auto;
+	width:960px;
+	height:70px;
+	background:#09345e url(../images/top.jpg) no-repeat;
+}
+.nav{
+	float:right;
+	margin-top:10px;
+	background:url(../images/nav_bg.jpg) no-repeat;
+	width:700px;
+	height:31px;
+	font-size:14px;
+	font-weight:bold;
+	overflow:hidden;
+}
+.nav ul, .nav li{ margin:0px;}
+.nav ul {
+	padding-left:10px;
+}
+.nav li{
+	float:left;
+	line-height:31px;
+	height:31px;
+	overflow:hidden;
+}
+.nav li a{
+	color:#FFF;
+	text-decoration:none;
+	padding-left:16px;
+	padding-right:15px;
+	border-right:#CCC 1px solid;
+}
+.nav li a:hover{
+	color:#F00;
+	text-decoration:none;
+}
+.banner{
+	margin:0px auto;
+	padding:0px;
+	width:960px;
+	height:68px;
+	overflow:hidden;
+}
+.main{
+	margin:0px auto;
+	text-align:left;
+	width:960px;
+	background:#FFF;
+	overflow:hidden;
+}
+.part{clear:none;height:100%;overflow:hidden;}
+.partMain{
+	float:left;
+	width:660px;
+}
+.partSider{
+	float:left;
+	width:300px;
+	background:#3a78a1;
+	background:#DFEEF2;
+	padding-bottom:3000px;
+	margin-bottom:-3000px;
+}
+.footer{
+	margin:0px auto;
+	width:960px;
+}
+.copyright{
+	color:#FFF;
+	background:#5193b5;
+	padding-top:15px;
+	padding-bottom:15px;
+	text-align:center;
+	line-height:22px;
+	
+}
+.copyright a{ color:#FFF;}
+.copyright a:hover{ color:#F00;}
+
+
+
+.box { margin:10px 5px; height:1%;} /*height:1%; 解决ie6下margin无效的bug*/
+.box .title{
+	color:#FFF;
+	font-size:14px;
+	font-weight:bold;
+	height:26px;
+	line-height:26px;
+	background:#48a9d2;
+	background:url(../images/box1_tit_bg.jpg);
+	padding-left:30px;
+}
+.box .title .titletxt{
+	float:left;
+	padding-left:10px;
+}
+.box .title .more{
+	float:right;
+	font-size:12px;
+	font-weight:normal;
+}
+.box .content{
+	margin:0px;
+	padding:2px;
+	background:#fafafa;
+	line-height:22px;
+	border:1px #75BAFF solid;
+}
+.box .content ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+.box .content li{
+	margin:0px;
+	padding-left:5px;
+	border-bottom:#CCC 1px dashed;
+}
+
+
+.txtArea{
+	margin:0px 5px 0px 5px;
+	border:solid 1px #C1E0FF;
+}
+.txtArea .title{
+	font-size:14px;
+	font-weight:bold;
+	height:30px;
+	line-height:30px;
+	padding-left:10px;
+	color:#666;
+	border-bottom:#C1E0FF 1px dashed;
+}
+.txtArea .content{
+	margin:0px;
+	padding:10px;
+	line-height:25px;
+	font-size:13px;
+}
+.txtArea .info{
+	height:28px;
+	line-height:28px;
+	padding-left:10px;
+	border-top:#CCC 1px dashed;
+	background:#F7F7F7;
+	color:#AAA;
+}
+.txtArea  a{ color:#069; color:#000; text-decoration:none;}
+.txtArea .title a{color:#366d99; text-decoration:none;}
+.txtArea a:hover{ color:#F00;}
+
+.location {
+	margin:5px;
+	padding:5px 10px;
+	background:#DCEDED;
+	border:dashed 1px #95D7D9;
+	font-size:14px;
+}
+
+.page{
+	margin:5px;
+	padding:5px 10px;
+	text-align:center;
+	background:#E2F7FE;
+	border:dashed 1px #95D7D9;
+	font-size:14px;
+	color:#F00;
+}
+.page a{text-decoration:none; padding:2px;}
+.page a:hover{ text-decoration:none; color:#F00;}

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /} - {sys:siteurl /}</title>
+
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.codeArea{
+	margin:5px;
+	padding:5px;
+	border:#C1E0FF 1px solid;
+	line-height:25px;
+	font-size:14px;
+}
+.codeArea  p{
+	margin:5px;
+	padding:5px;
+}
+
+.codeArea  a{ color:#069; text-decoration:none;}
+.codeArea a:hover{ color:#F00;}
+-->
+</style>
+</head>
+<body>
+
+	{include file="header.html" /}
+
+<div class="main">
+
+  		<div class="partMain part">
+        	
+            <div class="location">您现在的位置：{sys:sitepath /}</div>
+            
+            <div class="codeArea">
+            	{diypage:code /}
+            </div>
+            
+        </div>
+        <!-- partMain End -->
+        
+        <div class="partSider part">
+
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">相关页面</div> 
+                <div class="content"> 
+                    <ul>
+                    {list:diypage mode="sql" sql="SELECT ID,Title FROM DiyPage WHERE State = 1"}
+                     <li> <a href="diypage.asp?id=[diypage:id]" >[diypage:title]</a> </li>
+                    {/list:diypage}
+                    </ul>
+                </div>
+            </div> 
+            
+            
+			
+        </div>
+        <!-- partSider End -->
+        <div class="clear"></div>
+        
+</div>
+<!-- Main End -->
+
+{include file="footer.html" /}
+
+</body>
+</html>

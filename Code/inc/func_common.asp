@@ -350,10 +350,15 @@ End Function
 '	功能：	栏目链接导航
 '	参数：	id - 页面id
 '---------------------------------------------------
-Function DiyPagePath(ByVal id)
+Function DiyPagePath(ByVal param)
 	Dim Rs, strSql, strPath
-	If Len(id) = 0 Or Not IsNumeric(id) Then DiyPagePath = "": Exit Function
-	strSql = "SELECT Title FROM DiyPage WHERE ID = " & id
+	If Len(param) = 0 Then DiyPagePath = "": Exit Function
+	If IsNumeric(param) Then
+		strSql = "SELECT Title FROM DiyPage WHERE ID = " & param
+	Else
+		strSql = "SELECT Title FROM DiyPage WHERE PageName = '" & param & "'"
+	End If
+	
 	Set Rs = DB(strSql, 1)
 	If Not Rs.Eof Then
 		strPath = ToPath(IndexPath, Rs("Title"))

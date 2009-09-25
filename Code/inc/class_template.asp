@@ -147,12 +147,12 @@ Class ClassTemplate
 	' Purpose: 			文章（图片）调用标签执行，注意执行顺序
 	' Author:			Foolin
 	' Create on: 		2009-7-31 19:12:08
-	' Params:			id - 页面id
+	' Params:			param - 页面参数
 	' Return:			
 	' Modify log:					
 	'--------------------------------------------------------------
-	Public Function Compile_DiyPage(ByVal id)
-		Call Parser_DiyPage(id)		'执行DiyPage标签分析
+	Public Function Compile_DiyPage(ByVal param)
+		Call Parser_DiyPage(param)		'执行DiyPage标签分析
 		Call Parser_Include(3)	'执行包含文件分析处理
 		Call Parser_MyTag()		'执行自定义标签分析处理
 		Call Parser_Sys()		'执行系统标签分析处理
@@ -230,20 +230,25 @@ Class ClassTemplate
 	' Purpose: 			自定义页面（DiyPage）标签:{diypage:字段名 属性=值}
 	' Author:			Foolin
 	' Create on: 		2009-7-24 18:20:26
-	' Params:			id - 页面id
+	' Params:			param - 页面参数
 	' Return:			none
-	' Modify log:		
+	' Update on:		2009-9-25 16:01:19
+	' Modify log:		增加文件名参数类型（即是可以通过id或者文件名作为参数）
 	' Notice:						
 	'--------------------------------------------------------------
-	Public Function Parser_DiyPage(ByVal id)
+	Public Function Parser_DiyPage(ByVal param)
 		On Error Resume Next
 		Dim Matches, Match
 		Dim objRs, strSql
 		Dim tagName, strAttrs, tagLen, tagLenExt
-		If Len(id) = 0 Or Not IsNumeric(id) Then Response.Write(Warn("id[" & id & "]参数错误！")): Response.End()
-		strSql = "SELECT * FROM DiyPage WHERE State = 1 AND ID =  " & id
+		If Len(param) = 0 Then Response.Write(Warn("参数错误！")): Response.End()
+		If IsNumeric(param) Then
+			strSql = "SELECT * FROM DiyPage WHERE State = 1 AND ID =  " & param
+		Else
+			strSql = "SELECT * FROM DiyPage WHERE State = 1 AND PageName = '" & param &"'"
+		End If
 		Set objRs = DB(strSql, 1)
-		If objRs.Eof Then Response.Write(Warn("不存在id[" & id & "]页面。")): Response.End()
+		If objRs.Eof Then Response.Write(Warn("不存在[" & param & "]页面。")): Response.End()
 		If Len(Trim(objRs("Template"))) > 0 Then
 			mTemplate = TemplatePath & "/" & objRs("Template")
 		Else
@@ -276,7 +281,7 @@ Class ClassTemplate
 			tagLen = 0: tagLenExt = ""	'清除
 		Next
 	End Function
-	
+
 
 	'--------------------------------------------------------------
 	' Function name：	Parser_MyTag()	
@@ -333,11 +338,18 @@ Class ClassTemplate
 			mContent = Replace(mContent, Match.Value, strValue) ' 替换
 			If Err Then Err.Clear: Response.Write Warn("{sys}格式不合法，请检查！"): Response.End
 		Next
+		'替换css、html里面的图片
 		mReg.pattern = "<(.*?)(src=|href=|value=)""(images/|css/|js/|scripts/)(.*?)""(.*?)>"
 		If IsHideTempPath = 1 Then
 			mContent = mReg.replace(mcontent, "<$1$2""skin.asp?path=$3$4""$5>")
 		Else
 			mContent = mReg.replace(mcontent, "<$1$2""" & TemplatePath & "/$3$4""$5>")
+		End If
+		mReg.pattern = "url\((.*?)\)"	'替换网页中css中背景图片
+		If IsHideTempPath = 1 Then
+			mContent = mReg.replace(mcontent, "url(skin.asp?path=$1)")
+		Else
+			mContent = mReg.replace(mcontent, "url(" & TemplatePath & "/$1)")
 		End If
 		
 	End Function
@@ -425,18 +437,6 @@ Class ClassTemplate
 				Select Case LCase(tagSrc)
 					Case "image", "pic", "picture"
 						tagTable = "Picture"
-						'If Len(tagColumn) > 0 Then
-							'tagWhere = tagWhere & " AND "
-							'If Not IsNumeric(tagColumn) Then
-								'tagWhere = " ColID In (" & tagColumn & ") "
-							'Else
-								'tagWhere = " ColID=" & tagColumn & " "
-							'End If
-							'If IsNumeric(tagColumn) Then
-								'tagWhere = " ColID=" & tagColumn & " "
-							'End If
-
-						'End If
 					Case "imgart", "picart"
 						tagTable = "Article"
 						tagWhere = tagWhere & " AND IsFocusPic = 1 AND FocusPic<>'' "
@@ -547,8 +547,7 @@ Class ClassTemplate
 				Else
 					objRs.Close: Set objRs = Nothing
 				End If
-				
-				Call SetCache(mTemplate & tagSQL, strTempValue)
+
 			End If
 			mContent = Replace(mContent, Match.Value, strTempValue) ' 替换
 			If Err Then Response.Write Err.Description & "<br />" : Err.Clear: Response.Write  Warn("{list}格式不合法，请检查！"): Response.End

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /} - {sys:siteurl /}</title>
+
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.picArea {
+	margin:10px 5px 15px 5px;
+	margin:0px 5px 0px 5px;
+	border:#C1E0FF 1px solid;
+}
+.picArea .title{
+	font-size:14px;
+	font-weight:bold;
+	height:30px;
+	line-height:30px;
+	background:url(images/txtArea_tit_bg.jpg);
+	padding-left:10px;
+	color:#666;
+	border-bottom:#C1E0FF 1px dashed;
+}
+.picArea .content{ padding:0px; line-height:22px;}
+.picArea .content dl{ margin:5px; padding:0px;background:#F2F2F2; border: solid 1px #CCC; text-align:center;}
+.picArea .content dd{ margin:5px; padding:5px;}
+.picArea .content dt{ margin:0px; font-size:14px; padding:3px; border-top:dashed 1px #CCC;}
+.picArea a img{
+	border:solid 1px #999;
+	background:#FFF;
+	padding:5px;
+}
+.picArea a:hover img{
+	background:#3C3;
+}
+.picArea .content a{ text-decoration:none;}
+-->
+</style>
+</head>
+<body>
+
+	{include file="header.html" /}
+
+<div class="main">
+
+  		<div class="partMain part">
+        	
+            <div class="location">您现在的位置：{sys:sitepath /}</div>
+            
+            <div class="picArea">
+            	<div class="title">图片列表</div> 
+                <div class="content">
+                     {list:pic src="pic" column="auto" class="picList"  row="3" col="3" ispage="true"}
+                      <dl>
+                        <dd><a href="[pic:url]">
+                            <img src="[pic:PicPath]" class="img" width="140" height="100" />
+                            </a> </dd>
+                        <dt><a href="[pic:url]">[pic:title]</a> </dt>
+                       </dl>
+                      {/list:pic}
+                 </div>
+             </div>
+
+            <div class="page"> {tag:page /} </div>
+            
+        </div>
+        <!-- partMain End -->
+        
+        <div class="partSider part">
+        
+        
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">相册分类</div> 
+                <div class="content"> 
+                    <ul>
+                    {list:pic mode="sql" sql="SELECT ID,Name FROM PicColumn WHERE ParentID = 0"}
+                     <li> <a href="piclist.asp?id=[pic:id]" >[pic:name]</a> </li>
+                    {/list:pic}
+                    </ul>
+                </div>
+            </div> 
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">系统信息</div> 
+                <div class="content"> 
+                    EekkuCMS  v0.1.0 Dev20090921 <br /> 
+                    作者：Foolin <br /> 
+                    Email: Foolin@126.com <br /> 
+                    Http;//www.eekku.com <br /><br /><br /> 
+                </div>
+            </div> 
+
+			
+        </div>
+        <!-- partSider End -->
+        <div class="clear"></div>
+        
+</div>
+<!-- Main End -->
+
+{include file="footer.html" /}
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!--#include file="../inc/admin.chklogin.asp"-->
 <!--#include file="../../inc/class_upload.asp"-->
+<!--#include file="../../inc/func_file.asp"-->
 <%
  Call ChkLogin()
 
@@ -46,6 +47,9 @@ if request.QueryString("act")="upload" then
 	Response.End()
  else
  	if Upload.files(-1).count>0 then 					'这里判断你是否选择了文件
+			If ExistFolder("../../" & strFolder) = False Then
+				CreateFolder("../../" & strFolder)
+			End If
     		path=server.mappath("../../" & strFolder) 				'文件保存路径(这里是files文件夹)
     		'保存文件(以新文件名保存)
     		set tempCls = Upload.files("file1") 

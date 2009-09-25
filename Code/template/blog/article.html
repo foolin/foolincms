@@ -82,7 +82,7 @@
                 <div class="title">日志分类</div> 
                 <div class="content"> 
                     <ul>
-                    {list:artlist mode="sql" sql="SELECT ID,Title FROM ArtColumn WHERE ParentID = 0"}
+                    {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
                      <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
                     {/list:artlist}
                     </ul>

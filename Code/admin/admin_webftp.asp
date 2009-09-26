@@ -119,7 +119,9 @@ Fileurl =  replace(request("file"),"//","/")
 	Set Root = Fso.GetFolder(Server.Mappath(Urli))
 	%>
 	<%If Len(Fileurl) > 0 Then%>
-	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.HTMLEncode(Fileurl)%>&ext=<%=Request("ext")%>">
+	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.URLEncode(Fileurl)%>&ext=<%=Request("ext")%>">
+    	<input type="hidden" name="urli" value="<%=Urlr%>" />
+        <input type="hidden" name="urlr" value="<%=Urlr%>" />
 	<tr>
 		<td class='css_list'>
 			<textarea name="content1" id="content1" class="codepress <%=extCode%> linenumbers-on" style="width:99%;height:550px; border:#09F 1px solid;"><%=getfile(Server.HTMLEncode(Fileurl))%></textarea>

@@ -5,9 +5,8 @@
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Createed on: 	2009-7-17 11:08:14
-' Updated on: 	2009-7-24 18:13:32
-' Modify log:	
-' Notice:			
+' Updated on: 	2009-9-25 15:50:56
+' Modify log:	  自定义页面，增加URL参数入口，可以通过URL或者Id进行浏览自定义页面。(2009-9-25 15:50:56)		
 '=========================================================
 
 Class ClassTemplate

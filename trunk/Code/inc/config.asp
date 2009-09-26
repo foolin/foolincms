@@ -8,7 +8,7 @@ Option Explicit		'强制声明
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-25 14:24:40
+' Update on: 	2009-9-26 10:03:37
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
@@ -43,7 +43,7 @@ Dim CACHETIME		'缓存时间，默认是60分
 	CACHETIME = 60
 
 Dim ISWEBLOG		'是否记录后台管理操作记录
-	ISWEBLOG = 1
+	ISWEBLOG = 0
 
 Dim LIMITIP		'限制IP，多用逗号进行分割
 	LIMITIP = ""

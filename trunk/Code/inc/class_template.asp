@@ -247,7 +247,7 @@ Class ClassTemplate
 			strSql = "SELECT * FROM DiyPage WHERE State = 1 AND PageName = '" & param &"'"
 		End If
 		Set objRs = DB(strSql, 1)
-		If objRs.Eof Then Response.Write(Warn("不存在[" & param & "]页面。")): Response.End()
+		If objRs.Eof Then Response.Write(Warn("不存在[" & param & "]页面。请在后台[Diy页面]管理进行添加该页面！")): Response.End()
 		If Len(Trim(objRs("Template"))) > 0 Then
 			mTemplate = TemplatePath & "/" & objRs("Template")
 		Else

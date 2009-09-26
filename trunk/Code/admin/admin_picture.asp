@@ -537,6 +537,7 @@ Sub ColForm(ByVal id)
             <%End If%>
 	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post" onsubmit="return chkSubmit();">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
+        <input type="hidden" name="fHits" value="<%=objA.Hits%>"/>
         <table class="form" style="border:1px #88C4FF solid;">
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("±à¼­") Else Echo("ÉÏ´«")%>Í¼Æ¬

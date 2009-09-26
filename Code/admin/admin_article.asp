@@ -540,6 +540,7 @@ Sub ArtForm(ByVal id)
 %>
 	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
+        <input type="hidden" name="Hits" value="<%=objA.Hits%>"/>
         <table class="form" style="border:1px #88C4FF solid;">
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("╠Ю╪╜") Else Echo("лМ╪с")%>ндуб

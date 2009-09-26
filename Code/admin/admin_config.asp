@@ -217,7 +217,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                               <td>
                               		是<input type="radio" name="IsCache" value="1" <%If ISCACHE=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsCache" value="0" <%If ISCACHE=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">隐藏路径可以保证模板安全，但会影响网页载入速度。</span>
+                                 &nbsp;&nbsp;<span class="gray">缓存可以提高浏览页面的速度。</span>
                               </td>
                             </tr>
                             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">

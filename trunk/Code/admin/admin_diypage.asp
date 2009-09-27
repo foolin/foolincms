@@ -248,7 +248,13 @@ Sub List()
 					∑Ò
                 <%End If%>
             </td>
-            <td>diypage.asp?id=<%=Rs.Data("ID")%> [<a href="../diypage.asp?id=<%=Rs.Data("ID")%>" target="_blank">‰Ø¿¿]</a></td>
+            <td>
+            <%If Len(Rs.Data("PageName")) > 0 Then%>
+                 diypage.asp?url=<%=Rs.Data("PageName")%> [<a href="../diypage.asp?url=<%=Rs.Data("PageName")%>" target="_blank">‰Ø¿¿]</a>
+           <%Else%>
+                diypage.asp?id=<%=Rs.Data("ID")%> [<a href="../diypage.asp?id=<%=Rs.Data("ID")%>" target="_blank">‰Ø¿¿]</a>
+          <%End If%>
+            </td>
             <td><a href="?action=modify&id=<%=Rs.Data("ID")%>">±‡º≠</a></td>
             <td>
 				<%If Rs.Data("IsSystem") = 1 Then%>

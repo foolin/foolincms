@@ -509,10 +509,17 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'创建管理员初始密码
 	Conn.execute("INSERT INTO [Admin] ([Username],[Nickname],[Password],[Level],[LoginCount],[LoginTime],[LoginIP]) VALUES('"& strUsername &"','"& strUsername &"','"& strPassword &"',3,0,'"& Now() &"','"& GetIP() &"')")
 	'创建初始化自定义标签
+	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FirstTag','第一个自定义标签','第一个自定义标签：(零星碎事)')")
+	'系统信息
+	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('AboutSys','关于系统信息','{sys:sys /}<br />作者：Foolin<br /> Email: Foolin@126.com <br /> 主页：http://www.LiuFu.org/Ling<br />官网：Http://www.eekku.com<br />')")
+	'自定义标签：友情链接
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FriendLinks','友情链接','<a href=""http://www.eekku.com""> -==- E酷网 -==- </a><br />"& Chr(10) & Chr(9) &"<a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br />"& Chr(10) & Chr(9) &"')")
-	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('SubName','网站副标题','(零星碎事)')")
-	'创建初始化自定义页面
-	Conn.execute("INSERT INTO [DiyPage] ([Title],[Code],[State],[IsSystem]) VALUES('我的页面','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：<font color=""red"">diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font>即可打开这个自定义页面！</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br><br><a href=""http://www.eekku.com""> -==- E酷网 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br /></p>',1,0)")
+	'帮助页面
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('帮助文档','help.html','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：<font color=""red"">diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font>或者<font color=""red"">diypage.asp?url=<font color=""blue"">[您建立页面的名称]</font></font>即可打开这个自定义页面！</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br><br><a href=""http://www.eekku.com""> -==- E酷网 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br /></p>',1,0)")
+	'友情链接
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('友情链接','links.html','{my:friendlinks /}',1,0)")
+	'下载页面
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('作品下载','download.html','<p>--------------</p><p>E酷CMS作品简介：</p><p>Eekku Cms(E酷Cms)是我的第一个Cms作品，其功能有：</p><p>&nbsp;&nbsp;&nbsp; 1、本系统是采用 ASP + Access 技术实现<br />&nbsp;&nbsp;&nbsp;2、程序的功能有文章、相册、留言和评论等基本功能<br />&nbsp;&nbsp;&nbsp; 3、程序中模板和ASP代码将100%完全分离。<br />&nbsp;&nbsp;&nbsp;4、本系统自带系统标签，标签语法类似HTML标签语法，简洁易懂，还有自定义标签功能。<br />&nbsp;&nbsp;&nbsp; 5、本系统有自定义页面功能。<br />&nbsp;&nbsp;&nbsp; 6、更多功能等待你来发现....</p><p>目前还是开发版，敬请关注！</p><p>最新版本下载：<a href=""http://code.google.com/p/foolincms/downloads/list"" target=""_blank"">点击进入下载页面</a></p><p>--------------</p>',1,0)")
 	Conn.Close: Set Conn = Nothing
 	CreateTable = True
 End Function
@@ -583,7 +590,7 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "ISOPENGBOOK = 1" & keyEnter
 	' ISAUDITGBOOK变量
 	strTemp= strTemp & "Dim ISAUDITGBOOK" & keyTab & "'是否需要审核留言，是-1，否-0" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "ISAUDITGBOOK = 1" & keyEnter
+	strTemp= strTemp & "ISAUDITGBOOK = 0" & keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & "1" & keyEnter

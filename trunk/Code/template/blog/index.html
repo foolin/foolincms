@@ -40,10 +40,7 @@
             <div class="box"> 
                 <div class="title">系统信息</div> 
                 <div class="content"> 
-                    EekkuCMS  v0.1.0 Dev20090921 <br /> 
-                    作者：Foolin <br /> 
-                    Email: Foolin@126.com <br /> 
-                    Http;//www.eekku.com <br /><br /><br /> 
+                    {my:AboutSys /}
                 </div>
             </div> 
             <!--栏目-->
@@ -55,6 +52,21 @@
                      <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
                     {/list:artlist}
                     </ul>
+                </div>
+            </div> 
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">自定义标签</div> 
+                <div class="content"> 
+                    {my:FirstTag /}
+                </div>
+            </div> 
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">友情链接</div> 
+                <div class="content"> 
+                    {my:FriendLinks /}<br />
+                    <a href="diypage.asp?url=links.html">更多>></a>
                 </div>
             </div> 
 			

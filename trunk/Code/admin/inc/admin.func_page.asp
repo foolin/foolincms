@@ -1,6 +1,6 @@
 <%Sub Header%>
     <div id="header">
-        E酷CMS 一个简捷而不简单的内容管理系统。努力而不后悔，↖(^ω^)↗加油！
+        欢迎使用E酷CMS，一个方便而不简单的内容管理系统~
     </div>
 <%End Sub%>
 
@@ -12,12 +12,16 @@
      <li<%If act = "article" Then Echo(" class=""on""")%>><a href="admin_article.asp">文章</a></li>
      <li<%If act = "picture" Then Echo(" class=""on""")%>><a href="admin_picture.asp">图片</a></li>
      <li<%If act = "guestbook" Then Echo(" class=""on""")%>><a href="admin_guestbook.asp">留言</a></li>
+     <!--
      <li<%If act = "comment" Then Echo(" class=""on""")%>><a href="#admin_comment.asp">评论</a></li>
+     -->
      <li<%If act = "mytag" Then Echo(" class=""on""")%>><a href="admin_mytag.asp">标签</a></li>
      <li<%If act = "diypage" Then Echo(" class=""on""")%>><a href="admin_diypage.asp">DIY页面</a></li>
 <li<%If act = "webftp" Then Echo(" class=""on""")%>><a href="admin_webftp.asp">模板</a></li>
      <li<%If act = "user" Then Echo(" class=""on""")%>><a href="admin_user.asp">团队</a></li>
+     <!--
      <li<%If act = "file" Then Echo(" class=""on""")%>><a href="#admin_uploadfile.asp">文件</a></li>
+      -->
 	 <li<%If act = "weblog" Then Echo(" class=""on""")%>><a href="admin_weblog.asp">管理日志</a></li>
      <li<%If act = "config" Then Echo(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
      <li<%If act = "password" Then Echo(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
@@ -38,9 +42,9 @@
 <%Sub MyInfo()%>
         <ul class="menu">
          <li class="mTitle">--== 控制面板 ==--</li>
-         <li><a href="index.asp">欢迎[Foolin]！</a></li>
+         <li><a href="index.asp">欢迎[<%=Session("AdminName")%>]！</a></li>
          <li><a href="modify_password.asp">修改资料</a></li>
-         <li><a href="logout.asp">退出[Foolin]</a></li>
+         <li><a href="logout.asp">退出[<%=Session("AdminName")%>]</a></li>
         </ul>
 <%End Sub%>
 
@@ -50,6 +54,6 @@
             <dd>制作：E酷工作室(Foolin)</dd>
             <dd>E-mail：Foolin@126.com</dd>
             <dd><a href="http://www.eekku.com">官网：http://www.eekku.com</a></dd>
-            <dd><a href="http://www.eekku.com">E酷CMS V1.0.0 build0901</a></dd>
+            <dd><a href="http://www.eekku.com">E酷CMS <%=sysversion%></a></dd>
         </dl>
 <%End Sub%>

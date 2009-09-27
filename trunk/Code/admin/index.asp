@@ -43,7 +43,7 @@ End If
                 
             </td>
             <td id="content" valign="top" height="100%">
-                    	 Foolin，欢迎你进入后台管理，你的等级是普通管理员。
+                    	
                   <table style="width:85%; border:1px solid #93C9FF; margin:5px;">
                       <tr bgcolor="#E8F1FF" height=18>
                         <td colspan="2" align=center class="td2">服务器相关参数</td>
@@ -91,6 +91,7 @@ End If
                   </table>
                   <div >
                   	<ul>
+                    	<li> <%=Session("AdminName")%>，欢迎你进入后台管理。</li>
                     	<li><a href="?action=clearcache">更新缓存</a></li>
                     </ul>
                   </div>

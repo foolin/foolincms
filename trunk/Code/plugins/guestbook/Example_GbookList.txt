@@ -1,0 +1,83 @@
+详细解析说明，请看readme.txt文档
+---------------------- 标签示例代码开始 ----------------------
+
+<!--留言列表开始-->
+{list:gbook mode="sql" sql="SELECT * FROM GuestBook WHERE State = 1 ORDER BY ID DESC" col="1" row="20" ispage="true"}
+
+  <!--留言内层标签-->
+  <div class="txtArea"> 
+
+  <!-- 留言标题 -->
+      <div class="title">[gbook:id]: [gbook:title]</div> 
+
+    <!-- 留言内容 -->
+      <div class="content"> 
+        [gbook:content clearhtml="true"]
+      </div>
+
+      <!-- 留言回复：如果有回复则显示，无则不现实 -->
+      {if: Len("[gbook:recomment]") > 0}
+      <div class="recomment"> 
+        <b>[gbook:reuser]</b>回复：[gbook:recomment] ([gbook:retime])
+      </div>
+      {/if}
+
+      <!-- 留言信息 -->
+      <div class="info">留言者：[gbook:user] 主页：<a href="[gbook:homepage]" target="_blank">浏览</a> 　发表：[gbook:createtime]</div>
+      
+  </div> 
+
+{/list:gbook}
+<!--留言列表结束-->
+
+  <!--分页-->
+  <div class="page"> {tag:page /} </div>
+  
+			
+---------------------- 标签示例代码结束 ----------------------
+
+附该代码CSS样式：
+
+
+<style type="text/css">
+<!--
+.txtArea{
+	margin:0px 5px 0px 5px;
+	border:solid 1px #C1E0FF;
+}
+.txtArea .title{
+	font-size:14px;
+	font-weight:bold;
+	height:30px;
+	line-height:30px;
+	padding-left:10px;
+	color:#366d99;
+	border-bottom:#C1E0FF 1px dashed;
+}
+.txtArea .content{
+	margin:0px;
+	padding:10px;
+	line-height:25px;
+	font-size:13px;
+}
+.txtArea .info{
+	height:28px;
+	line-height:28px;
+	padding-left:10px;
+	border-top:#CCC 1px dashed;
+	background:#F7F7F7;
+	color:#AAA;
+}
+.txtArea  a{ color:#000; text-decoration:none;}
+.txtArea .title a{color:#366d99; text-decoration:none;}
+.txtArea a:hover{ color:#F00;}
+.recomment{
+	margin:5px;
+	border:dashed 1px #CCC;
+	padding:5px;
+	line-height:22px;
+	background:#F5F5F5;
+	color:#090;
+}
+-->
+</style>

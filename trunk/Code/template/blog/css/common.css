@@ -155,7 +155,7 @@ a:hover{ color:#F00;}
 	height:30px;
 	line-height:30px;
 	padding-left:10px;
-	color:#666;
+	color:#366d99;
 	border-bottom:#C1E0FF 1px dashed;
 }
 .txtArea .content{
@@ -172,7 +172,7 @@ a:hover{ color:#F00;}
 	background:#F7F7F7;
 	color:#AAA;
 }
-.txtArea  a{ color:#069; color:#000; text-decoration:none;}
+.txtArea  a{ color:#000; text-decoration:none;}
 .txtArea .title a{color:#366d99; text-decoration:none;}
 .txtArea a:hover{ color:#F00;}
 

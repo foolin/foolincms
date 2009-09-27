@@ -244,7 +244,7 @@ Class ClassArticle
 	' Create on: 		2009-8-28 16:58:31
 	'--------------------------------------------------------------
 	Public Function Delete()
-		DB "Delete From [Article] Where [ID] In" & vID ,0
+		DB "Delete From [Article] Where [ID] In (" & vID & ")" ,0
 		Delete = True
 	End Function
 

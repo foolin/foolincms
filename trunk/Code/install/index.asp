@@ -428,14 +428,16 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[GuestBook]:
 	Conn.execute("CREATE TABLE [GuestBook] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[User] varchar(10),"&_
-		"[Email] varchar(50),"&_
+		"[User] varchar(20),"&_
+		"[Email] varchar(20),"&_
 		"[HomePage] varchar(50),"&_
-		"[Title] varchar(100),"&_
-		"[Content] text,"&_
-		"[Recomment] varchar(250),"&_
 		"[Ip] varchar(20),"&_
+		"[Title] varchar(50),"&_
+		"[Content] varchar(250),"&_
 		"[CreateTime] datetime Default now(),"&_
+		"[Recomment] varchar(250),"&_
+		"[ReUser] varchar(20),"&_
+		"[ReTime] datetime,"&_
 		"[State] integer Default 0"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [Index_0D7D3CC3_EF47_4F3A] on [GuestBook]([ID] ) with Primary")
@@ -576,6 +578,12 @@ Function CreateConfig(DbName)
 	' ISHIDETEMPPATH变量
 	strTemp= strTemp & "Dim ISHIDETEMPPATH" & keyTab & "'是否隐藏模板路径，隐藏则会影响载入速度" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISHIDETEMPPATH = " & "0" & keyEnter
+	' ISOPENGBOOK变量
+	strTemp= strTemp & "Dim ISOPENGBOOK" & keyTab & "'是否开放留言，默认开放" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "ISOPENGBOOK = 1" & keyEnter
+	' ISAUDITGBOOK变量
+	strTemp= strTemp & "Dim ISAUDITGBOOK" & keyTab & "'是否需要审核留言，是-1，否-0" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "ISAUDITGBOOK = 1" & keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & "1" & keyEnter

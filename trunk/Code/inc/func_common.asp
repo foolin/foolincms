@@ -286,6 +286,25 @@ Function ClearHtml(strHtml)
 	ClearHtml = Trim(strOutput)
 End Function
 
+'---------------------------------------------------
+'	函数：	ToPath
+'	功能：	辅助，将两个连接串接起来
+'	参数：	strLinkA - 第一个连接， strLinkB - 第二个链接
+'---------------------------------------------------
+Function ToPath(ByVal strLinkA, ByVal strLinkB)
+	ToPath = strLinkA & SitePathSplit & strLinkB
+End Function
+
+'---------------------------------------------------
+'	函数：	ToLink
+'	功能：	辅助，转换成连接
+'	参数：	strName - 名称， strUrl - 连接
+'---------------------------------------------------
+Function ToLink(ByVal strName, ByVal strUrl)
+	ToLink = "<a href=""" & strUrl & """>" & strName & "</a>"
+End Function
+
+
 
 '---------------------------------------------------
 '	函数：	IndexPath
@@ -370,20 +389,10 @@ Function DiyPagePath(ByVal param)
 End Function
 
 '---------------------------------------------------
-'	函数：	ToPath
-'	功能：	辅助，将两个连接串接起来
-'	参数：	strLinkA - 第一个连接， strLinkB - 第二个链接
+'	函数：	GuestbookPath
+'	功能：	栏目链接导航
 '---------------------------------------------------
-Function ToPath(ByVal strLinkA, ByVal strLinkB)
-	ToPath = strLinkA & SitePathSplit & strLinkB
-End Function
-
-'---------------------------------------------------
-'	函数：	ToLink
-'	功能：	辅助，转换成连接
-'	参数：	strName - 名称， strUrl - 连接
-'---------------------------------------------------
-Function ToLink(ByVal strName, ByVal strUrl)
-	ToLink = "<a href=""" & strUrl & """>" & strName & "</a>"
+Function GuestbookPath()
+	GuestbookPath = ToPath(IndexPath, ToLink("留言簿", "guestbook.asp"))
 End Function
 %>

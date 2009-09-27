@@ -8,7 +8,7 @@ Option Explicit		'强制声明
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-26 10:03:37
+' Update on: 	2009-9-27 14:04:43
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
@@ -32,6 +32,12 @@ Dim TEMPLATEDIR		'网站模板路径，例如：default表示template/default/
 
 Dim ISHIDETEMPPATH		'是否隐藏模板路径，隐藏则会影响载入速度
 	ISHIDETEMPPATH = 0
+
+Dim ISOPENGBOOK		'是否开放留言，默认开放
+	ISOPENGBOOK = 1
+
+Dim ISAUDITGBOOK		'是否需要审核留言，是-1，否-0
+	ISAUDITGBOOK = 1
 
 Dim ISCACHE		'是否缓存，建议是，减轻服务器负载量
 	ISCACHE = 0

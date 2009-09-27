@@ -111,7 +111,7 @@ Class ClassGuestBook
 		vState = Request.Form("fState")
 		vCreateTime	= Now()
 		vReTime = Now()
-		If Len(vTitle) < 3 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 3 至 250 位" : SetValue = False : Exit Function
+		If Len(vTitle) < 3 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
 		If Len(User) = 0 Then User = "匿名"
 		If Len(vContent)<5 Or Len(Content)>250 Then mLastError = "留言内容的长度请控制在 3 至 250 位" : SetValue = False : Exit Function
 		If Len(vRecomment)<5 Or Len(vRecomment)>250 Then mLastError = "回复内容的长度请控制在 3 至 250 位" : SetValue = False : Exit Function

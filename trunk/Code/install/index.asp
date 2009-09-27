@@ -467,7 +467,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[Picture]:
 	Conn.execute("CREATE TABLE [Picture] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Title] varchar(20),"&_
+		"[Title] varchar(50),"&_
 		"[ColID] integer Default 0,"&_
 		"[Author] varchar(20),"&_
 		"[Source] varchar(250),"&_

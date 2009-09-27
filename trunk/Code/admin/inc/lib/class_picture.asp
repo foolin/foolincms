@@ -110,7 +110,7 @@ Class ClassPicture
 		vState = Request.Form("fState")
 		vHits = Request.Form("fHits")
 		vCreateTime = Now()
-		If Len(vTitle) < 2 Or Len(vTitle) > 20 Then mLastError = "标题的长度请控制在 3 至 20 位" : SetValue = False : Exit Function
+		If Len(vTitle) < 3 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
 		If Not IsNumeric(ColID) Then mLastError = "栏目ID必须为数字" : SetValue = False : Exit Function
 		If Cint(ColID) = 0 Then mLastError = "请选择栏目" : SetValue = False : Exit Function
 		If Len(vAuthor) = 0 Then vAuthor = "匿名"

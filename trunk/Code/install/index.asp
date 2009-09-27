@@ -362,7 +362,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[LoginTime] datetime Default Now(),"&_
 		"[LoginCount] integer Default 0,"&_
 		"[Level] integer Default 0,"&_
-		"[LoginIP] varchar(250)"&_
+		"[LoginIP] varchar(50)"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [PrimaryKey] on [Admin]([ID] ) with Primary")
 	
@@ -372,7 +372,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[Name] varchar(20),"&_
 		"[Info] varchar(250),"&_
 		"[ParentID] integer Default 0,"&_
-		"[Template] varchar(250)"&_
+		"[Template] varchar(20)"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [PrimaryKey] on [ArtColumn]([ID] ) with Primary")
 	Conn.execute("CREATE INDEX [ArtClassID] on [ArtColumn]([ID] )")
@@ -383,7 +383,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[ColID] integer Default 0,"&_
 		"[Title] varchar(50),"&_
 		"[Author] varchar(20),"&_
-		"[Source] varchar(50),"&_
+		"[Source] varchar(250),"&_
 		"[JumpUrl] varchar(250),"&_
 		"[Hits] integer Default 0,"&_
 		"[FocusPic] varchar(250),"&_
@@ -404,10 +404,10 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[CType] varchar(20),"&_
 		"[User] varchar(20),"&_
 		"[Email] varchar(20),"&_
-		"[HomePage] varchar(50),"&_
+		"[HomePage] varchar(250),"&_
 		"[Title] varchar(50),"&_
 		"[Content] varchar(250),"&_
-		"[Ip] varchar(20),"&_
+		"[Ip] varchar(50),"&_
 		"[CreateTime] datetime Default now(),"&_
 		"[State] integer Default 0"&_
 		")")
@@ -416,7 +416,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[DiyPage]:
 	Conn.execute("CREATE TABLE [DiyPage] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Title] varchar(50),"&_
+		"[Title] varchar(20),"&_
 		"[PageName] varchar(20),"&_
 		"[Keywords] varchar(250),"&_
 		"[Template] varchar(20),"&_
@@ -433,7 +433,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[User] varchar(20),"&_
 		"[Email] varchar(20),"&_
 		"[HomePage] varchar(50),"&_
-		"[Ip] varchar(20),"&_
+		"[Ip] varchar(50),"&_
 		"[Title] varchar(50),"&_
 		"[Content] varchar(250),"&_
 		"[CreateTime] datetime Default now(),"&_
@@ -459,7 +459,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[Name] varchar(50),"&_
 		"[Info] varchar(250),"&_
 		"[ParentID] integer Default 0,"&_
-		"[Template] varchar(250)"&_
+		"[Template] varchar(20)"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [PrimaryKey] on [PicColumn]([ID] ) with Primary")
 	Conn.execute("CREATE INDEX [ArtClassID] on [PicColumn]([ID] )")
@@ -469,8 +469,8 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[ID] integer IDENTITY (1,1) not null,"&_
 		"[Title] varchar(20),"&_
 		"[ColID] integer Default 0,"&_
-		"[Author] varchar(50),"&_
-		"[Source] varchar(50),"&_
+		"[Author] varchar(20),"&_
+		"[Source] varchar(250),"&_
 		"[SmallPicPath] varchar(250),"&_
 		"[PicPath] varchar(250),"&_
 		"[IsTop] integer Default 0,"&_
@@ -502,7 +502,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[ID] integer IDENTITY (1,1) not null,"&_
 		"[Username] varchar(20),"&_
 		"[UserAction] varchar(250),"&_
-		"[UserIP] varchar(250),"&_
+		"[UserIP] varchar(50),"&_
 		"[ActionUrl] varchar(250),"&_
 		"[CreateTime] datetime Default Now()"&_
 		")")

@@ -133,7 +133,9 @@ Class ClassArticle
 		If Not IsNumeric(ColID) Then mLastError = "栏目ID必须为数字" : SetValue = False : Exit Function
 		If Cint(ColID) = 0 Then mLastError = "请选择文章栏目" : SetValue = False : Exit Function
 		If Len(vAuthor) = 0 Then vAuthor = "佚名"
+		If Len(vAuthor) > 20 Then mLastError = "标题的长度请控制在 0 至 20 位" : SetValue = False : Exit Function
 		If Len(vHits) = 0 Or Not IsNumeric(vHits) Then vHits = 0
+		If Len(vSource) > 250 Then mLastError = "文章来源的长度请控制在 0 至 250 位" : SetValue = False : Exit Function
 		If Len(vJumpUrl) = 0 And Len(vContent) = 0 Then mLastError = "跳转地址和内容，请填写其一！" : SetValue = False : Exit Function
 		If Len(vJumpUrl) = 0 And Len(vContent) < 5 Then mLastError = "内容必须≥5个字符" : SetValue = False : Exit Function
 		If Len(vIsTop) = 0 Then vIsTop = 0

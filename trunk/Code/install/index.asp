@@ -381,9 +381,9 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	Conn.execute("CREATE TABLE [Article] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
 		"[ColID] integer Default 0,"&_
-		"[Title] varchar(250),"&_
-		"[Author] varchar(250),"&_
-		"[Source] varchar(250),"&_
+		"[Title] varchar(50),"&_
+		"[Author] varchar(20),"&_
+		"[Source] varchar(50),"&_
 		"[JumpUrl] varchar(250),"&_
 		"[Hits] integer Default 0,"&_
 		"[FocusPic] varchar(250),"&_
@@ -401,10 +401,12 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[Comment]:
 	Conn.execute("CREATE TABLE [Comment] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[CType] varchar(250),"&_
-		"[User] varchar(10),"&_
+		"[CType] varchar(20),"&_
+		"[User] varchar(20),"&_
+		"[Email] varchar(20),"&_
+		"[HomePage] varchar(50),"&_
+		"[Title] varchar(50),"&_
 		"[Content] varchar(250),"&_
-		"[Recomment] varchar(250),"&_
 		"[Ip] varchar(20),"&_
 		"[CreateTime] datetime Default now(),"&_
 		"[State] integer Default 0"&_
@@ -414,10 +416,10 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[DiyPage]:
 	Conn.execute("CREATE TABLE [DiyPage] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Title] varchar(250),"&_
-		"[PageName] varchar(250),"&_
+		"[Title] varchar(50),"&_
+		"[PageName] varchar(20),"&_
 		"[Keywords] varchar(250),"&_
-		"[Template] varchar(250),"&_
+		"[Template] varchar(20),"&_
 		"[Code] text,"&_
 		"[State] integer Default 0,"&_
 		"[IsSystem] integer Default 0"&_
@@ -483,12 +485,12 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[UploadFile]:
 	Conn.execute("CREATE TABLE [UploadFile] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Title] varchar(250),"&_
+		"[Title] varchar(50),"&_
 		"[Path] varchar(250),"&_
-		"[Info] text,"&_
+		"[Info] varchar(250),"&_
 		"[Ext] varchar(20),"&_
 		"[Size] integer,"&_
-		"[Author] varchar(250),"&_
+		"[Author] varchar(20),"&_
 		"[DownCount] integer Default 0,"&_
 		"[CreateTime] datetime Default Now()"&_
 		")")

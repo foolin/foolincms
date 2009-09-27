@@ -124,7 +124,7 @@ Fileurl =  replace(request("file"),"//","/")
         <input type="hidden" name="urlr" value="<%=Urlr%>" />
 	<tr>
 		<td class='css_list'>
-			<textarea name="content1" id="content1" class="codepress <%=extCode%> linenumbers-on" style="width:99%;height:550px; border:#09F 1px solid;"><%=getfile(Server.HTMLEncode(Fileurl))%></textarea>
+			<textarea name="content1" id="content1" class="codepress <%=extCode%> linenumbers-on" style="width:99%;height:550px; border:#09F 1px solid;"><%=Server.HTMLEncode(getfile(Fileurl))%></textarea>
 			<input type="button" name="save" onclick="saveCode(this.form)" value="保存该文件" /> </td>
 	</tr>
 	</form>

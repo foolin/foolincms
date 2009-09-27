@@ -11,7 +11,7 @@
      <li<%If act = "index" Then Echo(" class=""on""")%>><a href="index.asp">首页</a></li>
      <li<%If act = "article" Then Echo(" class=""on""")%>><a href="admin_article.asp">文章</a></li>
      <li<%If act = "picture" Then Echo(" class=""on""")%>><a href="admin_picture.asp">图片</a></li>
-     <li<%If act = "guestbook" Then Echo(" class=""on""")%>><a href="#admin_guestbook.asp">留言</a></li>
+     <li<%If act = "guestbook" Then Echo(" class=""on""")%>><a href="admin_guestbook.asp">留言</a></li>
      <li<%If act = "comment" Then Echo(" class=""on""")%>><a href="#admin_comment.asp">评论</a></li>
      <li<%If act = "mytag" Then Echo(" class=""on""")%>><a href="admin_mytag.asp">标签</a></li>
      <li<%If act = "diypage" Then Echo(" class=""on""")%>><a href="admin_diypage.asp">DIY页面</a></li>
@@ -28,7 +28,7 @@
 
 <%Sub Footer()%>
     <div id="footer">
-    	<a href="../index.asp">网站首页</a> | <a href="http://www.eekku.com">官方网站</a> | <a href="help.asp">用户帮助</a> <br />
+    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="http://www.eekku.com">官方网站</a> | <a href="help.asp">用户帮助</a>   | <a href="index.asp?action=clearcache">更新缓存</a> <br />
         Author:Foolin  E-mail:Foolin@126.com HomePage: http://www.eekku.com<br />
         Copyright &copy; 2009　www.eekku.com　版权所有　<br />
     </div>

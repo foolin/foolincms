@@ -27,6 +27,16 @@
 		Call MsgBox("模板目录不能为空","BACK")
 	End If
 	TEMPLATEDIR = Req("TemplateDir")
+	If  Len(Req("IsOpenGbook")) <> 0 And Cint(Req("IsOpenGbook")) = 1 Then
+		ISOPENGBOOK = 1
+	Else
+		ISOPENGBOOK = 0
+	End If
+	If  Len(Req("IsAuditGbook")) <> 0 And Cint(Req("IsAuditGbook")) = 1 Then
+		ISAUDITGBOOK = 1
+	Else
+		ISAUDITGBOOK = 0
+	End If
 	If  Len(Req("IsCache")) <> 0 And Cint(Req("IsCache")) = 1 Then
 		ISCACHE = 1
 	Else
@@ -85,6 +95,12 @@
 	' ISHIDETEMPPATH变量
 	strTemp= strTemp & "Dim ISHIDETEMPPATH" & keyTab & "'是否隐藏模板路径，隐藏则会影响载入速度" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISHIDETEMPPATH = " & ISHIDETEMPPATH & keyEnter
+	' ISOPENGBOOK变量
+	strTemp= strTemp & "Dim ISOPENGBOOK" & keyTab & "'是否开放留言，默认开放" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "ISOPENGBOOK = " & ISOPENGBOOK & keyEnter
+	' ISAUDITGBOOK变量
+	strTemp= strTemp & "Dim ISAUDITGBOOK" & keyTab & "'是否需要审核留言，是-1，否-0" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "ISAUDITGBOOK = " & ISAUDITGBOOK & keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & ISCACHE & keyEnter
@@ -211,6 +227,22 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                                 <td align="right" width="15%">模板目录：</td>
                                 <td><input type="text" name="TemplateDir" value="<%=TEMPLATEDIR%>" style="width:250px;"/> <span class="gray">模板目录（例如:default表示目录template/default/）</span></td>
+                            </tr>
+                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                                <td align="right" width="15%">开放留言：</td>
+                              <td>
+                              		是<input type="radio" name="IsOpenGbook" value="1" <%If ISOPENGBOOK=1 THEN Echo("checked=""checked""")%> />
+                                	否<input type="radio" name="IsOpenGbook" value="0" <%If ISOPENGBOOK=0 THEN Echo("checked=""checked""")%> />
+                                 &nbsp;&nbsp;<span class="gray">如果开放，则游客可以留言。</span>
+                              </td>
+                            </tr>
+                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                                <td align="right" width="15%">审核留言：</td>
+                              <td>
+                              		是<input type="radio" name="IsAuditGbook" value="1" <%If ISAUDITGBOOK=1 THEN Echo("checked=""checked""")%> />
+                                	否<input type="radio" name="IsAuditGbook" value="0" <%If ISAUDITGBOOK=0 THEN Echo("checked=""checked""")%> />
+                                 &nbsp;&nbsp;<span class="gray">是:表示需要审核留言才显示。</span>
+                              </td>
                             </tr>
                             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                                 <td align="right" width="15%">是否缓存：</td>

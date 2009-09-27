@@ -185,7 +185,7 @@ function onNav(opt)
 	<%Call Header()%>
     <table id="container">
         <tr><td colspan="2" id="topNav">
-			<%Call TopNav("index")%>
+			<%Call TopNav("help")%>
         </td></tr>
         <tr>
             <td id="sidebar" valign="top">

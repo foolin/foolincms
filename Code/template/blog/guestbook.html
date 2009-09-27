@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /} - {sys:siteurl /}</title>
+
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.postForm {
+	padding:5px;
+}
+.postForm table{
+	border:solid 1px #D2D2D2;
+	border-collapse:collapse;
+}
+.postForm table th{ background:#F7F7F7; color:#09C; border:solid 1px #E1E1E1; padding:5px;}
+.postForm table td{ padding:3px 10px;}
+.postForm .btn{ margin:5px; padding:5px;}
+.recomment{
+	margin:5px;
+	border:dashed 1px #CCC;
+	padding:5px;
+	line-height:22px;
+	background:#F5F5F5;
+	color:#090;
+}
+-->
+</style>
+</head>
+<body>
+
+	{include file="header.html" /}
+
+<div class="main">
+
+  		<div class="partMain part">
+        	
+            <div class="location">您现在的位置：{sys:sitepath /}</div>
+            
+            <!--留言列表开始-->
+            {list:gbook mode="sql" sql="SELECT * FROM GuestBook WHERE State = 1 ORDER BY ID DESC" col="1" row="20" ispage="true"}
+            <!--栏目-->
+            <div class="txtArea"> 
+                <div class="title">[gbook:id]: [gbook:title]</div> 
+                <div class="content"> 
+                	[gbook:content clearhtml="true"]
+                </div>
+                <!-- 留言回复 -->
+                {if: Len("[gbook:recomment]") > 0}
+                <div class="recomment"> 
+                	<b>[gbook:reuser]</b>回复：[gbook:recomment] ([gbook:retime])
+                </div>
+                {/if}
+                <!-- 留言信息 -->
+                <div class="info">留言者：[gbook:user] 主页：<a href="[gbook:homepage]" target="_blank">浏览</a> 　发表：[gbook:createtime]</div>
+            </div> 
+          {/list:gbook}
+          <!--留言列表结束-->
+          
+            <!--分页-->
+            <div class="page"> {tag:page /} </div>
+            
+            <div class="postForm">
+            <form action="{sys:saveurl /}" method="post">
+                <table width="100%">
+                	<tr>
+                    	<th colspan="2">签写留言</th>
+                    </tr>
+                    <tr>
+                    	<td>标题：</td><td><input type="text" name="fTitle" style="width:300px;" />（必填,3至50个字符）</td>
+                    </tr>
+                    <tr>
+                    	<td>名字：</td><td><input type="text" name="fUser" /></td>
+                    </tr>
+                    <tr>
+                        <td>邮箱：</td><td><input type="text" name="fEmail" /></td>
+                    </tr>
+                    <tr>
+                        <td>主页：</td><td><input type="text" name="fHomePage" value="http://" style="width:300px;" /></td>
+                    </tr>
+                    <tr>
+                        <td>内容：</td><td><textarea name="fContent" cols="50" rows="5"></textarea> （必填，5至250个字符）</td>
+                    </tr>
+                    <tr>
+                        <td>验证码：</td><td><input type="text" name="fChkCode" />  <img src="inc/chkcode.asp" alt="验证码,看不清楚?请点击刷新验证码" style="cursor:pointer;" onclick="this.src='inc/chkcode.asp?t='+Math.random()"/></td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2"> <input type="submit" class="btn" value="提交" /> <input type="reset" class="btn" value="重置" /> </td>
+                    </tr>
+                </table>
+            </form>
+            </div>
+            
+        </div>
+        <!-- partMain End -->
+        
+        <div class="partSider part">
+        
+        
+            <!--栏目-->
+            <div class="box"> 
+                <div class="title">日志分类</div> 
+                <div class="content"> 
+                    <ul>
+                    {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
+                     <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
+                    {/list:artlist}
+                    </ul>
+                </div>
+            </div> 
+			
+        </div>
+        <!-- partSider End -->
+        <div class="clear"></div>
+        
+</div>
+<!-- Main End -->
+
+{include file="footer.html" /}
+
+</body>
+</html>

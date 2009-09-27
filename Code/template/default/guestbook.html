@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{sys:sitename /}</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/artlist.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.gbook {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	line-height:22px;
+	font-size:14px;
+	color:green;
+}
+.gbook dl{
+	margin:0px;
+	border-bottom:2px solid #bfe599;
+	padding:5px;
+}
+.gbook dl dt{ font-size:14px; font-weight:bold; padding-bottom:5px;}
+.gbook dl dd{ margin:0px; font-size:12px;}
+.gbook .info, .blog .info a{ color:#999; font-size:12px; margin-top:5px;}
+.recomment{
+	margin-top:10px;
+	border:dashed 1px #CCC;
+	background:#F5FAF7;
+	color:#099;
+	padding:5px;
+}
+.postForm{
+	padding:5px;
+	font-size:12px;
+}
+.postForm form{ margin:0px;}
+.postForm table{margin:0px;border:1px solid #bfe599; border-collapse:collapse;}
+.postForm th{
+	margin:0px;
+	padding:5px;
+	text-align:left;
+	background:#cbe8bb url(images/box_title_bg.jpg);
+	color:#3fb14f;
+}
+.postForm table td{
+	border:0px;
+	padding:5px 10px;
+}
+-->
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+	<!--header start--->
+    {include file="header.html"/}
+    <!--header end--->
+    
+    <!--main start--->
+    <div id="main">
+    	<div class="container">
+        
+        		<!--notice--->
+        		<div class="location">
+                	你现在的位置：{sys:sitepath /}
+                </div>
+                
+                <div class="column_main">
+                		<div class="list">
+                            <div class="list_title">留言簿</div>
+								<div class="gbook">
+                                    {list:gb mode="sql" sql="SELECT * FROM GuestBook WHERE State = 1 ORDER BY ID DESC" col="1" row="10" ispage="true"}
+                                        <dl>
+                                            <dt> [gb:id]: [gb:title] </dt>
+                                            <dd>[gb:content clearhtml="true"]</dd>
+                                            {if: Len("[gb:recomment]") > 0}
+                                            <dd class="recomment"><b>[gb:reuser]</b>回复：[gb:recomment] ([gb:retime])</dd>
+                                            {/if}
+                                            <dd class="info">留言者：[gb:user] 主页：<a href="[gb:homepage]" target="_blank">浏览</a> 　发表：[gb:createtime]</dd>
+                                        </dl>
+                                    {/list:gb}
+                                </div>
+                           <div class="pagebar">{tag:page /}</div>
+                       
+                        </div>
+                        
+<div class="postForm">                   
+  <form action="{sys:saveurl /}" method="post">
+      <table width="100%">
+        <tr>
+            <th colspan="2">签写留言</th>
+          </tr>
+          <tr>
+            <td>标题：</td><td><input type="text" name="fTitle" style="width:300px;" />（必填,3至50个字符）</td>
+          </tr>
+          <tr>
+            <td>名字：</td><td><input type="text" name="fUser" /></td>
+          </tr>
+          <tr>
+              <td>邮箱：</td><td><input type="text" name="fEmail" /></td>
+          </tr>
+          <tr>
+              <td>主页：</td><td><input type="text" name="fHomePage" value="http://" style="width:300px;" /></td>
+          </tr>
+          <tr>
+              <td>内容：</td><td><textarea name="fContent" cols="50" rows="5"></textarea> （必填，5至250个字符）</td>
+          </tr>
+          <tr>
+              <td>验证码：</td><td><input type="text" name="fChkCode" />  <img src="inc/chkcode.asp" alt="验证码,看不清楚?请点击刷新验证码" style="cursor:pointer;" onclick="this.src='inc/chkcode.asp?t='+Math.random()"/></td>
+          </tr>
+          <tr>
+            <td colspan="2"> <input type="submit" class="btn" value="提交" /> <input type="reset" class="btn" value="重置" /> </td>
+          </tr>
+      </table>
+  </form>
+</div>  
+                        
+               </div>
+               
+				<div class="column_side">
+                
+                        <!--栏目-->
+                        <div class="box">
+                          <div class="title"><span class="titletxt">栏目导航</span></div>
+                            <div class="content">
+                                <ul>
+                                
+                                    {list:column mode="table" row="10" col="1"  table="ArtColumn" where="ParentID={sys:id /}" order="id"}
+                                        <li><a href="{sys:pluginurl /}blog/index.asp?id=[column:id]" title="">[column:name]</a></li>
+                                        
+                                        {if: [column:ParentID] = 0}
+                                            {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
+                                            <li>|-- <a href="{sys:pluginurl /}blog/index.asp?id=[child:id]" title="">[child:name]</a></li>
+                                            {/list:child} 	
+                                        {/if}
+                                        
+                                    {/list:column}
+                                    
+                                    {if: {sys:id /} <> 0 }
+                                        <li> <== <a href="{sys:pluginurl /}blog/index.asp" title="">返回父栏目</a></li>
+                                    {/if}
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                
+                        <!--栏目-->
+                        <div class="box">
+                          <div class="title"><span class="titletxt">热门新闻</span><span class="more"><a href="list.html">更多>></a></span></div>
+                            <div class="content">
+                                <ul>
+                                {list:hot  row="20" col="1" order="hot"}
+                                <li><a href="{sys:siteurl}[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
+								{/list:hot}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                </div>
+               <div class="clear"></div>
+        </div>
+    </div>
+    <!--main end--->
+    
+    <!--footer start--->
+	{include file="footer.html" /}
+    <!--footer end--->
+</div>
+</body>
+</html>
+<!--- 制作：刘付灵 E-mail:Foolin@126.com --->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

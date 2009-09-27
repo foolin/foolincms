@@ -8,7 +8,7 @@ Option Explicit		'强制声明
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-27 15:29:41
+' Update on: 	2009-9-27 17:51:20
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 

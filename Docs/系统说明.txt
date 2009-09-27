@@ -2,6 +2,8 @@
  一、E酷CMS安装说明：
     把Code里面的代码上传到你的ASP服务器，然后输入http://你网站的网址/安装目录/Install/Index.asp，然后按照提示进行安装本系统。
     如果要重新安装请删除Install/Install.lock文件，再运行http://你网站的网址/安装目录/Install/Index.asp
+    
+    注意：你的网站必须支持FSO组件以及读写权限，否则将无法正常安装。
   
   
  二、系统介绍：

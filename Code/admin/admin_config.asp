@@ -198,25 +198,25 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr><th colspan="2">
                                 系统配置
                             </th></tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">网站名称：</td>
                                 <td><input type="text" name="SiteName" value="<%=SITENAME%>" style="width:250px;"/> <span class="gray">例如:E酷网</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">网站网址：</td>
                                 <td><input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <span class="gray">例如：http://www.eekku.com （不能加目录）</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">安装目录：</td>
                                 <td><input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <span class="gray">安装目录 （前面加/，后面不用加/，不要加类似Http;//这样的绝对路径）</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">网站关键词：</td>
                                 <td><textarea name="SiteKeywords" cols="50" rows="5"><%=SITEKEYWORDS%></textarea>
                                 <span class="gray">网站关键词，多用逗号分隔。</span>
                                 </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">隐藏模板路径：</td>
                               <td>
                               		是<input type="radio" name="IsHideTempPath" value="1" <%If ISHIDETEMPPATH=1 THEN Echo("checked=""checked""")%> />
@@ -224,11 +224,23 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                  &nbsp;&nbsp;<span class="gray">隐藏路径可以保证模板安全，但会影响网页载入速度。</span>
                               </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">模板目录：</td>
-                                <td><input type="text" name="TemplateDir" value="<%=TEMPLATEDIR%>" style="width:250px;"/> <span class="gray">模板目录（例如:default表示目录template/default/）</span></td>
+                                <td>
+                                <select name="TemplateDir">
+                                	<option value="<%=TEMPLATEDIR%>"> => <%=TEMPLATEDIR%> <= </option>
+                                <%
+                                    Dim Fso: Set Fso = CreateObject("Scripting.FileSystemObject")
+                                    Dim Root: Set Root = Fso.GetFolder(Server.Mappath("../template"))
+                                    Dim F
+                                    For Each F In Root.SubFolders
+                                        Response.write "<option value=""" & F.Name & """>" & F.Name & "</option>"& chr(10) & chr(10) & chr(9)
+                                    Next
+                                %>
+                                </select>
+                                <span class="gray">模板目录（例如:default表示目录template/default/）</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">开放留言：</td>
                               <td>
                               		是<input type="radio" name="IsOpenGbook" value="1" <%If ISOPENGBOOK=1 THEN Echo("checked=""checked""")%> />
@@ -236,7 +248,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                  &nbsp;&nbsp;<span class="gray">如果开放，则游客可以留言。</span>
                               </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">审核留言：</td>
                               <td>
                               		是<input type="radio" name="IsAuditGbook" value="1" <%If ISAUDITGBOOK=1 THEN Echo("checked=""checked""")%> />
@@ -244,7 +256,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                  &nbsp;&nbsp;<span class="gray">是:表示需要审核留言才显示。</span>
                               </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">是否缓存：</td>
                               <td>
                               		是<input type="radio" name="IsCache" value="1" <%If ISCACHE=1 THEN Echo("checked=""checked""")%> />
@@ -252,27 +264,27 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                  &nbsp;&nbsp;<span class="gray">缓存可以提高浏览页面的速度。</span>
                               </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">缓存标志：</td>
                                 <td><input type="text" name="CacheFlag" value="<%=CACHEFLAG%>" style="width:250px;"/> <span class="gray">缓存标志，如果同一台服务器安装两个CMS，则必须不同。</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">缓存时间：</td>
                                 <td><input type="text" name="CacheTime" value="<%=CACHETIME%>" style="width:250px;"/> <span class="gray">缓存时间，默认0。</span></td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">限制访问者IP：</td>
                                 <td><textarea name="LimitIp" cols="50" rows="5"><%=LIMITIP%></textarea>
                                 <span class="gray">限制访问者IP，多用逗号分隔。</span>
                                 </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">脏话过滤：</td>
                                 <td><textarea name="DirtyWords" cols="50" rows="5"><%=DIRTYWORDS%></textarea>
                                 <span class="gray">多用逗号分隔。</span>
                                 </td>
                             </tr>
-                            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+                            <tr>
                                 <td align="right" width="15%">记录管理操作：</td>
                                 <td>                              		
                               		是<input type="radio" name="IsWebLog" value="1" <%If ISWebLog=1 THEN Echo("checked=""checked""")%> />
@@ -300,6 +312,20 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             this.style.border = '#09F 2px solid';
                         };  
                         oInputs.item(i).onmouseout = function(){
+                            this.style.background='#FFF';
+                            //this.style.borderColor = '#C4E1FF';
+                            this.style.border = '#C4E1FF 1px solid';
+                        };
+                    }
+                    var oTextAreas = document.getElementsByTagName("textarea");
+                    for(var i = 0; i < oTextAreas.length; i++){
+                     if(oTextAreas.item(i).name != "")
+                        oTextAreas.item(i).onmouseover = function(){
+                            this.style.background='#FF0';
+                            //this.style.borderColor = '#09F';
+                            this.style.border = '#09F 2px solid';
+                        };  
+                        oTextAreas.item(i).onmouseout = function(){
                             this.style.background='#FFF';
                             //this.style.borderColor = '#C4E1FF';
                             this.style.border = '#C4E1FF 1px solid';

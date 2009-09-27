@@ -594,7 +594,7 @@ Sub ArtForm(ByVal id)
             </tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">跳转地址：</td>
-                <td><input type="text" name="JumpUrl" id="JumpUrl" onfocus="chkJumpUrl()" onblur="chkJumpUrl()" value="<%=objA.JumpUrl%>"  style="width:450px;" /></td>
+                <td><input type="text" name="JumpUrl" id="JumpUrl" value="<%=objA.JumpUrl%>"  style="width:450px;" /></td>
             </tr>
             <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right">内容：</td>
@@ -644,13 +644,8 @@ for(var i = 0; i < oInputs.length; i++){
 		//this.style.borderColor = '#C4E1FF';
 		this.style.border = '#C4E1FF 1px solid';
 	};
-	if(oInputs.item(i).name == "JumpUrl")
-	{
-		oInputs.item(i).onfocus = function(){ $("editor").style.display = "none";}
-		oInputs.item(i).onblur = chkJumpUrl;
-	}
 }
-chkJumpUrl(); 	//执行
+//chkJumpUrl(); 	//执行
 function chkJumpUrl(){
 	//alert(0)
 	if ($("JumpUrl").value != ""){

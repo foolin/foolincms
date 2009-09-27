@@ -174,7 +174,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
 	<%Call Header()%>
     <table id="container">
         <tr><td colspan="2" id="topNav">
-			<%Call TopNav("diypage")%>
+			<%Call TopNav("guestbook")%>
         </td></tr>
         <tr>
             <td id="sidebar" valign="top">

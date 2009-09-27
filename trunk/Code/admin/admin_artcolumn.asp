@@ -293,13 +293,15 @@ Sub ColForm(ByVal id)
                 <td align="right">父栏目：</td>
                 <td>
                 	<select name="fParentID">
-                        	<option value="0"> 请选择栏目</option>
-                            <option value="0"> 作为父栏目 </option>
+                        	<option value="0"> 请选择栏目 </option>
                     	<%If objA.ParentID> 0 Then%>
-                    		<option value="<%=objA.ID%>" selected="selected"> => <%=GetColName(objA.ParentID, "article")%> <= </option>
+                        	<option value="0"> 第一级栏目 </option>
+                    		<option value="<%=objA.ParentID%>" selected="selected"> => <%=GetColName(objA.ParentID, "article")%> <= </option>
+                        <%Else%>
+                        	 <option value="0"  selected="selected"> => 第一级栏目 <= </option>
                         <%End If%>
                     	<%Call MainColumn()%>
-                    </select>（不选择，则作为父栏目）
+                    </select>（不选择，则第一级父栏目）
                 </td>
             </tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">

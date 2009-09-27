@@ -583,6 +583,9 @@ Class ClassTemplate
 			Call DB("UPDATE Picture SET Hits = Hits + 1 WHERE ID = " & objRs("ID"), 1)
 		Else
 			Call DB("UPDATE Article SET Hits = Hits + 1 WHERE ID = " & objRs("ID"), 1)
+			If Len(objRs("JumpUrl")) > 0 Then
+				Response.Redirect(objRs("JumpUrl"))	'如果是跳转地址，则进行跳转
+			End If
 		End If
 		'判断是否存在{field}
 		Call ReplaceFieldTags(objRs, "field", blnIsPic)

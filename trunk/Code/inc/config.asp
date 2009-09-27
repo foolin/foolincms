@@ -8,7 +8,7 @@ Option Explicit		'强制声明
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-27 14:04:43
+' Update on: 	2009-9-27 15:29:41
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
@@ -28,7 +28,7 @@ Dim SITEKEYWORDS		'网站关键词
 	SITEKEYWORDS = "E酷网，E酷Cms，E酷工作室,www.eekku.com，零星碎事，ling.liufu.org"
 
 Dim TEMPLATEDIR		'网站模板路径，例如：default表示template/default/
-	TEMPLATEDIR = "blog"
+	TEMPLATEDIR = "default"
 
 Dim ISHIDETEMPPATH		'是否隐藏模板路径，隐藏则会影响载入速度
 	ISHIDETEMPPATH = 0

@@ -67,7 +67,7 @@ Class ClassArtColumn
 		vParentID = Request.Form("fParentID")
 		vTemplate = Request.Form("fTemplate")
 
-		If Len(vName) < 1 Or Len(vName) > 20 Then mLastError = "标题的长度请控制在 0 至 20 位" : SetValue = False : Exit Function
+		If Len(vName) < 1 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
 		If Len(vInfo) > 250 Then mLastError = "信息的长度请控制在250 位" : SetValue = False : Exit Function
 		If Not IsNumeric(ParentID) Then mLastError = "父栏目ID必须为数字" : SetValue = False : Exit Function
 		If Len(vTemplate) > 20 Then mLastError = "模板的长度请控制在20 位" : SetValue = False : Exit Function

@@ -369,7 +369,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[ArtColumn]:
 	Conn.execute("CREATE TABLE [ArtColumn] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Name] varchar(20),"&_
+		"[Name] varchar(50),"&_
 		"[Info] varchar(250),"&_
 		"[ParentID] integer Default 0,"&_
 		"[Template] varchar(20)"&_
@@ -416,7 +416,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'[DiyPage]:
 	Conn.execute("CREATE TABLE [DiyPage] ("&_
 		"[ID] integer IDENTITY (1,1) not null,"&_
-		"[Title] varchar(20),"&_
+		"[Title] varchar(50),"&_
 		"[PageName] varchar(20),"&_
 		"[Keywords] varchar(250),"&_
 		"[Template] varchar(20),"&_

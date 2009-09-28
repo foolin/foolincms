@@ -318,7 +318,7 @@ Sub ColForm(ByVal id)
             </tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
             	<td align="right" width="15%">模板路径：</td>
-            	<td><input type="text" name="fTemplate" value="<%=objA.Template%>" style="width:450px;"/></td>
+            	<td><input type="text" name="fTemplate" value="<%=objA.Template%>" style="width:450px;"/> <span  style="color:gray;">(本版暂不支持)</span> </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

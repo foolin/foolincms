@@ -107,7 +107,7 @@ Fileurl =  replace(request("file"),"//","/")
 	</tr>
 	<tr>
 		<td class='css_top'>
-        <a href='?'><img src="inc/webftp/images/home.gif" border="0" width="28"/>首页</a>
+        <a href='?'><img src="inc/webftp/images/home.gif" border="0" width="28"/>根目录</a>
         |  <a href="#" onclick="history.go(-1);"><img src="inc/webftp/images/back.gif" border="0"/>后退</a>
         |  <a href="<%=Url%>?urli=<%=Urlr%>"><img src="inc/webftp/images/upper.gif" border="0"/>上一级</a>
         | 地址：<input type="text" value="当前目录: <%If Len(Fileurl) > 0 Then Response.write Fileurl Else Response.Write Urli%>"  style="width:450px; height:18px; line-height:18px;" readonly="readonly" /> 
@@ -152,7 +152,7 @@ Fileurl =  replace(request("file"),"//","/")
 	%>
 </table>
 
-					
+					<div style="color:#F00; padding:10px;">温馨提示：如果要选择模板，请到【<a href="admin_config.asp">系统配置 → 模板目录 </a>】进行设置！</div>
                </div>
             </td>
         </tr>

@@ -1,6 +1,6 @@
-<!--#include file="../inc/admin.chklogin.asp"-->
-<!--#include file="../../inc/class_upload.asp"-->
-<!--#include file="../../inc/func_file.asp"-->
+<!--#include file="../../inc/admin.chklogin.asp"-->
+<!--#include file="../../../inc/class_upload.asp"-->
+<!--#include file="../../../inc/func_file.asp"-->
 <%Call ChkLogin()%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
@@ -31,11 +31,11 @@ if request.QueryString("act")="upload" then
  	response.write Upload.Description 					'如果出现错误,获取错误描述
  else
  	if Upload.files(-1).count>0 then 					'这里判断你是否选择了文件
-			path = "../../upload/images/focuspic/"	'文件保存路径(这里是files文件夹)
+			path = "../../../upload/images/focuspic/"	'文件保存路径(这里是files文件夹)
 			If ExistFolder(path) = False Then
 				CreateFolder(path)
 			End If
-    		path=server.mappath("../../upload/images/focuspic/") 
+    		path=server.mappath("../../../upload/images/focuspic/") 
     		'保存文件(以新文件名保存)
     		set tempCls=Upload.files("file1") 
     		tempCls.SaveToFile path,0

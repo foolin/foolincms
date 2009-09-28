@@ -95,15 +95,14 @@ a:hover{ color:#F00;}
 .copyright{
 	color:#FFF;
 	background:#5193b5;
-	padding-top:15px;
-	padding-bottom:15px;
+	padding-top:10px;
+	padding-bottom:10px;
 	text-align:center;
 	line-height:22px;
 	
 }
-.copyright a{ color:#FFF;}
+.copyright a{ color:#FFF;text-decoration:none;}
 .copyright a:hover{ color:#F00;}
-
 
 
 .box { margin:10px 5px; height:1%;} /*height:1%; 解决ie6下margin无效的bug*/

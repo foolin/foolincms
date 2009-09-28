@@ -25,17 +25,18 @@ a:hover{
 	margin:auto;
 }
 #header {
-	color:#08F;
+	padding:5px;
 	font-size:16px;
 	font-weight:bold;
-	line-height:30px;
 	background:#E6F2FF;
 	height:50px;
+	color:#090;
+	font-family:"Times New Roman", Georgia, Times, serif;
 }
 #footer{
-	padding:5px;
+	padding:10px;
 	text-align:center;
-	line-height:20px;
+	line-height:25px;
 	background:#CEE7FF;
 }
 #container{

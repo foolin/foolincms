@@ -576,7 +576,7 @@ Sub ArtForm(ByVal id)
                 <td>
                 	<input type="text" name="FocusPic" id="FocusPic" value="<%=objA.FocusPic%>" style="width:450px;" /> <a href="javascript:uploadFocusPic();">ÉÏ´«Í¼Æ¬</a>
                     <div id="uploadFocusPic" style="display:none;">
-                    <iframe frameborder="0" src="uploader/upload_focuspic.asp" width="80%" height="30"></iframe>
+                    <iframe frameborder="0" src="inc/uploader/upload_focuspic.asp" width="80%" height="30"></iframe>
                     </div>
                 </td>
             </tr>

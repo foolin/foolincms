@@ -32,11 +32,12 @@ Dim SYSNAME	'系统名称
 	SYSNAME = "EekkuCMS"
 
 Dim SYSVERSION	'系统版本
-	SYSVERSION = " V0.1.3 Dev20090927"
+	SYSVERSION = " V0.1.4beta build090928"
 	
 Dim SYS	'系统
 	SYS = SYSNAME & "  " & SYSVERSION
 	
 Dim SYSLINK	'系统连接
 	SYSLINK = "<a href=" & STUDIOURL & " target=""_blank"">" & SYS & "</a>"
+	
 %>

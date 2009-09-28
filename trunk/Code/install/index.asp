@@ -593,6 +593,9 @@ Function CreateConfig(DbName)
 	' ISAUDITGBOOK变量
 	strTemp= strTemp & "Dim ISAUDITGBOOK" & keyTab & "'是否需要审核留言，是-1，否-0" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISAUDITGBOOK = 0" & keyEnter
+	' GBOOKTIME变量
+	strTemp= strTemp & "Dim GBOOKTIME" & keyTab & "'允许留言最短时间间隔，单位秒，默认60秒" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "GBOOKTIME = 60" keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & "1" & keyEnter
@@ -606,10 +609,10 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "Dim ISWEBLOG" & keyTab & "'是否记录后台管理操作记录" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISWEBLOG = " & "1" & keyEnter
 	' LIMITIP变量
-	strTemp= strTemp & "Dim LIMITIP" & keyTab & "'限制IP，多用逗号进行分割" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "Dim LIMITIP" & keyTab & "'限制IP，多用|进行分割" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "LIMITIP = " & Chr(34) & "" & Chr(34) & keyEnter
 	' DIRTYWORDS变量
-	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤，多用逗号进行分割" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤，多用|进行分割" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "DIRTYWORDS = " & Chr(34) & "" & Chr(34) & keyEnter
 	'标记结束
 	strTemp = strTemp & "%" & Chr(62) & Chr(10)

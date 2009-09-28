@@ -47,9 +47,13 @@ End Sub
 '创建栏目
 Function DoCreate()
 	Dim objC: Set objC = New ClassPicColumn
-	If objC.Create Then
-		Call WebLog("添加栏目[Name:"&objC.Name&"]成功！", "SESSION")
-		Call MsgAndGo("添加栏目[Name:"&objC.Name&"]成功！", "BACK")
+	If objC.SetValue Then
+		If objC.Create Then
+			Call WebLog("添加栏目[Name:"&objC.Name&"]成功！", "SESSION")
+			Call MsgAndGo("添加栏目[Name:"&objC.Name&"]成功！", "BACK")
+		Else
+			Call MsgBox("错误：" & objC.LastError, "BACK")
+		End If
 	Else
 		Call MsgBox("错误：" & objC.LastError, "BACK")
 	End If
@@ -60,9 +64,13 @@ End Function
 Sub DoModify()
 	Dim objC: Set objC = New ClassPicColumn
 	objC.ID = id
-	If objC.SetValue And objC.Modify Then
-		Call WebLog("修改栏目[id:"& id &"]成功！", "SESSION")
-		Call MsgAndGo("修改栏目[id:"& id &"]成功！", "admin_piccolumn.asp")
+	If objC.SetValue Then
+		If objC.Modify Then
+			Call WebLog("修改栏目[id:"& id &"]成功！", "SESSION")
+			Call MsgAndGo("修改栏目[id:"& id &"]成功！", "admin_piccolumn.asp")
+		Else
+			Call MsgBox("错误：" & objC.LastError, "BACK")
+		End If
 	Else
 		Call MsgBox("错误：" & objC.LastError, "BACK")
 	End If

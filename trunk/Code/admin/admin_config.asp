@@ -37,6 +37,11 @@
 	Else
 		ISAUDITGBOOK = 0
 	End If
+	If Len(Req("GbookTime")) = 0 Or Not IsNumeric(Req("GbookTime")) Then
+		GBOOKTIME = 60
+	Else
+		GBOOKTIME = Req("GbookTime")
+	End If
 	If  Len(Req("IsCache")) <> 0 And Cint(Req("IsCache")) = 1 Then
 		ISCACHE = 1
 	Else
@@ -101,6 +106,9 @@
 	' ISAUDITGBOOK变量
 	strTemp= strTemp & "Dim ISAUDITGBOOK" & keyTab & "'是否需要审核留言，是-1，否-0" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISAUDITGBOOK = " & ISAUDITGBOOK & keyEnter
+	' GBOOKTIME变量
+	strTemp= strTemp & "Dim GBOOKTIME" & keyTab & "'允许留言最短时间间隔，单位秒，默认60秒" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "GBOOKTIME = " & GBOOKTIME & keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & ISCACHE & keyEnter
@@ -114,10 +122,10 @@
 	strTemp= strTemp & "Dim ISWEBLOG" & keyTab & "'是否记录后台管理操作记录" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISWEBLOG = " & ISWEBLOG & keyEnter
 	' LIMITIP变量
-	strTemp= strTemp & "Dim LIMITIP" & keyTab & "'限制IP，多用逗号进行分割" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "Dim LIMITIP" & keyTab & "'限制IP，多用|进行分割" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "LIMITIP = " & Chr(34) & LIMITIP & Chr(34) & keyEnter
 	' DIRTYWORDS变量
-	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤,多用逗号进行分割" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤,多用|进行分割" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "DIRTYWORDS = " & Chr(34) & DIRTYWORDS & Chr(34) & keyEnter
 	'标记结束
 	strTemp = strTemp & "%" & Chr(62) & Chr(10)
@@ -217,14 +225,6 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">隐藏模板路径：</td>
-                              <td>
-                              		是<input type="radio" name="IsHideTempPath" value="1" <%If ISHIDETEMPPATH=1 THEN Echo("checked=""checked""")%> />
-                                	否<input type="radio" name="IsHideTempPath" value="0" <%If ISHIDETEMPPATH=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">隐藏路径可以保证模板安全，但会影响网页载入速度。</span>
-                              </td>
-                            </tr>
-                            <tr>
                                 <td align="right" width="15%">模板目录：</td>
                                 <td>
                                 <select name="TemplateDir">
@@ -238,7 +238,15 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                     Next
                                 %>
                                 </select>
-                                <span class="gray">模板目录（例如:default表示目录template/default/）</span></td>
+                                <span class="gray">请选择模板目录（例如:default表示目录template/default/）</span></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="15%">隐藏模板路径：</td>
+                              <td>
+                              		是<input type="radio" name="IsHideTempPath" value="1" <%If ISHIDETEMPPATH=1 THEN Echo("checked=""checked""")%> />
+                                	否<input type="radio" name="IsHideTempPath" value="0" <%If ISHIDETEMPPATH=0 THEN Echo("checked=""checked""")%> />
+                                 &nbsp;&nbsp;<span class="gray">隐藏路径可以防止别人下载模板，但会影响网页载入速度。</span>
+                              </td>
                             </tr>
                             <tr>
                                 <td align="right" width="15%">开放留言：</td>
@@ -255,6 +263,10 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 	否<input type="radio" name="IsAuditGbook" value="0" <%If ISAUDITGBOOK=0 THEN Echo("checked=""checked""")%> />
                                  &nbsp;&nbsp;<span class="gray">是:表示需要审核留言才显示。</span>
                               </td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="15%">留言时间间隔：</td>
+                                <td><input type="text" name="GbookTime" value="<%=GBOOKTIME%>" style="width:250px;"/> <span class="gray">允许留言最短时间间隔，单位秒，默认60秒。</span></td>
                             </tr>
                             <tr>
                                 <td align="right" width="15%">是否缓存：</td>
@@ -275,13 +287,13 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr>
                                 <td align="right" width="15%">限制访问者IP：</td>
                                 <td><textarea name="LimitIp" cols="50" rows="5"><%=LIMITIP%></textarea>
-                                <span class="gray">限制访问者IP，多用逗号分隔。</span>
+                                <span class="gray">限制访问者IP，多用|分隔。</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="right" width="15%">脏话过滤：</td>
                                 <td><textarea name="DirtyWords" cols="50" rows="5"><%=DIRTYWORDS%></textarea>
-                                <span class="gray">多用逗号分隔。</span>
+                                <span class="gray">多用|分隔。</span>
                                 </td>
                             </tr>
                             <tr>
@@ -293,9 +305,10 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                  </td>
                             </tr>
                             <tr>
-                                <td colspan="2" align="center">
+                                <td colspan="2" align="center" >
                                     <input type="submit" class="btn" value="提交" />
                                     <input type="reset" class="btn" value="重置" />
+                                    <span class="blue" style="line-height:32px; padding:5px;">如果配置网站之后出现错误，请自行配置inc/config.asp文件。</span>
                                 </td>
                             </tr>
                         </table>

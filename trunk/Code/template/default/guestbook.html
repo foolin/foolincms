@@ -125,18 +125,18 @@
                                 <ul>
                                 
                                     {list:column mode="table" row="10" col="1"  table="ArtColumn" where="ParentID={sys:id /}" order="id"}
-                                        <li><a href="{sys:pluginurl /}blog/index.asp?id=[column:id]" title="">[column:name]</a></li>
+                                        <li><a href="artlist.asp?id=[column:id]" title="">[column:name]</a></li>
                                         
                                         {if: [column:ParentID] = 0}
                                             {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
-                                            <li>|-- <a href="{sys:pluginurl /}blog/index.asp?id=[child:id]" title="">[child:name]</a></li>
+                                            <li>|-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
                                             {/list:child} 	
                                         {/if}
                                         
                                     {/list:column}
                                     
                                     {if: {sys:id /} <> 0 }
-                                        <li> <== <a href="{sys:pluginurl /}blog/index.asp" title="">返回父栏目</a></li>
+                                        <li> <== <a href="artlist.asp" title="">返回父栏目</a></li>
                                     {/if}
                                     
                                 </ul>

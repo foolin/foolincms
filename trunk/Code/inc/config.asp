@@ -1,19 +1,19 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
 <%
-Option Explicit		'强制声明
-'On Error Resume Next		'容错处理
+'Option Explicit		'强制声明
+On Error Resume Next		'容错处理
 '=========================================================
 ' File Name：	config.asp
 ' Purpose：		系统配置文件
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-27 17:51:20
+' Update on: 	2009-9-28 10:21:20
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
 Dim DBPATH		'Access数据库路径
-	DBPATH = "database/data.mdb"
+	DBPATH = "database/Fl28#Ek_7348D432AF.mdb"
 
 Dim SITENAME		'网站名称
 	SITENAME = "E酷工作室"
@@ -37,10 +37,13 @@ Dim ISOPENGBOOK		'是否开放留言，默认开放
 	ISOPENGBOOK = 1
 
 Dim ISAUDITGBOOK		'是否需要审核留言，是-1，否-0
-	ISAUDITGBOOK = 1
+	ISAUDITGBOOK = 0
+
+Dim GBOOKTIME		'允许留言最短时间间隔，单位秒，默认60秒
+	GBOOKTIME = 60
 
 Dim ISCACHE		'是否缓存，建议是，减轻服务器负载量
-	ISCACHE = 0
+	ISCACHE = 1
 
 Dim CACHEFLAG		'缓存标志，可以任意英文字母
 	CACHEFLAG = "EekkuCms_"
@@ -49,13 +52,13 @@ Dim CACHETIME		'缓存时间，默认是60分
 	CACHETIME = 60
 
 Dim ISWEBLOG		'是否记录后台管理操作记录
-	ISWEBLOG = 0
+	ISWEBLOG = 1
 
-Dim LIMITIP		'限制IP，多用逗号进行分割
-	LIMITIP = ""
+Dim LIMITIP		'限制IP，多用|进行分割
+	LIMITIP = "127.0.0.2|127.0.0.3"
 
-Dim DIRTYWORDS		'脏话过滤,多用逗号进行分割
-	DIRTYWORDS = ""
+Dim DIRTYWORDS		'脏话过滤,多用|进行分割
+	DIRTYWORDS = "fuck|江泽民|国民党"
 
 %>
 

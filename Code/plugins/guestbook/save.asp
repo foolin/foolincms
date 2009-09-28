@@ -13,8 +13,8 @@
 		Call MsgBox("对不起，本站禁止外部提交数据！","REFRESH")
 	End If
 	'5分钟之内不能留言
-	If DateDIff("s", CDate(Session("PostTime")), Now()) < 60*5 Then
-		Call MsgBox("禁止频繁提交留言！请5分钟之后再留言...","BACK")
+	If DateDIff("s", CDate(Session("PostTime")), Now()) < GBOOKTIME Then
+		Call MsgBox("禁止频繁提交留言！请"& GBOOKTIME &"秒之后再留言...","BACK")
 	End If
 	'检查验证码
 	If Len(Request("fChkCode"))=0 Then Call MsgBox("验证码不能为空！", "BACK")
@@ -30,10 +30,13 @@
 		strHomePage = Left(Req("fHomePage"),50)
 		strIP = GetIP()
 		If Len(strTitle)<3 Or Len(strContent)>50 Then Call MsgBox("标题的长度请控制在 3 至 50 位","BACK")
-		If Len(strContent)<5 Or Len(strContent)>250 Then Call MsgBox("内容的长度请控制在 3 至 250 位","BACK")
+		If Len(strContent)<5 Or Len(strContent)>250 Then Call MsgBox("内容的长度请控制在 5 至 250 位","BACK")
 		If Len(strUser) = 0 Then strUser = "匿名"
 		If Len(strEmail) = 0 Then strEmail = "@"
 		If Len(strHomePage) = 0 Then strHomePage = "#"
+		'过滤敏感字符
+		strTitle = FilterDirtyStr(strTitle)
+		strContent = FilterDirtyStr(strContent)
 		'判断是否需要审核
 		If ISAUDITGBOOK = 0 Then
 			strSql = "INSERT INTO GuestBook([Title],[Content],[User],[Email],[HomePage],[IP],[CreateTime], [State])"

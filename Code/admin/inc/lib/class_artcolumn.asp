@@ -35,6 +35,9 @@ Class ClassArtColumn
 	'Template
 	Public Property Let Template(ByVal pTemplate): vTemplate = pTemplate: End Property
 	Public Property Get Template: Template = vTemplate: End Property
+	'LastError
+	Public Property Let LastError(ByVal pLastError): mLastError = pLastError: End Property
+	Public Property Get LastError: LastError = mLastError: End Property
 	
 	Private Sub Class_Initialize()
 		Call ChkLogin()		'检查登录
@@ -67,8 +70,8 @@ Class ClassArtColumn
 		vParentID = Request.Form("fParentID")
 		vTemplate = Request.Form("fTemplate")
 
-		If Len(vName) < 1 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
-		If Len(vInfo) > 250 Then mLastError = "信息的长度请控制在250 位" : SetValue = False : Exit Function
+		If Len(vName)<1 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
+		If Len(vInfo)>250 Then mLastError = "信息的长度请控制在250 位" : SetValue = False : Exit Function
 		If Not IsNumeric(ParentID) Then mLastError = "父栏目ID必须为数字" : SetValue = False : Exit Function
 		If Len(vTemplate) > 20 Then mLastError = "模板的长度请控制在20 位" : SetValue = False : Exit Function
 		SetValue = True
@@ -102,7 +105,6 @@ Class ClassArtColumn
 	' Create on: 		2009-9-7 16:26:26
 	'--------------------------------------------------------------
 	Public Function Create()
-		If SetValue = False Then Create = False: Exit Function
 		Dim Rs
 		Set Rs = DB("Select * From [ArtColumn]",3)
 		Rs.AddNew

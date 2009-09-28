@@ -35,6 +35,10 @@ Class ClassPicColumn
 	'Template
 	Public Property Let Template(ByVal pTemplate): vTemplate = pTemplate: End Property
 	Public Property Get Template: Template = vTemplate: End Property
+	Public Property Get ModifyTime: ModifyTime = vModifyTime: End Property
+	'LastError
+	Public Property Let LastError(ByVal pLastError): mLastError = pLastError: End Property
+	Public Property Get LastError: LastError = mLastError: End Property
 	
 	Private Sub Class_Initialize()
 		Call ChkLogin()		'¼ì²éµÇÂ¼
@@ -101,7 +105,6 @@ Class ClassPicColumn
 	' Create on: 		2009-9-7 16:26:26
 	'--------------------------------------------------------------
 	Public Function Create()
-		If SetValue = False Then Create = False: Exit Function
 		Dim Rs
 		Set Rs = DB("Select * From [PicColumn]",3)
 		Rs.AddNew

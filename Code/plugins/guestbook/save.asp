@@ -29,8 +29,8 @@
 		strEmail = Left(Req("fEmail"),20)
 		strHomePage = Left(Req("fHomePage"),50)
 		strIP = GetIP()
-		If Len(strTitle)<3 Or Len(strContent)>50 Then Call MsgBox("标题的长度请控制在 3 至 50 位","BACK")
-		If Len(strContent)<5 Or Len(strContent)>250 Then Call MsgBox("内容的长度请控制在 5 至 250 位","BACK")
+		If Len(strTitle)<1 Or Len(strContent)>50 Then Call MsgBox("标题的长度请控制在 1 至 50 位","BACK")
+		If Len(strContent)<1 Or Len(strContent)>250 Then Call MsgBox("内容的长度请控制在 1 至 250 位","BACK")
 		If Len(strUser) = 0 Then strUser = "匿名"
 		If Len(strEmail) = 0 Then strEmail = "@"
 		If Len(strHomePage) = 0 Then strHomePage = "#"

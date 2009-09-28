@@ -613,7 +613,7 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "LIMITIP = " & Chr(34) & "" & Chr(34) & keyEnter
 	' DIRTYWORDS变量
 	strTemp= strTemp & "Dim DIRTYWORDS" & keyTab & "'脏话过滤，多用|进行分割" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "DIRTYWORDS = " & Chr(34) & "" & Chr(34) & keyEnter
+	strTemp= strTemp & "DIRTYWORDS = " & Chr(34) & "fuck|sex" & Chr(34) & keyEnter
 	'标记结束
 	strTemp = strTemp & "%" & Chr(62) & Chr(10)
 	If CreateFile(strTemp, "../inc/config.asp") = True Then

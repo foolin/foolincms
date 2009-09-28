@@ -8,7 +8,7 @@ On Error Resume Next		'容错处理
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-9-28 10:21:20
+' Update on: 	2009-9-28 17:16:40
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
@@ -16,7 +16,7 @@ Dim DBPATH		'Access数据库路径
 	DBPATH = "database/Fl28#Ek_7348D432AF.mdb"
 
 Dim SITENAME		'网站名称
-	SITENAME = "E酷工作室"
+	SITENAME = "傻啦傻啦"
 
 Dim HTTPURL		'网站网址前缀
 	HTTPURL = "http://localhost"
@@ -43,7 +43,7 @@ Dim GBOOKTIME		'允许留言最短时间间隔，单位秒，默认60秒
 	GBOOKTIME = 60
 
 Dim ISCACHE		'是否缓存，建议是，减轻服务器负载量
-	ISCACHE = 1
+	ISCACHE = 0
 
 Dim CACHEFLAG		'缓存标志，可以任意英文字母
 	CACHEFLAG = "EekkuCms_"

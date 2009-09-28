@@ -1,4 +1,6 @@
 <%
+Dim SITE
+	SITE = "<a href=""" & SITEURL & """ target=""_blank"">" & SITENAME & "</a>"
 Dim TEMPLATEPATH	'模板路径
 	TemplatePath = InstallDir & "/template/" & TemplateDir
 
@@ -28,6 +30,9 @@ Dim STUDIONAME	'官方
 Dim STUDIOURL	'官方Url
 	STUDIOURL = "http://www.eekku.com"
 	
+Dim STUDIO
+	STUDIO = "<a href=""" & STUDIOURL & """ target=""_blank"">" & STUDIONAME & "</a>"
+	
 Dim SYSNAME	'系统名称
 	SYSNAME = "EekkuCMS"
 
@@ -38,6 +43,6 @@ Dim SYS	'系统
 	SYS = SYSNAME & "  " & SYSVERSION
 	
 Dim SYSLINK	'系统连接
-	SYSLINK = "<a href=" & STUDIOURL & " target=""_blank"">" & SYS & "</a>"
+	SYSLINK = "<a href=""" & STUDIOURL & """ target=""_blank"">" & SYS & "</a>"
 	
 %>

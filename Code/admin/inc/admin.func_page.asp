@@ -1,6 +1,6 @@
 <%Sub Header%>
     <div id="header">
-        欢迎使用E酷CMS，一个方便而不简单的内容管理系统~
+        <img src="css/logo.gif" height="35" /><span style="font-size:32px; font-weight:bold;"><%=SiteName%>管理</span> <span style="font-size:18px; color:#099;">欢迎使用E酷CMS，一个小型站点的内容管理系统~</span>
     </div>
 <%End Sub%>
 
@@ -32,9 +32,9 @@
 
 <%Sub Footer()%>
     <div id="footer">
-    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="http://www.eekku.com">官方网站</a> | <a href="help.asp">用户帮助</a>   | <a href="index.asp?action=clearcache">更新缓存</a> <br />
-        Author:Foolin  E-mail:Foolin@126.com HomePage: http://www.eekku.com<br />
-        Copyright &copy; 2009　www.eekku.com　版权所有　<br />
+    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="http://www.liufu.org/ling" target="_blank">官方网站</a> | <a href="help.asp">用户帮助</a>   | <a href="index.asp?action=clearcache">更新缓存</a> <br />
+        Copyright &copy; 2009 <%=sitename%>　版权所有。<br />
+       System kernel：<%=syslink%> Power by <%=studio%><br />
     </div>
 	<iframe height="30" width="100%" frameborder="0" src="keeponline.asp" scrolling="no" style="display:none;"></iframe>
 <%End Sub%>
@@ -51,9 +51,8 @@
 <%Sub SysInfo()%>
         <dl class="menu">
             <dt>--== 版权信息 ==--</dt>
-            <dd>制作：E酷工作室(Foolin)</dd>
-            <dd>E-mail：Foolin@126.com</dd>
-            <dd><a href="http://www.eekku.com">官网：http://www.eekku.com</a></dd>
-            <dd><a href="http://www.eekku.com">E酷CMS <%=sysversion%></a></dd>
+            <dd>网站:<a href="<%=siteurl%>" target="_blank"><%=sitename%></a></dd>
+            <dd>网址:<a href="<%=siteurl%>" target="_blank"><%=siteurl%></a></dd>
+            <dd><a href="http://www.eekku.com"><%=syslink%></a></dd>
         </dl>
 <%End Sub%>

@@ -411,25 +411,25 @@ Sub FuncForm(ByVal id)
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("添加")%>自定义页面
             </th></tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">标题：</td>
             	<td><input type="text" name="fTitle" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">文件名：</td>
-                <td><input type="text" name="fPageName" value="<%=objA.PageName%>" />
+                <td><input type="text" name="fPageName" value="<%=objA.PageName%>" /> <span class="gray">（例如：links.html）</span>
                     
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">模板名：</td>
-                <td><input type="text" name="fTemplate" value="<%=objA.Template%>" /></td>
+                <td><input type="text" name="fTemplate" value="<%=objA.Template%>" /> <span class="gray">（template/模板目录/模板名.html。例如：mydiy.html表示template/default/mydiy.html）</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">关键词：</td>
                 <td><input type="text" name="fKeywords" value="<%=objA.Keywords%>" style="width:450px;"/></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">选项：</td>
                 <td>
                 	显示<input type="checkbox" name="fState" value="1" <%If objA.State = 1 Then Echo("checked=""checked""")%> />
@@ -441,7 +441,7 @@ Sub FuncForm(ByVal id)
                 	  
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">代码：</td>
                 <td ></td>
             </tr>

@@ -39,7 +39,7 @@ End If
 	border:solid 1px #AAD5FF;
 	padding:3px 5px;
 }
-.indexNav ul{ margin:5px; clear:both; padding:0px;}
+.indexNav ul{ margin:5px; clear:both; padding:0px; list-style:none;}
 .indexNav li{
 	margin:2px 5px;
 	float:left;

@@ -140,6 +140,7 @@ Class ClassPageList
 				curUrl = curUrl & "&"
 			End If
 		End If
+		Set Reg = Nothing
 		GetURL = curUrl
 	End Function
 End Class

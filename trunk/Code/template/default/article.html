@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>{sys:sitename /}</title>
+<meta name="keywords" content="{sys:sitekeywords /}"/>
+<meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/article.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
@@ -33,19 +35,12 @@ function fontZoom(size){
                 
                         <!--栏目-->
                         <div class="box">
-                          <div class="title"><span class="titletxt">热门新闻</span><span class="more"><a href="list.html">更多>></a></span></div>
+                          <div class="title"><span class="titletxt">热门文章</span><span class="more"><a href="list.html">更多>></a></span></div>
                             <div class="content">
                                 <ul>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
-                                <li><a href="article.html" title="广州大学档案馆正在建设中">广州大学档案馆正在建设中</a></li>
+                                {list:hot  row="20" col="1" order="hot"}
+                                <li><a href="[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
+								{/list:hot}
                                 </ul>
                             </div>
                         </div>

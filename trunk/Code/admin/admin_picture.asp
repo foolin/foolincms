@@ -532,21 +532,25 @@ Sub ColForm(ByVal id)
 		If objA.LetValue = False Then Call MsgBox("对不起，你编辑的栏目不存在", "BACK")
 	End If
 %>
-            <%If objA.PicPath<>"" Then %>
-				<div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500"  /></div>
-            <%End If%>
+
 	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post" onsubmit="return chkSubmit();">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
         <input type="hidden" name="fHits" value="<%=objA.Hits%>"/>
         <table class="form" style="border:1px #88C4FF solid;">
-            <tr><th colspan="2">
+
+            <%If objA.PicPath<>"" Then %>
+            <tr>
+            	<td colspan="2"><div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500"  /></div></td>
+            </tr>
+            <%End If%>
+                        <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("上传")%>图片
             </th></tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">标题：</td>
             	<td><input type="text" name="fTitle" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">父栏目：</td>
                 <td>
                 	<select name="fColID">
@@ -558,19 +562,27 @@ Sub ColForm(ByVal id)
                     </select><span class="red">* 必选</span>（不选择，则作为父栏目）
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
+                <td align="right">作者：</td>
+                <td><input type="text" name="fAuthor" value="<%=objA.Author%>" /></td>
+            </tr>
+            <tr>
+                <td align="right">来源：</td>
+                <td><input type="text" name="fSource" value="<%=objA.Source%>" /></td>
+            </tr>
+            <tr>
                 <td align="right">选项：</td>
                 <td>
                 	置顶<input type="checkbox" name="fIsTop" value="1"  <%If objA.IsTop = 1 Then Echo("checked=""checked""")%> />  
                 	通过审核<input type="checkbox" name="fState" value="1" <%If objA.State = 1 Then Echo("checked=""checked""")%> />
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right">图片介绍：</td>
                 <td><textarea name="fIntro" style="width:99%;height:100px;"><%=objA.Intro%></textarea></td>
             </tr>
             <%If objA.PicPath="" Then %>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right">上传图片：</td>
                 <td>
                     <div id="uploadFocusPic">
@@ -580,11 +592,11 @@ Sub ColForm(ByVal id)
                 </td>
             </tr>
             <%End If%>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right">缩略图路径：</td>
                 <td><input type="text" name="fSmallPicPath" value="<%=objA.SmallPicPath%>" <%If objA.ID>0 Then Echo("readonly=""readonly""")%> style="width:450px;"/></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right">图片路径：</td>
                 <td><input type="text" name="fPicPath" <%If objA.ID>0 Then Echo("readonly=""readonly""")%>  value="<%=objA.PicPath%>" style="width:450px;" /> <span class="red" id="PicNum">0</span>张</td>
             </tr>

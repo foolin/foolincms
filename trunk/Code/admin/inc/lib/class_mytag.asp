@@ -63,7 +63,7 @@ Class ClassMyTag
 		vName = Request.Form("fName")
 		vInfo = Request.Form("fInfo")
 		vCode = Request.Form("fCode")
-		If Len(vName) < 3 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
+		If Len(vName) < 1 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
 		If Len(vCode) = 0 Then mLastError = "页面内容不能为空" : SetValue = False : Exit Function
 		If Len(vInfo) = 0 Then vInfo = ""
 		SetValue = True

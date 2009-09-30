@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>{sys:sitename /}</title>
+<meta name="keywords" content="{sys:sitekeywords /}"/>
+<meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 </head>
@@ -18,7 +20,7 @@
           <div class="container">
             
                 <!--notice--->
-                <div class="notice"><marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollAmount="4" scrollDelay="80">这是滚动公告栏：最新新闻和消息新闻，The last news is here!</marquee></div>
+                <div class="notice"><marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollAmount="4" scrollDelay="80">{my:notice /}</marquee></div>
                     
                     <!--column_A start--->
                 <div class="column_A">
@@ -188,7 +190,7 @@
                             <div class="title">最新图片</div>
                             <div class="content">
                                 <div style="text-align:center;">
-                                {list:pic src="pic" row="5" col="5" order="last"}
+                                {list:pic src="pic" row="5" col="1" order="last"}
                                 <a href="[pic:url]"><img src="[pic:PicPath]" class="img" width="140" height="100" /></a> 
                                 {/list:pic}
                                 </div>
@@ -207,6 +209,7 @@
 </body>
 </html>
 <!--- 制作：刘付灵  E-mail:Foolin@126.com --->
+
 
 
 

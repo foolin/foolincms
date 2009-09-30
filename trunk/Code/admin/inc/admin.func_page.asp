@@ -25,16 +25,16 @@
 	 <li<%If act = "weblog" Then Echo(" class=""on""")%>><a href="admin_weblog.asp">管理日志</a></li>
      <li<%If act = "config" Then Echo(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
      <li<%If act = "password" Then Echo(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
-     <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">帮助</a></li>
+     <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">标签帮助</a></li>
      <li><a href="logout.asp">退出</a></li>
     </ul>
 <%End Sub%>
 
 <%Sub Footer()%>
     <div id="footer">
-    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="http://www.liufu.org/ling" target="_blank">官方网站</a> | <a href="help.asp">用户帮助</a>   | <a href="index.asp?action=clearcache">更新缓存</a> <br />
-        Copyright &copy; 2009 <%=sitename%>　版权所有。<br />
-       System kernel：<%=syslink%> Power by <%=studio%><br />
+    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="index.asp?action=clearcache">更新缓存</a>  | <a href="help.asp">用户帮助</a>  | <a href="http://www.liufu.org/ling" target="_blank">最新版本</a><br />
+       <%=Session("AdminName")%>，欢迎您进入[<%=sitename%>]后台管理。　<br />
+     &copy; 2009  Power by <%=studio%> ，System kernel：<%=syslink%><br />
     </div>
 	<iframe height="30" width="100%" frameborder="0" src="keeponline.asp" scrolling="no" style="display:none;"></iframe>
 <%End Sub%>
@@ -50,7 +50,7 @@
 
 <%Sub SysInfo()%>
         <dl class="menu">
-            <dt>--== 版权信息 ==--</dt>
+            <dt>--== 网站信息 ==--</dt>
             <dd>网站:<a href="<%=siteurl%>" target="_blank"><%=sitename%></a></dd>
             <dd>网址:<a href="<%=siteurl%>" target="_blank"><%=siteurl%></a></dd>
             <dd><a href="http://www.eekku.com"><%=syslink%></a></dd>

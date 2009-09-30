@@ -335,15 +335,15 @@ Sub FuncForm(ByVal id)
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("添加")%>自定义标签
             </th></tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">标签名：</td>
             	<td><input type="text" name="fName" value="<%=objA.Name%>" style="width:450px;"/> <span class="red">* 必填（只能英文和下划线，不能使用中文）</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">标签说明：</td>
                 <td><input type="text" name="fInfo" value="<%=objA.Info%>" style="width:450px;"/>（可以中文）</td>
             </tr>
-            <tr onmouseover="this.style.background='#FFFFFF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">代码：</td>
                 <td ></td>
             </tr>

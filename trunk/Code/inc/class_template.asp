@@ -444,13 +444,13 @@ Class ClassTemplate
 				End Select
 				Select Case LCase(tagOrder)
 					Case "hot"
-						tagOrder = " Hits DESC"
+						tagOrder = " IsTop DESC, Hits DESC"
 					Case "asc"
-						tagOrder = " ID"
+						tagOrder = " IsTop DESC, ID"
 					Case "last","desc"
-						tagOrder = " ID DESC"
+						tagOrder = " IsTop DESC, ID DESC"
 					Case Else
-						tagOrder = " ID DESC"
+						tagOrder = " IsTop DESC, ID DESC"
 				End Select
 				tagSQL = "SELECT " & tagField & " FROM " & tagTable & " WHERE " & tagWhere & " ORDER BY " & tagOrder
 			End If

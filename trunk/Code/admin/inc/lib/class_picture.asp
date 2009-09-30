@@ -81,7 +81,7 @@ Class ClassPicture
 		vColID = 0
 		vTitle = ""
 		vAuthor = ""
-		vSource = ""
+		vSource = "本站"
 		vSmallPicPath = ""
 		vPicPath = ""
 		vIntro = "暂无介绍"
@@ -110,10 +110,10 @@ Class ClassPicture
 		vState = Request.Form("fState")
 		vHits = Request.Form("fHits")
 		vCreateTime = Now()
-		If Len(vTitle) < 3 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
+		If Len(vTitle) < 1 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
 		If Not IsNumeric(ColID) Then mLastError = "栏目ID必须为数字" : SetValue = False : Exit Function
 		If Cint(ColID) = 0 Then mLastError = "请选择栏目" : SetValue = False : Exit Function
-		If Len(vAuthor) = 0 Then vAuthor = "匿名"
+		If Len(vAuthor) = 0 Then vAuthor = ""
 		If Len(vSource) = 0 Then vSource = "不详"
 		If Len(vPicPath) = 0 Then mLastError = "请先上传图片" : SetValue = False : Exit Function
 		If Len(vSmallPicPath) = 0 Then vSmallPicPath = vPicPath
@@ -194,7 +194,7 @@ Class ClassPicture
 		arrPicPath = Split(vPicPath, "|")
 		For i = 0 To UBound(arrPicPath)
 			vPicPath = arrPicPath(i)
-			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
+			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','"&vSmallPicPath&"','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
 		Next
 		BatCreate = True
 	End Function

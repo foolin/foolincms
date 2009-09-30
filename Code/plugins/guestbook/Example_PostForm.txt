@@ -4,7 +4,7 @@
             <th colspan="2">签写留言</th>
           </tr>
           <tr>
-            <td>标题：</td><td><input type="text" name="fTitle" style="width:300px;" />（必填,3至50个字符）</td>
+            <td>标题：</td><td><input type="text" name="fTitle" style="width:300px;" />（必填,1至50个字符）</td>
           </tr>
           <tr>
             <td>名字：</td><td><input type="text" name="fUser" /></td>
@@ -16,7 +16,7 @@
               <td>主页：</td><td><input type="text" name="fHomePage" value="http://" style="width:300px;" /></td>
           </tr>
           <tr>
-              <td>内容：</td><td><textarea name="fContent" cols="50" rows="5"></textarea> （必填，5至250个字符）</td>
+              <td>内容：</td><td><textarea name="fContent" cols="50" rows="5"></textarea> （必填，1至250个字符）</td>
           </tr>
           <tr>
               <td>验证码：</td><td><input type="text" name="fChkCode" />  <img src="inc/chkcode.asp" alt="验证码,看不清楚?请点击刷新验证码" style="cursor:pointer;" onclick="this.src='inc/chkcode.asp?t='+Math.random()"/></td>

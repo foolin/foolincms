@@ -53,11 +53,13 @@ If WaitTime = 0 Then Response.Redirect(Url)
 	<%Call Header()%>
     <table id="container">
         <tr><td colspan="2" id="topNav">
-			<%Call TopNav("index")%>
+			<%Call TopNav("jumpurl")%>
         </td></tr>
         <tr>
             <td id="sidebar" valign="top">
-
+            	<ul class="menu">
+                	<li><a href="index.asp">π‹¿Ì ◊“≥</a></li>
+                </ul>
                  <%Call MyInfo()%>
                 
                 <%Call SysInfo()%>

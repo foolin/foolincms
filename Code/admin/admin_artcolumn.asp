@@ -293,11 +293,11 @@ Sub ColForm(ByVal id)
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("添加")%>栏目
             </th></tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">名称：</td>
             	<td><input type="text" name="fName" value="<%=objA.Name%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">父栏目：</td>
                 <td>
                 	<select name="fParentID">
@@ -312,11 +312,11 @@ Sub ColForm(ByVal id)
                     </select>（不选择，则第一级父栏目）
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right">栏目介绍：</td>
-                <td><textarea name="fInfo" style="width:99%;height:150px;"><%=objA.Info%></textarea></td>
+                <td><textarea name="fInfo" cols="62" rows="3"><%=objA.Info%></textarea></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">模板路径：</td>
             	<td><input type="text" name="fTemplate" value="<%=objA.Template%>" style="width:450px;"/> <span  style="color:gray;">(本版暂不支持)</span> </td>
             </tr>

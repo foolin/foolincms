@@ -428,8 +428,8 @@ Dim mode: mode = LCase(Request("list"))
     	<tr>
         	<th><input type="checkbox" name="GroupID" value="" onClick="Checked(this.form,'GroupID',this)"/></th>
         	<th>ID</th>
-            <th>栏目</th>
             <th>标题</th>
+            <th>栏目</th>
             <th>作者</th>
             <th>时间</th>
             <th>状态</th>
@@ -464,12 +464,12 @@ Dim mode: mode = LCase(Request("list"))
         <tr onMouseOver="this.style.background='#C8E3E2';" onMouseOut="this.style.background='#F0F8FF'">
         	<td><input type="checkbox" name="GroupID" value="<%=Rs.Data("ID")%>" /></td>
         	<td><%=Rs.Data("ID")%></td>
-            <td><%=GetColName(Rs.Data("ColID"), "article")%></td>
 			<td>
             	<a href="admin_article.asp?action=modify&id=<%=Rs.Data("ID")%>"><%=Rs.Data("Title")%></a>
 				<%If Rs.Data("IsTop") = 1 Then Echo(" <font color=""red"">[顶]</font>")%>
                 <%If Rs.Data("IsFocusPic") =1 And Rs.Data("FocusPic") <> "" Then Echo(" <font color=""red"">[图]</font>")%>
             </td>
+            <td><%=GetColName(Rs.Data("ColID"), "article")%></td>
             <td><%=Rs.Data("Author")%></td>
             <td><%=FDate(Rs.Data("CreateTime"), 2)%></td>
             <td>
@@ -536,6 +536,8 @@ Sub ArtForm(ByVal id)
 	If Cint(id) > 0 Then
 		objA.ID = id
 		If objA.LetValue = False Then Call MsgBox("对不起，你编辑的文章不存在", "BACK")
+	Else
+		objA.Author = Session("AdminName")
 	End If
 %>
 	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post">
@@ -545,11 +547,11 @@ Sub ArtForm(ByVal id)
             <tr><th colspan="2">
 				<%If id > 0 Then Echo("编辑") Else Echo("添加")%>文章
             </th></tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
             	<td align="right" width="15%">标题：</td>
             	<td><input type="text" name="Title" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">栏目：</td>
                 <td>
                 	<select name="ColID">
@@ -563,15 +565,15 @@ Sub ArtForm(ByVal id)
                     <span class="red">* 必选</span>
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">作者：</td>
                 <td><input type="text" name="Author" value="<%=objA.Author%>" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">来源：</td>
                 <td><input type="text" name="Source" value="<%=objA.Source%>" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">焦点图片URL：</td>
                 <td>
                 	<input type="text" name="FocusPic" id="FocusPic" value="<%=objA.FocusPic%>" style="width:450px;" /> <a href="javascript:uploadFocusPic();">上传图片</a>
@@ -580,11 +582,11 @@ Sub ArtForm(ByVal id)
                     </div>
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">关键词：</td>
                 <td><input type="text" value="<%=objA.Keywords%>" name="Keywords"  style="width:450px;" /></td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">选项：</td>
                 <td>
                 	置顶<input type="checkbox" name="IsTop" value="1"  <%If objA.IsTop = 1 Then Echo("checked=""checked""")%> />  
@@ -592,7 +594,7 @@ Sub ArtForm(ByVal id)
                     焦点图片<input type="checkbox" name="IsFocusPic" value="1" <%If objA.IsFocusPic = 1 Then Echo("checked=""checked""")%> id="IsFocusPic" onclick="chkFocusPic()"/>
                 </td>
             </tr>
-            <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
+            <tr>
                 <td align="right">跳转地址：</td>
                 <td><input type="text" name="JumpUrl" id="JumpUrl" value="<%=objA.JumpUrl%>"  style="width:450px;" /></td>
             </tr>

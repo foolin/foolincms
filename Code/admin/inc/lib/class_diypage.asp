@@ -87,7 +87,7 @@ Class ClassDiyPage
 		vCode = Request.Form("fCode")
 		vIsSystem = Request.Form("fIsSystem")
 		vState = Request.Form("fState")
-		If Len(vTitle) < 3 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 3 至 50 位" : SetValue = False : Exit Function
+		If Len(vTitle) < 1 Or Len(vTitle) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
 		If Len(vCode) = 0 Then mLastError = "页面内容不能为空" : SetValue = False : Exit Function
 		If Len(vKeywords) = 0 Then vKeywords = ""
 		If Len(vPageName) = 0 Then vPageName = ""

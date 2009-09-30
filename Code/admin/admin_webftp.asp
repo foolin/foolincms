@@ -17,7 +17,7 @@
 body{
 	font-size:14px;
 }
-.css_table{ background:#F4FAFF; background:#F2F2F2; border:#68B4FF 1px solid;}
+.css_table{ background:#F4FAFF; background:#F2F2F2; border:#999 1px solid;}
 .css_list{ background:#FFF;}
 .list { margin: 0px; padding: 0px;}
 .list li { list-style-image: none; list-style-type: none; float: left; text-align: center; padding:15px 15px 10px 15px; }
@@ -27,10 +27,10 @@ body{
 .img a{ }
 .img a:hover{ background:#C00;}
 .txt { width: 100px; white-space:nowrap; text-overflow:ellipsis; overflow: hidden; padding-top: 5px; }
+.btn{ padding:3px; margin:5px; margin-left:20px;}
 -->
 </style>
 <script type="text/javascript" src="inc/base.js"></script>
-<script src="inc/webftp/codepress/codepress.js" type="text/javascript"></script> 
 <script type="text/javascript">
 //li滑动效果 : 在<ul>中加入class='li-slide'即可。
 function liEffect(){
@@ -45,16 +45,6 @@ function liEffect(){
 	}
 }
 window.onload = liEffect; //网页载入运行
-
-function saveCode(form){
-	var input1 = document.createElement('input');
-	input1.type = 'hidden';
-	input1.name = 'content';
-	input1.value = content1.getCode();
-	form.insertBefore(input1);
-	//alert(input1.value);
-	form.submit(); 
-}
 </script>
 </head>
 
@@ -91,7 +81,7 @@ If request("act") = "save" Then
 	Call CreateFile(SaveContent,SaveFile)
 	Call WebLog("修改模板["& SaveFile &"]成功！", "SESSION")
 	'Call MsgAndGo("修改自定义标签[id:"& id &"]成功！", "BACK")
-	strTips = "温馨提示：保存文件成功！" & Now()
+	strTips = "温馨提示：保存文件成功！" & Now() & ""
 End If 
 
 Dim Fso: Set Fso = CreateObject("Scripting.FileSystemObject")
@@ -99,19 +89,15 @@ Dim Fso: Set Fso = CreateObject("Scripting.FileSystemObject")
 Dim Fileurl
 Fileurl =  replace(request("file"),"//","/")
 %>
-<div class="status"> <a name="webftp" id="webftp"></a>您的位置：<a href="index.asp">管理首页</a> → <%=MainStatus%> → <%If Len(Fileurl) > 0 Then Response.write Fileurl Else Response.Write Urli%>  </div> 
+<div class="status">您的位置：<a href="index.asp">管理首页</a> → <%=MainStatus%> → <%If Len(Fileurl) > 0 Then Response.write Fileurl Else Response.Write Urli%>  <a name="webftp" id="webftp"></a></div> 
 <table width="100%" border="0" cellpadding="1" cellspacing="1" class="css_table">
-	<tr class="css_menu">
-		<td>
-		</td>
-	</tr>
 	<tr>
 		<td class='css_top'>
-        <a href='?'><img src="inc/webftp/images/home.gif" border="0" width="28"/>根目录</a>
+        <a href='?'><img src="inc/webftp/images/home.gif" border="0" width="28"/>目录</a>
         |  <a href="#" onclick="history.go(-1);"><img src="inc/webftp/images/back.gif" border="0"/>后退</a>
         |  <a href="<%=Url%>?urli=<%=Urlr%>"><img src="inc/webftp/images/upper.gif" border="0"/>上一级</a>
-        | 地址：<input type="text" value="当前目录: <%If Len(Fileurl) > 0 Then Response.write Fileurl Else Response.Write Urli%>"  style="width:450px; height:18px; line-height:18px;" readonly="readonly" /> 
-        <span style="color:#F00; font-weight:bold;"><%=strTips%></span>
+        | 地址：<input type="text" value="<%If Len(Fileurl) > 0 Then Response.write Fileurl Else Response.Write Urli%>"  style="width:400px; height:18px; line-height:18px;" readonly="readonly" /> 
+        <span style="color:#F00; font-weight:bold; padding:5px;"><%=strTips%></span>
         <br /></td>
 	</tr>
 	<%
@@ -119,13 +105,13 @@ Fileurl =  replace(request("file"),"//","/")
 	Set Root = Fso.GetFolder(Server.Mappath(Urli))
 	%>
 	<%If Len(Fileurl) > 0 Then%>
-	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.URLEncode(Fileurl)%>&ext=<%=Request("ext")%>">
+	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.URLEncode(Fileurl)%>&ext=<%=Request("ext")%>#webftp" onsubmit="return confirm('确定保存修改后文件？');">
     	<input type="hidden" name="urli" value="<%=Urlr%>" />
         <input type="hidden" name="urlr" value="<%=Urlr%>" />
 	<tr>
 		<td class='css_list'>
-			<textarea name="content1" id="content1" class="codepress <%=extCode%> linenumbers-on" style="width:99%;height:550px; border:#09F 1px solid;"><%=Server.HTMLEncode(getfile(Fileurl))%></textarea>
-			<input type="button" name="save" onclick="saveCode(this.form)" value="保存该文件" /> </td>
+			<textarea name="content" style="width:100%;height:550px; border:#999 1px solid;"><%=Server.HTMLEncode(getfile(Fileurl))%></textarea>
+			<input class="btn" type="submit" value="保存文件"  />  </td>
 	</tr>
 	</form>
 	 <%End If%>
@@ -152,7 +138,7 @@ Fileurl =  replace(request("file"),"//","/")
 	%>
 </table>
 
-					<div style="color:#F00; padding:10px;">温馨提示：如果要选择模板，请到【<a href="admin_config.asp">系统配置 → 模板目录 </a>】进行设置！</div>
+					<div style="color:green; padding:10px;">温馨提示：如果要选择模板，请到【<a href="admin_config.asp">系统配置 → 模板目录 </a>】进行设置！</div>
                </div>
             </td>
         </tr>

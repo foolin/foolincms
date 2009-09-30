@@ -512,7 +512,9 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	Conn.execute("INSERT INTO [Admin] ([Username],[Nickname],[Password],[Level],[LoginCount],[LoginTime],[LoginIP]) VALUES('"& strUsername &"','"& strUsername &"','"& strPassword &"',3,0,'"& Now() &"','"& GetIP() &"')")
 	'创建初始化自定义标签
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FirstTag','第一个自定义标签','第一个自定义标签：(零星碎事)')")
-	'系统信息
+	'自定义标签：公告
+	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('notice','公告','公告：您已经成功安装E酷CMS，欢迎使用！')")
+	'自定义标签：系统信息
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('AboutSys','关于系统信息','{sys:sys /}<br />作者：Foolin<br /> Email: Foolin@126.com <br /> 主页：http://www.LiuFu.org/Ling<br />官网：Http://www.eekku.com<br />')")
 	'自定义标签：友情链接
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FriendLinks','友情链接','<a href=""http://www.eekku.com""> -==- E酷网 -==- </a><br />"& Chr(10) & Chr(9) &"<a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br />"& Chr(10) & Chr(9) &"')")
@@ -581,6 +583,9 @@ Function CreateConfig(DbName)
 	' SITEKEYWORDS变量
 	strTemp= strTemp & "Dim SITEKEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "SITEKEYWORDS = " & Chr(34) & "E酷网，E酷Cms，E酷工作室,www.eekku.com，零星碎事，ling.liufu.org" & Chr(34) & keyEnter
+	' SITEDESC变量
+	strTemp= strTemp & "Dim SITEDESC" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "SITEDESC = " & Chr(34) & "E酷Cms是一种小型站点内容管理系统，内含文章、图片、留言等基本功能，简单且方便使用！" & Chr(34) & keyEnter
 	' TEMPLATEDIR变量
 	strTemp= strTemp & "Dim TEMPLATEDIR" & keyTab & "'网站模板路径，例如：default表示template/default/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "TEMPLATEDIR = " & Chr(34) & "default" & Chr(34) & keyEnter

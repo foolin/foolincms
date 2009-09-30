@@ -18,6 +18,7 @@
 		INSTALLDIR = Replace(Req("InstallDir"), chr(34), "'")
 	End If
 	SITEKEYWORDS = Replace(Req("SiteKeywords"), chr(34), "'")
+	SITEDESC= Replace(Req("SiteDesc"), chr(34), "'")
 	If  Len(Req("IsHideTempPath")) <> 0 And Cint(Req("IsHideTempPath")) = 1 Then
 		ISHIDETEMPPATH = 1
 	Else
@@ -94,6 +95,9 @@
 	' SITEKEYWORDS变量
 	strTemp= strTemp & "Dim SITEKEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "SITEKEYWORDS = " & Chr(34) & SITEKEYWORDS & Chr(34) & keyEnter
+	' SITEDESC变量
+	strTemp= strTemp & "Dim SITEDESC" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "SITEDESC = " & Chr(34) & SITEDESC & Chr(34) & keyEnter
 	' TEMPLATEDIR变量
 	strTemp= strTemp & "Dim TEMPLATEDIR" & keyTab & "'网站模板路径，例如：default表示template/default/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "TEMPLATEDIR = " & Chr(34) & TEMPLATEDIR & Chr(34) & keyEnter
@@ -220,8 +224,14 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             </tr>
                             <tr>
                                 <td align="right" width="15%">网站关键词：</td>
-                                <td><textarea name="SiteKeywords" cols="50" rows="5"><%=SITEKEYWORDS%></textarea>
+                                <td><textarea name="SiteKeywords" cols="60" rows="3"><%=SITEKEYWORDS%></textarea>
                                 <span class="gray">网站关键词，多用逗号分隔。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="15%">网站描述：</td>
+                                <td><textarea name="SiteDesc" cols="60" rows="3"><%=SITEDESC%></textarea>
+                                <span class="gray">网站描述。</span>
                                 </td>
                             </tr>
                             <tr>

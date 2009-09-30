@@ -106,7 +106,7 @@ a:hover{ color:#F00; text-decoration:underline;}
 	<form action="" method="post">
         <table width="100%">
           <tr>
-            <td colspan="2" class="title">E酷CMS系统管理登录</td>
+            <td colspan="2" class="title"><%=SiteName%>管理登录</td>
             <input type="hidden" name="action" value="login" />
           </tr>
           <tr>
@@ -129,8 +129,8 @@ a:hover{ color:#F00; text-decoration:underline;}
 	</form>
     </div>
     <div class="footer">
-    	Author:Foolin  &nbsp; E-mail:Foolin@126.com &nbsp; QQ:970026999 <br />
-    	Copyright&copy; 2009-<%=Year(Now())%>,<a href="<%=SiteUrl%>" target="_blank"><%=SiteName%></a>，All rights reserved。 Power by <%=SysLink%><br />
+    	 <br />
+    	 &copy; 2009 <%=Studio%> ,power by <%=SysLink%> <br />
     </div>
 </body>
 </html>

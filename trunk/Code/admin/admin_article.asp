@@ -79,6 +79,9 @@ End Sub
 '创建文章
 Function DoCreate()
 	Dim objA: Set objA = New ClassArticle
+	If objA.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
 	If objA.Create Then
 		Call WebLog("发表文章[id:title:"&objA.Title&"]成功！", "SESSION")
 		Call MsgAndGo("发表文章[id:title:"&objA.Title&"]成功！", "BACK")
@@ -92,7 +95,10 @@ End Function
 Sub DoModify()
 	Dim objA: Set objA = New ClassArticle
 	objA.ID = id
-	If objA.SetValue And objA.Modify Then
+	If objA.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
+	If objA.Modify Then
 		Call WebLog("修改文章[id:"& id &"]成功！", "SESSION")
 		Call MsgAndGo("修改文章[id:"& id &"]成功！", "admin_article.asp")
 	Else
@@ -103,9 +109,15 @@ End Sub
 
 '删除文章
 Sub DoDelete()
-	DB "Delete From [Article] Where [ID] In (" & id & ")" ,0
-	Call WebLog("删除文章[id:"& id &"]成功！", "SESSION")
-	Call MsgAndGo("删除文章[id:"& id &"]成功!", "REFRESH")
+	Dim objA: Set objA = New ClassArticle
+	objA.ID = id
+	If objA.Delete Then
+		Call WebLog("删除文章[id:"& id &"]成功！", "SESSION")
+		Call MsgAndGo("删除文章[id:"& id &"]成功！", "REFRESH")
+	Else
+		Call MsgBox("错误：" & objC.LastError, "BACK")
+	End If
+	Set objA = Nothing
 End Sub
 
 '披处理操作

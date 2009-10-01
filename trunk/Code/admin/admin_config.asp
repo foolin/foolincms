@@ -236,7 +236,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">Ä£°åÄ¿Â¼£º</td>
+                                <td align="right" width="15%">Ä£°å£º</td>
                                 <td>
                                 <select name="TemplateDir">
                                 	<option value="<%=TEMPLATEDIR%>"> => <%=TEMPLATEDIR%> <= </option>

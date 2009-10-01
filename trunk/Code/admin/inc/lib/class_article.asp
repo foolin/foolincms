@@ -183,7 +183,7 @@ Class ClassArticle
 	' Create on: 		2009-8-28 16:40:46
 	'--------------------------------------------------------------
 	Public Function Create()
-		If SetValue = False Then Create = False: Exit Function
+		'If SetValue = False Then Create = False: Exit Function
 		Dim Rs
 		Set Rs = DB("Select * From [Article]",3)
 		Rs.AddNew

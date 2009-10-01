@@ -182,7 +182,7 @@ Class ClassDiyPage
 		Dim Rs
 		Set Rs = DB("Select ID,IsSystem From [DiyPage] Where IsSystem = 1 And [ID] IN(" & vID &")",3)
 		If Not Rs.Eof Then mLastError = "你删除记录[" & Rs("ID") & "]是系统定义页面!": Rs.Close: Set Rs = Nothing :  Delete = False : Exit Function
-		DB "Delete From [DiyPage] Where [ID] IN(" & Rs("ID") &")" ,0
+		DB "Delete From [DiyPage] Where [ID] IN(" & vID &")" ,0
 		Delete = True
 	End Function
 

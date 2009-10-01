@@ -65,7 +65,10 @@ End Sub
 '创建自定义页面
 Function DoCreate()
 	Dim objA: Set objA = New ClassDiyPage
-	If objA.SetValue And objA.Create Then
+	If objA.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
+	If objA.Create Then
 		Call WebLog("创建自定义页面[title:"&objA.Title&"]成功！", "SESSION")
 		Call MsgAndGo("创建自定义页面[title:"&objA.Title&"]成功！", "REFRESH")
 	Else
@@ -78,7 +81,10 @@ End Function
 Sub DoModify()
 	Dim objA: Set objA = New ClassDiyPage
 	objA.ID = id
-	If objA.SetValue And objA.Modify Then
+	If objA.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
+	If objA.Modify Then
 		Call WebLog("修改自定义页面[id:"& id &"]成功！", "SESSION")
 		Call MsgAndGo("修改自定义页面[id:"& id &"]成功！", "admin_diypage.asp")
 	Else

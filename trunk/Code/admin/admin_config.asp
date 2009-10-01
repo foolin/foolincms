@@ -1,6 +1,7 @@
 <!--#include file="inc/admin.include.asp"-->
 <%
- ChkLogin()
+ Call ChkLogin()
+ Call ChkPower("config","all") '¼ì²éÈ¨ÏÞ
  If LCase(Request("action")) = "update" Then
  	Dim strTemp, keyTab, keyEnter
 	

@@ -16,6 +16,7 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "管理图片栏目"
 
 Call ChkLogin()	'检查登录
+Call ChkPower("piccolumn", "all")
 Call Init()		'初始化页面
 
 '初始化页面

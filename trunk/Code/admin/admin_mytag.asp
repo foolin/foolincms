@@ -16,6 +16,7 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "<a href='?'>管理自定义标签</a>"
 
 Call ChkLogin()	'检查登录
+Call ChkPower("mytag","all") '检查权限
 Call Init()		'初始化页面
 
 '初始化页面

@@ -9,4 +9,4 @@
 <!--#include file="admin.conn.asp"-->
 <!--#include file="admin.weblog.asp"-->
 <!--#include file="admin.func_page.asp"-->
-<!--#include file="admin.chklogin.asp"-->
+<!--#include file="admin.func_chkadmin.asp"-->

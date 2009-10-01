@@ -16,6 +16,7 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "<a href=""admin_guestbook.asp"">管理留言</a>"
 
 Call ChkLogin()	'检查登录
+Call ChkPower("guestbook", "all")
 Call Init()		'初始化页面
 
 '初始化页面

@@ -1,4 +1,4 @@
-<!--#include file="../../inc/admin.chklogin.asp"-->
+<!--#include file="../../inc/admin.func_chkadmin.asp"-->
 <!--#include file="../../../inc/class_upload.asp"-->
 <!--#include file="../../../inc/func_file.asp"-->
 <%Call ChkLogin()%>

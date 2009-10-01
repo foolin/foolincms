@@ -76,7 +76,7 @@
   
  Sys Name:    Eø·CMS (Eekku CMS)
  
- Version:     V1.0.0beta build090930
+ Version:     V1.0.0beta build091001
 
  Auhtor: 		  Foolin(¡ı∏∂¡È)
  

@@ -28,6 +28,10 @@ If Request("action") = "login" Then
 			Call WebLog("[User:"& strUsername &"]密码不正确！", strUsername)
 			Call MsgBox("密码不正确","REFRESH")
 		End If
+		If Rs("Level") < 0 Then
+			Call WebLog("用户[User:"& strUsername &"]是冻结用户，登录失败！", strUsername)	'增加记录
+			Call MsgBox("您的账号已经被冻结！请联系管理员！", "BACK")
+		End If
 		'更新最后登录信息
 		Rs("LoginTime") = Now()
 		Rs("LoginCount") = Rs("LoginCount") + 1

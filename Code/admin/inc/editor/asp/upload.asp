@@ -2,7 +2,7 @@
 <% Response.CodePage=936%>
 <% Response.Charset="GB2312" %>
 <!--#include file="UploadClass.inc"-->
-<!--#include file="../../../admin/inc/admin.func_chkadmin.asp"-->
+<!--#include file="../../admin.func_chkadmin.asp"-->
 <%
  Call ChkLogin()	'检查登录
  Dim Upload,successful
@@ -19,7 +19,7 @@
  	response.write Upload.Description 			'如果出现错误,获取错误描述
  else
  	if Upload.forms("imgFile")<>"" then 			'这里判断你file1是否选择了文件
-    		path=server.mappath("../../../upload/images/") 			'文件保存路径(这里是files文件夹)
+    		path=server.mappath("../../../../upload/images/") 			'文件保存路径(这里是files文件夹)
     		set tempCls=Upload.files("imgFile") 
     		successful=tempCls.SaveToFile(path,0)		'以时间+随机数字为文件名保存
     		'successful=tempCls.SaveToFile(path,1)		'如果想以原文件名保存,请使用本句

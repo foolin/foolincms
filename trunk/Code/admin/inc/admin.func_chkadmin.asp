@@ -1,7 +1,8 @@
 <%
 Function ChkLogin()
 	If Session("AdminName")="" or Session("AdminLevel")="" Then
-		Response.write "<script type='text/javascript'>alert('ÄãÉĞÎ´µÇÂ¼');this.top.location.href='login.asp';</script>"
+		Response.write "<script type='text/javascript'>alert('ÄãÉĞÎ´µÇÂ¼');window.close();history.go(-1);</script>"
+		Response.End()
 	End If
 End Function
 

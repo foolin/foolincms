@@ -473,12 +473,12 @@ Sub FuncForm(ByVal id)
     <div class="page">
     	<a href="javascript:history.go(-1)" onclick="return confirm('确定放弃编辑自定义页面?')"><< == 返回 << == </a>
     </div>
-<script type="text/javascript" charset="utf-8" src="./../inc/editor/kindeditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="inc/editor/kindeditor.js"></script>
 <script type="text/javascript">
 //初始化编辑器
 KE.show({
 	id : 'Content1',
-	cssPath : './../inc/editor/editor.css'
+	cssPath : 'inc/editor/editor.css'
 });
 function chkIsSystem(){
 	if($("fIsSystem").checked == true){

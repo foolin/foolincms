@@ -552,7 +552,7 @@ Sub ColForm(ByVal id)
             	<td><input type="text" name="fTitle" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>
             </tr>
             <tr>
-                <td align="right">父栏目：</td>
+                <td align="right">栏目：</td>
                 <td>
                 	<select name="fColID">
                         	<option value="0"> => 请选择栏目 <= </option>

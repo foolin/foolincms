@@ -12,6 +12,7 @@ Function ChkPower(Byval chkType, Byval chkAct)
 	ChkLogin()
 	Dim bFlag: bFlag = False
 	Dim UserLevel: UserLevel = Cint(Session("AdminLevel"))
+	Dim LowPower, NormalPower, HightPower, SuperPower
 	LowPower = "|article|picture|guestbook|"	'初级管理员
 	NormalPower = "|article|picture|guestbook|artcolumn|piccolumn|"	'普通管理员
 	HightPower = "|article|picture|guestbook|artcolumn|piccolumn|mytag|diypage|config|weblog|"	'高级管理员

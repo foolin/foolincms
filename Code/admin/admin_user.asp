@@ -76,7 +76,10 @@ Function DoCreate()
 	If Len(Request("fPassword")) < 6 Then Call MsgBox("密码不能少于6位!", "BACK")
 	If Request("fPassword")<>Request("fRePassword") Then Call MsgBox("密码不一致!", "BACK")
 	Dim objA: Set objA = New ClassAdmin
-	If objA.SetValue And objA.Create Then
+	If objA.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
+	If objA.Create Then
 		Call WebLog("创建管理员["&objA.Username&"]成功！", "SESSION")
 		Call MsgAndGo("创建管理员["&objA.Username&"]成功！", "BACK")
 	Else
@@ -91,14 +94,20 @@ Sub DoModify()
 	objA.ID = id
 	If Len(Request("fPassword"))>0 Then
 		If Request("fPassword")<>Request("fRePassword") Then Call MsgBox("密码不一致!", "BACK")
-		If objA.SetValue And objA.ModifyPsw Then
+		If objA.SetValue = False Then
+			Call MsgBox("错误：" & objA.LastError, "BACK")
+		End If
+		If objA.ModifyPsw Then
 			Call WebLog("修改管理员["& objA.Username &"]成功！", "SESSION")
 			Call MsgAndGo("修改管理员["& objA.Username &"]成功！", "admin_user.asp")
 		Else
 			Call MsgBox("错误：" & objA.LastError, "BACK")
 		End If
 	Else
-		If objA.SetValue And objA.ModifyInfo Then
+		If objA.SetValue = False Then
+			Call MsgBox("错误：" & objA.LastError, "BACK")
+		End If
+		If objA.ModifyInfo Then
 			Call WebLog("修改管理员["& objA.Username &"]信息成功，但没修改密码！", "SESSION")
 			Call MsgAndGo("您修改管理员["& objA.Username &"]信息成功，但没修改密码！", "admin_user.asp")
 		Else
@@ -282,15 +291,12 @@ Sub List()
             	<%If Rs.Data("Level") = -1 Then%>
             		<a href="?action=dofreeze&state=unfreeze&id=<%=Rs.Data("ID")%>" onclick="return confirm('解冻用户将变成初级管理员！\n\n确定解冻该用户？')">解冻</a>
                <%Else%>
-               		<a href="?action=modify&id=<%=Rs.Data("ID")%>">编辑</a>
+               		<a href="?action=modify&id=<%=Rs.Data("ID")%>">编辑</a> | 
+                    <a href="?action=dofreeze&state=freeze&id=<%=Rs.Data("ID")%>" onclick="return confirm('冻结用户将不能登录后台管理！\n\n确定冻结该用户？')">冻结</a>
                <%End If%>
             </td>
             <td>
-            	<%If Rs.Data("Level") = -1 Then%>
-					<a href="?action=dodelete&id=<%=Rs.Data("ID")%>" onclick="return confirm('删除将不用恢复！\n\n确定永久性删除该用户？')">删除</a>
-				<%Else%>
-            		<a href="?action=dofreeze&state=freeze&id=<%=Rs.Data("ID")%>" onclick="return confirm('冻结用户将不能登录后台管理！\n\n确定冻结该用户？')">冻结</a>
-                <%End If%>
+				<a href="?action=dodelete&id=<%=Rs.Data("ID")%>" onclick="return confirm('删除将不用恢复！\n\n确定永久性删除该用户？')">删除</a>
             </td>
         </tr>
 	<%

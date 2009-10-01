@@ -217,11 +217,11 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             </tr>
                             <tr>
                                 <td align="right" width="15%">网站网址：</td>
-                                <td><input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <span class="gray">例如：http://www.eekku.com （不能加目录）</span></td>
+                                <td><input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <span class="gray">例如：http://<%=Request.ServerVariables("Http_Host")%>（不能加目录）</span></td>
                             </tr>
                             <tr>
                                 <td align="right" width="15%">安装目录：</td>
-                                <td><input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <span class="gray">安装目录 （前面加/，后面不用加/，不要加类似Http;//这样的绝对路径）</span></td>
+                                <td><input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <span class="gray">安装目录（前面加/，后面不用加/，不要加类似Http;//这样的绝对路径）</span></td>
                             </tr>
                             <tr>
                                 <td align="right" width="15%">网站关键词：</td>

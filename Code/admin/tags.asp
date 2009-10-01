@@ -1,3 +1,4 @@
+<!--#include file="inc/admin.include.asp"-->
 <%
 '===========================================
 'File Name£º	tags.asp
@@ -6,6 +7,7 @@
 'Create on:		2009-9-30
 ' Copyright (c) 2009 E¿á¹¤×÷ÊÒ£¨Foolin£©All Rights Reserved
 '===========================================
+Call ChkLogin()
 If Request("action") = "create" Then
 	 Dim mode: mode = Request("ListMode")
 	 Dim strCode: strCode = ""

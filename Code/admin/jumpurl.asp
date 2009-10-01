@@ -79,7 +79,7 @@ If WaitTime = 0 Then Response.Redirect(Url)
 							  function waitTime() {
 								   $("waitTime").innerHTML = time;
 								   time = time - 1;
-								   if(time == -1) this.top.location.href = '<%=Url%>';
+								   if(time == 0) this.top.location.href = '<%=Url%>';
 								   window.setTimeout('waitTime()', 1000);
 							  }
 							  waitTime();

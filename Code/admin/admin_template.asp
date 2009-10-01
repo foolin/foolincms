@@ -1,6 +1,7 @@
 <!--#include file="inc/admin.include.asp"-->
 <%
- ChkLogin()
+ Call ChkLogin()
+ Call ChkPower("template","all")
  Dim extCode: extCode = Request("ext")
  Dim MainStatus, SubStatus: MainStatus = "<a href='?'>管理模板</a>"
  If LCase(extCode) = "js" Then extCode = "javascript"
@@ -53,7 +54,7 @@ window.onload = liEffect; //网页载入运行
 	<%Call Header()%>
     <table id="container">
         <tr><td id="topNav">
-			<%Call TopNav("webftp")%>
+			<%Call TopNav("template")%>
         </td></tr>
         <tr>
             <td id="content" valign="top" height="100%">	
@@ -105,7 +106,7 @@ Fileurl =  replace(request("file"),"//","/")
 	Set Root = Fso.GetFolder(Server.Mappath(Urli))
 	%>
 	<%If Len(Fileurl) > 0 Then%>
-	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.URLEncode(Fileurl)%>&ext=<%=Request("ext")%>#webftp" onsubmit="return confirm('确定保存修改后文件？');">
+	<form id="form1" name="form1" method="post" action="<%=URL%>?act=save&file=<%=Server.URLEncode(Fileurl)%>&ext=<%=Request("ext")%>#webftp" onsubmit="return confirm('确定保存文件？');">
     	<input type="hidden" name="urli" value="<%=Urlr%>" />
         <input type="hidden" name="urlr" value="<%=Urlr%>" />
 	<tr>

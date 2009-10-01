@@ -16,6 +16,7 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "<a href='?'>管理团队</a>"
 
 Call ChkLogin()	'检查登录
+Call ChkPower("admin","all") '检查权限
 Call Init()		'初始化页面
 
 '初始化页面
@@ -127,9 +128,9 @@ Function GetLevel(Byval iLevel)
 		Case -1
 			tLevel = "<font color='blue'>冻结用户</font>"
 		Case 0
-			tLevel = "初级管理员"
-		Case 1
 			tLevel = "普通管理员"
+		Case 1
+			tLevel = "中级管理员"
 		Case 2
 			tLevel = "高级管理员"
 		Case 3
@@ -467,8 +468,8 @@ Sub FuncForm(ByVal id)
                 	<%If id > 0 Then%>
                     	<option value="<%=objA.Level%>" selected="selected"> <%=GetLevel(objA.Level)%> </option>
                     <%End If%>
-                    <option value="0"> 初级管理员 </option>
-                    <option value="1"> 普通管理员 </option>
+                    <option value="0"> 普通管理员 </option>
+                    <option value="1"> 中级管理员 </option>
                     <option value="2"> 高级管理员 </option>
                     <option value="3"> 超级管理员 </option>
                     <option value="4"> 冻结用户 </option>
@@ -482,6 +483,14 @@ Sub FuncForm(ByVal id)
                 </td>
             </tr>
         </table>
+        <div style="border:dashed 1px #CCC; margin:10px 0px; padding:5px; line-height:22px;">
+         <b>权限说明：</b><br />
+         1、普通管理员权限：管理文章、图片、留言。<br />
+         2、中级管理员权限：管理文章、图片、留言、文章栏目、图片栏目。<br />
+         3、高级管理员权限：高级管理员权限 + 标签管理、DIY页面管理、系统配置、操作记录。<br />
+         4、超级管理员权限：具有全部权限（即是：高级管理员权限 + 模板管理 + 团队管理）。<br />
+         5、冻结用户：没有管理权限，并且不能登录本系统后台管理。
+        </div>
     </form>
     </div>
 	<script type="text/javascript">

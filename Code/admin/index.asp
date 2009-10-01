@@ -11,7 +11,7 @@ Call ChkLogin()
 Dim Act: Act = Request("action")
 If LCase(Act) = "clearcache" Then
 	Call ClearCache()
-	Call MsgAndGo("更新缓存成功!", "REFRESH")
+	Call MsgAndGo("更新缓存成功!", "index.asp")
 End If 
 %>
 <!DOCTYPE html PUBLIC "=//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1=transitional.dtd">

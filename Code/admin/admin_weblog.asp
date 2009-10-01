@@ -16,14 +16,17 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "<a href='?'>管理操作日志</a>"
 
 Call ChkLogin()	'检查登录
+
 Call Init()		'初始化页面
 
 '初始化页面
 Sub Init()
 	Select Case LCase(act)
 		Case "doclear"
+			Call ChkPower("weblog","delete") '检查权限
 			Call DoClear()
 		Case "dodelete"
+			Call ChkPower("weblog","delete") '检查权限
 			Call DoDelete()
 		Case Else
 			SubStatus = "操作日志列表"

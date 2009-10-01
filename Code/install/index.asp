@@ -600,7 +600,7 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "ISAUDITGBOOK = 0" & keyEnter
 	' GBOOKTIME变量
 	strTemp= strTemp & "Dim GBOOKTIME" & keyTab & "'允许留言最短时间间隔，单位秒，默认60秒" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "GBOOKTIME = 60" keyEnter
+	strTemp= strTemp & "GBOOKTIME = 60" & keyEnter
 	' ISCACHE变量
 	strTemp= strTemp & "Dim ISCACHE" & keyTab & "'是否缓存，建议是，减轻服务器负载量" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "ISCACHE = " & "1" & keyEnter

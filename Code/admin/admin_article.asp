@@ -16,6 +16,7 @@ Dim page: page = Request("page")
 Dim MainStatus, SubStatus: MainStatus = "管理文章"
 
 Call ChkLogin()	'检查登录
+Call ChkPower("article","all")	'检查是否拥有管理权限
 Call Init()		'初始化页面
 
 '初始化页面
@@ -24,6 +25,7 @@ Sub Init()
 	Select Case LCase(act)
 		Case "create"
 			SubStatus = "创建文章"
+
 			Call Main("create")
 		Case "modify"
 			SubStatus = "修改文章"

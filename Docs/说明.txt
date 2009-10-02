@@ -105,7 +105,7 @@
   
   
 
- 四、获取最新版本：
+ 五、获取最新版本：
  
     Google SVN: http://code.google.com/p/foolincms/
     

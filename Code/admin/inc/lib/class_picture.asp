@@ -194,7 +194,7 @@ Class ClassPicture
 		arrPicPath = Split(vPicPath, "|")
 		For i = 0 To UBound(arrPicPath)
 			vPicPath = arrPicPath(i)
-			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','"&vSmallPicPath&"','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
+			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','"&vPicPath&"','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
 		Next
 		BatCreate = True
 	End Function

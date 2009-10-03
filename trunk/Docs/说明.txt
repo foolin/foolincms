@@ -48,7 +48,17 @@
     
       例如：
       
-      {list:name mode="default" width="100%" class="list"}
+      {list:name mode="default" src="article" width="100%" row="10" col="1"}
+      
+      <!--内层标签-->
+      
+      [name:url]  <!-- 文章URL -->
+      
+      [name:title]  <!-- 标题 -->
+      
+      [name:author]  <!-- 作者 -->
+      
+      [name:content]  <!-- 内容 -->
       
       <!--内层标签-->
       
@@ -115,7 +125,7 @@
   
  Sys Name:    E酷CMS (Eekku CMS)
  
- Version:     V1.0.0beta build091001
+ Version:     V1.0.0beta build091002
 
  Auhtor: 		  Foolin(刘付灵)
  

@@ -184,7 +184,7 @@ Class ClassGuestBook
 		vRecomment	= Request.Form("fRecomment")
 		vReUser = Request.Form("fReUser")
 		vReTime = Now()
-		If Len(vRecomment)<5 Or Len(vRecomment)>250 Then mLastError = "回复内容的长度请控制在 3 至 250 位" : Comment = False : Exit Function
+		If Len(vRecomment)<1 Or Len(vRecomment)>250 Then mLastError = "回复内容的长度请控制在 1 至 250 位" : Comment = False : Exit Function
 		'回复留言
 		Dim Rs
 		Set Rs = DB("Select * From [GuestBook] Where [ID]=" & vID,3)

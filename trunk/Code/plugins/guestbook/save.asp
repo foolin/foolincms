@@ -12,7 +12,7 @@
 	If Mid(serverUrl1, 8, Len(serverUrl2)) <>  serverUrl2 Then
 		Call MsgBox("对不起，本站禁止外部提交数据！","REFRESH")
 	End If
-	'5分钟之内不能留言
+	'检测是否频繁留言
 	If DateDIff("s", CDate(Session("PostTime")), Now()) < GBOOKTIME Then
 		Call MsgBox("禁止频繁提交留言！请"& GBOOKTIME &"秒之后再留言...","BACK")
 	End If

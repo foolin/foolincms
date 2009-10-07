@@ -40,7 +40,7 @@ If Request("action") = "login" Then
 		Call WebLog("用户[User:"& strUsername &"]登录成功！", strUsername)	'增加记录
 		Session("AdminName") = Rs("Username")		'设置Session变量
 		Session("AdminLevel") = Rs("Level")
-		Session.Timeout = 60
+		Session.Timeout = 120
 	Rs.Close
 	Set Rs = Nothing
 	Call ConnClose()

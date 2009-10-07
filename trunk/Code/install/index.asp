@@ -515,15 +515,16 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'自定义标签：公告
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('notice','公告','公告：您已经成功安装E酷CMS，欢迎使用！')")
 	'自定义标签：系统信息
-	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('AboutSys','关于系统信息','{sys:sys /}<br />作者：Foolin<br /> Email: Foolin@126.com <br /> 主页：http://www.LiuFu.org/Ling<br />官网：Http://www.eekku.com<br />')")
+	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('AboutSys','关于系统信息','{sys:sys /}<br />作者：Foolin<br /> Email: Foolin@126.com <br /> 主页：http://www.LiuFu.org/Ling<br />E酷CMS官网：Http://www.eekku.com<br />')")
 	'自定义标签：友情链接
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FriendLinks','友情链接','<a href=""http://www.eekku.com""> -==- E酷网 -==- </a><br />"& Chr(10) & Chr(9) &"<a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br />"& Chr(10) & Chr(9) &"')")
 	'帮助页面
-	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('帮助文档','help.html','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：<font color=""red"">diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font>或者<font color=""red"">diypage.asp?url=<font color=""blue"">[您建立页面的名称]</font></font>即可打开这个自定义页面！</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br><br><a href=""http://www.eekku.com""> -==- E酷网 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br /></p>',1,0)")
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('帮助文档','help.html','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：</p><p><font color=""red"">http://您网站网址/安装目录/diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font></p><p>或者</p>
+<p><font color=""red"">http://您网站网址/安装目录/diypage.asp?url=<font color="blue">[您建立页面的名称]</font></font><br />即可打开这个自定义页面！</p><p>&nbsp;</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br /><a href=""http://www.eekku.com/"">-==- E酷CMS官方 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/"">-==- 作者主页 -==- </a><br /></p>',1,0)")
 	'友情链接
 	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('友情链接','links.html','{my:friendlinks /}',1,0)")
 	'下载页面
-	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('作品下载','download.html','<p>--------------</p><p>E酷CMS作品简介：</p><p>Eekku Cms(E酷Cms)是我的第一个Cms作品，其功能有：</p><p>&nbsp;&nbsp;&nbsp; 1、本系统是采用 ASP + Access 技术实现<br />&nbsp;&nbsp;&nbsp;2、程序的功能有文章、相册、留言和评论等基本功能<br />&nbsp;&nbsp;&nbsp; 3、程序中模板和ASP代码将100%完全分离。<br />&nbsp;&nbsp;&nbsp;4、本系统自带系统标签，标签语法类似HTML标签语法，简洁易懂，还有自定义标签功能。<br />&nbsp;&nbsp;&nbsp; 5、本系统有自定义页面功能。<br />&nbsp;&nbsp;&nbsp; 6、更多功能等待你来发现....</p><p>目前还是开发版，敬请关注！</p><p>最新版本下载：<a href=""http://code.google.com/p/foolincms/downloads/list"" target=""_blank"">点击进入下载页面</a></p><p>--------------</p>',1,0)")
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('作品下载','download.html','<p><strong>E酷CMS简介：</strong></p><p>E酷CMS（EekkuCMS）是一种小型站点内容管理系统，亦可做个人博客（主页）系统，内含文章、图片、留言、评论等基本功能，轻盈小巧，简便易用，是您建小型站点的明智选择！其功能有：</p><p>&nbsp;&nbsp;&nbsp; 1、本系统是采用 ASP + Access 技术实现，系统开源。<br />&nbsp;&nbsp;&nbsp; 2、程序的功能有文章、相册、留言和评论等基本功能。<br />&nbsp;&nbsp;&nbsp; 3、程序中模板和ASP代码将100%完全分离。<br />&nbsp;&nbsp;&nbsp; 4、本系统自带系统标签，标签语法类似HTML标签语法，简洁易懂，此外，还有自定义标签功能，方便易用。<br />&nbsp;&nbsp;&nbsp; 5、本系统有自定义页面功能。<br />&nbsp;&nbsp;&nbsp; 6、系统用途任君选择，本系统可以作为小型文章管理系统，亦可作为个人博客，(*^__^*) ...<br />&nbsp;&nbsp;&nbsp; 6、系统自带两种风格(CMS风格和BLOG风格，任君选择(*^__^*) )。<br />&nbsp;&nbsp;&nbsp; 7、更多功能等待你来发现....</p><p>最新版本下载：<a href='http://www.liufu.org/ling/diypage.asp?url=download.html' target='_blank'>点击进入下载页面</a></p>',1,0)")
 	Conn.Close: Set Conn = Nothing
 	CreateTable = True
 End Function

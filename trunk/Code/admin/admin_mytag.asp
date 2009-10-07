@@ -357,7 +357,7 @@ Sub FuncForm(ByVal id)
             <tr>
                 <td colspan="2">
                 	<div id="editor">
-                    <textarea name="fCode" style="width:100%;height:400px;"><%=objA.Code%></textarea>
+                    <textarea name="fCode" id="content1" style="width:100%;height:400px;"><%=objA.Code%></textarea>
                     </div>
                 </td>
             </tr>
@@ -365,11 +365,30 @@ Sub FuncForm(ByVal id)
                 <td colspan="2" align="center">
                     <input type="submit" class="btn" value="提交" />
                     <input type="reset" class="btn" value="重置" />
+                    <input type="button" name="button" value="加载编辑器" onclick="javascript:KE.create('content1');" />
                 </td>
             </tr>
         </table>
     </form>
     </div>
+<script type="text/javascript" charset="utf-8" src="inc/editor/kindeditor.js"></script>
+<script type="text/javascript">
+//初始化编辑器
+KE.init({
+	id : 'content1',
+	cssPath : 'inc/editor/editor.css',
+	skinType: 'tinymce',
+	items : [
+		'source', 'preview',  'print', 'undo', 'redo', 'cut', 'copy', 'paste',
+		'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
+		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		'superscript', 'date', 'time', 'specialchar', 'emoticons', 'link', 'unlink', '-',
+		'title', 'fontname', 'fontsize', 'textcolor', 'bgcolor', 'bold',
+		'italic', 'underline', 'strikethrough', 'removeformat', 'selectall', 'image',
+		'flash', 'media', 'layer', 'table', 'hr', 'about'
+	]
+});
+</script>
 	<script type="text/javascript">
     <!--
         var oInputs = document.getElementsByTagName("input");

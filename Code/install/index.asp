@@ -143,10 +143,6 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
 <!-- 本安装过程制作：刘付灵   E-mail:Foolin@126.com   2009年7月28日15:14:40 -->
 
 <%Sub Step1()%>
-
-	<%
-		If TestCreate = False Then Call InstallErr("对不起，安装失败！您的空间不支持FS0读写权限！无法创建数据库！")
-	%>
 	
 	<!--第一步:许可协议-->
     <div id="step1">
@@ -185,6 +181,10 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
  
  
  Sub Step2()
+
+ '检查FSO读写权限
+ If TestCreate = False Then Call InstallErr("对不起，安装失败！您的空间不支持FS0读写权限！无法创建数据库！")
+ 
 %>
     <div id="step2">
     	<div class="title">第二步：E酷内容管理系统（EekkuCMS）安装</div>

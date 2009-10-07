@@ -76,7 +76,7 @@ Sub DoModify()
 	End If
 	If objC.Modify Then
 		Call WebLog("修改图片[id:"& id &"]成功！", "SESSION")
-		Call MsgAndGo("修改图片[id:"& id &"]成功！", "BACK")
+		Call MsgAndGo("修改图片[id:"& id &"]成功！", "admin_picture.asp")
 	Else
 		Call MsgBox("错误：" & objC.LastError, "BACK")
 	End If
@@ -347,6 +347,17 @@ function Dobatch(objSel){
 	}
 	objSel.selectedIndex = 0;
 }
+
+//搜索文章
+function soPicture(){
+	var jumpUrl;
+	jumpUrl = 'admin_picture.asp?colid=' + $('sColId').value;
+	if ($('sKeyword').value != "" && $('sKeyword').value !="请输入关键词"){
+		jumpUrl =  jumpUrl + '&keyword=' + $('sKeyword').value;
+	}
+	this.location = jumpUrl;
+	return false;
+}
 //-->
 </script>
 <style type="text/css">
@@ -447,7 +458,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
 '图片列表， mode - 模式
 Sub List()
 %>
-	<form name="form2" action="" method="post">
+	<form name="form2" action="" onsubmit="return soPicture();"  method="post">
 	<table class="list">
     	<tr>
         	<td colspan="4">
@@ -464,17 +475,26 @@ Sub List()
 	<%
 		Dim strSql, Rs
 		Dim mode: mode = LCase(Request("list"))
+		Dim colId, sqlColId, strKeyword, sqlKeyword
+		'栏目ID
+		colId = Request("colid")
+		If Len(Request("colid")) = 0 Then colId = 0
+		If colId > 0 Then sqlColId = " And ColID = "& colId &" "
+		'搜索字符串
+		strKeyword = Trim(Request("keyword"))
+		If Len(strKeyword) > 0 Then sqlKeyword = " And Title LIKE '%"& strKeyword &"%' "
+		'SQL语句
 		Select Case mode
 			Case "trash"
-				strSql = "SELECT * FROM [Picture] WHERE State = -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Picture] WHERE State = -1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "nopass"
-				strSql = "SELECT * FROM [Picture] WHERE State = 0 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Picture] WHERE State = 0 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "pass"
-				strSql = "SELECT * FROM [Picture] WHERE State = 1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Picture] WHERE State = 1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "all"
-				strSql = "SELECT * FROM [Picture] WHERE State > -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Picture] WHERE State > -1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case Else
-				strSql = "SELECT * FROM [Picture] WHERE State > -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Picture] WHERE State > -1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 		End Select
 		Set Rs = New ClassPageList
 		Rs.Result = 1
@@ -494,6 +514,7 @@ Sub List()
 			End If
 			Echo """ width=""150"" height=""120"" class=""img""  /></a><br /><a href=""?action=modify&id=" &Rs.Data("ID")& """>"&Rs.Data("Title") & "</a>"
 			If Rs.Data("IsTop")=1 Then Echo("<font color='red'>[顶]</font>")
+			Echo " [<a href='?colid="& Rs.Data("ColID") &"'>"& GetColName(Rs.Data("ColID"), "picture") &"</a>]"
 			Echo "<hr style=""border:dotted 1px #B5DAFF""/> "
 			Echo "<input type=""checkbox"" name=""GroupID"" value=" & Rs.Data("ID") & " />"
 			If Rs.Data("State")=1 Then
@@ -538,6 +559,14 @@ Sub List()
                     <%End If%>
                     <option value="delete"> 彻底删除 </option>
                 </select>
+                
+                 &nbsp; 搜索：<select name="sColId" id="sColId">
+                 <option value="0"> 请选择栏目 </option>
+                 <option value="0"> 全部栏目 </option>
+                    <%Call MainColumn()%>
+                 </select>
+                 <input type="text" name="sKeyword" id="sKeyword" value="<%If Len(Request("keyword"))>0 Then Echo(Request("keyword")) Else Echo("请输入关键词")%>" onclick="if(this.value=='请输入关键词')this.value='';" />
+                 <input type="button" value="搜索" onclick="soPicture();" />
             </td>
         </tr>
     </table>
@@ -557,6 +586,38 @@ Sub ColForm(ByVal id)
 		If objA.LetValue = False Then Call MsgBox("对不起，你编辑的栏目不存在", "BACK")
 	End If
 %>
+<script type="text/javascript">
+<!--
+// 图片缩放
+//使用：<img src="/ling/template/blog/images/a.jpg" onload="javascript:DrawImage(this);"/>
+function DrawImage(ImgD,iWidth){ 
+    var image=new Image();
+	if(iWidth<=0 || iWidth==null)
+	{
+		var iWidth = 600;
+	}
+    image.src=ImgD.src; 
+    if(image.width>0 && image.height>0){ 
+        flag=true; 
+      if(image.width>=iWidth){ 
+        ImgD.width=iWidth;
+        ImgD.height=(image.height*iWidth)/image.width; 
+
+
+        }else{ 
+            ImgD.width=image.width; 
+            ImgD.height=image.height; 
+        }  
+    } 
+} 
+//鼠标滚轮函数
+//使用：<img src="/ling/template/blog/images/a.jpg" onmousewheel="return cgimg(this);" />
+function cgimg(o){
+	var zoom=parseInt(o.style.zoom, 10)||100;zoom+=event.wheelDelta/12;if (zoom>0) o.style.zoom=zoom+'%';
+	return false;
+}
+-->
+</script>
 
 	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post" onsubmit="return chkSubmit();">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
@@ -565,7 +626,7 @@ Sub ColForm(ByVal id)
 
             <%If objA.PicPath<>"" Then %>
             <tr>
-            	<td colspan="2"><div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500"  /></div></td>
+            	<td colspan="2"><div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);" /></div></td>
             </tr>
             <%End If%>
             

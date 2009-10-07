@@ -1,6 +1,6 @@
 <%Sub Header%>
     <div id="header">
-        <img src="css/logo.gif" height="35" /><span style="font-size:32px; font-weight:bold;"><%=SiteName%>管理</span> <span style="font-size:18px; color:#099;">欢迎使用E酷CMS，一个小型站点的内容管理系统~</span>
+         <img src="images/logo.gif" height="35"  border="0"/> <span style="font-size:32px; font-weight:bold;"><%=SiteName%>管理</span> <span style="font-size:18px; color:#099;">欢迎使用E酷CMS，一个小型站点的内容管理系统~</span>
     </div>
 <%End Sub%>
 

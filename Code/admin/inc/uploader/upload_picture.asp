@@ -35,7 +35,7 @@ if request.QueryString("act")="upload" then
  set Upload=new AnUpLoad				 				'创建类实例
  Upload.SingleSize=300*1024            			'设置单个文件最大上传限制,按字节计；默认为不限制
  Upload.MaxSize=1024*1024*1024            				'设置最大上传限制,按字节计；默认为不限制
- Upload.Exe="bmp|rar|pdf|jpg|gif"          				'设置合法扩展名,以|分割,忽略大小写
+ Upload.Exe="bmp|png|jpg|gif"          				'设置合法扩展名,以|分割,忽略大小写
  Upload.Charset="gb2312"								'设置文本编码，默认为gb2312
  Upload.openProcesser=false								'禁止进度条功能，如果启用，需配合客户端程序
  Upload.GetData()										'获取并保存数据,必须调用本方法

@@ -183,7 +183,8 @@ Class ClassArticle
 	' Create on: 		2009-8-28 16:40:46
 	'--------------------------------------------------------------
 	Public Function Create()
-		'If SetValue = False Then Create = False: Exit Function
+		'判断是否为父栏目，如果是，不允许添加文章
+		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加文章","BACK")
 		Dim Rs
 		Set Rs = DB("Select * From [Article]",3)
 		Rs.AddNew
@@ -215,6 +216,8 @@ Class ClassArticle
 	' Create on: 		2009-8-28 16:58:31
 	'--------------------------------------------------------------
 	Public Function Modify()
+		'判断是否为父栏目，如果是，不允许添加文章
+		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加文章","BACK")
 		Dim Rs
 		Set Rs = DB("Select * From [Article] Where [ID]=" & vID,3)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Modify = False : Exit Function
@@ -249,6 +252,19 @@ Class ClassArticle
 		DB "Delete From [Article] Where [ID] In (" & vID & ")" ,0
 		Delete = True
 	End Function
-
+	
+	'判断是否为父栏目
+	Private Function IsParentCol()
+		Dim cRs,cFlag
+		Set cRs = DB("SELECT * FROM ArtColumn WHERE ParentID = " & vColID, 1)
+		If cRs.Eof Then
+			cFlag = False
+		Else
+			cFlag = True
+		End If
+		Set cRs = Nothing
+		IsParentCol = cFlag
+	End Function
+	
 End Class
 %>

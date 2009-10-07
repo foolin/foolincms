@@ -15,7 +15,7 @@ Dim act: act = Request("action")
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>标签代码参考-用户帮助</title>
-<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="images/common.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
 body {

@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title><%=SITENAME%>后台管理 - 配置管理 - <%=SYS%></title>
-<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="images/common.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
 body{
@@ -111,8 +111,8 @@ Fileurl =  replace(request("file"),"//","/")
         <input type="hidden" name="urlr" value="<%=Urlr%>" />
 	<tr>
 		<td class='css_list'>
-			<textarea name="content" style="width:100%;height:550px; border:#999 1px solid;"><%=Server.HTMLEncode(getfile(Fileurl))%></textarea>
-			<input class="btn" type="submit" value="保存文件"  />  </td>
+			<textarea name="content" id="content1" style="width:100%;height:550px; border:#999 1px solid;"><%=Server.HTMLEncode(getfile(Fileurl))%></textarea>
+			<input class="btn" type="submit" value="保存文件"  /></td>
 	</tr>
 	</form>
 	 <%End If%>

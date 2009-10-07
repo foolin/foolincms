@@ -124,6 +124,8 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
 			Call Cancel()
 		Case "hasinstall"
 			Call HasInstall()
+		Case "err"
+			Call InstallErr("对不起，安装出错！")
 		Case Else
 			Call Step1()
 	End Select
@@ -142,6 +144,10 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
 
 <%Sub Step1()%>
 
+	<%
+		If TestCreate = False Then Call InstallErr("对不起，安装失败！您的空间不支持FS0读写权限！无法创建数据库！")
+	%>
+	
 	<!--第一步:许可协议-->
     <div id="step1">
     	<div class="title">第一步：E酷内容管理系统（EekkuCMS）安装许可协议</div>
@@ -307,6 +313,35 @@ function chkForm(){
     </div>
     
 <%
+ End Sub
+ 
+ '安装出错
+ Sub InstallErr(msg)
+%>
+    
+    <div id="hasInstall">
+    	<div class="title" style="color:#F00;">安装出错！</div>
+        <div class="box">
+            <div class="error" style="margin:5px; color:#F00; border:dashed 1px #E00; font-size:14px; font-weight:bold; padding:10px;">
+				<%=msg%>(<%=Now()%>)
+                
+                <div style="color:green;padding:5px; margin:10px auto;">
+                    请根据出错原因做相应修改，然后【<a href="index.asp">点击这里</a>】进行安装！
+                </div>
+            </div>
+        	<div class="ourinfo">
+            &nbsp;&nbsp;<b>Author: Foolin(负零) </b><br />
+            	&nbsp;&nbsp;&nbsp;&nbsp; QQ：970026999<br />
+                &nbsp;&nbsp;&nbsp;&nbsp; E-mail：Foolin@126.com<br />
+                &nbsp;&nbsp;&nbsp;&nbsp; 主页: http://ling.liufu.org<br /><br />
+            网址：http://www.eekku.com （E酷工作室）<br /><br />
+            本系统由Foolin独立开发。如果有任何问题或者建议，请联系作者，万分感谢！<br />
+            </div>
+        </div>
+    </div>
+    
+<%
+	Response.End()
  End Sub
  
 
@@ -628,6 +663,7 @@ Function CreateConfig(DbName)
 	End If
 End Function
 
+'锁定安装
 Function LockInstall()
  	Dim strTemp, keyTab, keyEnter
 	keyTab = Chr(9) & Chr(9)
@@ -643,4 +679,18 @@ Function LockInstall()
 	strTemp = strTemp & "=========================================================" & keyEnter
 	Call CreateFile(strTemp, "install.lock")
 End Function
+
+Function TestCreate()
+	TestCreate = True
+	On Error Resume Next
+	Dim fso: Set fso = Server.CreateObject("Scripting.FileSystemObject")
+	fso.CreateTextFile(Server.MapPath("test.tmp"), True).Close
+	fso.DeleteFile Server.MapPath("test.tmp")
+	Set fso = Nothing
+	If Err Then
+		Err.Clear
+		TestCreate = False
+	End If
+End Function
+
 %>

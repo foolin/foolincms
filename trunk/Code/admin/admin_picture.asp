@@ -25,6 +25,9 @@ Sub Init()
 	Select Case LCase(act)
 		Case "create"
 			SubStatus = "创建图片"
+			If IsNullColumn = True Then
+				Call MsgBox("尚未有任何栏目，请先添加栏目!","admin_piccolumn.asp?action=create")
+			End If
 			Call Main("create")
 		Case "modify"
 			SubStatus = "修改图片"
@@ -52,6 +55,9 @@ End Sub
 '添加图片
 Function DoCreate()
 	Dim objC: Set objC = New ClassPicture
+	If objC.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
 	If objC.BatCreate Then
 		Call WebLog("添加图片[Title:"&objC.Title&"]成功！", "SESSION")
 		Call MsgAndGo("添加图片[Title:"&objC.Title&"]成功！", "BACK")
@@ -65,7 +71,10 @@ End Function
 Sub DoModify()
 	Dim objC: Set objC = New ClassPicture
 	objC.ID = id
-	If objC.SetValue And objC.Modify Then
+	If objC.SetValue = False Then
+		Call MsgBox("错误：" & objA.LastError, "BACK")
+	End If
+	If objC.Modify Then
 		Call WebLog("修改图片[id:"& id &"]成功！", "SESSION")
 		Call MsgAndGo("修改图片[id:"& id &"]成功！", "BACK")
 	Else
@@ -87,6 +96,7 @@ Sub DoDelete()
 	Set objC = Nothing
 End Sub
 
+'设置状态
 Sub SetState()
 	If Len(id) = 0 Or Not IsNumeric(id) Then Call MsgBox("id参数错误", "BACK")
 	Dim state: state = Request("state")
@@ -164,6 +174,20 @@ Sub DoBatch()
 	End Select
 End Sub
 
+
+'检查栏目是否为空
+Function IsNullColumn()
+	Dim cRs,cFlag
+	Set cRs = DB("SELECT * FROM PicColumn", 1)
+	If cRs.Eof Then
+		cFlag = True
+	Else
+		cFlag = False
+	End If
+	Set cRs = Nothing
+	IsNullColumn = cFlag
+End Function
+
 '主函数
 Sub Main(ByVal picType)
 %>
@@ -172,7 +196,7 @@ Sub Main(ByVal picType)
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title><%=SITENAME%>后台管理 - 图片管理 - <%=SYS%></title>
-<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="images/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="inc/base.js"></script>
 <script language="javascript" type="text/javascript">
 <!--
@@ -544,9 +568,12 @@ Sub ColForm(ByVal id)
             	<td colspan="2"><div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500"  /></div></td>
             </tr>
             <%End If%>
-                        <tr><th colspan="2">
-				<%If id > 0 Then Echo("编辑") Else Echo("上传")%>图片
+            
+            <%If id = 0 Then%>
+             <tr><th colspan="2">
+				上传图片
             </th></tr>
+            <%End If%>
             <tr>
             	<td align="right" width="15%">标题：</td>
             	<td><input type="text" name="fTitle" value="<%=objA.Title%>" style="width:450px;"/> <span class="red">* 必填</span></td>

@@ -25,7 +25,9 @@ Sub Init()
 	Select Case LCase(act)
 		Case "create"
 			SubStatus = "创建文章"
-
+			If IsNullColumn = True Then
+				Call MsgBox("尚未有任何栏目，请先添加栏目!","admin_artcolumn.asp?action=create")
+			End If
 			Call Main("create")
 		Case "modify"
 			SubStatus = "修改文章"
@@ -158,6 +160,19 @@ Sub DoBatch()
 	End Select
 End Sub
 
+'检查栏目是否为空
+Function IsNullColumn()
+	Dim cRs,cFlag
+	Set cRs = DB("SELECT * FROM ArtColumn", 1)
+	If cRs.Eof Then
+		cFlag = True
+	Else
+		cFlag = False
+	End If
+	Set cRs = Nothing
+	IsNullColumn = cFlag
+End Function
+
 
 '主函数
 Sub Main(ByVal artType)
@@ -170,9 +185,9 @@ Select Case LCase(Request("list"))
 	Case "pass"
 		SubStatus2 = " → 已经审核"
 	Case "all"
-		SubStatus2 = " → 全部文章"
+		SubStatus2 = ""
 	Case Else
-		SubStatus2 = " → 全部文章"
+		SubStatus2 = ""
 End Select
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -180,7 +195,7 @@ End Select
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title><%=SITENAME%>后台管理 - 文章管理 - <%=SYS%></title>
-<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="images/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="inc/base.js"></script>
 <script language="javascript" type="text/javascript">
 <!--
@@ -331,6 +346,18 @@ function Dobatch(objSel){
 	}
 	objSel.selectedIndex = 0;
 }
+
+//搜索文章
+function soArticle(){
+	var jumpUrl;
+	jumpUrl = 'admin_article.asp?colid=' + $('sColId').value;
+	if ($('sKeyword').value != "" && $('sKeyword').value !="请输入关键词"){
+		jumpUrl =  jumpUrl + '&keyword=' + $('sKeyword').value;
+	}
+	this.location = jumpUrl;
+	return false;
+}
+
 //-->
 </script>
 <style type="text/css">
@@ -409,6 +436,8 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                         <a href="?list=nopass">未审核</a> |
                         <a href="?list=trash">回收站</a> |
                         <a href="?action=create">添加文章</a>
+                        
+
                     </div>
 					<%
                         Select Case LCase(artType)
@@ -437,7 +466,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
 Sub List()
 Dim mode: mode = LCase(Request("list"))
 %>
-	<form name="form2" action="" method="post">
+	<form name="form2" action="" onsubmit="return soArticle();" method="post">
 	<table class="list">
     	<tr>
         	<th><input type="checkbox" name="GroupID" value="" onClick="Checked(this.form,'GroupID',this)"/></th>
@@ -452,17 +481,26 @@ Dim mode: mode = LCase(Request("list"))
         </tr>
 	<%
 		Dim strSql, Rs
+		Dim colId, sqlColId, strKeyword, sqlKeyword
+		'栏目ID
+		colId = Request("colid")
+		If Len(Request("colid")) = 0 Then colId = 0
+		If colId > 0 Then sqlColId = " And ColID = "& colId &" "
+		'搜索字符串
+		strKeyword = Trim(Request("keyword"))
+		If Len(strKeyword) > 0 Then sqlKeyword = " And Title LIKE '%"& strKeyword &"%' "
+		'文章列表类型
 		Select Case mode
 			Case "trash"
-				strSql = "SELECT * FROM [Article] WHERE State = -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Article] WHERE State=-1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "nopass"
-				strSql = "SELECT * FROM [Article] WHERE State = 0 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Article] WHERE State=0 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "pass"
-				strSql = "SELECT * FROM [Article] WHERE State = 1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Article] WHERE State=1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case "all"
-				strSql = "SELECT * FROM [Article] WHERE State > -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Article] WHERE State>-1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 			Case Else
-				strSql = "SELECT * FROM [Article] WHERE State > -1 ORDER BY IsTop DESC,ID DESC"
+				strSql = "SELECT * FROM [Article] WHERE State>-1 "& sqlColId & sqlKeyword &" ORDER BY IsTop DESC,ID DESC"
 		End Select
 		'Set Rs = DB(strSql, 1)
 		Set Rs = New ClassPageList
@@ -479,11 +517,19 @@ Dim mode: mode = LCase(Request("list"))
         	<td><input type="checkbox" name="GroupID" value="<%=Rs.Data("ID")%>" /></td>
         	<td><%=Rs.Data("ID")%></td>
 			<td>
-            	<a href="admin_article.asp?action=modify&id=<%=Rs.Data("ID")%>"><%=Rs.Data("Title")%></a>
+            	<a href="admin_article.asp?action=modify&id=<%=Rs.Data("ID")%>">
+                <%
+					If Len(Request("keyword"))>0 Then
+						Echo(Replace(Rs.Data("Title"),Request("keyword"),"<font color='red'>" & Request("keyword") & "</font>"))
+					Else
+						Echo(Rs.Data("Title"))
+					End If
+				%>
+                </a>
 				<%If Rs.Data("IsTop") = 1 Then Echo(" <font color=""red"">[顶]</font>")%>
                 <%If Rs.Data("IsFocusPic") =1 And Rs.Data("FocusPic") <> "" Then Echo(" <font color=""red"">[图]</font>")%>
             </td>
-            <td><%=GetColName(Rs.Data("ColID"), "article")%></td>
+            <td><a href="?colid=<%=Rs.Data("ColID")%>"><%=GetColName(Rs.Data("ColID"), "article")%></a></td>
             <td><%=Rs.Data("Author")%></td>
             <td><%=FDate(Rs.Data("CreateTime"), 2)%></td>
             <td>
@@ -534,6 +580,14 @@ Dim mode: mode = LCase(Request("list"))
                     <%End If%>
                     <option value="delete"> 彻底删除 </option>
                 </select>
+                
+                 &nbsp; 搜索：<select name="sColId" id="sColId">
+                 <option value="0"> 请选择栏目 </option>
+                 <option value="0"> 全部栏目 </option>
+                    <%Call MainColumn()%>
+                 </select>
+                 <input type="text" name="sKeyword" id="sKeyword" value="<%If Len(Request("keyword"))>0 Then Echo(Request("keyword")) Else Echo("请输入关键词")%>" onclick="if(this.value=='请输入关键词')this.value='';" />
+                 <input type="button" value="搜索" onclick="soArticle();" />
             </td>
         </tr>
     </table>

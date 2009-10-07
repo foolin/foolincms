@@ -146,7 +146,7 @@ End Function
 '文章底层标签
 Function ArtTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
@@ -166,7 +166,7 @@ Function ArtTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":istop] &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":isfocuspic] &lt;!-- 是否焦点图片：1 - 是， 0 - 否 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":state] &lt;!-- 文章状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	ArtTags = strTemp
 End Function
 
@@ -175,7 +175,7 @@ End Function
 '图片底层标签
 Function PicTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
@@ -193,14 +193,14 @@ Function PicTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":createtime] &lt;!-- 创建时间 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":istop] &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":state] &lt;!-- 图片状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	PicTags = strTemp
 End Function
 
 '文章、图片栏目底层标签
 Function ColTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
@@ -208,7 +208,7 @@ Function ColTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":info] &lt;!-- 栏目信息 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":parentid] &lt;!-- 父栏目ID，若本身为父栏目则为0 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":template] &lt;!-- 栏目模板 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	ColTags = strTemp
 End Function
 
@@ -216,7 +216,7 @@ End Function
 '留言底层标签
 Function GbookTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
@@ -231,21 +231,21 @@ Function GbookTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":reuser] &lt;!-- 回复留言者名字 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":retime] &lt;!-- 回复时间 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":state] &lt;!-- 状态： 0 - 未审核， 1 - 已经审核 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	GbookTags = strTemp
 End Function
 
 '自定义标签底层标签
 Function MyTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段）（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段）（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":name] &lt;!-- 标签名 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":info] &lt;!-- 标签描述信息 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":code] &lt;!-- 标签的代码 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	MyTags = strTemp
 End Function
 
@@ -253,7 +253,7 @@ End Function
 '自定义页面表底层标签
 Function DiypageTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
@@ -264,18 +264,18 @@ Function DiypageTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":code] &lt;!-- 页面代码 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":state] &lt;!-- 状态： 0 - 隐藏， 1 - 显示 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":issystem] &lt;!-- 是否是系统定义页面：0 - 否， 1 - 是 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	DiypageTags = strTemp
 End Function
 
 '共同底层标签
 Function CommonTags(Byval ListName)
 	Dim strTemp
-	strTemp = "&nbsp; &lt;!-- 内层标签 --&gt;<br />"
+	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":字段名] &lt;!-- 字段名 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; &lt;!-- 内层标签 --&gt;"
+	strTemp = strTemp & "&nbsp; &lt;!-- 内层循环标签 --&gt;"
 	CommonTags = strTemp
 End Function
 

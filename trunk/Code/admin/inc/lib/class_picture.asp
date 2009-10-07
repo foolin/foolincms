@@ -160,7 +160,9 @@ Class ClassPicture
 	' Create on: 		2009-9-7 16:26:26
 	'--------------------------------------------------------------
 	Public Function Create()
-		If SetValue = False Then Create = False: Exit Function
+		'判断是否为父栏目，如果是，不允许添加图片
+		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加图片","BACK")
+		'处理添加记录
 		Dim Rs
 		Set Rs = DB("Select * From [Picture]",3)
 		Rs.AddNew
@@ -189,7 +191,9 @@ Class ClassPicture
 	' Create on: 		2009-9-12 11:17:02
 	'--------------------------------------------------------------
 	Public Function BatCreate()
-		If SetValue = False Then BatCreate = False: Exit Function
+		'判断是否为父栏目，如果是，不允许添加图片
+		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加图片","BACK")
+		'处理添加记录
 		Dim arrPicPath, i
 		arrPicPath = Split(vPicPath, "|")
 		For i = 0 To UBound(arrPicPath)
@@ -207,6 +211,8 @@ Class ClassPicture
 	' Create on: 		2009-9-7 16:26:35
 	'--------------------------------------------------------------
 	Public Function Modify()
+		'判断是否为父栏目，如果是，不允许添加图片
+		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加图片","BACK")
 		Dim Rs
 		Set Rs = DB("Select * From [Picture] Where [ID]=" & vID,3)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Modify = False : Exit Function
@@ -248,6 +254,19 @@ Class ClassPicture
 		Rs.Close : Set Rs = Nothing
 		DB "Delete From [Picture] Where [ID] = " & vID ,0
 		Delete = True
+	End Function
+	
+	'判断是否为父栏目
+	Private Function IsParentCol()
+		Dim cRs,cFlag
+		Set cRs = DB("SELECT * FROM PicColumn WHERE ParentID = " & vColID, 1)
+		If cRs.Eof Then
+			cFlag = False
+		Else
+			cFlag = True
+		End If
+		Set cRs = Nothing
+		IsParentCol = cFlag
 	End Function
 
 End Class

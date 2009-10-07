@@ -519,8 +519,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'自定义标签：友情链接
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FriendLinks','友情链接','<a href=""http://www.eekku.com""> -==- E酷网 -==- </a><br />"& Chr(10) & Chr(9) &"<a href=""http://www.liufu.org/ling/""> -==- 零星碎事 -==- </a><br />"& Chr(10) & Chr(9) &"')")
 	'帮助页面
-	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('帮助文档','help.html','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：</p><p><font color=""red"">http://您网站网址/安装目录/diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font></p><p>或者</p>
-<p><font color=""red"">http://您网站网址/安装目录/diypage.asp?url=<font color='blue'>[您建立页面的名称]</font></font><br />即可打开这个自定义页面！</p><p>&nbsp;</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br /><a href=""http://www.eekku.com/"">-==- E酷CMS官方 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/"">-==- 作者主页 -==- </a><br /></p>',1,0)")
+	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('帮助文档','help.html','<p>这是我的第一个自定义页面，欢迎大家光临。</p><p>你只要在后台添加一个页面，然后引用该链接：</p><p><font color=""red"">http://您网站网址/安装目录/diypage.asp?id=<font color=""blue"">[您建立页面的ID]</font></font></p><p>或者</p><p><font color=""red"">http://您网站网址/安装目录/diypage.asp?url=<font color='blue'>[您建立页面的名称]</font></font><br />即可打开这个自定义页面！</p><p>&nbsp;</p><p>如需帮助，请访问：http://www.eekku.com，E酷网络欢迎你。</p><p>你正在使用E酷CMS系统！</p><p><br /><a href=""http://www.eekku.com/"">-==- E酷CMS官方 -==- </a></p><p><br /></p><p><a href=""http://www.liufu.org/ling/"">-==- 作者主页 -==- </a><br /></p>',1,0)")
 	'友情链接
 	Conn.execute("INSERT INTO [DiyPage] ([Title],[PageName],[Code],[State],[IsSystem]) VALUES('友情链接','links.html','{my:friendlinks /}',1,0)")
 	'下载页面

@@ -455,9 +455,7 @@ Sub FuncForm(ByVal id)
             <tr>
                 <td colspan="2">
                 	<div id="editor">
-                    <textarea id="Content1" name="fCode" style="width:100%;height:550px;visibility:hidden;">
-                    	<%=objA.Code%>
-                    </textarea>
+                    <textarea id="content1" name="fCode" style="width:100%;height:550px;"><%=objA.Code%></textarea>
                     </div>
                 </td>
             </tr>
@@ -465,6 +463,7 @@ Sub FuncForm(ByVal id)
                 <td colspan="2" align="center">
                     <input type="submit" class="btn" value="提交" />
                     <input type="reset" class="btn" value="重置" />
+                    <input type="button" name="button" value="加载编辑器" onclick="javascript:KE.create('content1');" />
                 </td>
             </tr>
         </table>
@@ -476,10 +475,21 @@ Sub FuncForm(ByVal id)
 <script type="text/javascript" charset="utf-8" src="inc/editor/kindeditor.js"></script>
 <script type="text/javascript">
 //初始化编辑器
-KE.show({
-	id : 'Content1',
-	cssPath : 'inc/editor/editor.css'
+KE.init({
+	id : 'content1',
+	cssPath : 'inc/editor/editor.css',
+	skinType: 'tinymce',
+	items : [
+		'source', 'preview',  'print', 'undo', 'redo', 'cut', 'copy', 'paste',
+		'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
+		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		'superscript', 'date', 'time', 'specialchar', 'emoticons', 'link', 'unlink', '-',
+		'title', 'fontname', 'fontsize', 'textcolor', 'bgcolor', 'bold',
+		'italic', 'underline', 'strikethrough', 'removeformat', 'selectall', 'image',
+		'flash', 'media', 'layer', 'table', 'hr', 'about'
+	]
 });
+
 function chkIsSystem(){
 	if($("fIsSystem").checked == true){
 		if(!confirm("设置为系统页面将不能删除！请慎重操作！\n\n确定设置系统页面？")){
@@ -487,6 +497,7 @@ function chkIsSystem(){
 		}
 	}
 }
+
 var oInputs = document.getElementsByTagName("input");
 for(var i = 0; i < oInputs.length; i++){
  if(oInputs.item(i).name != "")

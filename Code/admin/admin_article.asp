@@ -642,7 +642,17 @@ Sub ArtForm(ByVal id)
 //³õÊ¼»¯±à¼­Æ÷
 KE.show({
 	id : 'Content1',
-	cssPath : 'inc/editor/editor.css'
+	cssPath : 'inc/editor/editor.css',
+	skinType: 'tinymce',
+	items : [
+		'source', 'preview',  'print', 'undo', 'redo', 'cut', 'copy', 'paste',
+		'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
+		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		'superscript', 'date', 'time', 'specialchar', 'emoticons', 'link', 'unlink', '-',
+		'title', 'fontname', 'fontsize', 'textcolor', 'bgcolor', 'bold',
+		'italic', 'underline', 'strikethrough', 'removeformat', 'selectall', 'image',
+		'flash', 'media', 'layer', 'table', 'hr', 'about'
+	]
 });
 </script>
 <script type="text/javascript">

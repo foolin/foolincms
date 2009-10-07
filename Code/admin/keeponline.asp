@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<meta http-equiv="refresh" content="1800" />
+<meta http-equiv="refresh" content="600" />
 <title>Keep Online</title>
 </head>
 <body>
-<%Session.Timeout = 60	'设置过期时间为60分钟失效。%>
+<!-- 保持在线防止Session过期 -->
 </body>
 </html>

@@ -44,7 +44,7 @@
        <%=Session("AdminName")%>，欢迎您进入[<%=sitename%>]后台管理。　<br />
      &copy; 2009  Power by <%=studio%> ，System kernel：<%=syslink%><br />
     </div>
-	<iframe height="30" width="100%" frameborder="0" src="keeponline.asp" scrolling="no" style="display:none;"></iframe>
+	<iframe height="0" width="0" frameborder="0" src="keeponline.asp" scrolling="no"></iframe>
 <%End Sub%>
 
 <%Sub MyInfo()%>

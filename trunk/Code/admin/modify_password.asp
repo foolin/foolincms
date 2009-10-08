@@ -84,16 +84,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
             	<ul class="menu">
                 	<li><a href="index.asp">管理首页</a></li>
                 </ul>
-                 <%Call MyInfo()%>
-                <ul class="menu">
-                 <li class="mTitle">--== 系统管理 ==--</li>
-                 <li class="on"><a href="admin_config.asp">系统配置</a></li>
-                 <li><a href="admin_user.asp">团队管理</a></li>
-                 <li><a href="admin_mytag.asp">标签管理</a></li>
-                 <li><a href="admin_diypage.asp">DIY页面管理</a></li>
-                 <li><a href="admin_weblog.asp">操作记录管理</a></li>
-                </ul>
-                
+                 <%Call MyInfo()%> 
                 <%Call SysInfo()%>
                 
             </td>

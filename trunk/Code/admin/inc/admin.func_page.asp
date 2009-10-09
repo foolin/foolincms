@@ -33,7 +33,7 @@
      	<li<%If act = "config" Then Echo(" class=""on""")%>><a href="admin_config.asp">系统配置</a></li>
      <%End If%>
      <li<%If act = "password" Then Echo(" class=""on""")%>><a href="modify_password.asp">修改密码</a></li>
-     <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">标签帮助</a></li>
+     <li<%If act = "help" Then Echo(" class=""on""")%>><a href="help.asp">帮助</a></li>
      <li><a href="logout.asp">退出</a></li>
     </ul>
 <%End Sub%>

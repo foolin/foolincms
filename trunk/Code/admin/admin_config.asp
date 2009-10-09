@@ -312,7 +312,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 <td>                              		
                               		是<input type="radio" name="IsWebLog" value="1" <%If ISWebLog=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsWebLog" value="0" <%If ISWebLog=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">选择是否记录后台管理操作记录。</span>
+                                 &nbsp;&nbsp;<span class="gray">选择是否记录后台管理操作记录（管理日志）。</span>
                                  </td>
                             </tr>
                             <tr>

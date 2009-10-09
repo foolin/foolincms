@@ -60,6 +60,35 @@ Function GetColName(ByVal ColId, ByVal strType)
 	GetColName = strTempName
 End Function
 
+'根据父栏目ID获取所有子栏目ID以及本身ID
+Function GetColIds(ByVal FID, ByVal ColType)
+	GetColIds = FID & GetSubColIds(FID, ColType)
+End Function
+
+'根据父栏目ID获取所有子栏目ID
+Function GetSubColIds(ByVal FID, ByVal ColType)
+	Dim Rs,strIds
+	Select Case LCase(ColType)
+		Case "picture","pic","image","img"
+			Set Rs = DB("SELECT * FROM PicColumn WHERE ParentID IN (" & FID & ")", 1)
+		Case Else
+			Set Rs = DB("SELECT * FROM ArtColumn WHERE ParentID IN (" & FID & ")", 1)
+	End Select
+	'strIds = FID
+	If Not Rs.Eof Then
+		Do While Not Rs.Eof
+			strIds = strIds &  "," & Rs("ID") & GetSubColIds(Rs("ID"), ColType) '递归子级分类
+		Rs.Movenext:Loop
+		If Rs.Eof Then
+			Rs.Close: Set Rs = Nothing
+			GetSubColIds = strIds
+			Exit Function
+		End If
+	End If
+	Rs.Close: Set Rs = Nothing
+	GetSubColIds = strIds
+End Function
+
 '================================================================
 '获取上一篇文章(图片)
 '参数：	id -- 当前id， 

@@ -37,7 +37,7 @@ Dim SYSNAME	'系统名称
 	SYSNAME = "EekkuCMS"
 
 Dim SYSVERSION	'系统版本
-	SYSVERSION = " V1.0.0beta build091008"
+	SYSVERSION = " V1.0.0beta1 build091009"
 	
 Dim SYS	'系统
 	SYS = SYSNAME & "  " & SYSVERSION

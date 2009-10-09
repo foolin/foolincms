@@ -546,7 +546,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 	'创建管理员初始密码
 	Conn.execute("INSERT INTO [Admin] ([Username],[Nickname],[Password],[Level],[LoginCount],[LoginTime],[LoginIP]) VALUES('"& strUsername &"','"& strUsername &"','"& strPassword &"',3,0,'"& Now() &"','"& GetIP() &"')")
 	'创建初始化自定义标签
-	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FirstTag','第一个自定义标签','第一个自定义标签：(零星碎事)')")
+	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('FirstTag','第一个自定义标签','第一个自定义标签：(零星碎事)<br /><br /><a href=""http://www.eekku.com""> -==- E酷工作室 -==- </a><br /><a href=""http://ling.liufu.org""> -==- 作者主页 -==- </a> <br /><a href=""http://http://code.google.com/p/foolincms/""> -==- 最新版本 -==- </a><br />')")
 	'自定义标签：公告
 	Conn.execute("INSERT INTO [MyTags] ([Name],[Info],[Code]) VALUES('notice','公告','公告：您已经成功安装E酷CMS，欢迎使用！')")
 	'自定义标签：系统信息

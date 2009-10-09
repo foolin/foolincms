@@ -9,7 +9,17 @@
     
     如果要重新安装请删除Install/Install.lock文件，再运行http://你网站的网址/安装目录/Install/Index.asp
     
-    注意：你的网站必须支持FSO组件以及读写权限，否则将无法正常安装。
+    
+    本系统运行环境：
+    
+      1、IIS5.0(或者更高版本) 。
+      
+      2、支持Access数据库。
+      
+      3、支持FSO组件以及读写权限。
+      
+      
+      请确保您服务器空间支持以上功能（也就是空间必须支持ASP），否则将无法正常安装。
     
     
     2、管理
@@ -125,7 +135,7 @@
   
  Sys Name:    E酷CMS (Eekku CMS)
  
- Version:     V1.0.0beta build091008
+ Version:     V1.0.0beta1 build091009
 
  Auhtor: 		  Foolin(刘付灵)
  

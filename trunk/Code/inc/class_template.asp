@@ -428,13 +428,13 @@ Class ClassTemplate
 				End If
 				If Len(tagColumn) > 0 Then
 					If LCase(tagColumn) <> "auto" Then
-						tagWhere = tagWhere & " AND ColID IN (" & tagColumn & ") "
+						tagWhere = tagWhere & " AND ColID IN (" & GetColIds(tagColumn, tagSrc) & ") "
 					ElseIf  LCase(tagColumn) = "auto" And ColId > 0 Then
-					 	tagWhere = tagWhere & " AND ColID IN (" & ColId & ") "
+					 	tagWhere = tagWhere & " AND ColID IN (" & GetColIds(ColId, tagSrc) & ") "
 					End If
 				End If
 				Select Case LCase(tagSrc)
-					Case "image", "pic", "picture"
+					Case  "pic", "picture","img","image"
 						tagTable = "Picture"
 					Case "imgart", "picart"
 						tagTable = "Article"

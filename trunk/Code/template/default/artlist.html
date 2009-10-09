@@ -33,11 +33,11 @@
                                 <ul>
                                 {list:column mode="table" row="10" col="1"  table="ArtColumn" where="ParentID={sys:id /}" order="id"}
                                 	<li><a href="artlist.asp?id=[column:id]" title="">[column:name]</a></li>
-                                    {if: [column:ParentID] = 0}
+                                 
                                         {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
                                         <li>|-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
                                         {/list:child} 	
-                                    {/if}
+
 								{/list:column}
                                 {if: {sys:id /} <> 0 }
                                  	<li> <== <a href="artlist.asp" title="">·µ»Ø¸¸À¸Ä¿</a></li>
@@ -66,7 +66,7 @@
                                 {list:art src="art" column="auto"  row="20" col="1" ispage="true"}
                                 	<tr>
                                     	<td class="article"><a href="[art:url]" title="[art:title]">[art:title len="30" len="..."]</a></td>
-                                        <td class="time">2009-5-20</td>
+                                        <td class="time">[art:createtime format="yyyy-mm-dd"]</td>
                                     </tr>
 								{/list:art}
                                 </table>

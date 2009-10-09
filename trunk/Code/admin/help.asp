@@ -235,39 +235,37 @@ function HightLightTag(id){
 
     </fieldset>
     <fieldset>
-    <legend>标签简单说明</legend>
-    <div id="tagCode">
-         <div class="codeTipTit">========== 列表标签代码 ==========</div>
-        {list:ListName mode="default" src="article" row="10" Col="2" width="100%" class="list"}<br />
-        [ListName:字段名  len="" lenext=""] <span class="intro">标题，长度</span><br />
-        [ListName:字段名]<br />
-        {/list:myname}<br />
-        <a href="?action=list"> >> 详情请查看【列表标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 包含文件标签代码 ==========</div>
-        {include file="<span class="green">文件名</span>" /}<br />
-        <a href="?action=include"> >> 详情请查看【包含标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 自定义标签 ==========</div>
-        {my:自定义标签名 /} <br />
-         <a href="?action=mytag"> >> 详情请查看【自定义标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 系统标签 ==========</div>
-        {sys:变量名 /}<br />
-        <a href="?action=sys"> >> 详情请查看【系统标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 内容标签 ==========</div>
-        {field:字段名 /}<br />
-        <a href="?action=content"> >> 详情请查看【内容标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 自定义页面标签 ==========</div>
-        {diypage:字段名 /}<br />
-        <a href="?action=diypage"> >> 详情请查看【自定义页面标签】帮助 << </a><br /><br />
-        
-        <br /><div class="codeTipTit">========== 判断标签 ==========</div>
-        {if:表达式} ### 表达式成立的值 ### {else} ### 表达式不成立的值 ### {/if}<br />
-        <a href="?action=mytag"> >> 详情请查看【判断标签】帮助 << </a><br />
-    </div>
+    <legend>制作模板简单说明</legend>
+    	<div style="padding:5px;">
+<ol>
+<li>制作的模板，你可以创建一个新目录（可自由命名，例如命名为newtpl），但该目录必须放在template目录下。</li>
+<li>模板目录中，必须存在的模板页有：index.html（首页模板页）、artlist.html（文章列表模板页）、article.html（文章内容模板页）、piclist.html（图片列表模板页）、picture.html（图片内容模板页）、guestbook.html（留言模板页）和diypage.html（自定义页面模板页）。</li>
+<li>模板里面的图片必须放在images目录下，css文件必须放在css目录下，js文件必须放在js或者scripts目录下。</li>
+<li>在模板中使用的标签，标签语法请查看标签说明文档。<br />
+<div style="font-size:12px; color:gray;">
+
+本系统标签尽量采用与HTML接近的语法，但为了与HTML区分，本系统标签采用大括号{}代替HTML中的<>。<br />
+例如：<br />
+{list：name mode="default" src="article"}<br />
+###内层循环标签###<br />
+{/list: name }<br />
+如果标签有多种写法，请自己选择适合标签，建议用第一个，或者与HTML语法（具有开始与闭合）相近写法。<br />
+</div></li>
+<li>制作模板完成之后，进入【管理后台】 → 【系统配置】 → 选择【模板】，选中你制作模板的目录，点击保存即可。如果你网站不能及时刷新，点击【更新缓存】，然后刷新即可完成。</li>
+<li>	制作过程可以参照系统自带的模板和本标签说明即可。</li>
+<li>	若有任何疑问或者bug,请到官方http://www.eekku.com或者发送邮件到Foolin@126.com进行反馈。</li>
+</ol>
+
+<br />
+注意：制作模板必须具备一定的HTML和CSS知识。网页默认是Gb2312编码。
+<br /><br />
+
+官方：<a href="http://www.eekku.com" target="_blank">http://www.eekku.com</a><br />
+主页：<a href="http://www.liufu.org/ling" target="_blank">http://www.liufu.org/ling</a><br />
+邮箱：Foolin@126.com<br />
+<br />
+
+        </div>
     </fieldset>
 </div>
                                     
@@ -414,7 +412,7 @@ function HightLightTag(id){
     <legend>标签参考代码</legend>
 	<iframe src="tags.asp" name="showTags" width="100%" marginwidth="0" marginheight="0" scrolling="Auto" frameborder="0" id="showTags"></iframe>
     </fieldset>
-    <div style="padding:5px; border:dashed 1px #CCC; margin-top:10px; color:#333;">
+    <div style="padding:5px; border:dashed 1px #CCC; margin-top:10px; color:gray;">
         <span style="font-size:13px; font-weight:bold;">内层标签属性：</span><br />
         1、<span class="red">len=""</span> 截取长度（值为数字），<span class="red">lenext=""</span>截取长度后扩展后缀（值为字符串）<br />
         &nbsp;&nbsp; &nbsp;&nbsp;例如：<br />

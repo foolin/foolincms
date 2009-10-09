@@ -113,11 +113,13 @@ a:hover{
 .container{
 	margin:0 auto;
 	width:900px;
+	clear:both;
 }
 
 
 /*Ò³½Å*/
 #footer{
+	margin-top:0px;
 	background:url(../images/footer_bg.jpg);
 	height:120px;
 }

@@ -7,6 +7,37 @@
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/article.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+<!--
+// 图片缩放
+//使用：<img src="images/a.jpg" onload="javascript:DrawImage(this);"/>
+function DrawImage(ImgD,iWidth){ 
+    var image=new Image();
+	if(iWidth<=0 || iWidth==null)
+	{
+		var iWidth = 400;
+	}
+    image.src=ImgD.src; 
+    if(image.width>0 && image.height>0){ 
+        flag=true; 
+      if(image.width>=iWidth){ 
+        ImgD.width=iWidth;
+        ImgD.height=(image.height*iWidth)/image.width; 
+
+        }else{ 
+            ImgD.width=image.width; 
+            ImgD.height=image.height; 
+        }  
+    } 
+} 
+//鼠标滚轮函数
+//使用：<img src="images/a.jpg" onmousewheel="return cgimg(this);" />
+function cgimg(o){
+var zoom=parseInt(o.style.zoom, 10)||100;zoom+=event.wheelDelta/12;if (zoom>0) o.style.zoom=zoom+'%';
+return false;
+}
+-->
+</script>
 </head>
 
 <body>
@@ -46,7 +77,7 @@
                     			</div>
                                 <div class="content" id="content"  style="text-align:center">
                       
-										<img src="{pic:PicPath /}" /><br />
+										<img src="{pic:PicPath /}" width="600" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);"/><br />
 										{pic:Intro/}
                           		</div>
                                 <div class="preNext" style="text-align:center; margin-top:20px; margin-bottom:20px;">

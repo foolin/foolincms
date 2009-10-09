@@ -234,7 +234,7 @@ function HightLightTag(id){
 <ol>
 <li>制作的模板，你可以创建一个新目录（可自由命名，例如命名为newtpl），但该目录必须放在template目录下。</li>
 <li>模板目录中，必须存在的模板页有：index.html（首页模板页）、artlist.html（文章列表模板页）、article.html（文章内容模板页）、piclist.html（图片列表模板页）、picture.html（图片内容模板页）、guestbook.html（留言模板页）和diypage.html（自定义页面模板页）。</li>
-<li>模板里面的图片必须放在images目录下，css文件必须放在css目录下，js文件必须放在js或者scripts目录下。</li>
+<li>模板里面的图片必须放在当前模板（例如：newtpl）中images目录下，css文件必须放在css目录下，js文件必须放在js或者scripts目录下。</li>
 <li>在模板中使用的标签，标签语法请查看标签说明文档。<br />
 <div style="font-size:12px; color:gray;">
 
@@ -245,7 +245,7 @@ function HightLightTag(id){
 {/list: name }<br />
 如果标签有多种写法，请自己选择适合标签，建议用第一个，或者与HTML语法（具有开始与闭合）相近写法。<br />
 </div></li>
-<li>制作模板完成之后，进入【管理后台】 → 【系统配置】 → 选择【模板】，选中你制作模板的目录，点击保存即可。如果你网站不能及时刷新，点击【更新缓存】，然后刷新即可完成。</li>
+<li>制作模板完成之后，进入【管理后台】 → 【<a href="admin_config.asp">系统配置</a>】 → 选择【<a href="admin_config.asp">模板</a>】，选中你制作模板的目录，点击保存即可。如果你网站不能及时刷新，点击【<a href="index.asp?action=clearcache">更新缓存</a>】，然后刷新即可完成。</li>
 <li>	制作过程可以参照系统自带的模板和本标签说明即可。</li>
 <li>	若有任何疑问或者bug,请到官方http://www.eekku.com或者发送邮件到Foolin@126.com进行反馈。</li>
 </ol>

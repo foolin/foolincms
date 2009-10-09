@@ -673,9 +673,7 @@ Sub ArtForm(ByVal id)
             <tr>
                 <td colspan="2">
                 	<div id="editor">
-                    <textarea id="Content1" name="Content" style="width:100%;height:550px;visibility:hidden;">
-                    	<%=objA.Content%>
-                    </textarea>
+                    <textarea id="content1" name="Content" style="width:100%;height:550px;visibility:hidden;"><%=objA.Content%></textarea>
                     </div>
                 </td>
             </tr>
@@ -695,7 +693,7 @@ Sub ArtForm(ByVal id)
 <script type="text/javascript">
 //³õÊ¼»¯±à¼­Æ÷
 KE.show({
-	id : 'Content1',
+	id : 'content1',
 	cssPath : 'inc/editor/editor.css',
 	skinType: 'tinymce',
 	items : [

@@ -52,6 +52,10 @@ if request.QueryString("act")="upload" then
  <script type ="text/javascript" language="javascript">
  <!--//
 	window.parent.document.forms["form1"].elements["FocusPic"].value='upload/images/focuspic/<%=fName%>';
+	//更新到编辑器
+ 	parent.KE.util.focus("content1");
+	parent.KE.util.selection("content1"); 
+ 	parent.KE.util.insertHtml("content1", "<img src=\"../upload/images/focuspic/<%=fName%>\" border=\"0\" \/>");
  //-->
  </script>
  文件上传成功.[<a href='upload_focuspic.asp'>重新上传</a>]

@@ -22,10 +22,10 @@
                 <!--notice--->
                 <div class="notice"><marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollAmount="4" scrollDelay="80">{my:notice /}</marquee></div>
                     
-                    <!--column_A start--->
-                <div class="column_A">
+                    <!--column_Main start--->
+                <div class="columnMain">
                             <!--栏目-->
-                            <div class="box fixheight">
+                            <div class="box fixheight fixwidth">
                               <div class="title"><span class="titletxt">图片新闻</span><span class="more"><a href="list.html">更多>></a></span></div>
                                 <div class="content">
                                     <!-- picnews start -->
@@ -47,12 +47,12 @@
 			{/list:imgart}
 
 
-            var focus_width=285;
+            var focus_width=325;
             var focus_height=230;
             var text_height=30;
         //如果是IE浏览器
         if (navigator.userAgent.indexOf("MSIE")>= 0) {
-          focus_width=285;
+          focus_width=325;
           focus_height=215;
           text_height=25;
         }
@@ -82,85 +82,58 @@
                           </div>
                                         <!-- picnews end -->
                                 </div>
-                            </div>
-                            
-                            <!--栏目-->
-                       {list:column mode="table" table="ArtColumn"  Where="ParentID=0"  row="10" order="ID"}
-                       	{if:[column:i] mod 2 = 0}
-                            <div class="box fixheight">
-                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
-                                <div class="content">
-                                  <ul>
-                                  {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
-                                      <li><a href="[art:url]" title="">[art:title len="15" lenext="..."]</a></li>
-                                  {/list:art}
-                                    </ul>
-                                </div>
-                            </div>
-                       {/if}
-   					{/list:column}
-                            
+                            </div>             
 
-                    </div>
-                    <!--column_A end--->
-                    
-                    <!--column_main start--->
-                    <div class="column_main">
-                            <!--栏目-->
-                       {list:column mode="table" table="ArtColumn" Where="ParentID=0" row="10" order="ID"}
+                           
+                       {list:column mode="table" table="ArtColumn" Where="ParentID=0" row="10" col="1" order="ID"}
                        
-                       	<!--输出最新栏目-->
-                       	{if: [column:num] > 1 And [column:num] mod 2 = 0 And [column:i] = 1}
-                            <div class="box fixheight">
-                              <div class="title"><span class="titletxt">最新文章</span><span class="more"><a href="artlist.asp">更多>></a></span></div>
-                                <div class="content">
-                                  <table>
-                                  {list:art src="art" row="10" col="1" order="last"}
-                                      <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
-                                  {/list:art}
-                                    </table>
-                                </div>
-                            </div>
-                       {/if}
-                       
-                       	<!--输出奇数栏目-->
-                       	{if: [column:i] mod 2 = 1}
-                            <div class="box fixheight">
-                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
-                                <div class="content">
-                                  <table>
-                                  {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
-                                      <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
-                                  {/list:art}
-                                    </table>
-                                </div>
-                            </div>
-                       {/if}
-   					{/list:column}
-
-                 
-                    </div>
-                    <!--column_main end--->
-                    
-                    <!--column_B start--->
-                    <div class="column_B">
-                            <!--栏目-->
-                            <div class="box fixheight">
-                                    <div class="title">官方网站</div>
+                            <!--输出最新栏目-->
+                            {if: [column:num] > 1 And [column:num] mod 2 = 0 And [column:i] = 1}
+                                <div class="box fixheight fixwidth">
+                                  <div class="title"><span class="titletxt">最新文章</span><span class="more"><a href="artlist.asp">更多>></a></span></div>
                                     <div class="content">
-                                            <div class="friendlinks">
-                                                  <a href="http://www.eekku.com"> -==- E酷工作室 -==- </a><br />
-                                                  <a href="http://ling.liufu.org"> -==- 作者主页 -==- </a> <br />
-                                                  <a href="http://http://code.google.com/p/foolincms/"> -==- 最新版本 -==- </a><br />
-                                            </div>
+                                      <table>
+                                      {list:art src="art" row="10" col="1" order="last"}
+                                          <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
+                                      {/list:art}
+                                        </table>
                                     </div>
+                                </div>
+                                <div class="clear"></div>
+                           {/if}
+                       
+                       		 <!--栏目-->
+                            <div class="box fixheight fixwidth">
+                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
+                                <div class="content">
+                                  <table>
+                                  {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
+                                      <tr><td><img src="images/dot.jpg" border="0" /> <a href="[art:url]" title="[art:title]">[art:title len="20" lenext="..."]</a></td><td class="time">[art:createtime format="yyyy-mm-dd"]</td></tr>
+                                  {/list:art}
+                                    </table>
+                                </div>
+                            </div>
+                            
+   						{/list:column}
+                        
+                        
+                    	<div class="clear"></div>
+                    </div>
+                    <!--columnMain end--->
+                    
+                    <!--columnSide start--->
+                    <div class="columnSide">
+                            
+                            <!--栏目-->
+                            <div class="box fixheight">
                                     <div class="title">自定义标签演示</div>
                                     <div class="content">
-                                            <div class="friendlinks">
+                                            <div class="friendlinks">                
                                                   {my:FirstTag /}
                                             </div>
                                     </div>
-                            </div>  
+                            </div> 
+                            
                             <!--栏目-->
                             <div class="box fixheight">
                                     <div class="title">系统信息</div>
@@ -208,7 +181,8 @@
 </div>
 </body>
 </html>
-<!--- 制作：刘付灵  E-mail:Foolin@126.com --->
+<!--- 制作：Foolin  E-mail:Foolin@126.com --->
+
 
 
 

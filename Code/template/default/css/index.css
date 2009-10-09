@@ -15,22 +15,22 @@
 	width:300px;
 }
 
-.column_main {
+.column_B {
 	float:left;
 	width:400px;
 }
 
-.column_B{
+.column_C{
 	float:right;
 	width:200px;
 }
 
-.column_main1 {
+.columnMain {
 	float:left;
 	width:700px;
 }
 
-.column_B1 {
+.columnSide {
 	float:left;
 	width:200px;
 }
@@ -39,6 +39,8 @@
 .picnews{
 	height:230px;
 	overflow:hidden;
+	text-align:center;
+	padding-top:2px;
 }
 
 .time{
@@ -54,6 +56,11 @@
 .fixheight{
 	height:270px;
 	overflow:hidden;
+}
+
+.fixwidth{
+	float:left;
+	width:340px;
 }
 
 .box .content table{

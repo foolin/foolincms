@@ -8,7 +8,7 @@ Function WebLog(ByVal strAction, ByVal strUser)
 		If UCase(strUser) = "SESSION" Then
 			strUser = Session("AdminName")
 		End If
-		DB "INSERT INTO WebLog(Username, UserAction, UserIP, ActionUrl, CreateTime) VALUES('" & strUser & "', '" & strAction & "', '" & GetIP() & "', '" & GetUrl() & "', '" & Now() & "')", 0
+		DB "INSERT INTO WebLog(Username, UserAction, UserIP, ActionUrl, CreateTime) VALUES('" & strUser & "', '" & strAction & "', '" & GetIP() & "', '" & Request.ServerVariables("HTTP_REFERER") & "', '" & Now() & "')", 0
 	End If
 End Function
 

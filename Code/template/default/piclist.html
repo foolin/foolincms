@@ -43,11 +43,9 @@
                                 <ul>
                                 {list:column mode="table" row="10" col="1"  table="PicColumn" where="ParentID={sys:id /}" order="id"}
                                 	<li><a href="piclist.asp?id=[column:id]" title="">[column:name]</a></li>
-                                    {if: [column:ParentID] = 0}
                                         {list:child mode="table" row="10" col="1"  table="PicColumn" where="ParentID=[column:id]" order="id"}
                                         <li>|-- <a href="piclist.asp?id=[child:id]" title="">[child:name]</a></li>
                                         {/list:child} 	
-                                    {/if}
 								{/list:column}
                                 {if: {sys:id /} <> 0 }
                                  	<li> <== <a href="artlist.asp" title="">·µ»Ø¸¸À¸Ä¿</a></li>

@@ -191,6 +191,9 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
         <form action="?action=step3" method="post" name="form1" onsubmit="return chkForm();">
         <table class="form">
             <tr>
+                <td class="name">网站名称：</td><td class="inputtxt"><input name="Sitename" type="text" value="E酷网" /> 请填写网站名称</td>
+            </tr>
+            <tr>
                 <td class="name">登录帐号：</td><td class="inputtxt"><input name="Username" type="text" /> 请填写管理员账号</td>
             </tr>
             <tr>
@@ -213,6 +216,10 @@ td.inputtxt { width:75%; text-align:left; color:#666;}
 <!--
 function chkForm(){
 	var form = document.forms["form1"];
+	if( form.elements["Sitename"].value == ""){
+		alert("网站名称不能为空");
+		return false;
+	}
 	if( form.elements["Username"].value == ""){
 		alert("账号不能为空");
 		return false;
@@ -590,6 +597,8 @@ Function CreateConfig(DbName)
  	Dim strTemp, keyTab, keyEnter
 	keyTab = Chr(9) & Chr(9)
 	keyEnter = vbcrlf & vbcrlf
+	Dim strSiteName: strSiteName = Replace(Trim(Request("Sitename")), """", "")
+	If Len(strSiteName) = 0 Then strSiteName = "E酷工作室"
 	'系统信息
 	strTemp =  Chr(60) & "%@LANGUAGE=""VBSCRIPT"" CODEPAGE=""936""%" & Chr(62) & Chr(10)
 	strTemp = strTemp & Chr(60) & "%" & Chr(10)
@@ -608,7 +617,7 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "DBPATH = " & Chr(34) & "database/" & DbName & Chr(34) & keyEnter
 	' SITENAME变量
 	strTemp= strTemp & "Dim SITENAME" & keyTab & "'网站名称" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "SITENAME = " & Chr(34) & "E酷工作室" & Chr(34) & keyEnter
+	strTemp= strTemp & "SITENAME = " & Chr(34) & strSiteName & Chr(34) & keyEnter
 	' HTTPURL变量
 	strTemp= strTemp & "Dim HTTPURL" & keyTab & "'网站网址前缀" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "HTTPURL = " & Chr(34) & "http://" & Request.ServerVariables("Http_Host") & Chr(34) & keyEnter

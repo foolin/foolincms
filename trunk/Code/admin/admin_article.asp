@@ -485,7 +485,7 @@ Dim mode: mode = LCase(Request("list"))
 		'À¸Ä¿ID
 		colId = Request("colid")
 		If Len(Request("colid")) = 0 Then colId = 0
-		If colId > 0 Then sqlColId = " And ColID = "& colId &" "
+		If colId > 0 Then sqlColId = " And ColID IN ("& GetColIds(colId,"ARTICLE") &") "
 		'ËÑË÷×Ö·û´®
 		strKeyword = Trim(Request("keyword"))
 		If Len(strKeyword) > 0 Then sqlKeyword = " And Title LIKE '%"& strKeyword &"%' "

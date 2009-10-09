@@ -229,12 +229,6 @@ function HightLightTag(id){
 %>
  <div id="view">
     <fieldset>
-    <legend>标签执行顺序</legend>
-    
-	&nbsp;&nbsp; 包含标签 → 自定义标签 → 系统标签 → 列表标签 → 分页标签 → 判断标签
-
-    </fieldset>
-    <fieldset>
     <legend>制作模板简单说明</legend>
     	<div style="padding:5px;">
 <ol>
@@ -266,6 +260,13 @@ function HightLightTag(id){
 <br />
 
         </div>
+    </fieldset>
+    
+    <fieldset>
+    <legend>标签执行顺序</legend>
+    
+	&nbsp;&nbsp; 包含标签 → 自定义标签 → 系统标签 → 列表标签 → 分页标签 → 判断标签
+
     </fieldset>
 </div>
                                     

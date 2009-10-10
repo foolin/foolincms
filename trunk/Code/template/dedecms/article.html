@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{article:title/} - {sys:sitename/} - powered by eekku.com</title>
+<meta name="keywords" content="{sys:keywords /},eekkucms">
+<meta name="description" content="{sys:sitedesc /},eekkucms">
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/article.css" rel="stylesheet" type="text/css" />
+<style>
+.context{	width:638px; clear:both;}
+</style>
+</head>
+<body>
+<!--头部开始-->
+<div class="top cbody">
+	{include file="top.html"}
+</div>
+<!--导航栏-->
+<div class="topmenu cbody">
+	<ul>
+		<li><a href="index.asp">首页</a></li>
+        <li><a href="artlist.asp" class="on">文章</a></li>
+        <li><a href="piclist.asp">图片</a></li>
+        <li><a href="guestbook.asp">留言</a></li>
+        <li><a href="diypage.asp?url=download.html">下载</a></li>
+        <li><a href="diypage.asp?url=help.html">帮助文档</a></li>
+        <li><a href="diypage.asp?url=links.html">友情链接</a></li>
+        <li><a href="http://www.eekku.com" target="_blank">E酷网官方</a></li>
+        <li><a href="http://www.liufu.org/ling" target="_blank">作者主页</a></li>
+	</ul>
+</div>
+
+<!--内容-->
+<div class="main cbody margintop">
+	<!--左侧-->
+  <div class="pleft">
+		<!--位置导航-->
+		<div class="thisplace">
+				当前位置 :{sys:sitepath/}
+		</div>
+		<!--资讯内容-->
+		<div class="newsview">
+			<!--资讯标题-->
+			<div class="title">
+				<h1>{article:title /}</h1>
+			</div>
+			<!--相关信息-->
+			<div class="info">
+				<strong>来源：</strong>{article:source /}
+			  <strong>作者：</strong>{article:author /} 
+			  <strong>时间：</strong>{article:createtime /}
+	      <strong>点击：</strong> 
+		      {article:hits /}次
+		  </div>
+	    <!--资讯正文-->
+			<div class="content">
+            {article:content /}<br />
+            </div>
+            <div class="boxoff">
+				<strong>------分隔线----------------------------</strong>
+			</div>
+            <div class="context">
+            <!--上下文-->
+                    上一篇：{article:pre /}<br />
+                    下一篇：{article:next /}
+           </div>
+
+
+            <div class="floatclear"><!--清除浮动--></div>
+
+		</div>
+		<!--评论-->
+
+	</div>
+
+	<!--右侧-->
+	<div class="pright">
+    
+    
+        <!--侧边信息列表-->
+		<div class="rlist">
+			<div class="title">文章栏目</div>
+				<div class="rbox gplist">
+
+					<ul>
+                    {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
+                     <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
+                    {/list:artlist}
+					</ul>
+				</div>
+		</div>
+        
+        <!--侧边信息列表-->
+		<div class="rlist margintop">
+			<div class="title">热点关注</div>
+				<div class="rbox gplist">
+                        <ul>
+                           {list:art src="article" row="10" col="1" order="hot"}
+                             <li><span class="gptlink"><a href="[art:url]">[art:title len="40"]</a></span></li>
+                           {/list:art}
+                        </ul>
+				</div>
+		</div>
+        
+
+	</div>
+	<div class="floatclear"><!--清除浮动--></div>
+</div>
+
+
+<!--页面底部-->
+<div class="footer cbody margintop">
+		<div class="copyright"> 
+                <div style="font-size:12px"> <a href="{sys:siteurl /}">{sys:sitename /}</a>  
+                <a href="http://www.miibeian.gov.cn/">[备案信息]</a>              
+            </div>  
+    		Powered by  Power by {sys:syslink /}. &copy;2009  <a href="http://www.eekku.com/" target="_blank">Eekku Studio.</a> 
+      
+	</div>
+   
+</div>
+
+
+</body>
+</html>

@@ -78,7 +78,8 @@
       
     注意：修改模板必须有HTML的基本知识。详细系统标签说明以及使用方法，请查阅【标签说明文档.doc】。
     
-    
+	
+    获取更多网站模板，请访问：http://www.eekku.com
     
     
     
@@ -141,7 +142,7 @@
  
  Version:     V1.0.0beta1 build091010
 
- Auhtor: 		  Foolin(刘付灵)
+ Auhtor: 		  Foolin(负零)
  
  E-mail: 		  Foolin@126.com
  

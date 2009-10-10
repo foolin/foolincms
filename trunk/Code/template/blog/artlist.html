@@ -43,9 +43,26 @@
                 <div class="title">日志分类</div> 
                 <div class="content"> 
                     <ul>
-                    {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
-                     <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
-                    {/list:artlist}
+                    
+                    <!--获取当前栏目-->
+                    {list:col mode="table" row="1" col="1"  table="ArtColumn" where="ID={sys:id /}"}
+                    	<li><a href="artlist.asp?id=[col:id]" title="">[col:name]</a></li>
+                    {/list:col}
+                    
+                    <!--获取下一级栏目-->
+                    {list:column mode="table" row="10" col="1" table="ArtColumn" where="ParentID={sys:id /}" order="id"}
+                        <li>
+                        	{if: {sys:id/}<>0 } |-- {/if} 	<!--判断是否有ID传入-->
+                        	<a href="artlist.asp?id=[column:id]" title="">[column:name]</a>
+                        </li>
+                        {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
+                       		<li>&nbsp;&nbsp; |-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
+                        {/list:child} 	
+                    {/list:column}
+                    
+                    {if: {sys:id /}<>0 }<li> <== <a href="artlist.asp" title="">返回父栏目</a></li>
+                    {/if}
+                     
                     </ul>
                 </div>
             </div> 

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{diypage:title /} - {sys:sitename/} - powered by eekku.com</title>
+<meta name="keywords" content="{sys:keywords /},eekkucms">
+<meta name="description" content="{sys:sitedesc /},eekkucms">
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/diypage.css" rel="stylesheet" type="text/css" />
+<style>
+.context{	width:638px; clear:both;}
+</style>
+</head>
+<body>
+<!--头部开始-->
+<div class="top cbody">
+	{include file="top.html"}
+</div>
+<!--导航栏-->
+<div class="topmenu cbody">
+	<ul>
+		<li><a href="index.asp">首页</a></li>
+        <li><a href="artlist.asp">文章</a></li>
+        <li><a href="piclist.asp">图片</a></li>
+        <li><a href="guestbook.asp">留言</a></li>
+        <li><a href="diypage.asp?url=download.html">下载</a></li>
+        <li><a href="diypage.asp?url=help.html">帮助文档</a></li>
+        <li><a href="diypage.asp?url=links.html">友情链接</a></li>
+        <li><a href="http://www.eekku.com" target="_blank">E酷网官方</a></li>
+        <li><a href="http://www.liufu.org/ling" target="_blank">作者主页</a></li>
+	</ul>
+</div>
+
+<!--内容-->
+<div class="main cbody margintop">
+	<!--左侧-->
+  <div class="pmain">
+		<!--位置导航-->
+		<div class="thisplace">
+				当前位置 :{sys:sitepath/}
+		</div>
+		
+        <!--列表-->
+        <div class="leftlist">
+            <div class="ptitle"><div class="txt">{diypage:title /}</div></div>
+			<div class="pleft">
+            	<div class="code">
+					{diypage:code /}
+                </div>
+		  </div>
+        </div>
+        
+	</div>
+
+	<!--右侧-->
+	<div class="pside">
+    
+    
+        <!--侧边信息列表-->
+		<div class="rlist">
+			<div class="title">相关页面导航</div>
+				<div class="rbox gplist">
+
+					<ul>
+                        {list:nav mode="sql" sql="SELECT ID,Title FROM DIYPAGE WHERE State=1" row="20" col="1"}
+                        <li><a href="diypage.asp?id=[nav:ID]" title="[nav:Title]">[nav:Title]</a></li>
+                        {/list:nav}
+					</ul>
+				</div>
+		</div>
+
+        
+
+	</div>
+	<div class="floatclear"><!--清除浮动--></div>
+</div>
+
+
+<!--页面底部-->
+<div class="footer cbody margintop">
+		<div class="copyright"> 
+                <div style="font-size:12px"> <a href="{sys:siteurl /}">{sys:sitename /}</a>  
+                <a href="http://www.miibeian.gov.cn/">[备案信息]</a>              
+            </div>  
+    		Powered by  Power by {sys:syslink /}. &copy;2009  <a href="http://www.eekku.com/" target="_blank">Eekku Studio.</a> 
+      
+	</div>
+   
+</div>
+
+
+</body>
+</html>

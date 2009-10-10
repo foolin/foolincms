@@ -1,0 +1,129 @@
+@charset "gb2312";
+/*---------------资讯*/
+/*---------------左侧*/
+
+.pmain{
+	width:670px;
+	float:left;
+	overflow:hidden;
+}
+/*---------------左侧:当前位置*/
+.thisplace{
+	width:670px;
+	height:31px;
+	background:url(../images/place_bg.jpg) repeat-x;
+	line-height:31px;
+
+}
+/*---------------左侧列表*/
+.leftlist{
+	width:668px;
+	border:1px solid #DDD;
+	overflow:hidden;
+}
+.leftlist .ptitle{
+	width:666px;
+	height:31px;
+	margin:1px auto 0px;
+	background:url(../images/topline_botbg.gif) 0px -20px repeat-x;
+	border-bottom:1px solid #EEE;
+}
+.leftlist .ptitle .txt{
+	display:block;
+	width:200px;
+	height:31px;
+	line-height:31px;
+	background:url(../images/article_ico_1.gif) 8px 8px no-repeat;
+	text-indent:30px;
+	font-size:14px;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.gbook{
+}
+.gbook dl{
+}
+.gbook dl dt{
+	font-size:14px;
+	font-weight:bold;
+	height:30px;
+	line-height:30px;
+	padding-left:10px;
+	color:#366d99;
+	border-bottom:#CCC 1px dashed;
+}
+.gbook dl dd{
+	margin:0px;
+	padding:10px;
+	line-height:25px;
+	font-size:13px;
+}
+.gbook .info{
+	padding:0px;
+	padding-left:10px;
+	border-top:#CCC 1px dashed;
+	background:#F7F7F7;
+	color:#AAA;
+}
+.gbook .recomment{
+	margin:5px;
+	border:dashed 1px #CCC;
+	padding:5px;
+	line-height:22px;
+	background:#F5F5F5;
+	color:#090;
+}
+
+.postForm {
+	padding:5px 0px;
+}
+.postForm table{
+	border:solid 1px #D2D2D2;
+	border-collapse:collapse;
+}
+.postForm table th{ background:#F7F7F7; font-size:14px; text-align:left; text-indent:10px; color:#09C; border:solid 1px #E1E1E1; padding:5px;}
+.postForm table td{ padding:5px 10px;}
+.postForm .btn{padding:2px;height:25px;}
+.postForm input{ border:dashed 1px #bbb; line-height:20px; height:22px;}
+
+/*---------------右侧*/
+.pside{
+	float:right;
+}
+/*-------------------------右侧:常规列表定义*/
+.rlist{
+	width:222px;
+}
+.rlist .title{
+	width:222px;
+	height:19px;
+	padding-top:9px;
+	background:url(../images/rlist_title_bg.gif) no-repeat;
+	text-indent:10px;
+	font-weight:bold;
+	letter-spacing:2px;
+	color:#555;
+}
+.rbox{
+	border:1px solid #DDD;
+	width:220px;
+	padding:5px 0px 7px 0px;
+}
+.rbox ul li{
+	height:27px;
+	line-height:27px;
+	background:url(../images/ico_4.gif) 12px 13px no-repeat;
+	text-indent:10px;
+	overflow:hidden;
+	width:214px;
+}
+.rbox ul li a{
+	color:#039;
+}
+
+.page{
+	padding:5px;
+	text-align:center;
+	line-height:30px;
+}

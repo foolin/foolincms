@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{picture:title/} - {sys:sitename/} - powered by eekku.com</title>
+<meta name="keywords" content="{sys:keywords /},eekkucms">
+<meta name="description" content="{sys:sitedesc /},eekkucms">
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/article.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+<!--
+// 图片缩放
+//使用：<img src="images/a.jpg" onload="javascript:DrawImage(this);"/>
+function DrawImage(ImgD,iWidth){ 
+    var image=new Image();
+	if(iWidth<=0 || iWidth==null)
+	{
+		var iWidth = 400;
+	}
+    image.src=ImgD.src; 
+    if(image.width>0 && image.height>0){ 
+        flag=true; 
+      if(image.width>=iWidth){ 
+        ImgD.width=iWidth;
+        ImgD.height=(image.height*iWidth)/image.width; 
+
+        }else{ 
+            ImgD.width=image.width; 
+            ImgD.height=image.height; 
+        }  
+    } 
+} 
+//鼠标滚轮函数
+//使用：<img src="images/a.jpg" onmousewheel="return cgimg(this);" />
+function cgimg(o){
+var zoom=parseInt(o.style.zoom, 10)||100;zoom+=event.wheelDelta/12;if (zoom>0) o.style.zoom=zoom+'%';
+return false;
+}
+-->
+</script>
+<style>
+.context{	width:638px; clear:both;}
+</style>
+</head>
+<body>
+<!--头部开始-->
+<div class="top cbody">
+	{include file="top.html"}
+</div>
+<!--导航栏-->
+<div class="topmenu cbody">
+	<ul>
+		<li><a href="index.asp">首页</a></li>
+        <li><a href="artlist.asp">文章</a></li>
+        <li><a href="piclist.asp" class="on">图片</a></li>
+        <li><a href="guestbook.asp">留言</a></li>
+        <li><a href="diypage.asp?url=download.html">下载</a></li>
+        <li><a href="diypage.asp?url=help.html">帮助文档</a></li>
+        <li><a href="diypage.asp?url=links.html">友情链接</a></li>
+        <li><a href="http://www.eekku.com" target="_blank">E酷网官方</a></li>
+        <li><a href="http://www.liufu.org/ling" target="_blank">作者主页</a></li>
+	</ul>
+</div>
+
+<!--内容-->
+<div class="main cbody margintop">
+	<!--左侧-->
+  <div class="pleft">
+		<!--位置导航-->
+		<div class="thisplace">
+				当前位置 :{sys:sitepath/}
+		</div>
+		<!--资讯内容-->
+		<div class="newsview">
+			<!--资讯标题-->
+			<div class="title">
+				<h1>{picture:title /}</h1>
+			</div>
+			<!--相关信息-->
+			<div class="info">
+				<strong>来源：</strong>{picture:source /}
+			  <strong>作者：</strong>{picture:author /} 
+			  <strong>时间：</strong>{picture:createtime /}
+	      <strong>点击：</strong> 
+		      {picture:hits /}次
+		  </div>
+	    <!--资讯正文-->
+			<div class="content" style="text-align:center;">
+            		<img src="{pic:PicPath /}" width="600" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);"/><br />
+				{pic:Intro/}
+            </div>
+            <div class="boxoff">
+				<strong>------分隔线----------------------------</strong>
+			</div>
+            <div class="context">
+            <!--上下文-->
+                    上一张：{picture:pre /}<br />
+                    下一张：{picture:next /}
+           </div>
+
+
+            <div class="floatclear"><!--清除浮动--></div>
+
+		</div>
+		<!--评论-->
+
+	</div>
+
+	<!--右侧-->
+	<div class="pright">
+    
+    
+        <!--侧边信息列表-->
+		<div class="rlist">
+			<div class="title">文章栏目</div>
+				<div class="rbox gplist">
+
+					<ul>
+                    {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
+                     <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
+                    {/list:artlist}
+					</ul>
+				</div>
+		</div>
+        
+        <!--侧边信息列表-->
+		<div class="rlist margintop">
+			<div class="title">热点关注</div>
+				<div class="rbox gplist">
+                        <ul>
+                           {list:pic src="picture" row="10" col="1" order="hot"}
+                             <li><span class="gptlink"><a href="[pic:url]">[pic:title len="40"]</a></span></li>
+                           {/list:pic}
+                        </ul>
+				</div>
+		</div>
+
+	</div>
+	<div class="floatclear"><!--清除浮动--></div>
+</div>
+
+
+<!--页面底部-->
+<div class="footer cbody margintop">
+		<div class="copyright"> 
+                <div style="font-size:12px"> <a href="{sys:siteurl /}">{sys:sitename /}</a>  
+                <a href="http://www.miibeian.gov.cn/">[备案信息]</a>              
+            </div>  
+    		Powered by  Power by {sys:syslink /}. &copy;2009  <a href="http://www.eekku.com/" target="_blank">Eekku Studio.</a> 
+      
+	</div>
+   
+</div>
+
+
+</body>
+</html>

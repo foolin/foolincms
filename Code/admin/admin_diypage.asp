@@ -455,7 +455,7 @@ Sub FuncForm(ByVal id)
             <tr>
                 <td colspan="2">
                 	<div id="editor">
-                    <textarea id="content1" name="fCode" style="width:100%;height:550px;"><%=objA.Code%></textarea>
+                    <textarea id="content1" name="fCode" style="width:100%;height:550px;"><%=Server.HTMLEncode(objA.Code)%></textarea>
                     </div>
                 </td>
             </tr>

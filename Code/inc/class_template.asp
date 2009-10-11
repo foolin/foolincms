@@ -6,7 +6,9 @@
 ' E-mail: 		Foolin@126.com
 ' Createed on: 	2009-7-17 11:08:14
 ' Updated on: 	2009-9-25 15:50:56
-' Modify log:	  自定义页面，增加URL参数入口，可以通过URL或者Id进行浏览自定义页面。(2009-9-25 15:50:56)		
+' Modify log:	
+'   1、自定义页面，增加URL参数入口，可以通过URL或者Id进行浏览自定义页面。(2009-9-25 15:50:56）
+'	2、列表{list}增加[mylist:url]属性，对文章、图片、栏目、DIY页面数据库表有效。（2009-10-11 13:01:08）
 '=========================================================
 
 Class ClassTemplate
@@ -409,15 +411,26 @@ Class ClassTemplate
 			If Len(tagTable) = 0 Then tagTable = "Article"			'默认设为文章列表
 			If Len(tagField) = 0 Then tagField = "*"				'默认全部字段
 			
-			'纯SQL语句属性
+			'纯SQL语句模式
 			tagSQL = GetAttrValue(strAtrr, "sql", False)
-			
+
 			'当mode="table"模式时
 			If tagMode = "table" Then
 				tagSQL = "SELECT " & tagField & " FROM " & tagTable
 				If Len(tagWhere) > 0 Then tagSQL = tagSQL & " WHERE " & tagWhere
-				If Len(tagOrder) > 0 Then tagSQL = tagSQL & " ORDER BY " & tagOrder 
-			ElseIf tagMode <> "sql" Then	'mode缺省模式属性
+				If LCase(tagTable) = "artcolumn" Or LCase(tagTable) = "piccolumn" Then
+					tagSQL = tagSQL & " ORDER BY Sort DESC"
+					If Len(tagOrder) > 0 Then
+						tagSQL = tagSQL & ", " & tagOrder
+					End If
+				Else
+					If Len(tagOrder) > 0 Then
+					 	tagSQL = tagSQL & " ORDER BY " & tagOrder
+					End If
+				End If
+				
+			'mode缺省模式属性
+			ElseIf tagMode <> "sql" Then
 				tagSrc = GetAttrValue(strAtrr, "src", False)
 				tagColumn = GetAttrValue(strAtrr, "column", False)
 				If Len(tagSrc)= 0 Then tagSrc = "article"			'默认设为文章列表
@@ -452,103 +465,98 @@ Class ClassTemplate
 					Case Else
 						tagOrder = " IsTop DESC, ID DESC"
 				End Select
+				'组合成SQL
 				tagSQL = "SELECT " & tagField & " FROM " & tagTable & " WHERE " & tagWhere & " ORDER BY " & tagOrder
 			End If
 			
 			'如果缺省tagSQL值，则为默认值。
 			If Len(tagSQL) = 0 Then tagSQL = "SELECT * FORM Article Where State = 1 ORDER BY ID DESC"
 			
-			'判断是否是article|picture表，以便处理特殊标签
-			If InStr(LCase(tagSQL), "colid") > 0 Or InStr(LCase(tagSQL), "*") > 0 Then
-				If InStr(LCase(tagSQL), "article") > 0 Then
-					srcType = "article"
-				ElseIf InStr(LCase(tagSQL), "picture") > 0 Then
-					srcType = "picture"
+			srcType = GetTableBySql(tagSQL)	'通过SQL语句获取当前SQL中表
+			
+			'清空临时变量
+			strTempValue = ""
+			'是否为分页
+			If tagIsPage = True Then
+				Set objRs = New ClassPageList
+				objRs.Result = 1
+				objRs.Sql = tagSQL
+				objRs.PageSize = tagRow * tagCol 
+				objRs.AbsolutePage = mCurrPage
+				objRs.List()
+			Else
+				Set objRs = DB(tagSQL, 2)
+			End If
+			If Err Then Response.Write Warn("模板中{list}标签属性SQL出错[" & tagSQL & "] <br /><br />错误描述 : " & Err.Description): Response.End
+			'如果tagCol＞1则表格形式输出
+			If tagCol > 1 Then strTempValue = strTempValue & "<table width=""" & tagWidth & """ " & tagClass & ">" & vbCrLf
+
+			Session(CacheFlag & "List_i")  = 0
+			If tagIsPage = True Then	'判断是否分页
+				Session(CacheFlag & "List_num") = objRs.Data.RecordCount 
+			Else
+				Session(CacheFlag & "List_num") = objRs.RecordCount 
+			End If
+			If Session(CacheFlag & "List_num") > tagRow * tagCol Then Session(CacheFlag & "List_num") = tagRow * tagCol
+			j = 0	'判断col变量
+			For i = 1 To tagRow * tagCol	'循环输出记录
+				If tagIsPage = True Then	'判断是否分页
+					If objRs.Data.Eof Then Exit For	
+				Else
+					If objRs.Eof Then Exit For	'没有记录，则退出
 				End If
+				j = j + 1
+				Session(CacheFlag & "List_i")  = Session(CacheFlag & "List_i") + 1
+				If tagCol > 1 Then ' 表
+					If j = 1 Then strTempValue = strTempValue & "  <tr>" & vbCrLf
+					strTempValue = strTempValue & "	<td valign=""top"" width=""" & Round(100 / tagCol) & "%"">"
+				End If
+				'替换标签
+				If tagIsPage = True Then	'判断是否分页
+					strTempValue = strTempValue & ReplaceListTags(strListName, strInnerText, objRs.Data, srcType)
+				Else
+					strTempValue = strTempValue & ReplaceListTags(strListName, strInnerText, objRs, srcType)
+				End If
+
+					
+				If tagCol > 1 Then ' 表
+					strTempValue = strTempValue & "	</td>" & vbCrLf
+					If j = tagCol Then strTempValue = strTempValue & "  </tr>" & vbCrLf: j = 0
+				End If
+				If tagIsPage = True Then	'判断是否分页
+					objRs.Data.MoveNext
+				Else
+					objRs.MoveNext
+				End If
+			Next
+			
+			If tagCol > 1 Then
+				If j < tagCol And j > 0 Then
+					For i = 1 To tagCol - j
+						strTempValue = strTempValue & "	<td width=""" & Round(100 / tagCol) & "%""></td>" & vbCrLf
+					Next
+					strTempValue = strTempValue & "  </tr>" & vbCrLf
+				End If
+				strTempValue = strTempValue & "</table>" & vbCrLf
 			End If
 			
-			If ChkCache(mTemplate & tagSQL) Then
-				strTempValue = GetCache(mTemplate & tagSQL)
-			Else
-				strTempValue = ""
-				'是否为分页
-				If tagIsPage = True Then
-					Set objRs = New ClassPageList
-					objRs.Result = 1
-					objRs.Sql = tagSQL
-					objRs.PageSize = tagRow * tagCol 
-					objRs.AbsolutePage = mCurrPage
-					objRs.List()
-				Else
-					Set objRs = DB(tagSQL, 2)
-				End If
-				If Err Then Response.Write Warn("模板中{list}标签属性SQL出错[" & tagSQL & "] <br /><br />错误描述 : " & Err.Description): Response.End
-				'如果tagCol＞1则表格形式输出
-				If tagCol > 1 Then strTempValue = strTempValue & "<table width=""" & tagWidth & """ " & tagClass & ">" & vbCrLf
-
-				Session(CacheFlag & "List_i")  = 0
-				If tagIsPage = True Then	'判断是否分页
-					Session(CacheFlag & "List_num") = objRs.Data.RecordCount 
-				Else
-					Session(CacheFlag & "List_num") = objRs.RecordCount 
-				End If
-				If Session(CacheFlag & "List_num") > tagRow * tagCol Then Session(CacheFlag & "List_num") = tagRow * tagCol
-				j = 0	'判断col变量
-				For i = 1 To tagRow * tagCol	'循环输出记录
-					If tagIsPage = True Then	'判断是否分页
-						If objRs.Data.Eof Then Exit For	
-					Else
-						If objRs.Eof Then Exit For	'没有记录，则退出
-					End If
-					j = j + 1
-					Session(CacheFlag & "List_i")  = Session(CacheFlag & "List_i") + 1
-					If tagCol > 1 Then ' 表
-						If j = 1 Then strTempValue = strTempValue & "  <tr>" & vbCrLf
-						strTempValue = strTempValue & "	<td valign=""top"" width=""" & Round(100 / tagCol) & "%"">"
-					End If
-					'替换标签
-					If tagIsPage = True Then	'判断是否分页
-						strTempValue = strTempValue & ReplaceListTags(strListName, strInnerText, objRs.Data, srcType)
-					Else
-						strTempValue = strTempValue & ReplaceListTags(strListName, strInnerText, objRs, srcType)
-					End If
-
-						
-					If tagCol > 1 Then ' 表
-						strTempValue = strTempValue & "	</td>" & vbCrLf
-						If j = tagCol Then strTempValue = strTempValue & "  </tr>" & vbCrLf: j = 0
-					End If
-					If tagIsPage = True Then	'判断是否分页
-						objRs.Data.MoveNext
-					Else
-						objRs.MoveNext
-					End If
-				Next
-				
-				If tagCol > 1 Then
-					If j < tagCol And j > 0 Then
-						For i = 1 To tagCol - j
-							strTempValue = strTempValue & "	<td width=""" & Round(100 / tagCol) & "%""></td>" & vbCrLf
-						Next
-						strTempValue = strTempValue & "  </tr>" & vbCrLf
-					End If
-					strTempValue = strTempValue & "</table>" & vbCrLf
-				End If
-				
-				'替换分页{tag:page /}
-				If tagIsPage = True Then
-					mContent = RegReplace(mContent, "\{tag:page\s*/\}", objRs.Page)
-				End If
-
-				If tagIsPage = True Then	'判断是否分页
-					objRs.Data.Close
-					Set objRs = Nothing
-				Else
-					objRs.Close: Set objRs = Nothing
-				End If
-
+			'替换分页{tag:page /}
+			If tagIsPage = True Then
+				mContent = RegReplace(mContent, "\{tag:page\s*/\}", objRs.Page)
 			End If
+
+			If tagIsPage = True Then	'判断是否分页
+				objRs.Data.Close
+				Set objRs = Nothing
+			Else
+				'如果不是分页标签，则设置缓存
+				'Call SetCache("list_" & tagSQL, strTempValue)
+				objRs.Close: Set objRs = Nothing
+			End If
+
 			mContent = Replace(mContent, Match.Value, strTempValue) ' 替换
+
+			'判断是否存在错误
 			If Err Then Response.Write Err.Description & "<br />" : Err.Clear: Response.Write  Warn("{list}格式不合法，请检查！"): Response.End
 		Next
 		' 多次调用，列表嵌套
@@ -652,6 +660,7 @@ Class ClassTemplate
 		Dim Matches, Match, tagName, tagAttrs
 		Dim attrLen, attrLenExt, attrFormat, attrClearHtml
 		Dim clearHtmlValue
+		srcType = LCase(srcType)	'将参数srcType转为小写字母
 		'mReg.Pattern = "\[\s*list:(\S+)(\s[^\]]*)?\]"	'匹配[list:field]或者[list:field len="" lenext=""]
 		mReg.Pattern = "\[\s*" & strListName & "\s*:(.+?)\]"
 		Set Matches = mReg.Execute(strTemp)
@@ -661,18 +670,23 @@ Class ClassTemplate
 			tagAttrs = Trim(Match.SubMatches(0)) 	'标签属性
 			Select Case LCase(tagName)
 			Case "url"
-				If srcType = "article" Then
-					strTemp = Replace(strTemp, Match.Value, "article.asp?id=" & objRs("ID"))
-				ElseIf srcType = "picture" Then
-					strTemp = Replace(strTemp, Match.Value, "picture.asp?id=" & objRs("ID"))
-				Else
-					strTemp = Replace(strTemp, Match.Value, Warn(Match.Value))
-				End If
+				Select Case srcType
+				Case "article","picture","diypage"
+					strTemp = Replace(strTemp, Match.Value, srcType & ".asp?id=" & objRs("ID"))
+				Case "artcolumn"
+					strTemp = Replace(strTemp, Match.Value, "artlist.asp?id=" & objRs("ID"))
+				Case "piccolumn"
+					strTemp = Replace(strTemp, Match.Value, "piclist.asp?id=" & objRs("ID"))
+				Case Else
+					strTemp = Replace(strTemp, Match.Value, "#No_exist_this_link")
+				End Select
 			Case "colname"
 				If srcType = "article" Then
 					strTemp = Replace(strTemp, Match.Value, GetColName(objRs("ColID"), "article"))
 				ElseIf srcType = "picture" Then
 					strTemp = Replace(strTemp, Match.Value, GetColName(objRs("ColID"), "picture"))
+				ElseIf srcType = "artcolumn" Or srcType = "piccolumn" Then
+					strTemp = Replace(strTemp, Match.Value, objRs("Name"))
 				Else
 					strTemp = Replace(strTemp, Match.Value, Warn(Match.Value))
 				End If
@@ -681,6 +695,10 @@ Class ClassTemplate
 					strTemp = Replace(strTemp, Match.Value, "artlist.asp?id=" & objRs("ColID"))
 				ElseIf srcType = "picture" Then
 					strTemp = Replace(strTemp, Match.Value, "piclist.asp?id=" & objRs("ColID"))
+				ElseIf srcType = "artcolumn" Then
+					strTemp = Replace(strTemp, Match.Value, "artlist.asp?id=" & objRs("ID"))
+				ElseIf srcType = "piccolumn" Then
+					strTemp = Replace(strTemp, Match.Value, "piclist.asp?id=" & objRs("ID"))
 				Else
 					strTemp = Replace(strTemp, Match.Value, Warn(Match.Value))
 				End If

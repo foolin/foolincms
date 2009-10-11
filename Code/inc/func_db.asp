@@ -12,6 +12,7 @@ Function GetMyTag(ByVal tagName)
 	GetMyTag = "1"
 	Dim tagValue, strSql, objRs
 	strSql = "SELECT Top 1 Code FROM  MyTags WHERE NAME = """ & tagName & """ ORDER BY ID DESC"
+	'检查是否缓存
 	If IsCache = 1 Then
 		If ChkCache("MyTag_" & tagName) Then
 			tagValue = GetCache("MyTag_" & tagName)
@@ -30,7 +31,6 @@ Function GetMyTag(ByVal tagName)
 		Set objRs = DB(strSql, 1)
 		If Not objRs.Eof Then
 			tagValue = objRs("Code")
-			Call SetCache("MyTag_" & tagName, tagValue)
 		Else
 			tagValue = Warn("未初始化标签{my:" & tagName & " /}")
 		End If

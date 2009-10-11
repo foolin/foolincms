@@ -33,7 +33,7 @@ Function DefaultCode()
 	If Len(Request("ListWidth")) > 0 Then vWidth = " width=" & chr(34) & Request("ListWidth") & chr(34)
 	If Len(Request("ListClass")) > 0 Then vClass = " class=" & chr(34) & Request("ListClass") & chr(34)
 	If Len(Request("ListOrder")) > 0 Then vOrder = " order=" & chr(34) & Request("ListOrder") & chr(34)
-	If Len(Request("ListIspage")) > 0 Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
+	If LCase(Request("ListIspage")) = "true" Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
 	If LCase(Request("ListSrc")) = "picture" Then
 		vInnerCode = PicTags(vName)
 	Else
@@ -62,7 +62,7 @@ Function TableCode()
 	If Len(Request("ListCol")) > 0 Then vCol = " col=" & chr(34) & Request("ListCol") & chr(34)
 	If Len(Request("ListWidth")) > 0 Then vWidth = " width=" & chr(34) & Request("ListWidth") & chr(34)
 	If Len(Request("ListClass")) > 0 Then vClass = " class=" & chr(34) & Request("ListClass") & chr(34)
-	If Len(Request("ListIspage")) > 0 Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
+	If LCase(Request("ListIspage")) = "true" Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
 	Select Case LCase(Request("ListTable"))
 		Case "article"
 			vInnerCode = ArtTags(vName)
@@ -101,7 +101,7 @@ Function SQLCode()
 	If Len(Request("ListCol")) > 0 Then vCol = " col=" & chr(34) & Request("ListCol") & chr(34)
 	If Len(Request("ListWidth")) > 0 Then vWidth = " width=" & chr(34) & Request("ListWidth") & chr(34)
 	If Len(Request("ListClass")) > 0 Then vClass = " class=" & chr(34) & Request("ListClass") & chr(34)
-	If Len(Request("ListIspage")) > 0 Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
+	If LCase(Request("ListIspage")) = "true" Then vIspage = " ispage=" & chr(34) & Request("ListIspage") & chr(34)
 	'正则表达式获取数据库表
 	Dim Reg, Match, Matches
 	Set Reg = New RegExp
@@ -150,12 +150,12 @@ Function ArtTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览文章URL（非表中字段) --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":title] &lt;!-- 文章标题 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":content] &lt;!-- 文章内容 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览文章URL --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":colid] &lt;!-- 所属栏目ID --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":colname] &lt;!-- 所属栏目名称 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":colurl] &lt;!-- 所属栏目URL --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":colurl] &lt;!-- 所属栏目URL（非表中字段) --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":colname] &lt;!-- 所属栏目名称（非表中字段) --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":author] &lt;!-- 作者 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":source] &lt;!-- 来源 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":hits] &lt;!-- 点击率 --&gt;<br />"
@@ -179,14 +179,14 @@ Function PicTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览图片URL（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":title] &lt;!-- 标题 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":smallpicpath] &lt;!-- 图片缩略图路径,有时为空，建议使用picpath --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":picpath] &lt;!-- 图片路径 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":intro] &lt;!-- 图片介绍 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览图片URL --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":colid] &lt;!-- 所属栏目ID --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":colname] &lt;!-- 所属栏目名称 --&gt;<br />"
-	strTemp = strTemp & "&nbsp; [" & ListName & ":colurl] &lt;!-- 所属栏目URL --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":colurl] &lt;!-- 所属栏目URL（非表中字段) --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":colname] &lt;!-- 所属栏目名称（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":author] &lt;!-- 作者 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":source] &lt;!-- 来源 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":hits] &lt;!-- 点击率 --&gt;<br />"
@@ -204,6 +204,7 @@ Function ColTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览栏目URL（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":name] &lt;!-- 栏目名称 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":info] &lt;!-- 栏目信息 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":parentid] &lt;!-- 父栏目ID，若本身为父栏目则为0 --&gt;<br />"
@@ -241,6 +242,7 @@ Function MyTags(Byval ListName)
 	strTemp = "&nbsp; &lt;!-- 内层循环标签 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段）（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段）（非表中字段） --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览URL（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":name] &lt;!-- 标签名 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":info] &lt;!-- 标签描述信息 --&gt;<br />"

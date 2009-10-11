@@ -415,6 +415,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[Info] varchar(250),"&_
 		"[ParentID] integer Default 0,"&_
 		"[Template] varchar(20)"&_
+		"[Sort] integer Default 0,"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [PrimaryKey] on [ArtColumn]([ID] ) with Primary")
 	Conn.execute("CREATE INDEX [ArtClassID] on [ArtColumn]([ID] )")
@@ -502,6 +503,7 @@ Function CreateTable(strDbName, strUsername, strPassword)
 		"[Info] varchar(250),"&_
 		"[ParentID] integer Default 0,"&_
 		"[Template] varchar(20)"&_
+		"[Sort] integer Default 0,"&_
 		")")
 	Conn.execute("CREATE Unique INDEX [PrimaryKey] on [PicColumn]([ID] ) with Primary")
 	Conn.execute("CREATE INDEX [ArtClassID] on [PicColumn]([ID] )")

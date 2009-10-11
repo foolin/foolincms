@@ -204,13 +204,14 @@ Sub List()
             <th>名称</th>
             <th>栏目介绍</th>
             <th>模板</th>
+            <th>排序</th>
             <th>操作</th>
             <th>删除</th>
         </tr>
 	<%
 		Dim strSql, Rs
 			'strSql = "SELECT * FROM [ArtColumn]"
-		strSql = "SELECT * FROM [ArtColumn] WHERE ParentID = 0 ORDER BY ID"
+		strSql = "SELECT * FROM [ArtColumn] WHERE ParentID = 0 ORDER BY Sort DESC,ID"
 		Set Rs = DB(strSql, 1)
 		Set Rs = New ClassPageList
 		Rs.Result = 1
@@ -229,6 +230,7 @@ Sub List()
             </td>
             <td><%=Rs.Data("Info")%></td>
             <td><%=Rs.Data("Template")%></td>
+            <td><%=Rs.Data("Sort")%></td>
             <td>
             	<a href="?action=modify&id=<%=Rs.Data("ID")%>">编辑</a>
             </td>
@@ -249,7 +251,7 @@ End Sub
 '子栏目分类
 Function SubColumnTR(FID,StrDis)
 	Dim Rs1
-	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID, 1)
+	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID & " ORDER BY Sort DESC,ID", 1)
 	If Not Rs1.Eof Then
 		Do While Not Rs1.Eof
 %>
@@ -260,6 +262,7 @@ Function SubColumnTR(FID,StrDis)
             </td>
             <td><%=Rs1("Info")%></td>
             <td><%=Rs1("Template")%></td>
+            <td><%=Rs1("Sort")%></td>
             <td>
             	<a href="?action=modify&id=<%=Rs1("ID")%>">编辑</a>
             </td>
@@ -318,6 +321,10 @@ Sub ColForm(ByVal id)
                 <td><textarea name="fInfo" cols="62" rows="3"><%=objA.Info%></textarea></td>
             </tr>
             <tr>
+            	<td align="right" width="15%">栏目排序：</td>
+            	<td><input type="text" name="fSort" value="<%=objA.Sort%>" style="width:450px;"/> <span  style="color:gray;">(必须为数字，数字越大越前)</span> </td>
+            </tr>
+            <tr>
             	<td align="right" width="15%">模板路径：</td>
             	<td><input type="text" name="fTemplate" value="<%=objA.Template%>" style="width:450px;"/> <span  style="color:gray;">(本版暂不支持)</span> </td>
             </tr>
@@ -357,7 +364,7 @@ End Sub
 '第一级栏目分类
 Function MainColumn()
 	Dim Rs
-	Set Rs = DB( "SELECT * FROM ArtColumn WHERE ParentID = 0", 1)
+	Set Rs = DB( "SELECT * FROM ArtColumn WHERE ParentID = 0 ORDER BY Sort DESC,ID", 1)
 	If Not Rs.Eof Then
 		Do While Not Rs.Eof
 			If Rs("ID") <> Cint(Request("id")) Then
@@ -373,7 +380,7 @@ End Function
 '子栏目分类
 Function SubColumn(FID,StrDis)
 	Dim Rs1
-	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID, 1)
+	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID & " ORDER BY Sort DESC,ID", 1)
 	If Not Rs1.Eof Then
 		Do While Not Rs1.Eof
 			If Rs1("ID") <> Cint(Request("id")) Then

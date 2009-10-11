@@ -758,7 +758,7 @@ End Sub
 '第一级栏目分类
 Function MainColumn()
 	Dim Rs
-	Set Rs = DB( "SELECT * FROM ArtColumn WHERE ParentID = 0", 1)
+	Set Rs = DB( "SELECT * FROM ArtColumn WHERE ParentID = 0 ORDER BY Sort DESC,ID", 1)
 	If Not Rs.Eof Then
 		Do While Not Rs.Eof
 			Echo("<option value=""" & Rs("ID") & """>" & Rs("Name") & "</option>" & Chr(10) & Chr(9) & Chr(9))
@@ -772,7 +772,7 @@ End Function
 '子栏目分类
 Function SubColumn(FID,StrDis)
 	Dim Rs1
-	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID, 1)
+	Set Rs1 = DB("SELECT * FROM ArtColumn WHERE ParentID = " & FID & " ORDER BY Sort DESC,ID", 1)
 	If Not Rs1.Eof Then
 		Do While Not Rs1.Eof
 			Echo("<option value=""" & Rs1("ID") & """>" & StrDis & Rs1("Name") & "</option>" & Chr(10) & Chr(9))

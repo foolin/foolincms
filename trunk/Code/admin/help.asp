@@ -104,11 +104,11 @@ fieldset{ font-size:14px;}
 .intro{ color:#999;}
 .codeTipTit{color:#000;width:60%; padding-left:10px;}
 .btn{ border:#C4E1FF 1px solid; background:#F4FAFF; padding:5px; color:#090; font-weight:bold;}
-.blue{ color:blue;}
-.green{ color:green;}
-.gray{ color:gray;}
-.red{ color:red;}
-.black{ color:#000;}
+.blue{ color:blue; font-size:12px;}
+.green{ color:green; font-size:12px;}
+.gray{ color:gray; font-size:12px;}
+.red{ color:red; font-size:12px;}
+.black{ color:#000; font-size:12px;}
 h3{ margin:3px;}
 .desc{ color:#999; padding-left:5px; font-size:13px;}
 -->
@@ -291,8 +291,8 @@ function HightLightTag(id){
     <legend>标签操作选项</legend>
     <div id="ctrlOpt">
 	<form action="tags.asp?action=create" method="post" name="formList" target="showTags">
-    <table style="color:green;">
-    	<tr><td>模式（mode）：</td>
+    <table style="color:green;" width="100%">
+    	<tr><td width="120">模式（mode）：</td>
             <td>
             <select name="ListMode" onchange="changeMode(this);">
               <option value="default" <%If mode="default" Then Echo("selected=""selected""")%>>默认模式</option>
@@ -302,7 +302,7 @@ function HightLightTag(id){
             </td>
        </tr>
     	<tr><td>标签名（name）：</td>
-            <td><input name="ListName" type="text" value="MyList" /><font color="red">（ * 必填，可任意英文） </font>
+            <td><input name="ListName" type="text" value="my" /><font color="red">（ * 必填，可任意英文） </font>
             </td>
        </tr>
        
@@ -316,14 +316,14 @@ function HightLightTag(id){
               <option value="article">文章</option>
               <option value="imgart">文章[图]</option>
               <option value="picture">图片</option>
-            </select><span class="gray">文章[图]：表示带焦点图片的文章</span>
+            </select> <span class="gray">文章[图]：表示带焦点图片的文章</span>
             </td>
        </tr>
     	<tr><td>栏目（column）:</td>
-            <td><input name="ListColumn" type="text" value="" /> <span class="gray">选项值：栏目id | auto| 缺省。多id用逗号分隔。auto则自动选择栏目，省略则全部栏目。</span>
+            <td><input name="ListColumn" type="text" value="" /> <span class="gray">值：缺省 | 栏目id | auto 。缺省则全部栏目，多id用逗号分隔，auto则自动选择栏目（列表模板有效）。</span>
             </td>
        </tr>
-    	<tr><td>排序(Order)：</td>
+    	<tr><td>排序(order)：</td>
             <td><select name="ListOrder" onchange="doSubmit();">
     	  <option value="asc">ID升序</option>
     	  <option value="desc">ID逆序</option>
@@ -376,7 +376,21 @@ function HightLightTag(id){
        <%If mode = "sql" Then%>
        <!-- SQL模式 -->
     	<tr><td>SQL(sql)：</td>
-            <td><input name="ListSql" type="text" value="SELECT * FROM [表名] WHERE 条件 ORDER BY 排序方式"  style="width:500px;" /><span class="gray">（<span class="red">* 必填</span>，不分大小写。如果你不熟悉SQL，建议不使用）</span>
+            <td><input name="ListSql" type="text" value="SELECT * FROM 表名 WHERE 条件 ORDER BY 排序方式"  style="width:500px;" /><span class="gray">（<span class="red">* 必填</span>，不分大小写。如果你不熟悉SQL，建议不使用）</span>
+            </td>
+       </tr>
+        <tr><td>参考表：</td>
+            <td>
+            <select name="ListTable" onchange="doSuggestSql(this);">
+             <option value=""> ==> 参考表 <== </option>
+              <option value="Article">文章[Article]</option>
+              <option value="ArtColumn">文章栏目[ArtColumn]</option>
+              <option value="Picture">图片[Picture]</option>
+              <option value="PicColumn">图片栏目[PicColumn]</option>
+              <option value="GuestBook">留言表[GuestBook]</option>
+              <option value="MyTags">自定义标签表[MyTags]</option>
+              <option value="DiyPage">DIY页面表[DiyPage]</option>
+            </select> <span class="gray">(SQL基本语法：SELECT * FROM [表名] WHERE 条件 ORDER BY 排序方式) </span>
             </td>
        </tr>
        <%End If%>
@@ -402,7 +416,7 @@ function HightLightTag(id){
             <td>是：<input name="ListIspage"type="radio" value="true" /> 否：<input name="ListIspage" type="radio" value="false" checked="checked" /><span class="gray">（一个页面中只能用一次） </span>
             </td>
        </tr>
-    	<tr><td colspan="2"><input type="button" onclick="doSubmit();" class="btn" value="生成列表" /></td></tr>
+    	<tr><td colspan="2"><input type="button" onclick="doSubmit();" class="btn" value="生成参考代码" /></td></tr>
       </table>
      </form>
     </div>
@@ -468,6 +482,19 @@ function doSubmit(){
 	}
 	if(chkFlag) frm.submit();
 }
+
+//推荐参考表
+function doSuggestSql(objSel){
+	if (objSel.options[objSel.selectedIndex].value != ""){
+		document.forms["formList"].elements["ListSql"].value='SELECT * FROM ' + objSel.options[objSel.selectedIndex].value + ' ORDER BY ID DESC';
+		doSubmit();
+	}
+	else
+	{
+		document.forms["formList"].elements["ListSql"].value='SELECT * FROM 表名 WHERE 条件 ORDER BY 排序方式';
+	}
+}
+
 //-->
 </script>
 <%End Sub%>

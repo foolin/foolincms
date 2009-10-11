@@ -750,7 +750,7 @@ End Sub
 '第一级栏目分类
 Function MainColumn()
 	Dim Rs
-	Set Rs = DB( "SELECT * FROM PicColumn WHERE ParentID = 0", 1)
+	Set Rs = DB( "SELECT * FROM PicColumn WHERE ParentID = 0 ORDER BY Sort DESC,ID", 1)
 	If Not Rs.Eof Then
 		Do While Not Rs.Eof
 			If Rs("ID") <> Cint(Request("id")) Then
@@ -766,7 +766,7 @@ End Function
 '子栏目分类
 Function SubColumn(FID,StrDis)
 	Dim Rs1
-	Set Rs1 = DB("SELECT * FROM PicColumn WHERE ParentID = " & FID, 1)
+	Set Rs1 = DB("SELECT * FROM PicColumn WHERE ParentID = " & FID & " ORDER BY Sort DESC,ID", 1)
 	If Not Rs1.Eof Then
 		Do While Not Rs1.Eof
 			If Rs1("ID") <> Cint(Request("id")) Then

@@ -313,4 +313,25 @@ Function FilterDirtyStr(Byval pStr)
 	Next
 	FilterDirtyStr = tempStr
 End Function
+
+'正则表达式获取数据库表
+Function GetTableBySql(Byval Sql)
+	Dim Reg, Match, Matches, vTable
+	Set Reg = New RegExp
+	Reg.Ignorecase = True
+	Reg.Global = True
+	Reg.Pattern = "from\s\[?([a-z]*)\]?(?:\swhere)?"
+	Set Matches = Reg.Execute(Sql)
+	For Each Match In Matches
+		vTable = Match.SubMatches(0)
+	Next
+	Set Reg = Nothing
+	GetTableBySql = vTable
+End Function
+
+'调试
+Function Debug(Byval str)
+	Response.Write(Warn(str))
+	Response.End()
+End Function
 %>

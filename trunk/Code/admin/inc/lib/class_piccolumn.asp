@@ -17,6 +17,7 @@ Class ClassPicColumn
 	Private vInfo
 	Private vParentID
 	Private vTemplate
+	Private vSort
 	'm前缀：Menber，类成员
 	Dim mLastError
 	
@@ -36,6 +37,9 @@ Class ClassPicColumn
 	Public Property Let Template(ByVal pTemplate): vTemplate = pTemplate: End Property
 	Public Property Get Template: Template = vTemplate: End Property
 	Public Property Get ModifyTime: ModifyTime = vModifyTime: End Property
+	'Sort
+	Public Property Let Sort(ByVal pSort): vSort = pSort: End Property
+	Public Property Get Sort: Sort = vSort: End Property
 	'LastError
 	Public Property Let LastError(ByVal pLastError): mLastError = pLastError: End Property
 	Public Property Get LastError: LastError = mLastError: End Property
@@ -55,6 +59,7 @@ Class ClassPicColumn
 		vInfo = ""
 		vParentID = 0
 		vTemplate = ""
+		vSort = 0
 		mLastError = ""
 	End Function
 	
@@ -70,10 +75,13 @@ Class ClassPicColumn
 		vInfo = Request.Form("fInfo")
 		vParentID = Request.Form("fParentID")
 		vTemplate = Request.Form("fTemplate")
+		vSort = Request.Form("fSort")
 
 		If Len(vName) < 1 Or Len(vName) > 50 Then mLastError = "标题的长度请控制在 1 至 50 位" : SetValue = False : Exit Function
 		If Len(vInfo) > 20 Then mLastError = "信息的长度请控制在250 位" : SetValue = False : Exit Function
 		If Not IsNumeric(ParentID) Then mLastError = "父栏目ID必须为数字" : SetValue = False : Exit Function
+		If Len(vSort) = 0 Then vSort = 0
+		If Not IsNumeric(vSort) Then mLastError = "排序必须为数字" : SetValue = False : Exit Function
 		SetValue = True
 	End Function
 
@@ -92,6 +100,7 @@ Class ClassPicColumn
 		vInfo = Rs("Info")
 		vParentID = Rs("ParentID")
 		vTemplate = Rs("Template")
+		vSort = Rs("Sort")
 		Rs.Close
 		Set Rs = Nothing
 		LetValue = True
@@ -112,6 +121,7 @@ Class ClassPicColumn
 		Rs("Info") = vInfo
 		Rs("ParentID") = vParentID
 		Rs("Template") = vTemplate
+		Rs("Sort") = vSort
 		Rs.Update
 		Rs.Close
 		Set Rs = Nothing
@@ -126,6 +136,9 @@ Class ClassPicColumn
 	' Create on: 		2009-9-7 16:26:35
 	'--------------------------------------------------------------
 	Public Function Modify()
+		'防止父栏目是自己或者自己的子栏目，造成死循环
+		If InStr(","&GetColIds(vID, "PICTURE")&",", ","&vParentID&",") > 0 Then mLastError = "父栏目ID不能是自己或者自己子栏目！" : Modify = False : Exit Function
+		'更新修改
 		Dim Rs
 		Set Rs = DB("Select * From [PicColumn] Where [ID]=" & vID,3)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Modify = False : Exit Function
@@ -133,6 +146,7 @@ Class ClassPicColumn
 		Rs("Info") = vInfo
 		Rs("ParentID") = vParentID
 		Rs("Template") = vTemplate
+		Rs("Sort") = vSort
 		Rs.Update
 		Rs.Close
 		Set Rs = Nothing

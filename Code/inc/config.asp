@@ -1,14 +1,14 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
 <%
-Option Explicit		'强制声明
-'On Error Resume Next		'容错处理
+'Option Explicit		'强制声明
+On Error Resume Next		'容错处理
 '=========================================================
 ' File Name：	config.asp
 ' Purpose：		系统配置文件
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-10-11 10:02:47
+' Update on: 	2009-10-12 9:39:50
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 

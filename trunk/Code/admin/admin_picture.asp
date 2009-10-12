@@ -125,8 +125,14 @@ End Sub
 '披处理操作
 Sub DoBatch()
 	Dim bat: bat = Request("batch")
+	Dim colId: colId = Request("colid")
+	If Len(colId) = 0 Or Not IsNumeric(colId) Then Call MsgBox("栏目id参数错误", "BACK")
 	If Len(id) = 0 Or Not IsNumeric(id) Then Call MsgBox("id参数错误", "BACK")
 	Select Case LCase(bat)
+		Case "move"
+			Call DB("UPDATE Picture SET ColID = "& colId &" WHERE ID IN (" & id & ")", 0)
+			Call WebLog("批量移动图片[id:"& id &"]To栏目["&colId&"]成功！", "SESSION")
+			Call MsgAndGo("批量移动图片[id:"& id &"]To栏目["&colId&"]成功!", "REFRESH")
 		Case "pass"
 			Call DB("UPDATE Picture SET State = 1 WHERE ID IN (" & id & ")", 0)
 			Call WebLog("批量审核图片[id:"& id &"]成功！", "SESSION")
@@ -318,6 +324,21 @@ function BatchDelete(form){
 	}
 } 
 
+//批量移动
+function BatchMove(form){
+	var id = GetID(form);
+	if(!id){return;}
+	var colid = $("toColId").value;
+	if ( parseInt(colid) == 0){
+		alert('请选择栏目');
+		return;
+	}
+	if (confirm('确定批量移动到该栏目？')){	
+		form.action  = '?action=dobatch&batch=move&id=' + id + '&colid=' + colid;
+		form.submit();  
+	}
+}
+
 //批处理操作
 function Dobatch(objSel){
 	switch(objSel.options[objSel.selectedIndex].value){
@@ -341,6 +362,9 @@ function Dobatch(objSel){
 			break;
 		case 'delete':
 			BatchDelete(objSel.form);
+			break;
+		case 'move':
+			$("batMove").style.display = "block";
 			break;
 		default:
 			return false;
@@ -402,6 +426,35 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
 }
 .list{ font-size:13px;}
 .img{ border:#CCC 1px solid; background:#FFF; padding:5px;}
+
+.openWin{
+	position:fixed;
+	left:30%;
+	top:20%;
+	width:350px;
+	height:200px;
+	border:#E3E3E3 5px solid;
+	background:#FFF;
+	overflow:auto;
+}
+.openWin .title{
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	line-height:35px;
+	color:#666;
+	border-bottom:#E3E3E3 2px solid;
+	background:#F3F3F3;
+}
+.openWin .content{
+	padding:5px;
+	line-height:22px;
+}
+.openWin .close{
+	text-align:center;
+	padding:10px;
+}
+#batMove{ display:none;}
 -->
 </style>
 </head>
@@ -548,6 +601,7 @@ Sub List()
                 批量操作：
                 <select name="name" onChange="Dobatch(this)" style="line-height:25px; padding:5px;">
                 	<option value=""> 选择操作 </option>
+                    <option value="move"> 批量移动 </option>
                     <%If Request("list") = "trash" Then%>
                     <option value="notrash"> 还原 </option>
                     <%Else%>
@@ -559,6 +613,21 @@ Sub List()
                     <%End If%>
                     <option value="delete"> 彻底删除 </option>
                 </select>
+                
+                <div class="openWin" id="batMove">
+                        <div class="title">请选择操作</div>
+                        <div class="content">
+                       
+                            请选择的栏目：
+                            <select name="toColId" id="toColId">
+                                  <option value="0"> 请选择栏目 </option>
+                                    <%Call MainColumn()%>
+                            </select>
+                            <input type="button" value="移动" onclick="BatchMove(this.form);" />
+                            <br /> <br />
+                        </div>
+                        <div class="close"><a href="#" onclick="$('batMove').style.display='none';">[×] 关闭窗口</a></div>
+                </div>
                 
                  &nbsp; 搜索：<select name="sColId" id="sColId">
                  <option value="0"> 请选择栏目 </option>

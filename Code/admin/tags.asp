@@ -286,7 +286,7 @@ End Function
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>无标题文档</title>
+<title>标签</title>
 <style type="text/css">
 <!--
 body{
@@ -302,7 +302,7 @@ body{
 </style>
 </head>
 
-<body onload="parent.window.document.all.showTags.height=document.body.scrollHeight"> 
+<body onload="parent.window.document.getElementById('showTags').height=document.body.scrollHeight"> 
 
  <div id="showTags">
  	<%=strCode%>
@@ -348,6 +348,7 @@ function HightLightTag(){
 	strList = strList.replace(regExp, " &nbsp;<span class='desc'>&lt;!--$1--&gt;</span>");
 	//alert(strList);
 	$("showTags").innerHTML = strList;
+	
 }
 HightLightTag();
 -->

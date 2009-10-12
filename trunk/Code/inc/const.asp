@@ -2,7 +2,8 @@
 Dim SITE
 	SITE = "<a href=""" & SITEURL & """ target=""_blank"">" & SITENAME & "</a>"
 Dim TEMPLATEPATH	'模板路径
-	TemplatePath = InstallDir & "/template/" & TemplateDir
+	TemplatePath = "template/" & TemplateDir
+	'TemplatePath = InstallDir & "/template/" & TemplateDir
 
 Dim STARTTIME	'记录开始执行时间
 	STARTTIME = Timer()

@@ -259,7 +259,7 @@ function chkForm(){
             	<dt> 系统安装成功</dt>
             	<dd> 帐号：<span class="success"><%=Request("Username")%></span></dd>
                 <dd> 密码：<span class="success"><%=Request("Password")%></span></dd>
-            	<dd> 当前安装目录： <%=Replace(Request.ServerVariables("Path_Info"),"/install/index.asp", "")%> </dd>
+            	<dd> 当前安装目录： <%=GetInstallDir()%> </dd>
                 <dd> <a href="../index.asp">进入首页</a></dd>
                 <dd> <a href="../admin/login.asp">进入后台管理</a> </dd>
               <dd>&nbsp; </dd>
@@ -625,7 +625,7 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "HTTPURL = " & Chr(34) & "http://" & Request.ServerVariables("Http_Host") & Chr(34) & keyEnter
 	' INSTALLDIR变量
 	strTemp= strTemp & "Dim INSTALLDIR" & keyTab & "'网站安装目录，根目录则为：/" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "INSTALLDIR = " & Chr(34) & Replace(Request.ServerVariables("Path_Info"),"/install/index.asp", "") & Chr(34) & keyEnter
+	strTemp= strTemp & "INSTALLDIR = " & Chr(34) & GetInstallDir & Chr(34) & keyEnter
 	' SITEKEYWORDS变量
 	strTemp= strTemp & "Dim SITEKEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "SITEKEYWORDS = " & Chr(34) & "E酷网，E酷Cms，E酷工作室,www.eekku.com，零星碎事，ling.liufu.org" & Chr(34) & keyEnter
@@ -704,4 +704,11 @@ Function TestCreate()
 	End If
 End Function
 
+
+Function GetInstallDir()
+	Dim strDir: strDir = Request.ServerVariables("Path_Info")
+	strDir = Replace(strDir, "/install/index.asp", "")
+	If Trim(strDir) = "" Then strDir = "/"
+	GetInstallDir = strDir
+End Function
 %>

@@ -72,7 +72,7 @@ Function DoCreate()
 		Call WebLog("创建自定义页面[title:"&objA.Title&"]成功！", "SESSION")
 		Call MsgAndGo("创建自定义页面[title:"&objA.Title&"]成功！", "REFRESH")
 	Else
-		Call MsgBox("错误：" & objA.LastError, "REFRESH")
+		Call MsgBox("错误：" & objA.LastError, "BACK")
 	End If
 	Set objA = Nothing
 End Function
@@ -88,7 +88,7 @@ Sub DoModify()
 		Call WebLog("修改自定义页面[id:"& id &"]成功！", "SESSION")
 		Call MsgAndGo("修改自定义页面[id:"& id &"]成功！", "admin_diypage.asp")
 	Else
-		Call MsgBox("错误：" & objA.LastError, "REFRESH")
+		Call MsgBox("错误：" & objA.LastError, "BACK")
 	End If
 	Set objA = Nothing
 End Sub

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>留言簿 - {sys:sitename/} - powered by eekku.com</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:keywords /},eekkucms">
 <meta name="description" content="{sys:sitedesc /},eekkucms">
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -107,7 +107,7 @@
 
 					<ul>
                         {list:nav mode="sql" sql="SELECT ID,Title FROM DIYPAGE WHERE State=1" row="20" col="1"}
-                        <li><a href="diypage.asp?id=[nav:ID]" title="[nav:Title]">[nav:Title]</a></li>
+                        <li><a href="[nav:url]" title="[nav:title]">[nav:title]</a></li>
                         {/list:nav}
 					</ul>
 				</div>

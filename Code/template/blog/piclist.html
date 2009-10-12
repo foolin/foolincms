@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /} - {sys:siteurl /}</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:sitekeywords /}"/>
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -76,24 +76,29 @@
                 <div class="title">相册分类</div> 
                 <div class="content"> 
                     <ul>
+                    
                     <!--获取当前栏目-->
                     {list:col mode="table" row="1" col="1"  table="PicColumn" where="ID={sys:id /}"}
-                    	<li><a href="piclist.asp?id=[col:id]" title="">[col:name]</a></li>
+                    	<li><a href="[col:url]" title="">[col:name]</a></li>
                     {/list:col}
                     
                     <!--获取下一级栏目-->
                     {list:column mode="table" row="10" col="1"  table="PicColumn" where="ParentID={sys:id /}" order="id"}
                         <li>
                         	{if: {sys:id/}<>0 } |-- {/if} 	<!--判断是否有ID传入-->
-                        	<a href="piclist.asp?id=[column:id]" title="">[column:name]</a>
+                        	<a href="[column:url]" title="">[column:name]</a>
                         </li>
                      
                         {list:child mode="table" row="10" col="1"  table="PicColumn" where="ParentID=[column:id]" order="id"}
-                       		<li>&nbsp;&nbsp; |-- <a href="piclist.asp?id=[child:id]" title="">[child:name]</a></li>
+                       		<li>&nbsp;&nbsp; |-- <a href="[child:url]" title="">[child:name]</a></li>
                         {/list:child} 	
                     {/list:column}
-                    {if: {sys:id /}<>0 }<li> <== <a href="piclist.asp" title="">返回父栏目</a></li>
+                    
+                    <!--如果是子栏目，则增加返回父栏目选项-->
+                    {if: {sys:id /}<>0 }
+                    	<li> <== <a href="piclist.asp" title="">返回父栏目</a></li>
                     {/if}
+                    
                     </ul>
                 </div>
             </div> 

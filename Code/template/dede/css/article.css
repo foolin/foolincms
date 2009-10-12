@@ -4,7 +4,7 @@
 
 .pleft{
 	width:670px;
-	float:left;
+	float:right;
 	overflow:hidden;
 }
 /*---------------左侧:当前位置*/
@@ -45,7 +45,7 @@
 
 /*---------------右侧*/
 .pright{
-	float:right;
+	float:left;
 }
 /*-------------------------右侧:常规列表定义*/
 .rlist{

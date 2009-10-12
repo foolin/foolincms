@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /}</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:sitekeywords /}"/>
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -58,12 +58,12 @@ return false;
                 
                         <!--栏目-->
                         <div class="box">
-                          <div class="title"><span class="titletxt">热门文章</span><span class="more"><a href="list.html">更多>></a></span></div>
+                          <div class="title"><span class="titletxt">图片栏目</span></div>
                             <div class="content">
                                 <ul>
-                                {list:hot  row="20" col="1" order="hot"}
-                                <li><a href="[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
-								{/list:hot}
+                                    {list:col mode="sql" sql="SELECT ID,Name FROM PicColumn WHERE ParentID = 0"}
+                                     <li> <a href="[col:url]" >[col:name]</a> </li>
+                                    {/list:col}
                                 </ul>
                             </div>
                         </div>

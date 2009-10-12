@@ -46,12 +46,12 @@
                 		<div class="list">
                             <div class="list_title">最新博文</div>
 								<div class="blog">
-                                    {list:blog src="art" column="auto"  row="20" col="1" ispage="true"}
+                                    {list:blog src="art" row="20" col="1"}
                                         <dl>
-                                            <dt> <a href="{sys:siteurl /}[blog:url]">[blog:title]</a></dt>
+                                            <dt> <a href="[blog:url]">[blog:title]</a></dt>
                                             <dd>
                                             	 [blog:content len="300" lenext="..." clearhtml="true"] 
-                                                 [<a href="{sys:siteurl /}[blog:url]">阅读全文</a>]
+                                                 [<a href="[blog:url]">阅读全文</a>]
                                             </dd>
                                              <dd class="info">类别：<a href="{sys:siteurl /}[blog:colurl]">[blog:colname]</a>    浏览:[blog:hits]   时间：[blog:createtime]</dd>
                                         </dl>
@@ -70,11 +70,11 @@
                                 <ul>
                                 
                                     {list:column mode="table" row="10" col="1"  table="ArtColumn" where="ParentID={sys:id /}" order="id"}
-                                        <li><a href="artlist.asp?id=[column:id]" title="">[column:name]</a></li>
+                                        <li><a href="[column:url]" title="[column:name]">[column:name]</a></li>
                                         
                                         {if: [column:ParentID] = 0}
                                             {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
-                                            <li>|-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
+                                            <li>|-- <a href="[child:url]" title="">[child:name]</a></li>
                                             {/list:child} 	
                                         {/if}
                                         
@@ -94,7 +94,7 @@
                             <div class="content">
                                 <ul>
                                 {list:hot  row="20" col="1" order="hot"}
-                                <li><a href="{sys:siteurl}[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
+                                <li><a href="[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
 								{/list:hot}
                                 </ul>
                             </div>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{article:title/} - {sys:sitename/} - powered by eekku.com</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:keywords /},eekkucms">
 <meta name="description" content="{sys:sitedesc /},eekkucms">
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -85,7 +85,7 @@
 
 					<ul>
                     {list:artlist mode="sql" sql="SELECT ID,Name FROM ArtColumn WHERE ParentID = 0"}
-                     <li> <a href="artlist.asp?id=[artlist:id]" >[artlist:name]</a> </li>
+                     <li> <a href="[artlist:url]" >[artlist:name]</a> </li>
                     {/list:artlist}
 					</ul>
 				</div>

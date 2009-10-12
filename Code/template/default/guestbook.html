@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /}</title>
+<title>留言簿 - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:sitekeywords /}"/>
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -122,24 +122,13 @@
                 
                         <!--栏目-->
                         <div class="box">
-                          <div class="title"><span class="titletxt">栏目导航</span></div>
+                          <div class="title"><span class="titletxt">相关页面导航</span></div>
                             <div class="content">
                                 <ul>
                                 
-                                    {list:column mode="table" row="10" col="1"  table="ArtColumn" where="ParentID={sys:id /}" order="id"}
-                                        <li><a href="artlist.asp?id=[column:id]" title="">[column:name]</a></li>
-                                        
-                                        {if: [column:ParentID] = 0}
-                                            {list:child mode="table" row="10" col="1"  table="ArtColumn" where="ParentID=[column:id]" order="id"}
-                                            <li>|-- <a href="artlist.asp?id=[child:id]" title="">[child:name]</a></li>
-                                            {/list:child} 	
-                                        {/if}
-                                        
-                                    {/list:column}
-                                    
-                                    {if: {sys:id /} <> 0 }
-                                        <li> <== <a href="artlist.asp" title="">返回父栏目</a></li>
-                                    {/if}
+                                    {list:nav mode="sql" sql="SELECT ID,Title FROM DIYPAGE WHERE State=1" row="20" col="1"}
+                                    <li><a href="[nav:url]" title="[nav:title]">[nav:title]</a></li>
+                                    {/list:nav}
                                     
                                 </ul>
                             </div>

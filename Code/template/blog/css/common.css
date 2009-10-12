@@ -28,7 +28,10 @@ a:hover{ color:#F00;}
 	margin:0px auto;
 	width:960px;
 	height:70px;
-	background:#09345e url(../images/top.jpg) no-repeat;
+	background:#09345e;
+}
+.logo{
+	float:left;
 }
 .nav{
 	float:right;
@@ -66,7 +69,20 @@ a:hover{ color:#F00;}
 	padding:0px;
 	width:960px;
 	height:68px;
+	background:url(../images/banner.jpg) no-repeat;
+	text-align:left;
 	overflow:hidden;
+}
+.banner .txt{
+	font-size:14px; 
+	font-family:Verdana, Geneva, sans-serif; 
+	font-weight:bold;
+	text-indent:30px;
+	line-height:180%; 
+	color:#EEE; 
+	width:650px; 
+	margin-left:230px; 
+	margin-top:8px;
 }
 .main{
 	margin:0px auto;

@@ -686,13 +686,14 @@ HightLightTag("tagCode");
 		&nbsp; {sys:sitename /} &lt;!-- 网站名称 --&gt;<br />
         &nbsp; {sys:siteurl  /} &lt;!-- 网站地址,相当于{sys:httpurl /} + {sys:installdir /} 的组合 --&gt;<br />
         &nbsp; {sys:skinurl /} &lt;!-- 皮肤路径 --&gt;<br />
-        &nbsp; {sys:sitepath /} &lt;!-- 当前路径 --&gt;<br />
-        &nbsp; {sys:installdir /} &lt;!-- 系统安装目录 --&gt;<br />
-        &nbsp; {sys:httpurl /} &lt;!-- 站内链接前缀 --&gt;<br />
-        &nbsp; {sys:templatedir /} &lt;!-- 当前模板目录 --&gt;<br />
-        &nbsp; {sys:templatepath /} &lt;!-- 模板路径（相当于template/{sys:templatedir /}/） --&gt;<br />
+        &nbsp; {sys:title /} &lt;!-- 当前页面标题 --&gt;<br />
+        &nbsp; {sys:sitepath /} &lt;!-- 当前页面路径 --&gt;<br />
         &nbsp; {sys:sitekeywords /} &lt;!-- 网站关键字 --&gt;<br />
         &nbsp; {sys:sitedesc /} &lt;!-- 网站描述 --&gt;<br />
+        &nbsp; {sys:installdir /} &lt;!-- 系统安装目录 --&gt;<br />
+        &nbsp; {sys:httpurl /} &lt;!-- 网站域名 --&gt;<br />
+        &nbsp; {sys:templatedir /} &lt;!-- 当前模板目录 --&gt;<br />
+        &nbsp; {sys:templatepath /} &lt;!-- 模板路径（相当于template/{sys:templatedir /}/） --&gt;<br />
         &nbsp; {sys:sysname /} &lt;!-- 系统名称 --&gt;<br />
         &nbsp; {sys:sysversion /} &lt;!-- 系统当前版本  --&gt;<br />
         &nbsp; {sys:sys /} &lt;!-- 系统信息（相当于{sys:sysname /} + {sys:sysversion /}）  --&gt;<br />

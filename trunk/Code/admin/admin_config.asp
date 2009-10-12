@@ -9,14 +9,19 @@
 	keyEnter = vbcrlf & vbcrlf
 	If Len(Req("SiteName"))  = 0 Then Call MsgBox("网站名称不能为空","BACK")
 	SITENAME = Replace(Req("SiteName"), chr(34), "'")
-	If Len(Req("HttpUrl")) <> 0 Then
-		If LCase(Left(Req("HttpUrl"),7)) <> "http://" Then
-			Call MsgBox("网站网址不合法，必须为：http://开头","BACK")
+	If LCase(Request("mode")) = "auto" Then
+		HTTPURL = "http://" & Request.ServerVariables("Http_Host")
+		INSTALLDIR = GetInstallDir()
+	Else
+		If Len(Req("HttpUrl")) <> 0 Then
+			If LCase(Left(Req("HttpUrl"),7)) <> "http://" Then
+				Call MsgBox("网站网址不合法，必须为：http://开头","BACK")
+			End If
+			HTTPURL = Replace(Req("HttpUrl"), chr(34), "'")
 		End If
-		HTTPURL = Replace(Req("HttpUrl"), chr(34), "'")
-	End If
-	If Len(Req("InstallDir")) <> 0 Then
-		INSTALLDIR = Replace(Req("InstallDir"), chr(34), "'")
+		If Len(Req("InstallDir")) <> 0 Then
+			INSTALLDIR = Replace(Req("InstallDir"), chr(34), "'")
+		End If
 	End If
 	SITEKEYWORDS = Replace(Req("SiteKeywords"), chr(34), "'")
 	SITEDESC= Replace(Req("SiteDesc"), chr(34), "'")
@@ -142,6 +147,14 @@
 		Call MsgBox("对不起，配置系统失败！\n\n请按照说明自行修改inc/config.asp配置文件！","BACK")
 	End If
  End If
+ 
+ 
+Function GetInstallDir()
+	Dim strDir: strDir = Request.ServerVariables("Path_Info")
+	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录/admin”
+	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录”
+	GetInstallDir = strDir
+End Function
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -154,7 +167,7 @@
 .green {color:green;}
 .red{ color:#F00;}
 .blue{ color:blue;}
-.gray{ color:gray;}
+.gray{ color:gray; line-height:20px;}
 form{ margin:0px;}
 table.form{
 	width:100%;
@@ -174,7 +187,8 @@ table.form th{
 }
 table.form td{
 	border:#ACD8FF 1px solid;
-	padding:2px 5px;
+	border:dashed 1px #CCC;
+	padding:5px 10px;
 	line-height:20px;
 }
 input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
@@ -211,32 +225,51 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr><th colspan="2">
                                 系统配置
                             </th></tr>
-                            <tr>
-                                <td align="right" width="15%">网站名称：</td>
-                                <td><input type="text" name="SiteName" value="<%=SITENAME%>" style="width:250px;"/> <span class="gray">例如:E酷网</span></td>
+                            <%If INSTALLDIR <> GetInstallDir Then%>
+                             <tr>
+                                <td colspan="2">
+                                	<span class="red" style="font-size:12px;">注意:您网站配置安装目录为：<span class="blue"><%=INSTALLDIR%></span>，系统检测到您当前安装目录为<span class="blue"><%=GetInstallDir%></span>。这可能会出现<span class="blue">无法载入模板</span>情况，请更正配置。</span>
+                                 </td>
                             </tr>
+                            <%End If%>
                             <tr>
-                                <td align="right" width="15%">网站网址：</td>
-                                <td><input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <span class="gray">例如：http://<%=Request.ServerVariables("Http_Host")%>（不能加目录）</span></td>
-                            </tr>
-                            <tr>
-                                <td align="right" width="15%">安装目录：</td>
-                                <td><input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <span class="gray">安装目录（前面加/，后面不用加/，根目录直接用/）</span></td>
-                            </tr>
-                            <tr>
-                                <td align="right" width="15%">网站关键词：</td>
-                                <td><textarea name="SiteKeywords" cols="60" rows="3"><%=SITEKEYWORDS%></textarea>
-                                <span class="gray">网站关键词，多用逗号分隔。</span>
+                                <td align="right" width="100">网站名称：</td>
+                                <td>
+                                	<input type="text" name="SiteName" value="<%=SITENAME%>" style="width:250px;"/> <br /> <span class="gray">例如:E酷网</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">网站描述：</td>
+                                <td align="right" width="100">网站域名：</td>
+                                <td>
+                                    <input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <br /> <span class="gray">例如：http://www.eekku.com（不能加目录）。</span>
+                                    <%If HTTPURL <> ("http://"&Request.ServerVariables("Http_Host")) Then%>
+                                        <span class="blue">检测到域名为：http://<%=Request.ServerVariables("Http_Host")%></span>
+                                    <%End If%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="100">安装目录：</td>
+                                <td>
+                                	<input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <br /> <span class="gray">前面加“/”，后面不用加“/”，根目录直接用“/”。</span>
+                                    <%If INSTALLDIR <> GetInstallDir Then%>
+                                    	<span class="blue">检测到安装目录为：<%=GetInstallDir%></span>
+                                    <%End If%>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="100">网站关键词：</td>
+                                <td>
+                                	<textarea name="SiteKeywords" cols="60" rows="3"><%=SITEKEYWORDS%></textarea>									
+                               		<span class="gray">多用逗号分隔。</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="100">网站描述：</td>
                                 <td><textarea name="SiteDesc" cols="60" rows="3"><%=SITEDESC%></textarea>
-                                <span class="gray">网站描述。</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">模板：</td>
+                                <td align="right" width="100">模板：</td>
                                 <td>
                                 <select name="TemplateDir">
                                 	<option value="<%=TEMPLATEDIR%>"> => <%=TEMPLATEDIR%> <= </option>
@@ -249,81 +282,83 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                     Next
                                 %>
                                 </select>
-                                <span class="gray">请选择模板目录（例如:default表示目录template/default/）</span></td>
+                                 <span class="gray">模板目录（例如:default表示目录template/default/）</span></td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">隐藏模板路径：</td>
+                                <td align="right" width="100">隐藏模板路径：</td>
                               <td>
                               		是<input type="radio" name="IsHideTempPath" value="1" <%If ISHIDETEMPPATH=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsHideTempPath" value="0" <%If ISHIDETEMPPATH=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">隐藏路径可以防止别人下载模板，但会影响网页载入速度。</span>
+                                  &nbsp;&nbsp;<span class="gray">隐藏路径可以防止别人下载模板，但会影响网页载入速度。</span>
                               </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">开放留言：</td>
+                                <td align="right" width="100">开放留言：</td>
                               <td>
                               		是<input type="radio" name="IsOpenGbook" value="1" <%If ISOPENGBOOK=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsOpenGbook" value="0" <%If ISOPENGBOOK=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">如果开放，则游客可以留言。</span>
+                                  &nbsp;&nbsp;<span class="gray">如果开放，则游客可以留言。</span>
                               </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">审核留言：</td>
+                                <td align="right" width="100">审核留言：</td>
                               <td>
                               		是<input type="radio" name="IsAuditGbook" value="1" <%If ISAUDITGBOOK=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsAuditGbook" value="0" <%If ISAUDITGBOOK=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">是:表示需要审核留言才显示。</span>
+                                  &nbsp;&nbsp;<span class="gray">是:表示需要审核留言才显示。</span>
                               </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">留言时间间隔：</td>
+                                <td align="right" width="100">留言时间间隔：</td>
                                 <td><input type="text" name="GbookTime" value="<%=GBOOKTIME%>" style="width:250px;"/> <span class="gray">允许留言最短时间间隔，单位秒，默认60秒。</span></td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">是否缓存：</td>
+                                <td align="right" width="100">是否缓存：</td>
                               <td>
                               		是<input type="radio" name="IsCache" value="1" <%If ISCACHE=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsCache" value="0" <%If ISCACHE=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">缓存可以提高浏览页面的速度。</span>
+                                  &nbsp;&nbsp;<span class="gray">缓存可以提高浏览页面的速度。</span>
                               </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">缓存标志：</td>
-                                <td><input type="text" name="CacheFlag" value="<%=CACHEFLAG%>" style="width:250px;"/> <span class="gray">缓存标志，如果同一台服务器安装两个CMS，则必须不同。</span></td>
+                                <td align="right" width="100">缓存标志：</td>
+                                <td><input type="text" name="CacheFlag" value="<%=CACHEFLAG%>" style="width:250px;"/>  <span class="gray">缓存标志，如果同一台服务器安装两个CMS，则必须不同。</span></td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">缓存时间：</td>
-                                <td><input type="text" name="CacheTime" value="<%=CACHETIME%>" style="width:250px;"/> <span class="gray">缓存时间，默认0。</span></td>
+                                <td align="right" width="100">缓存时间：</td>
+                                <td><input type="text" name="CacheTime" value="<%=CACHETIME%>" style="width:250px;"/>  <span class="gray">缓存时间，默认0。</span></td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">限制访问者IP：</td>
+                                <td align="right" width="100">限制访问者IP：</td>
                                 <td><textarea name="LimitIp" cols="50" rows="5"><%=LIMITIP%></textarea>
                                 <span class="gray">限制访问者IP，多用|分隔。</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">脏话过滤：</td>
+                                <td align="right" width="100">脏话过滤：</td>
                                 <td><textarea name="DirtyWords" cols="50" rows="5"><%=DIRTYWORDS%></textarea>
-                                <span class="gray">多用|分隔。</span>
+                               <span class="gray">多用|分隔。</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="right" width="15%">记录管理操作：</td>
+                                <td align="right" width="100">记录管理操作：</td>
                                 <td>                              		
                               		是<input type="radio" name="IsWebLog" value="1" <%If ISWebLog=1 THEN Echo("checked=""checked""")%> />
                                 	否<input type="radio" name="IsWebLog" value="0" <%If ISWebLog=0 THEN Echo("checked=""checked""")%> />
-                                 &nbsp;&nbsp;<span class="gray">选择是否记录后台管理操作记录（管理日志）。</span>
+                                  &nbsp;&nbsp;<span class="gray">是：表示记录管理日志。</span>
                                  </td>
                             </tr>
                             <tr>
                                 <td colspan="2" align="center" >
-                                    <input type="submit" class="btn" value="提交" />
+                                    <input type="submit" class="btn" value="保存" />
                                     <input type="reset" class="btn" value="重置" />
-                                    <span class="blue" style="line-height:32px; padding:5px;">如果配置网站之后出现错误，请自行配置inc/config.asp文件。</span>
+                                     <input type="button" class="btn" value="自动配置" onclick="onAutoConfig(this.form);" />
+                                    
                                 </td>
                             </tr>
                         </table>
                     </form>
+                      <div class="blue" style="line-height:32px; padding:5px;">如果配置网站之后出现错误，请自行配置inc/config.asp文件。</div>
                     </div>
 					<script type="text/javascript">
                     <!--
@@ -355,6 +390,12 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             this.style.border = '#C4E1FF 1px solid';
                         };
                     }
+					function onAutoConfig(form){
+						if (confirm('系统会自动配置[网站域名]和[安装目录]这两个选项，其余选项不变。\n\n自动配置能解决载入模板出错问题，确定自动配置？')){	
+							form.action  = '?action=update&mode=auto';
+							form.submit();  
+						}
+					}
                     //-->
                     </script>
             </td>

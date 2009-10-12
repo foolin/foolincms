@@ -186,7 +186,7 @@ table.form th{
 }
 table.form td{
 	border:#ACD8FF 1px solid;
-	border:dashed 1px #CCC;
+	border:solid 1px #CCC;
 	padding:5px 10px;
 	line-height:20px;
 }
@@ -227,7 +227,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <%If INSTALLDIR <> GetInstallDir Then%>
                              <tr>
                                 <td colspan="2">
-                                	<span class="red" style="font-size:12px;">注意:您网站配置安装目录为：<span class="blue"><%=INSTALLDIR%></span>，系统检测到您当前安装目录为<span class="blue"><%=GetInstallDir%></span>。这可能会出现<span class="blue">无法载入模板</span>情况，请更正配置。</span>
+                                	<span class="red" style="font-size:12px;">注意:您网站配置安装目录为：<span class="blue"><%=INSTALLDIR%></span>，系统检测到您当前安装目录为<span class="blue"><%=GetInstallDir%></span>。</span>
                                  </td>
                             </tr>
                             <%End If%>
@@ -390,7 +390,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                         };
                     }
 					function onAutoConfig(form){
-						if (confirm('系统会自动配置[网站域名]和[安装目录]这两个选项，其余选项不变。\n\n自动配置能解决载入模板出错问题，确定自动配置？')){	
+						if (confirm('系统会自动配置[网站域名]和[安装目录]这两个选项，其余选项不变。\n\n确定自动配置？')){	
 							form.action  = '?action=update&mode=auto';
 							form.submit();  
 						}

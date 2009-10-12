@@ -128,7 +128,11 @@ Class ClassDiyPage
 	' Create on: 		2009-8-28 16:40:46
 	'--------------------------------------------------------------
 	Public Function Create()
-		'If SetValue = False Then Create = False: Exit Function
+		'检测是否有相同页面
+		If Len(vPageName) > 0 And ExistPage(vPageName) = True Then
+			mLastError = "DIY页面[" & vPageName & "]已存在!": Create = False: Exit Function
+		End If
+		'创建
 		Dim Rs
 		Set Rs = DB("Select * From [DiyPage]",3)
 		Rs.AddNew
@@ -157,6 +161,11 @@ Class ClassDiyPage
 		Dim Rs
 		Set Rs = DB("Select * From [DiyPage] Where [ID]=" & vID,3)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Modify = False : Exit Function
+		If Rs("PageName") <> vPageName Then
+			If Len(vPageName) > 0 And ExistPage(vPageName) = True Then
+				mLastError = "DIY页面[" & vPageName & "]已存在!":  Modify = False : Exit Function
+			End If
+		End If
 		Rs("Title") = vTitle
 		Rs("Keywords") = vKeywords
 		Rs("PageName") = vPageName
@@ -184,6 +193,19 @@ Class ClassDiyPage
 		If Not Rs.Eof Then mLastError = "你删除记录[" & Rs("ID") & "]是系统定义页面!": Rs.Close: Set Rs = Nothing :  Delete = False : Exit Function
 		DB "Delete From [DiyPage] Where [ID] IN(" & vID &")" ,0
 		Delete = True
+	End Function
+	
+	'判断页面是否存在
+	Public Function ExistPage(Byval pageName)
+		Dim Rs, Flag
+		Set Rs = DB("Select [ID] From [DiyPage] Where [PageName]='" & pageName & "'",1)
+		If Not Rs.Eof Then
+			Flag = True
+		Else
+			Flag = False
+		End If
+		Rs.Close : Set Rs = Nothing
+		ExistPage = Flag
 	End Function
 
 End Class

@@ -96,7 +96,7 @@ Class ClassMyTag
 	' Create on: 		2009-8-28 16:40:46
 	'--------------------------------------------------------------
 	Public Function Create()
-		'If SetValue = False Then Create = False: Exit Function
+		If ExistTag(vName) = True Then mLastError = "标签已经[" & vName & "]已存在!": Create = False: Exit Function
 		Dim Rs
 		Set Rs = DB("Select * From [MyTags]",3)
 		Rs.AddNew
@@ -120,6 +120,9 @@ Class ClassMyTag
 		Dim Rs
 		Set Rs = DB("Select * From [MyTags] Where [ID]=" & vID,3)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing : mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Modify = False : Exit Function
+		If Rs("Name") <> vName Then
+			If ExistTag(vName) = True Then mLastError = "标签已经[" & vName & "]已存在!":  Modify = False : Exit Function
+		End If
 		Rs("Name") = vName
 		Rs("Info") = vInfo
 		Rs("Code") = vCode
@@ -139,6 +142,19 @@ Class ClassMyTag
 	Public Function Delete()
 		DB "Delete From [MyTags] Where [ID] In (" & vID &")" ,0
 		Delete = True
+	End Function
+	
+	'判断标签是否存在
+	Public Function ExistTag(Byval tagName)
+		Dim Rs, Flag
+		Set Rs = DB("Select [ID] From [MyTags] Where [Name]='" & tagName & "'",1)
+		If Not Rs.Eof Then
+			Flag = True
+		Else
+			Flag = False
+		End If
+		Rs.Close : Set Rs = Nothing
+		ExistTag = Flag
 	End Function
 
 End Class

@@ -152,6 +152,7 @@ Function GetInstallDir()
 	Dim strDir: strDir = Request.ServerVariables("Path_Info")
 	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录/admin”
 	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录”
+	If Trim(strDir) = "" Then strDir = "/"
 	GetInstallDir = strDir
 End Function
 %>

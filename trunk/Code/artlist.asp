@@ -4,7 +4,11 @@ Dim page: page = CPage(Req("page"))	'当前页数
 Dim id: id = Req("id")
 If Len(id) = 0 Or Not IsNumeric(id) Then id = 0
 If InStr(id, ",") > 0 Then id = Mid(id, 1, InStr(id, ",") - 1)
-Dim SitePath: SitePath = ColPath(id, 0)	'当前路径
+'当前页标题
+Dim Title: Title = "文章列表"	
+If id > 0 Then Title = GetNameOfColumn(id, "ARTICLE") & " - 文章列表"
+'当前路径
+Dim SitePath: SitePath = ColPath(id, 0)	
 
 Dim tpl	'模板类实例
 Set tpl = New ClassTemplate

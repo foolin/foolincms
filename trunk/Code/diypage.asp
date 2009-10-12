@@ -9,8 +9,10 @@ ElseIf Len(Req("url")) > 0 Then
 Else
 	Response.Write(Warn("参数错误，请检查！")): Response.End()
 End If
-Dim SitePath: SitePath = DiyPagePath(param)	'当前路径
-
+'当前页标题
+Dim Title: Title = "DIY页面": Title = GetTitleOfDiypage(param)
+'当前路径
+Dim SitePath: SitePath = DiyPagePath(param)	
 
 Dim tpl	'模板类实例
 Set tpl = New ClassTemplate

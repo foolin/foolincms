@@ -211,4 +211,66 @@ Function GetColLink(ByVal id, ByVal colType)
 	Rs.Close: Set Rs = Nothing
 	GetColLink = strLink
 End Function
+
+'获取栏目的名称
+'artlist.asp中Title调用
+Function GetNameOfColumn(Byval colid, Byval colType)
+	Dim strName, Rs, strSql, strType
+	If LCase(colType) = "picture" Then
+		strType = "图片"
+		strSql = "SELECT Name FROM PicColumn WHERE ID= " & colid
+	Else
+		strType = "文章"
+		strSql = "SELECT Name FROM ArtColumn WHERE ID= " & colid
+	End If
+	If Len(id) = 0 Or Not IsNumeric(id) Then GetNameOfColumn = strType & "列表": Exit Function
+	Set Rs = DB(strSql, 1)
+	If Not Rs.Eof Then
+		strName = Rs("Name")
+	Else
+		strName = strType & "列表"
+	End If
+	Rs.Close: Set Rs = Nothing
+	GetNameOfColumn = strName
+End Function
+
+'获取文章、图片的标题
+'article.asp(picture.asp)中Title调用
+Function GetTitleOfArtOrPic(Byval id, Byval colType)
+	Dim strTitle, Rs, strSql
+	If LCase(colType) = "picture" Then
+		strSql = "SELECT Title FROM Picture WHERE ID= " & id
+	Else
+		strSql = "SELECT Title FROM Article WHERE ID= " & id
+	End If
+	If Len(id) = 0 Or Not IsNumeric(id) Then GetTitleOfArtOrPic = "": Exit Function
+	Set Rs = DB(strSql, 1)
+	If Not Rs.Eof Then
+		strTitle = Rs("Title")
+	Else
+		strTitle = strType & "列表"
+	End If
+	Rs.Close: Set Rs = Nothing
+	GetTitleOfArtOrPic = strTitle
+End Function
+
+'获取自定义页面的标题
+'diypage.asp中Title调用
+Function GetTitleOfDiypage(Byval param)
+	Dim strTitle, Rs, strSql
+	If Len(param) = 0 Then GetTitleOfDiypage= "自定义页面": Exit Function
+	If IsNumeric(param) Then
+		strSql = "SELECT Title FROM DiyPage WHERE ID = " & param
+	Else
+		strSql = "SELECT Title FROM DiyPage WHERE PageName = '" & param & "'"
+	End If
+	Set Rs = DB(strSql, 1)
+	If Not Rs.Eof Then
+		strTitle = Rs("Title")
+	Else
+		strTitle = "自定义页面"
+	End If
+	Rs.Close: Set Rs = Nothing
+	GetTitleOfDiypage = strTitle
+End Function
 %>

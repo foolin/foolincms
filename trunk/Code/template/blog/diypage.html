@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /} - {sys:siteurl /}</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:sitekeywords /}"/>
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
                 <div class="content"> 
                     <ul>
                     {list:diypage mode="sql" sql="SELECT ID,Title FROM DiyPage WHERE State = 1"}
-                     <li> <a href="diypage.asp?id=[diypage:id]" >[diypage:title]</a> </li>
+                     <li> <a href="[diypage:url]" >[diypage:title]</a> </li>
                     {/list:diypage}
                     </ul>
                 </div>

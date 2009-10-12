@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /}</title>
+<title>{sys:sitename /} - {sys:title /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:sitekeywords /}"/>
 <meta name="description" content="{sys:sitedesc /}"/>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -104,7 +104,7 @@
                        
                        		 <!--栏目-->
                             <div class="box fixheight fixwidth">
-                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="artlist.asp?id=[column:id]">更多>></a></span></div>
+                              <div class="title"><span class="titletxt">[column:name]</span><span class="more"><a href="[column:url]">更多>></a></span></div>
                                 <div class="content">
                                   <table>
                                   {list:art src="art" column="[column:id]" row="10" col="1" order="last"}
@@ -164,7 +164,7 @@
                             <div class="content">
                                 <div style="text-align:center;">
                                 {list:pic src="pic" row="5" col="1" order="last"}
-                                <a href="[pic:url]"><img src="[pic:PicPath]" class="img" width="140" height="100" /></a> 
+                                <a href="[pic:url]"><img src="[pic:picpath]" class="img" width="140" height="100" /></a> 
                                 {/list:pic}
                                 </div>
                             </div>

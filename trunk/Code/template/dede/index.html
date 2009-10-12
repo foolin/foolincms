@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{sys:sitename /} - powered by eekku.com</title>
+<title>{sys:title /} - {sys:sitename /} - Powered by eekku.com</title>
 <meta name="keywords" content="{sys:keywords /},eekkucms">
 <meta name="description" content="{sys:sitedesc /},eekkucms">
 <link href="css/common.css" rel="stylesheet" type="text/css" />
@@ -113,7 +113,7 @@ document.write('<embed src="images/focus.swf" wmode="opaque" FlashVars="bcastr_f
 		<div class="newsbox">
             {list:col mode="table" table="ArtColumn" where="parentid=0" row="20" col="1"}
 			<dl class="margintop">
-				<dt><a href="artlist.asp?id=[col:id]">[col:name] </a></dt>
+				<dt><a href="[col:url]">[col:name] </a></dt>
 				<dd>
 					<ul>
                 	{list:art src="article" row="5" column="[col:id]" col="1" order="last"}
@@ -179,23 +179,6 @@ document.write('<embed src="images/focus.swf" wmode="opaque" FlashVars="bcastr_f
 		</div>
         <!--热点关注结束-->
       
-        <!--测试新标签-->
-		<div class="rlist margintop">
-			<div class="title">测试新URl标签</div>
-				<div class="rbox gplist">
-					<dl>
-						<dd>
-							<ul>
-                               {list:test mode="table" table="ArtColumn" order="ID Desc" where="1111" row="10" col="1"}
-
-                	 			 <li><span class="gptlink"><a href="[test:url]">[test:name len="40"]</a></span></li>
-                    		   {/list:test} 
-							</ul>
-						</dd>
-					</dl>
-				</div>
-		</div>
-        <!--测试新标签-->
 
 		<!--栏目-->
 		<div class="rlist margintop">

@@ -443,6 +443,7 @@ function HightLightTag(id){
 </div>
 <script type="text/javascript">
 <!--
+//每个文本框增加onkeyup检测提交
 var oInputs = document.getElementsByTagName("input");
 for(var i = 0; i < oInputs.length; i++){
 	 if(oInputs.item(i).name != "" && oInputs.item(i).type == "text"){
@@ -454,7 +455,12 @@ for(var i = 0; i < oInputs.length; i++){
 				this.style.background='#FFF';
 				this.style.border = '#C4E1FF 1px solid';
 			};
-			oInputs.item(i).onkeyup = function(){doSubmit();};
+			if(oInputs.item(i).name == "ListColumn"){
+				oInputs.item(i).onblur = function(){isValidColumn(this);}
+			}
+			else{
+				oInputs.item(i).onkeyup = function(){doSubmit();};
+			}
 	 }
 	 if(oInputs.item(i).name != "" && oInputs.item(i).type == "radio"){
 		 oInputs.item(i).onclick = function(){doSubmit();};
@@ -465,22 +471,52 @@ function changeMode(objSel){
 	this.top.location.href = '?action=list&mode=' + objSel.options[objSel.selectedIndex].value;
 }
 
+//检查栏目是否合法
+function isValidColumn(_this){
+	if ( _this.value != "" && isNaN(_this.value) && 
+		!(/^\d+(,\d+)*$/g.test(_this.value)) && _this.value != "auto"){
+		alert("栏目（column）不合法！");
+		return;
+	}
+	doSubmit();
+}
+
+//提交获取数据前，检测是否合法
 function doSubmit(){
-	var chkFlag = true;
 	var frm = document.forms["formList"];
+	var row = frm.elements["ListRow"].value;
+	var col = frm.elements["ListCol"].value;
 	if(frm.elements["ListName"].value == ""){
-		chkFlag = false;
 		alert("列表名不能为空");
+		return;
 	}
-	if( !(/^\d+$/g.test(frm.elements["ListRow"].value))){
-		chkFlag = false;
+	if(isNaN(row)){
 		alert("行数(Row)必须为数字");
+		return;
 	}
-	if( !(/^\d+$/g.test(frm.elements["ListCol"].value))){
-		chkFlag = false;
+	if(row <= 0){
+		alert("行数(Row)必须大于1");
+		return;
+	}
+	if(isNaN(col)){
 		alert("列数(Col)必须为数字");
+		return;
 	}
-	if(chkFlag) frm.submit();
+	if(col <= 0){
+		alert("列数(Col)必须大于1");
+		return;
+	}
+	/*
+	if( /^\d+$/g.test(frm.elements["ListRow"].value) == false){
+		alert("行数(Row)必须为数字");
+		return;
+	}
+	if( /^\d+$/g.test(frm.elements["ListCol"].value) == false){
+		alert("列数(Col)必须为数字");
+		return;
+	}
+	*/
+	frm.submit();
 }
 
 //推荐参考表
@@ -546,51 +582,40 @@ function doSuggestSql(objSel){
     <fieldset>
     <legend>标签参考代码</legend>
     	选择内容标签：<select name="TagType" onchange="doSel(this);">
-        	 <option value="artcommon">文章[公共](article.html)</option>
-              <option value="article">文章(article.html)</option>
-              <option value="piccommon">图片[公共](picture.html)</option>
-              <option value="picture">图片(picture.html)</option>
+        	 <option value="artcommon">文章[field](article.html)</option>
+              <option value="article">文章[article](article.html)</option>
+              <option value="piccommon">图片[field](picture.html)</option>
+              <option value="picture">图片[article](picture.html)</option>
             </select>
     <div id="tagCode">
     
-    
+   <h4 class="black">1、基本标签语法：</h4> 
     
 		<div id="artcommon">
-        
-<h4 class="black">1、基本标签语法：</h4>
-			&nbsp; {field:id /} &lt;!-- ID标识符（自动排序） --&gt;<br />&nbsp; {field:title /} &lt;!-- 文章标题 --&gt;<br />&nbsp; {field:content /} &lt;!-- 文章内容 --&gt;<br />&nbsp; {field:colid /} &lt;!-- 所属栏目ID --&gt;<br />&nbsp; {field:author /} &lt;!-- 作者 --&gt;<br />&nbsp; {field:source /} &lt;!-- 来源 --&gt;<br />&nbsp; {field:hits /} &lt;!-- 点击率 --&gt;<br />&nbsp; {field:focuspic /} &lt;!-- 焦点图片 --&gt;<br />&nbsp; {field:keywords /} &lt;!-- 关键词 --&gt;<br />&nbsp; {field:createtime /} &lt;!-- 创建时间 --&gt;<br />&nbsp; {field:modifytime /} &lt;!-- 修改时间 --&gt;<br />&nbsp; {field:istop /} &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />&nbsp; {field:isfocuspic /} &lt;!-- 是否焦点图片：1 - 是， 0 - 否 --&gt;<br />&nbsp; {field:state /} &lt;!-- 文章状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />
-            <div class="green">备注：亦可把<span class="red">{field:id /}</span>简写成为<span class="red">{article:id /}、{art:id /}</span>， 其输出是等价的。</div>
-            
 
+			&nbsp; {field:id /} &lt;!-- ID标识符（自动排序） --&gt;<br />&nbsp; {field:title /} &lt;!-- 文章标题 --&gt;<br />&nbsp; {field:content /} &lt;!-- 文章内容 --&gt;<br />&nbsp; {field:colid /} &lt;!-- 所属栏目ID --&gt;<br />&nbsp; {field:author /} &lt;!-- 作者 --&gt;<br />&nbsp; {field:source /} &lt;!-- 来源 --&gt;<br />&nbsp; {field:hits /} &lt;!-- 点击率 --&gt;<br />&nbsp; {field:focuspic /} &lt;!-- 焦点图片 --&gt;<br />&nbsp; {field:keywords /} &lt;!-- 关键词 --&gt;<br />&nbsp; {field:createtime /} &lt;!-- 创建时间 --&gt;<br />&nbsp; {field:modifytime /} &lt;!-- 修改时间 --&gt;<br />&nbsp; {field:istop /} &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />&nbsp; {field:isfocuspic /} &lt;!-- 是否焦点图片：1 - 是， 0 - 否 --&gt;<br />&nbsp; {field:state /} &lt;!-- 文章状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />
+            
         </div>
         
         
         
         <div id="article" style='display:none;'>
         
-<h4 class="black">1、基本标签语法：</h4>
            &nbsp; {article:id /} &lt;!-- ID标识符（自动排序） --&gt;<br />&nbsp; {article:title /} &lt;!-- 文章标题 --&gt;<br />&nbsp; {article:content /} &lt;!-- 文章内容 --&gt;<br />&nbsp; {article:colid /} &lt;!-- 所属栏目ID --&gt;<br />&nbsp; {article:author /} &lt;!-- 作者 --&gt;<br />&nbsp; {article:source /} &lt;!-- 来源 --&gt;<br />&nbsp; {article:hits /} &lt;!-- 点击率 --&gt;<br />&nbsp; {article:focuspic /} &lt;!-- 焦点图片 --&gt;<br />&nbsp; {article:keywords /} &lt;!-- 关键词 --&gt;<br />&nbsp; {article:createtime /} &lt;!-- 创建时间 --&gt;<br />&nbsp; {article:modifytime /} &lt;!-- 修改时间 --&gt;<br />&nbsp; {article:istop /} &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />&nbsp; {article:isfocuspic /} &lt;!-- 是否焦点图片：1 - 是， 0 - 否 --&gt;<br />&nbsp; {article:state /} &lt;!-- 文章状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;
             <br />
-            <div class="green">备注：亦可把<span class="red">{article:id /}</span>简写成为<span class="red">{art:id /}、{field:id /}</span>， 其输出是等价的。</div>
-            
 
         </div>
         
-        
-        
         <div id="piccommon" style="display:none">
-<h4 class="black">1、基本标签语法：</h4>
+
 			&nbsp; {field:id /} &lt;!-- ID标识符（自动排序） --&gt;<br />&nbsp; {field:title /} &lt;!-- 标题 --&gt;<br />&nbsp; {field:smallpicpath /} &lt;!-- 图片缩略图路径,有时为空，建议使用picpath --&gt;<br />&nbsp; {field:picpath /} &lt;!-- 图片路径 --&gt;<br />&nbsp; {field:intro /} &lt;!-- 图片介绍 --&gt;<br />&nbsp; {field:colid /} &lt;!-- 所属栏目ID --&gt;<br />&nbsp; {field:author /} &lt;!-- 作者 --&gt;<br />&nbsp; {field:source /} &lt;!-- 来源 --&gt;<br />&nbsp; {field:hits /} &lt;!-- 点击率 --&gt;<br />&nbsp; {field:createtime /} &lt;!-- 创建时间 --&gt;<br />&nbsp; {field:istop /} &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />&nbsp; {field:state /} &lt;!-- 图片状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />
-			 <div class="green">备注：亦可把<span class="red">{field:id /}</span>写成为<span class="red">{picture:id /}、{pic:id /}、{image:id /}、{img:id /}</span>， 其输出是等价的。</div>
-        </div>
-        
-        
-        
+            </div>
+
         
         <div id="picture" style="display:none">
-<h4 class="black">1、基本标签语法：</h4>
+
 				&nbsp; {picture:id /} &lt;!-- ID标识符（自动排序） --&gt;<br />&nbsp; {picture:title /} &lt;!-- 标题 --&gt;<br />&nbsp; {picture:smallpicpath /} &lt;!-- 图片缩略图路径,有时为空，建议使用picpath --&gt;<br />&nbsp; {picture:picpath /} &lt;!-- 图片路径 --&gt;<br />&nbsp; {picture:intro /} &lt;!-- 图片介绍 --&gt;<br />&nbsp; {picture:colid /} &lt;!-- 所属栏目ID --&gt;<br />&nbsp; {picture:author /} &lt;!-- 作者 --&gt;<br />&nbsp; {picture:source /} &lt;!-- 来源 --&gt;<br />&nbsp; {picture:hits /} &lt;!-- 点击率 --&gt;<br />&nbsp; {picture:createtime /} &lt;!-- 创建时间 --&gt;<br />&nbsp; {picture:istop /} &lt;!-- 是否置顶：1 - 置顶， 0 - 不置顶 --&gt;<br />&nbsp; {picture:state /} &lt;!-- 图片状态：1 - 已经审核， 0 - 未审核， -1 - 已删除 --&gt;<br />
-                <div class="green">备注：亦可把<span class="red">{picture:id /}</span>写成为<span class="red">{pic:id /}、{field:id /}、{image:id /}、{img:id /}</span>， 其输出是等价的。</div>
+                
         </div>
     </div>
     </fieldset>

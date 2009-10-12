@@ -7,66 +7,65 @@
 	
 	keyTab = Chr(9) & Chr(9)
 	keyEnter = vbcrlf & vbcrlf
-	If Len(Req("SiteName"))  = 0 Then Call MsgBox("网站名称不能为空","BACK")
-	SITENAME = Replace(Req("SiteName"), chr(34), "'")
+	If Len(Request("SiteName"))  = 0 Then Call MsgBox("网站名称不能为空","BACK")
+	SITENAME = Replace(Request("SiteName"), chr(34), "'")
 	If LCase(Request("mode")) = "auto" Then
 		HTTPURL = "http://" & Request.ServerVariables("Http_Host")
 		INSTALLDIR = GetInstallDir()
 	Else
-		If Len(Req("HttpUrl")) <> 0 Then
-			If LCase(Left(Req("HttpUrl"),7)) <> "http://" Then
+		If Len(Request("HttpUrl")) <> 0 Then
+			If LCase(Left(Request("HttpUrl"),7)) <> "http://" Then
 				Call MsgBox("网站网址不合法，必须为：http://开头","BACK")
 			End If
-			HTTPURL = Replace(Req("HttpUrl"), chr(34), "'")
+			HTTPURL = Replace(Request("HttpUrl"), chr(34), "'")
 		End If
-		If Len(Req("InstallDir")) <> 0 Then
-			INSTALLDIR = Replace(Req("InstallDir"), chr(34), "'")
+		If Len(Request("InstallDir")) <> 0 Then
+			INSTALLDIR = Replace(Request("InstallDir"), chr(34), "'")
 		End If
 	End If
-	SITEKEYWORDS = Replace(Req("SiteKeywords"), chr(34), "'")
-	SITEDESC= Replace(Req("SiteDesc"), chr(34), "'")
-	If  Len(Req("IsHideTempPath")) <> 0 And Cint(Req("IsHideTempPath")) = 1 Then
+	SITEKEYWORDS = Replace(Request("SiteKeywords"), chr(34), "'")
+	SITEDESC= Replace(Request("SiteDesc"), chr(34), "'")
+	If  Len(Request("IsHideTempPath")) <> 0 And Cint(Request("IsHideTempPath")) = 1 Then
 		ISHIDETEMPPATH = 1
 	Else
 		ISHIDETEMPPATH = 0
 	End If
-	If Len(Req("TemplateDir")) = 0 Then
+	If Len(Request("TemplateDir")) = 0 Then
 		Call MsgBox("模板目录不能为空","BACK")
 	End If
-	TEMPLATEDIR = Req("TemplateDir")
-	If  Len(Req("IsOpenGbook")) <> 0 And Cint(Req("IsOpenGbook")) = 1 Then
+	TEMPLATEDIR = Request("TemplateDir")
+	If  Len(Request("IsOpenGbook")) <> 0 And Cint(Request("IsOpenGbook")) = 1 Then
 		ISOPENGBOOK = 1
 	Else
 		ISOPENGBOOK = 0
 	End If
-	If  Len(Req("IsAuditGbook")) <> 0 And Cint(Req("IsAuditGbook")) = 1 Then
+	If  Len(Request("IsAuditGbook")) <> 0 And Cint(Request("IsAuditGbook")) = 1 Then
 		ISAUDITGBOOK = 1
 	Else
 		ISAUDITGBOOK = 0
 	End If
-	If Len(Req("GbookTime")) = 0 Or Not IsNumeric(Req("GbookTime")) Then
+	If Len(Request("GbookTime")) = 0 Or Not IsNumeric(Request("GbookTime")) Then
 		GBOOKTIME = 60
 	Else
-		GBOOKTIME = Req("GbookTime")
+		GBOOKTIME = Request("GbookTime")
 	End If
-	If  Len(Req("IsCache")) <> 0 And Cint(Req("IsCache")) = 1 Then
+	If  Len(Request("IsCache")) <> 0 And Cint(Request("IsCache")) = 1 Then
 		ISCACHE = 1
 	Else
 		ISCACHE = 0
 	End If
-	If Len(Req("CacheFlag")) = 0 Then
-		CACHEFLAG = "EEKKU_COM"
-	Else
-		CACHEFLAG = Req("CacheFlag")
+	CACHEFLAG = Replace(Request("CacheFlag"), chr(34), "'")
+	If Len(Request("CacheFlag")) = 0 Then
+		CACHEFLAG = "EEKKU_"
 	End If
-	If Len(Req("CacheTime")) = 0 Or Not IsNumeric(Req("CacheTime")) Then
+	If Len(Request("CacheTime")) = 0 Or Not IsNumeric(Request("CacheTime")) Then
 		CACHETIME = 60
 	Else
-		CACHETIME = Req("CacheTime")
+		CACHETIME = Request("CacheTime")
 	End If
-	LIMITIP =  Replace(Req("LimitIp"), chr(34), "'")
-	DIRTYWORDS = Replace(Req("DirtyWords"), chr(34), "'")
-	If  Len(Req("IsWebLog")) <> 0 And Cint(Req("IsWebLog")) = 1 Then
+	LIMITIP =  Replace(Request("LimitIp"), chr(34), "'")
+	DIRTYWORDS = Replace(Request("DirtyWords"), chr(34), "'")
+	If  Len(Request("IsWebLog")) <> 0 And Cint(Request("IsWebLog")) = 1 Then
 		ISWEBLOG = 1
 	Else
 		ISWEBLOG = 0

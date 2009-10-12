@@ -66,10 +66,10 @@ Dim Url,Urli,Urlr
 Url = CStr(Request.ServerVariables("SCRIPT_NAME"))
 Urli = Request("urli")
 Urlr = Request("urlr")
-If len(Urli) = 0 Then Urli =  "/" & INSTALLDIR  & "/template/" &  Urli 
-If len(Urlr) = 0 Then Urlr = "/" & INSTALLDIR  & "/template/"
-If InStr(Urli, INSTALLDIR  & "/template/") = 0 Then Urli = "/" & INSTALLDIR  & "/template/"
-If InStr(Urli, INSTALLDIR  & "/template/") = 0 Then Urli = "/" & INSTALLDIR  & "/template/"
+If len(Urli) = 0 Then Urli =  "../template/" &  Urli 
+If len(Urlr) = 0 Then Urlr = "../template/"
+If InStr(Urli, "/template/") = 0 Then Urli = "../template/"
+If InStr(Urli, "/template/") = 0 Then Urli = "../template/"
 Urli = replace(Urli,"//","/")
 Urlr = replace(Urlr,"//","/")
 

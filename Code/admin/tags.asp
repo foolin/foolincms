@@ -286,7 +286,7 @@ End Function
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>标签</title>
+<title>标签 - Powered by eekku.com</title>
 <style type="text/css">
 <!--
 body{

@@ -126,10 +126,10 @@ End Sub
 Sub DoBatch()
 	Dim bat: bat = Request("batch")
 	Dim colId: colId = Request("colid")
-	If Len(colId) = 0 Or Not IsNumeric(colId) Then Call MsgBox("栏目id参数错误", "BACK")
 	If Len(id) = 0 Or Not IsNumeric(id) Then Call MsgBox("id参数错误", "BACK")
 	Select Case LCase(bat)
 		Case "move"
+			If Len(colId) = 0 Or Not IsNumeric(colId) Then Call MsgBox("栏目id参数错误", "BACK")
 			Call DB("UPDATE Picture SET ColID = "& colId &" WHERE ID IN (" & id & ")", 0)
 			Call WebLog("批量移动图片[id:"& id &"]To栏目["&colId&"]成功！", "SESSION")
 			Call MsgAndGo("批量移动图片[id:"& id &"]To栏目["&colId&"]成功!", "REFRESH")

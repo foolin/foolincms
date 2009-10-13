@@ -8,12 +8,12 @@ On Error Resume Next		'容错处理
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-10-13 0:00:17
+' Update on: 	2009-10-13 9:00:45
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
 Dim DBPATH		'Access数据库路径
-	DBPATH = "database/Fl28#Ek_7348D432AF.mdb"
+	DBPATH = "database/data.mdb"
 
 Dim SITENAME		'网站名称
 	SITENAME = "E酷科技网"
@@ -31,7 +31,7 @@ Dim SITEDESC		'网站描述
 	SITEDESC = "E酷Cms(EekkuCMS)是一种小型站点内容管理系统，内含文章、图片、留言等基本功能，简单且方便使用！"
 
 Dim TEMPLATEDIR		'网站模板路径，例如：default表示template/default/
-	TEMPLATEDIR = "blog"
+	TEMPLATEDIR = "default"
 
 Dim ISHIDETEMPPATH		'是否隐藏模板路径，隐藏则会影响载入速度
 	ISHIDETEMPPATH = 0

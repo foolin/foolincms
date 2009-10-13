@@ -113,7 +113,7 @@ Sub Main(ByVal strType)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title><%=SITENAME%>后台管理 - 自定义页面管理 - <%=SYS%></title>
+<title><%=SITENAME%>后台管理 - 自定义页面管理 - Powered by eekku.com</title>
 <script type="text/javascript" src="inc/base.js"></script>
 <link href="images/common.css" rel="stylesheet" type="text/css" />
 <style type="text/css">

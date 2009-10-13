@@ -40,9 +40,9 @@
 
 <%Sub Footer()%>
     <div id="footer">
-    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="index.asp?action=clearcache">更新缓存</a>  | <a href="help.asp">用户帮助</a>  | <a href="http://www.liufu.org/ling" target="_blank">最新版本</a><br />
+    	<a href="../index.asp" target="_blank">网站首页</a> | <a href="index.asp?action=clearcache">更新缓存</a>  | <a href="help.asp">用户帮助</a>  | <a href="http://www.eekku.com" target="_blank">最新版本</a><br />
        <%=Session("AdminName")%>，欢迎您进入[<%=sitename%>]后台管理。　<br />
-     &copy; 2009  Power by <%=studio%> ，System kernel：<%=syslink%><br />
+     &copy; 2009 <%=studio%> All rights reserved。Powered by<%=syslink%><br />
     </div>
 	<iframe height="0" width="0" frameborder="0" src="keeponline.asp" scrolling="no"></iframe>
 <%End Sub%>
@@ -61,6 +61,6 @@
             <dt>--== 网站信息 ==--</dt>
             <dd>网站:<a href="<%=siteurl%>" target="_blank"><%=sitename%></a></dd>
             <dd>网址:<a href="<%=siteurl%>" target="_blank"><%=siteurl%></a></dd>
-            <dd><a href="http://www.eekku.com"><%=syslink%></a></dd>
+            <dd>内核:<a href="http://www.eekku.com"><%=syslink%></a></dd>
         </dl>
 <%End Sub%>

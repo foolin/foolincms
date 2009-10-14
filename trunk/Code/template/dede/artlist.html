@@ -68,6 +68,7 @@
 				<div class="rbox gplist">
 
 					<ul>
+                    <!-- 文章栏目无限分级start -->
                     
                     <!--获取当前栏目-->
                     {list:col mode="table" row="1" col="1"  table="ArtColumn" where="ID={sys:id /}"}
@@ -92,6 +93,9 @@
                         <li> <== <a href="artlist.asp" title="">返回父栏目</a></li>
                      {/if}
                      
+                     
+                     <!-- 文章栏目无限分级end -->
+                     
 					</ul>
 				</div>
 		</div>
@@ -102,7 +106,7 @@
 				<div class="rbox gplist">
                         <ul>
                            {list:art src="article" row="10" col="1" order="hot"}
-                             <li><span class="gptlink"><a href="[art:url]">[art:title len="40"]</a></span></li>
+                             <li><span class="gptlink"><a href="[art:url]">[art:title len="25"]</a></span></li>
                            {/list:art}
                         </ul>
 				</div>

@@ -329,6 +329,25 @@ Function GetTableBySql(Byval Sql)
 	GetTableBySql = vTable
 End Function
 
+'检查组件是否被支持及组件版本的子程序
+Function ObjTest(strObj)
+	on error resume next
+	IsObj = False
+	'VerObj=""
+	dim TestObj
+	set TestObj = Server.CreateObject (strObj)
+	If -2147221005 <> Err Then
+		IsObj = True
+		'VerObj = TestObj.version
+		'if VerObj="" or isnull(VerObj) then VerObj=TestObj.about
+	End If
+	ObjTest = IsObj
+End Function
+
+Function ObjTest2(strObj)
+	
+End Function
+
 '调试
 Function Debug(Byval str)
 	Response.Write(Warn(str))

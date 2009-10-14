@@ -259,6 +259,7 @@ Function DiypageTags(Byval ListName)
 	strTemp = strTemp & "&nbsp; [" & ListName & ":i] &lt;!-- i输出时的序号（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":num] &lt;!-- 记录总数（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":id] &lt;!-- ID标识符（自动排序） --&gt;<br />"
+	strTemp = strTemp & "&nbsp; [" & ListName & ":url] &lt;!-- 浏览URL（非表中字段） --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":title] &lt;!-- 页面标题 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":pagename] &lt;!-- 该页面文件名 --&gt;<br />"
 	strTemp = strTemp & "&nbsp; [" & ListName & ":keywords] &lt;!-- 页面关键词 --&gt;<br />"

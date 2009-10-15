@@ -390,7 +390,7 @@ End Function
 'µº»ÎSQL”Ôæ‰
 Function CreateTable(strDbName, strUsername, strPassword)
 	Dim Conn: Set Conn=Server.CreateObject("ADODB.Connection")
-	If Instr(DbName,":\")=0 And Instr(DbName,":/")=0 Then
+	If Instr(strDbName,":\")=0 And Instr(strDbName,":/")=0 Then
 		strDbName = Server.MapPath("../database/" & strDbName)
 	End If 
 	Conn.open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDbName

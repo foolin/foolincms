@@ -744,7 +744,7 @@ function cgimg(o){
             	<td align="right">ÉÏ´«Í¼Æ¬£º</td>
                 <td>
                     <div id="uploadFocusPic">
-                    <iframe frameborder="0" src="inc/uploader/upload_picture.asp" width="80%" height="30"></iframe>
+                    <iframe frameborder="0" src="inc/upload_picture.asp" width="80%" height="30"></iframe>
                      &nbsp;<span class="red">* ±ØÌî</span>
                     </div>
                 </td>

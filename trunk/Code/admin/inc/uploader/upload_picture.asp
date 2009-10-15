@@ -1,6 +1,7 @@
-<!--#include file="../../inc/admin.func_chkadmin.asp"-->
-<!--#include file="../../../inc/class_upload.asp"-->
+<!--#include file="../../../inc/config.asp"-->
 <!--#include file="../../../inc/func_file.asp"-->
+<!--#include file="../admin.func_chkadmin.asp"-->
+<!--#include file="../class_upload.asp"-->
 <%
  Call ChkLogin()
 
@@ -14,7 +15,7 @@
  End Function
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>上传焦点图片</title>
@@ -33,10 +34,10 @@ if request.QueryString("act")="upload" then
  Dim strFolder:  strFolder = "upload/images/" & GetFolderName
 '===============================================================================
  set Upload=new AnUpLoad				 				'创建类实例
- Upload.SingleSize=300*1024            			'设置单个文件最大上传限制,按字节计；默认为不限制
+ Upload.SingleSize=300*1024            					'设置单个文件最大上传限制,按字节计；默认为不限制
  Upload.MaxSize=1024*1024*1024            				'设置最大上传限制,按字节计；默认为不限制
- Upload.Exe="bmp|png|jpg|gif"          				'设置合法扩展名,以|分割,忽略大小写
- Upload.Charset="gb2312"								'设置文本编码，默认为gb2312
+ Upload.Exe="bmp|png|jpg|gif"          					'设置合法扩展名,以|分割,忽略大小写
+ Upload.Charset = CHARSET								'设置文本编码，默认为gb2312
  Upload.openProcesser=false								'禁止进度条功能，如果启用，需配合客户端程序
  Upload.GetData()										'获取并保存数据,必须调用本方法
 '===============================================================================

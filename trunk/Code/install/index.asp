@@ -1,4 +1,4 @@
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
+<!--#include file="../inc/config.asp"-->
 <!--#include file="../inc/func_common.asp"-->
 <!--#include file="../inc/func_file.asp"-->
 <!--#include file="../inc/md5.asp"-->
@@ -16,8 +16,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; varcharset=gb2312" />
-   <title>E酷内容管理系统-安装</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>E酷内容管理系统-安装</title>
 <style type="text/css">
 <!--
 body{
@@ -602,10 +602,12 @@ Function CreateConfig(DbName)
 	Dim strSiteName: strSiteName = Replace(Trim(Request("Sitename")), """", "")
 	If Len(strSiteName) = 0 Then strSiteName = "E酷工作室"
 	'系统信息
-	strTemp =  Chr(60) & "%@LANGUAGE=""VBSCRIPT"" CODEPAGE=""936""%" & Chr(62) & Chr(10)
+	strTemp =  Chr(60) & "%@LANGUAGE=""VBSCRIPT"" CODEPAGE="""& CODEPAGE &"""%" & Chr(62) & Chr(10)
 	strTemp = strTemp & Chr(60) & "%" & Chr(10)
 	strTemp = strTemp & "'Option Explicit" & keyTab & "'强制声明" & Chr(10)
 	strTemp = strTemp & "On Error Resume Next" & keyTab & "'容错处理" & Chr(10)
+	strTemp= strTemp & "Dim CODEPAGE: CODEPAGE = " & Chr(34) & CODEPAGE & Chr(34) & keyTab & "'页面编码65001|936" & Chr(10)
+	strTemp= strTemp & "Dim CHARSET: CHARSET = " & Chr(34) & CHARSET & Chr(34)& keyTab & "'编码名称utf-8|gb2312" & Chr(10)
 	strTemp = strTemp & "'=========================================================" & Chr(10)
 	strTemp = strTemp & "' File Name：	config.asp" & Chr(10)
 	strTemp = strTemp & "' Purpose：		系统配置文件" & Chr(10)

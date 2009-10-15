@@ -874,30 +874,15 @@ Class ClassTemplate
 		End If
 		GetAttrValue = tagValue
 	End Function
-
+	
 	' 载入模板
 	Private Function LoadTemplate()
-		Dim Obj
-		On Error Resume Next
-		Set Obj = Server.CreateObject("adodb.stream")
-		With Obj
-			.Type = 2: .Mode = 3: .Open: .Charset = "GB2312" : .Position = Obj.Size: .Loadfromfile Server.Mappath(mTemplate): mContent = .ReadText: .Close
-		End With
-		Set Obj = Nothing
-		If Err Then Response.Write Err.Description & Warn("无法加载模板[" & mTemplate & "]"):Response.End
+		mContent = GetFile(mTemplate)
 	End Function
 	
-	' 载入文件
-	Private Function LoadFile(ByVal strFilePath)
-		Dim objFile, strTempConent
-		On Error Resume Next
-		Set objFile = Server.CreateObject("adodb.stream")
-		With objFile
-			.Type = 2: .Mode = 3: .Open: .Charset = "GB2312" : .Position = objFile.Size: .Loadfromfile Server.Mappath(strFilePath): strTempConent = .ReadText: .Close
-		End With
-		Set objFile = Nothing
-		If Err Then  Response.Write Err.Description & Warn("无法加载文件[" & strFilePath & "]"): Response.End
-		LoadFile = strTempConent
+	'载入文件
+	Function LoadFile(ByVal strFilePath)
+		LoadFile = GetFile(strFilePath)
 	End Function
 
 	

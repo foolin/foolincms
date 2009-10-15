@@ -72,10 +72,12 @@
 	End If
 	
 	'系统信息
-	strTemp =  Chr(60) & "%@LANGUAGE=""VBSCRIPT"" CODEPAGE=""936""%" & Chr(62) & Chr(10)
+	strTemp =  Chr(60) & "%@LANGUAGE=""VBSCRIPT"" CODEPAGE="""& CODEPAGE &"""%" & Chr(62) & Chr(10)
 	strTemp = strTemp & Chr(60) & "%" & Chr(10)
 	strTemp = strTemp & "'Option Explicit" & keyTab & "'强制声明" & Chr(10)
 	strTemp = strTemp & "On Error Resume Next" & keyTab & "'容错处理" & Chr(10)
+	strTemp= strTemp & "Dim CODEPAGE: CODEPAGE = " & Chr(34) & CODEPAGE & Chr(34) & keyTab & "'页面编码65001|936" & Chr(10)
+	strTemp= strTemp & "Dim CHARSET: CHARSET = " & Chr(34) & CHARSET & Chr(34)& keyTab & "'编码名称utf-8|gb2312" & Chr(10)
 	strTemp = strTemp & "'=========================================================" & Chr(10)
 	strTemp = strTemp & "' File Name：	config.asp" & Chr(10)
 	strTemp = strTemp & "' Purpose：		系统配置文件" & Chr(10)

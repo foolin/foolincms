@@ -9,19 +9,6 @@
 ' CopyRight (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
-' 读取文件文件
-Function ReadFile(ByVal strFilePath)
-	On Error Resume Next
-	Dim objFile, strTempConent
-	Set objFile = Server.CreateObject("adodb.stream")
-	With objFile
-		.Type = 2: .Mode = 3: .Open: .Charset = "GB2312" : .Position = objFile.Size: .Loadfromfile Server.Mappath(strFilePath): strTempConent = .ReadText: .Close
-	End With
-	Set objFile = Nothing
-	If Err Then  Response.Write Err.Description & Warn("无法加载文件[" & strFilePath & "]"): Response.End
-	ReadFile = strTempConent
-End Function
-
 '是否存在文件
 Function ExistFile(ByVal strFilePath)
 	Dim objFso, isExist

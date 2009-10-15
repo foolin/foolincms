@@ -1,14 +1,16 @@
 <%@LANGUAGE="VBSCRIPT" CODEPAGE="936"%>
 <%
-'Option Explicit		'强制声明
-On Error Resume Next		'容错处理
+Option Explicit		'强制声明
+'On Error Resume Next		'容错处理
+Dim CodePage: CodePage = "936"		'页面编码65001|936
+Dim CHARSET: CHARSET = "GB2312"		'编码名称utf-8|gb2312
 '=========================================================
 ' File Name：	config.asp
 ' Purpose：		系统配置文件
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-10-14 16:08:17
+' Update on: 	2009-10-15 14:28:07
 ' Copyright (c) 2009 E酷工作室（Foolin）All Rights Reserved
 '=========================================================
 
@@ -31,7 +33,7 @@ Dim SITEDESC		'网站描述
 	SITEDESC = "E酷Cms(EekkuCMS)是一种小型站点内容管理系统，内含文章、图片、留言等基本功能，简单且方便使用！"
 
 Dim TEMPLATEDIR		'网站模板路径，例如：default表示template/default/
-	TEMPLATEDIR = "dede"
+	TEMPLATEDIR = "default"
 
 Dim ISHIDETEMPPATH		'是否隐藏模板路径，隐藏则会影响载入速度
 	ISHIDETEMPPATH = 0

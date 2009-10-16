@@ -19,7 +19,7 @@ Dim SKINURL		'皮肤目录Url，方便调用images/css
 	SKINURL = Replace(SKINURL, "http:/", "http://")
 	
 Dim PLUGINURL		'插件目录Url
-	PLUGINURL	= SITEURL & "plugin/"
+	PLUGINURL	= SITEURL & "plugins/"
 	
 Dim SITEPATHSPLIT	'路径分隔符
 	SITEPATHSPLIT = " → "

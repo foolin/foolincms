@@ -23,8 +23,8 @@
 			INSTALLDIR = Replace(Request("InstallDir"), chr(34), "'")
 		End If
 	End If
-	SITEKEYWORDS = Replace(Request("SiteKeywords"), chr(34), "'")
-	SITEDESC= Replace(Request("SiteDesc"), chr(34), "'")
+	KEYWORDS = Replace(Request("Keywords"), chr(34), "'")
+	DESCRIPTION = Replace(Request("Description"), chr(34), "'")
 	If  Len(Request("IsHideTempPath")) <> 0 And Cint(Request("IsHideTempPath")) = 1 Then
 		ISHIDETEMPPATH = 1
 	Else
@@ -100,11 +100,11 @@
 	strTemp= strTemp & "Dim INSTALLDIR" & keyTab & "'网站安装目录，根目录则为：/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "INSTALLDIR = " & Chr(34) & INSTALLDIR & Chr(34) & keyEnter
 	' SITEKEYWORDS变量
-	strTemp= strTemp & "Dim SITEKEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "SITEKEYWORDS = " & Chr(34) & SITEKEYWORDS & Chr(34) & keyEnter
+	strTemp= strTemp & "Dim KEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "KEYWORDS = " & Chr(34) & KEYWORDS & Chr(34) & keyEnter
 	' SITEDESC变量
-	strTemp= strTemp & "Dim SITEDESC" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "SITEDESC = " & Chr(34) & SITEDESC & Chr(34) & keyEnter
+	strTemp= strTemp & "Dim DESCRIPTION" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "DESCRIPTION = " & Chr(34) & DESCRIPTION & Chr(34) & keyEnter
 	' TEMPLATEDIR变量
 	strTemp= strTemp & "Dim TEMPLATEDIR" & keyTab & "'网站模板路径，例如：default表示template/default/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "TEMPLATEDIR = " & Chr(34) & TEMPLATEDIR & Chr(34) & keyEnter
@@ -261,13 +261,13 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr>
                                 <td align="right" width="100">网站关键词：</td>
                                 <td>
-                                	<textarea name="SiteKeywords" cols="60" rows="3"><%=SITEKEYWORDS%></textarea>									
+                                	<textarea name="Keywords" cols="60" rows="3"><%=KEYWORDS%></textarea>									
                                		<span class="gray">多用逗号分隔。</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="right" width="100">网站描述：</td>
-                                <td><textarea name="SiteDesc" cols="60" rows="3"><%=SITEDESC%></textarea>
+                                <td><textarea name="Description" cols="60" rows="3"><%=DESCRIPTION%></textarea>
                                 </td>
                             </tr>
                             <tr>

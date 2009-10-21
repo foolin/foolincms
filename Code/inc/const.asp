@@ -1,4 +1,10 @@
 <%
+Dim SITEKEYWORDS	'网站关键词（保持V1.0.3以前版本兼容性）
+	SITEKEYWORDS = KEYWORDS
+
+Dim SITEDESC		'网站描述（保持V1.0.3以前版本兼容性）
+	SITEDESC = DESCRIPTION
+
 Dim SITE
 	SITE = "<a href=""" & SITEURL & """ target=""_blank"">" & SITENAME & "</a>"
 Dim TEMPLATEPATH	'模板路径

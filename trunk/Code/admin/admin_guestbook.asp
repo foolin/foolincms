@@ -422,7 +422,7 @@ Sub FuncForm(ByVal id)
             <tr>
             	<td align="right" width="15%">ÄúµÄÃû×Ö£º</td>
                 <td>
-                    <input type="text" name="fReUser" value="<%=Session("AdminName")%>"/>
+                    <input type="text" name="fReUser" value="<%=GetLogin("AdminNickname")%>"/>
                 </td>
             </tr>
             <tr>

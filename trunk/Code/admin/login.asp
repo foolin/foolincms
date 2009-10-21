@@ -8,7 +8,7 @@ If Request("action") = "login" Then
 		Call MsgBox("用户名的长度不能少于3个字符。", "REFRESH")
 	End If
 	If Request("ChkCode") <> Session("ChkCode") Then
-		Call MsgBox("验证码不正确！", "REFRESH")
+		Call MsgBox("验证码不正确！", "BACK")
 	End If
 	Dim Rs, strSql, rsUsername, rsPassword
 		strSql = "Select * From [Admin] Where [Username]='"&strUserName&"' and [Password]='"&strPassword&"'"
@@ -37,10 +37,14 @@ If Request("action") = "login" Then
 		Rs("LoginCount") = Rs("LoginCount") + 1
 		Rs("LoginIP") = GetIP()
 		Rs.Update
+		'写入登录信息
+		Call SetLogin("AdminName", Rs("Username"))
+		Call SetLogin("AdminNickname", Rs("Nickname"))
+		Call SetLogin("AdminLevel", Rs("Level"))
+		Call SetLogin("AdminPassword", MD5(Rs("Password")&Rs("LoginTime")))
 		Call WebLog("用户[User:"& strUsername &"]登录成功！", strUsername)	'增加记录
-		Session("AdminName") = Rs("Username")		'设置Session变量
-		Session("AdminLevel") = Rs("Level")
-		Session.Timeout = 120
+		'自动删除30天前的Log记录
+		Call DB("DELETE FROM WebLog WHERE DateDiff('d',CreateTime,now())>30", 0)
 	Rs.Close
 	Set Rs = Nothing
 	Call ConnClose()

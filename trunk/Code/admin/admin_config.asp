@@ -227,10 +227,10 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                             <tr><th colspan="2">
                                 系统配置
                             </th></tr>
-                            <%If INSTALLDIR <> GetInstallDir Then%>
+                            <%If LCase(INSTALLDIR) <> LCase(GetInstallDir) Then%>
                              <tr>
                                 <td colspan="2">
-                                	<span class="red" style="font-size:12px;">注意:您网站配置安装目录为：<span class="blue"><%=INSTALLDIR%></span>，系统检测到您当前安装目录为<span class="blue"><%=GetInstallDir%></span>。</span>
+                                	<span class="red" style="font-size:12px;">注意:您网站配置安装目录为：<span class="blue"><%=INSTALLDIR%></span>，系统检测到您当前安装目录为<span class="blue"><%=GetInstallDir%></span>。这可能会导致网站运行不正常，请检查。</span>
                                  </td>
                             </tr>
                             <%End If%>
@@ -244,7 +244,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 <td align="right" width="100">网站域名：</td>
                                 <td>
                                     <input type="text" name="HttpUrl" value="<%=HTTPURL%>" style="width:250px;"/> <br /> <span class="gray">例如：http://www.eekku.com（不能加目录）。</span>
-                                    <%If HTTPURL <> ("http://"&Request.ServerVariables("Http_Host")) Then%>
+                                    <%If LCase(HTTPURL) <> LCase("http://"&Request.ServerVariables("Http_Host")) Then%>
                                         <span class="blue">检测到域名为：http://<%=Request.ServerVariables("Http_Host")%></span>
                                     <%End If%>
                                 </td>
@@ -253,7 +253,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
                                 <td align="right" width="100">安装目录：</td>
                                 <td>
                                 	<input type="text" name="InstallDir" value="<%=INSTALLDIR%>" style="width:250px;"/> <br /> <span class="gray">前面加“/”，后面不用加“/”，根目录直接用“/”。</span>
-                                    <%If INSTALLDIR <> GetInstallDir Then%>
+                                    <%If LCase(INSTALLDIR) <> LCase(GetInstallDir) Then%>
                                     	<span class="blue">检测到安装目录为：<%=GetInstallDir%></span>
                                     <%End If%>
                                  </td>

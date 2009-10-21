@@ -13,6 +13,15 @@ If LCase(Act) = "clearcache" Then
 	Call ClearCache()
 	Call MsgAndGo("更新缓存成功!", "index.asp")
 End If 
+
+'获取安装目录
+Function GetInstallDir()
+	Dim strDir: strDir = Request.ServerVariables("Path_Info")
+	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录/admin”
+	strDir = Left(strDir,InStrRev(strDir,"/")-1)	'返回“/安装目录”
+	If Trim(strDir) = "" Then strDir = "/"
+	GetInstallDir = strDir
+End Function
 %>
 <!DOCTYPE html PUBLIC "=//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1=transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -51,6 +60,16 @@ End If
 	border-top:solid 1px #BCE1FC;
 }
 .sysinfo p{ margin:5px; padding:5px;}
+.warning{
+	padding:5px;
+	color:#F00;
+	font-size:14px;
+	background:#FFFFD7;
+	background:#FF6;
+
+	border:solid 1px #F30;
+	margin:3px;
+}
 -->
 </style>
 </head>
@@ -78,6 +97,13 @@ End If
             </td>
             <td id="content" valign="top" height="100%">
               <div class="content">
+              
+					<%If LCase(INSTALLDIR) <> LCase(GetInstallDir) Then%>
+                     <div class="warning">
+                        注意:您网站配置[安装目录]为：<span style="color:#00F;"><%=INSTALLDIR%></span>，而系统检测到[安装目录]为<span style="color:#00F;"><%=GetInstallDir%></span>。请检查<a href="admin_config.asp">[系统配置]</a>...
+                     </div> 
+                    <%End If%>
+                    
                   <div class="indexNav">
                   	<ul>
                     	<li><a href="modify_password.asp">修改密码</a> | </li>
@@ -89,14 +115,11 @@ End If
                     </ul>
                  	<div class="clear"></div>
                     <div class="sysinfo">
-                          &nbsp; <b style="color:#093;"><%=Session("AdminName")%>，欢迎您进入后台管理。</b><br /> 
-                		<p>
-                        
-                	 &nbsp;网站名称:&nbsp;&nbsp;&nbsp; <%=SITE%><br />
-                     &nbsp;网站网址:&nbsp;&nbsp;&nbsp; <a href="<%=SITEURL%>"><%=SITEURL%></a><br />
-       
-                            </p>
-                           
+
+                      &nbsp; <b style="color:#093;"><%=GetLogin("AdminNickname")%>，欢迎您进入后台管理。</b><br />  
+                	<p> &nbsp;网站名称:&nbsp;&nbsp;&nbsp; <%=SITE%><br />
+                     	&nbsp;网站网址:&nbsp;&nbsp;&nbsp; <a href="<%=SITEURL%>"><%=SITEURL%></a><br />
+                     </p>    
 
                   </div>
                   
@@ -127,6 +150,10 @@ End If
                       <tr height="18">
                         <td align="left" class="td">&nbsp;脚本超时时间：</td>
                         <td class="td">&nbsp;<%=Server.ScriptTimeout%> 秒</td>
+                      </tr>
+                      <tr height="18">
+                        <td align="left" class="td">&nbsp;Persits.Jpeg(AspJpeg)组件：</td>
+                        <td class="td">&nbsp;<%=IIF(IsObjInstalled("Persits.Jpeg"),"√支持","×不支持")%></td>
                       </tr>
                       <tr height="18">
                         <td align="left" class="td">&nbsp;本文件路径：</td>

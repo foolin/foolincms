@@ -5,8 +5,17 @@ Function WebLog(ByVal strAction, ByVal strUser)
 		If Len(Trim(strUser)) = 0 Then
 			strUser = "游客"
 		End If
-		If UCase(strUser) = "SESSION" Then
-			strUser = Session("AdminName")
+		Select Case UCase(strUser)
+			Case "SESSION"
+				strUser = Session("AdminName")
+			Case "COOKIES"
+				strUser = GetCookies("AdminName")
+			Case "SELF"
+				strUser = GetCookies("AdminName")
+		End Select
+		'如果用户名为空，则为自己
+		If Len(strUser) = 0 Then
+			strUser = GetCookies("AdminName")
 		End If
 		DB "INSERT INTO WebLog(Username, UserAction, UserIP, ActionUrl, CreateTime) VALUES('" & strUser & "', '" & strAction & "', '" & GetIP() & "', '" & Request.ServerVariables("HTTP_REFERER") & "', '" & Now() & "')", 0
 	End If

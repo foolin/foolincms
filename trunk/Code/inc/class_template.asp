@@ -138,8 +138,8 @@ Class ClassTemplate
 		Call Parser_Include(3)	'执行包含文件分析处理
 		Call Parser_MyTag()		'执行自定义标签分析处理
 		Call Parser_Sys()		'执行系统标签分析处理
-		Call Parser_List(-1)		'执行List列表标签分析
 		Call Parser_Field(id, blnIsPic)	'执行Field标签标签分析
+		Call Parser_List(-1)		'执行List列表标签分析
 		Call Parser_IF()	
 	End Function
 	

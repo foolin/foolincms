@@ -248,7 +248,7 @@ Function GetTitleOfArtOrPic(Byval id, Byval colType)
 	If Not Rs.Eof Then
 		strTitle = Rs("Title")
 	Else
-		strTitle = strType & "列表"
+		strTitle = "列表"
 	End If
 	Rs.Close: Set Rs = Nothing
 	GetTitleOfArtOrPic = strTitle

@@ -4,7 +4,7 @@
  If LCase(Request("action")) = "update" Then
 	Dim rRs
 	Dim rUsername, rNickname, rOldPassword, rPassword
-	rUsername = Session("AdminName")
+	rUsername = GetCookies("AdminName")
 	rNickname = Req("fNickname")
 	rOldPassword = Req("fOldPassword")
 	If Req("fPassword") <> "" Then
@@ -26,7 +26,7 @@
  
  Dim objRs
  Dim strUsername, strNickname
- Set objRs = DB("SELECT Username,Nickname FROM Admin WHERE Username = '" & Session("AdminName") & "'", 1)
+ Set objRs = DB("SELECT Username,Nickname FROM Admin WHERE Username = '" & GetCookies("AdminName") & "'", 1)
   If objRs.Eof Then objRs.Close: Set objRs = Nothing: Call MsgBox("’ ∫≈∑«∑®£°«Î÷ÿ–¬µ«¬º£°" ,"logout.asp")
   strUsername = objRs("Username")
   strNickname = objRs("Nickname")
@@ -146,7 +146,7 @@ input{ background:#FFFFFF; padding:3px; border:#C4E1FF 1px solid;}
 						function chkForm(){
 							if( $("fNickname").value == ""){
 								alert("«Î ‰»ÎÍ«≥∆£°");
-								$("fOldPassword").focus();
+								$("fNickname").focus();
 								return false;
 							}
 							if( $("fOldPassword").value == ""){

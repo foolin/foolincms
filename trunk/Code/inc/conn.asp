@@ -6,13 +6,15 @@ End If
 
 '打开数据库连接
 Dim ConnStr, Conn
-ConnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath(DBPath)
+ConnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath(InstallDir & "/" & DBPath)
 Set   Conn=Server.CreateObject("ADODB.Connection")  
 Conn.Open ConnStr
 If Err Then
 	Err.Clear
 	Set Conn = Nothing
-	Response.Write "数据库连接出错，请检查数据库连接文件中的数据库参数设置。"
+	Response.Write("数据库连接出错，请检查您网站配置参数是否正确。<br /><br />")
+	Response.Write("提示：登录后台管理 → 系统配置 → 自动配置 → 完成。<br /><br />")
+	Response.Write("如果有任何疑问，请到官方进行反馈<a href='http://www.eekku.com'>http://www.eekku.com</a>。<br />")
 	Response.End
 End If
 %>

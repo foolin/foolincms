@@ -1,9 +1,26 @@
 <%
 Function ChkLogin()
-	If Session("AdminName")="" or Session("AdminLevel")="" Then
-		Response.write "<script type='text/javascript'>alert('你尚未登录');window.close();history.go(-1);</script>"
+	Dim blnFlag: blnFlag = False
+	Dim strAdminName, strAdminPassword
+	strAdminName = GetLogin("AdminName")
+	strAdminPassword = GetLogin("AdminPassword")
+	If strAdminName="" And strAdminPassword="" Then
+		Response.write "<script type='text/javascript'>alert('你尚未登录');window.close();this.top.location.href='login.asp';history.go(-1);</script>"
 		Response.End()
 	End If
+	'验证登陆
+	Dim Rs
+	Set Rs = DB("SELECT Password,LoginTime FROM Admin WHERE Username = '"& strAdminName &"'", 1)
+	If Rs.Eof Then
+		Call MsgBox("尚未登录或者登录超时","logout.asp")
+		Response.End()
+	End If
+	If Md5(Rs("Password")&Rs("LoginTime"))<> strAdminPassword Then
+		Call MsgBox("非法登录","logout.asp")
+		Response.End()
+	End If
+	blnFlag = True
+	ChkLogin = blnFlag
 End Function
 
 '检查权限函数，chkType检查类型，chkAct-检查的操作
@@ -12,7 +29,7 @@ End Function
 Function ChkPower(Byval chkType, Byval chkAct)
 	ChkLogin()
 	Dim bFlag: bFlag = False
-	Dim UserLevel: UserLevel = Cint(Session("AdminLevel"))
+	Dim UserLevel: UserLevel = Cint(GetLogin("AdminLevel"))
 	Dim LowPower, NormalPower, HightPower, SuperPower
 	LowPower = "|article|picture|guestbook|"	'初级管理员
 	NormalPower = "|article|picture|guestbook|artcolumn|piccolumn|"	'普通管理员

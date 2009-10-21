@@ -475,8 +475,8 @@ function changeMode(objSel){
 function isValidColumn(_this){
 	if ( _this.value != "" && isNaN(_this.value) && 
 		!(/^\d+(,\d+)*$/g.test(_this.value)) && _this.value != "auto"){
-		alert("栏目（column）不合法！");
-		return;
+		alert("栏目（column）可能不合法！");
+		//return;
 	}
 	doSubmit();
 }

@@ -56,7 +56,7 @@ End Sub
 Function DoCreate()
 	Dim objC: Set objC = New ClassPicture
 	If objC.SetValue = False Then
-		Call MsgBox("错误：" & objA.LastError, "BACK")
+		Call MsgBox("错误：" & objC.LastError, "BACK")
 	End If
 	If objC.BatCreate Then
 		Call WebLog("添加图片[Title:"&objC.Title&"]成功！", "SESSION")
@@ -72,7 +72,7 @@ Sub DoModify()
 	Dim objC: Set objC = New ClassPicture
 	objC.ID = id
 	If objC.SetValue = False Then
-		Call MsgBox("错误：" & objA.LastError, "BACK")
+		Call MsgBox("错误：" & objC.LastError, "BACK")
 	End If
 	If objC.Modify Then
 		Call WebLog("修改图片[id:"& id &"]成功！", "SESSION")
@@ -163,11 +163,15 @@ Sub DoBatch()
 			If batRs.Eof Then batRs.Close : Set batRs = Nothing
 			While Not batRs.Eof
 				'删除文件
-				If ExistFile("../"&batRs("SmallPicPath")) Then
-					Call DeleteFile("../" & batRs("SmallPicPath"))
+				If IsHttp(batRs("SmallPicPath")) = False Then
+					If ExistFile("../"&batRs("SmallPicPath")) Then
+						Call DeleteFile("../" & batRs("SmallPicPath"))
+					End If
 				End If
-				If ExistFile("../"&batRs("PicPath")) Then
-					Call DeleteFile("../" & batRs("PicPath"))
+				If IsHttp(batRs("PicPath")) = False Then
+					If ExistFile("../"&batRs("PicPath")) Then
+						Call DeleteFile("../" & batRs("PicPath"))
+					End If
 				End If
 				DB "Delete From [Picture] Where [ID] = " & batRs("ID") ,0
 				batRs.MoveNext
@@ -561,9 +565,17 @@ Sub List()
 			Call LoopEcho(chr(9), 4)
 			Echo("<td  align=""center""  style=""padding:5px""  onmouseover=""this.style.background='#FFFFFF';"" onmouseout=""this.style.background='#F0F8FF'""><a href=""?action=modify&id=" &Rs.Data("ID")& """><img src=""")
 			If Rs.Data("SmallPicPath")<>"" Then
-				Echo("../"&Rs.Data("SmallPicPath"))
+				If IsHttp(Rs.Data("SmallPicPath")) = True Then
+					Echo(Rs.Data("SmallPicPath"))
+				Else
+					Echo("../"&Rs.Data("SmallPicPath"))
+				End If
 			Else
-				Echo("../"&Rs.Data("PicPath"))
+				If IsHttp(Rs.Data("SmallPicPath")) = True Then
+					Echo(Rs.Data("PicPath"))
+				Else
+					Echo("../"&Rs.Data("PicPath"))
+				End If
 			End If
 			Echo """ width=""150"" height=""120"" class=""img""  /></a><br /><a href=""?action=modify&id=" &Rs.Data("ID")& """>"&Rs.Data("Title") & "</a>"
 			If Rs.Data("IsTop")=1 Then Echo("<font color='red'>[顶]</font>")
@@ -695,7 +707,9 @@ function cgimg(o){
 
             <%If objA.PicPath<>"" Then %>
             <tr>
-            	<td colspan="2"><div style="text-align:center; padding:5px;"><img class="img" src="../<%=objA.PicPath%>" width="500" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);" /></div></td>
+            	<td colspan="2"><div style="text-align:center; padding:5px;">
+                	<img class="img" src="<% If IsHttp(objA.PicPath) = False Then Echo("../")%><%=objA.PicPath%>" width="500" onload="javascript:DrawImage(this);" onmousewheel="return cgimg(this);" />
+                </div></td>
             </tr>
             <%End If%>
             
@@ -752,11 +766,11 @@ function cgimg(o){
             <%End If%>
             <tr>
             	<td align="right">缩略图路径：</td>
-                <td><input type="text" name="fSmallPicPath" value="<%=objA.SmallPicPath%>" <%If objA.ID>0 Then Echo("readonly=""readonly""")%> style="width:450px;"/></td>
+                <td><input type="text" name="fSmallPicPath" value="<%=objA.SmallPicPath%>" <%If (objA.ID>0) And (IsHttp(objA.SmallPicPath) = False) Then Echo("readonly=""readonly""")%> style="width:450px;"/>(多用|分隔)</td>
             </tr>
             <tr>
             	<td align="right">图片路径：</td>
-                <td><input type="text" name="fPicPath" <%If objA.ID>0 Then Echo("readonly=""readonly""")%>  value="<%=objA.PicPath%>" style="width:450px;" /> <span class="red" id="PicNum">0</span>张</td>
+                <td><input type="text" name="fPicPath" <%If (objA.ID>0) And (IsHttp(objA.PicPath) = False) Then Echo("readonly=""readonly""")%> onblur="chkPicNum();" value="<%=objA.PicPath%>" style="width:450px;" /> <span class="red" id="PicNum">0</span>张</td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -787,15 +801,27 @@ for(var i = 0; i < oInputs.length; i++){
 }
 
 function $F(el){return document.forms["form1"].elements[el];}
+/*
 //判断几张图片
 if ($F("fPicPath").value != ""){
 	$("PicNum").innerHTML = '1';
 }
+*/
+chkPicNum();
+function chkPicNum(){
+	var paths = $F("fPicPath").value;
+	if( paths != "" ){
+		$("PicNum").innerHTML = paths.split('|').length;
+	}
+	else{
+		$("PicNum").innerHTML = '0';
+	}
+}
 //检查提交
 function chkSubmit(){
-	if (parseInt($F("fTitle").value.length) < 2 || parseInt($F("fTitle").value.length) > 20)
+	if (parseInt($F("fTitle").value.length) < 1 || parseInt($F("fTitle").value.length) > 50)
 	{
-		alert("标题长度控制在 2 至 20 字符之间");
+		alert("标题长度控制在 1 至 50 字符之间");
 		$F("fTitle").focus();
 		return false;
 	}

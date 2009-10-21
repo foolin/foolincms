@@ -314,6 +314,15 @@ Function FilterDirtyStr(Byval pStr)
 	FilterDirtyStr = tempStr
 End Function
 
+'判断字符串是否是Http前缀
+Function IsHttp(Byval str)
+	If Left(str,7) = "http://" Then
+		IsHttp = True
+	Else
+		IsHttp = False
+	End If
+End Function
+
 '正则表达式获取数据库表
 Function GetTableBySql(Byval Sql)
 	Dim Reg, Match, Matches, vTable
@@ -344,13 +353,53 @@ Function ObjTest(strObj)
 	ObjTest = IsObj
 End Function
 
-Function ObjTest2(strObj)
-	
+Function IsObjInstalled(strObj)
+	On Error Resume Next
+	IsObjInstalled = False
+	Err = 0
+	Set objTest =Server.CreateObject(strObj)
+	'IF 0=Err Then IsObjInstalled=True
+	If -2147221005 <> Err Then IsObjInstalled = True
+	Set objTest = Nothing
+	Err = 0
 End Function
 
 '调试
 Function Debug(Byval str)
 	Response.Write(Warn(str))
 	Response.End()
+End Function
+
+
+'存储Session
+Function SetSession(Byval vName, Byval vValue)
+	Session( CACHEFLAG & vName) = vValue
+End Function
+
+'获取Session值
+Function GetSession(Byval vName)
+	GetSession = Session( CACHEFLAG & vName)
+End Function
+
+'存储cookies
+Function SetCookies(Byval vName, Byval vValue)
+	Response.Cookies( CACHEFLAG & vName) = vValue
+End Function
+
+'获取cookies值
+Function GetCookies(Byval vName)
+	GetCookies = Server.HTMLEncode(Request.Cookies( CACHEFLAG & vName))
+End Function
+
+'存储登录信息
+Function SetLogin(Byval vName, Byval vValue)
+	'Call SetCookies(vName, vValue)	'cookies模式
+	Call SetSession(vName, vValue)	'session模式
+End Function
+
+'获取登录信息
+Function GetLogin(Byval vName)
+	'GetLogin = GetCookies(vName)	'cookies模式
+	GetLogin = GetSession(vName)	'session模式
 End Function
 %>

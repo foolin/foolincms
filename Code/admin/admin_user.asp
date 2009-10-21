@@ -438,7 +438,7 @@ Sub FuncForm(ByVal id)
 		If objA.LetValue = False Then Call MsgBox("对不起，你编辑的管理员不存在", "BACK")
 	End If
 %>
-	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post">
+	<form action="?action=do<%If id > 0 Then Echo("modify") Else Echo("create")%>" id="form1" name="form1" method="post" onsubmit="return chkForm();">
     	<input type="hidden" name="id" value="<%=objA.ID%>"/>
         <table class="form" style="border:1px #88C4FF solid;">
             <tr><th colspan="2">
@@ -446,11 +446,11 @@ Sub FuncForm(ByVal id)
             </th></tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
             	<td align="right" width="15%">管理员：</td>
-            	<td><input type="text" name="fUsername" value="<%=objA.Username%>" <%If id > 0 Then Echo("readonly=""readonly""")%> style="width:450px;"/> <span class="red">* 必填（只能英文和下划线，不能使用中文）</span></td>
+            	<td><input type="text" name="fUsername" id="fUsername" value="<%=objA.Username%>" <%If id > 0 Then Echo("readonly=""readonly""")%> style="width:450px;"/> <span class="red">* 必填（只能英文和下划线，不能使用中文）</span></td>
             </tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
             	<td align="right" width="15%">昵称：</td>
-            	<td><input type="text" name="fNickname" value="<%=objA.Nickname%>" style="width:450px;"/> <span class="red">* 必填（可以使用中文）</span></td>
+            	<td><input type="text" name="fNickname" id="fNickname" value="<%=objA.Nickname%>" style="width:450px;"/> <span class="red">* 必填（可以使用中文）</span></td>
             </tr>
             <tr onmouseover="this.style.background='#51C7FF';" onmouseout="this.style.background='#F0F8FF'">
                 <td align="right" width="15%">新密码：</td>
@@ -478,7 +478,7 @@ Sub FuncForm(ByVal id)
                     <option value="1"> 中级管理员 </option>
                     <option value="2"> 高级管理员 </option>
                     <option value="3"> 超级管理员 </option>
-                    <option value="4"> 冻结用户 </option>
+                    <option value="-1"> 冻结用户 </option>
                 </select> <span class="red"> * 必选</span>
                 </td>
             </tr>
@@ -515,6 +515,34 @@ Sub FuncForm(ByVal id)
                 this.style.border = '#C4E1FF 1px solid';
             };
         }
+		//检查表单
+		function chkForm(){
+			if( $("fUsername").value == ""){
+				alert("请输入管理员名！");
+				return false;
+			}
+			if(/^[0-9a-zA-Z\_]+$/g.test($("fUsername").value) == false){
+				alert("管理员名不合法！");
+				return false;
+			}
+			if( $("fNickname").value == ""){
+				alert("请输入昵称！");
+				return false;
+			}
+			if( $("fPassword").value == ""){
+				alert("请输入密码！");
+				return false;
+			}
+			if( $("fPassword").value.length < 6){
+				alert("密码不能少于6位！");
+				return false;
+			}
+			if( $("fRePassword").value != $("fPassword").value){
+				alert("请输入两次密码不一致！");
+				return false;
+			}
+			return true;
+		}
     //-->
     </script>
     <div class="page">

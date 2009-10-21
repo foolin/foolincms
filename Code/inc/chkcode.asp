@@ -4,7 +4,7 @@ Public Noisy, Count, Width, Height, Angle, Offset, Border
 Private Graph(), Margin(3)
 Private Sub Class_Initialize()
    Randomize
-   Noisy = 10 ' 干扰点出现的概率
+   Noisy = 5 ' 干扰点出现的概率
    Count = 4 ' 字符数量
    Width = 80 ' 图片宽度
    Height = 20 ' 图片高度

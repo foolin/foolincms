@@ -1,6 +1,4 @@
-<!--#include file="../../inc/config.asp"-->
-<!--#include file="../../inc/func_common.asp"-->
-<!--#include file="../inc/plugin.conn.asp"-->
+<!--#include file="../../inc/plugin.include.asp"-->
 <%	'判断是否开放留言
 	If ISOPENGBOOK = 0 Then
 		Call MsgBox("对不起，本站留言功能暂不开放！","BACK")

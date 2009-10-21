@@ -194,11 +194,19 @@ Class ClassPicture
 		'判断是否为父栏目，如果是，不允许添加图片
 		If IsParentCol = True Then Call MsgBox("你选择栏目是父栏目，父栏目不允许添加图片","BACK")
 		'处理添加记录
-		Dim arrPicPath, i
+		Dim arrPicPath, arrSmallPicPath, i
+		If Len(vSmallPicPath) = 0 Then
+			arrSmallPicPath = vPicPath
+		End If
 		arrPicPath = Split(vPicPath, "|")
+		arrSmallPicPath = Split(vSmallPicPath, "|")
+		If UBound(arrPicPath)<>UBound(arrSmallPicPath) Then
+			Call MsgBox("缩略图的张数和图片张数不同，请返回检查！","BACK")
+		End If
 		For i = 0 To UBound(arrPicPath)
 			vPicPath = arrPicPath(i)
-			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','"&vPicPath&"','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
+			vSmallPicPath = arrSmallPicPath(i)
+			Call DB("INSERT INTO Picture(ColID, Title, Author, Source, SmallPicPath, PicPath, Intro, IsTop, State, Hits, CreateTime) VALUES("&vColID&",'"&vTitle&"','"&vAuthor&"','"&vSource&"','"&vSmallPicPath&"','"&vPicPath&"','"&vIntro&"',"&vIsTop&","&vState&","&vHits&",'"&vCreateTime&"')",0)
 		Next
 		BatCreate = True
 	End Function
@@ -245,11 +253,15 @@ Class ClassPicture
 		Set Rs = DB("Select * From [Picture] Where [ID]=" & vID,1)
 		If Rs.Eof Then Rs.Close : Set Rs = Nothing: mLastError = "你所需要更新的记录 " & vID & " 不存在!" : Delete = False : Exit Function
 		'删除文件
-		If ExistFile("../"&Rs("SmallPicPath")) Then
-			Call DeleteFile("../" & Rs("SmallPicPath"))
+		If IsHttp(Rs("SmallPicPath")) = False Then
+			If ExistFile("../"&Rs("SmallPicPath")) Then
+				Call DeleteFile("../" & Rs("SmallPicPath"))
+			End If
 		End If
-		If ExistFile("../"&Rs("PicPath")) Then
-			Call DeleteFile("../" & Rs("PicPath"))
+		If IsHttp(Rs("PicPath")) = False Then
+			If ExistFile("../"&Rs("PicPath")) Then
+				Call DeleteFile("../" & Rs("PicPath"))
+			End If
 		End If
 		Rs.Close : Set Rs = Nothing
 		DB "Delete From [Picture] Where [ID] = " & vID ,0

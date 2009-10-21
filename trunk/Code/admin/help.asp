@@ -713,8 +713,10 @@ HightLightTag("tagCode");
         &nbsp; {sys:skinurl /} &lt;!-- 皮肤路径 --&gt;<br />
         &nbsp; {sys:title /} &lt;!-- 当前页面标题 --&gt;<br />
         &nbsp; {sys:sitepath /} &lt;!-- 当前页面路径 --&gt;<br />
-        &nbsp; {sys:sitekeywords /} &lt;!-- 网站关键字 --&gt;<br />
-        &nbsp; {sys:sitedesc /} &lt;!-- 网站描述 --&gt;<br />
+        &nbsp; {sys:keywords /} &lt;!-- 网站关键字 --&gt;<br />
+        &nbsp; {sys:sitekeywords /} &lt;!-- 网站关键字（v1.0.3以前版本） --&gt;<br />
+        &nbsp; {sys:description /} &lt;!-- 网站描述 --&gt;<br />
+        &nbsp; {sys:sitedesc /} &lt;!-- 网站描述（v1.0.3以前版本） --&gt;<br />
         &nbsp; {sys:installdir /} &lt;!-- 系统安装目录 --&gt;<br />
         &nbsp; {sys:httpurl /} &lt;!-- 网站域名 --&gt;<br />
         &nbsp; {sys:templatedir /} &lt;!-- 当前模板目录 --&gt;<br />

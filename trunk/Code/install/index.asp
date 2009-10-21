@@ -629,11 +629,11 @@ Function CreateConfig(DbName)
 	strTemp= strTemp & "Dim INSTALLDIR" & keyTab & "'网站安装目录，根目录则为：/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "INSTALLDIR = " & Chr(34) & GetInstallDir & Chr(34) & keyEnter
 	' SITEKEYWORDS变量
-	strTemp= strTemp & "Dim SITEKEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "SITEKEYWORDS = " & Chr(34) & "E酷网，E酷Cms，E酷工作室,www.eekku.com，零星碎事，ling.liufu.org" & Chr(34) & keyEnter
+	strTemp= strTemp & "Dim KEYWORDS" & keyTab & "'网站关键词" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "KEYWORDS = " & Chr(34) & "E酷网，E酷Cms，E酷工作室,www.eekku.com，零星碎事，ling.liufu.org" & Chr(34) & keyEnter
 	' SITEDESC变量
-	strTemp= strTemp & "Dim SITEDESC" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
-	strTemp= strTemp & "SITEDESC = " & Chr(34) & "E酷Cms是一种小型站点内容管理系统，内含文章、图片、留言等基本功能，简单且方便使用！" & Chr(34) & keyEnter
+	strTemp= strTemp & "Dim DESCRIPTION" & keyTab & "'网站描述" & Chr(10) & Chr(9) 
+	strTemp= strTemp & "DESCRIPTION = " & Chr(34) & "E酷Cms是一种小型站点内容管理系统，内含文章、图片、留言等基本功能，简单且方便使用！" & Chr(34) & keyEnter
 	' TEMPLATEDIR变量
 	strTemp= strTemp & "Dim TEMPLATEDIR" & keyTab & "'网站模板路径，例如：default表示template/default/" & Chr(10) & Chr(9) 
 	strTemp= strTemp & "TEMPLATEDIR = " & Chr(34) & "default" & Chr(34) & keyEnter

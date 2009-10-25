@@ -26,7 +26,7 @@
  
  Dim objRs
  Dim strUsername, strNickname
- Set objRs = DB("SELECT Username,Nickname FROM Admin WHERE Username = '" & GetCookies("AdminName") & "'", 1)
+ Set objRs = DB("SELECT Username,Nickname FROM Admin WHERE Username = '" & GetLogin("AdminName") & "'", 1)
   If objRs.Eof Then objRs.Close: Set objRs = Nothing: Call MsgBox("帐号非法！请重新登录！" ,"logout.asp")
   strUsername = objRs("Username")
   strNickname = objRs("Nickname")

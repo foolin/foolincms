@@ -129,7 +129,7 @@ function update(form){
             </div>
         </div>
         <div class="btn">
-        	<form action="update.asp" method="post">
+        	<form action="" method="post">
             	<input type="hidden" name="action" value="update" />
                 <input type="button" value="Éý¼¶"  onclick="update(this.form);"/>
             </form>

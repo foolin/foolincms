@@ -86,7 +86,7 @@
                         </div>
                         
 <div class="postForm">                   
-  <form action="{sys:saveurl /}" method="post">
+  <form action="{sys:pluginurl /}guestbook/save.asp" method="post">
       <table width="100%">
         <tr>
             <th colspan="2">«©–¥¡Ù—‘</th>
@@ -140,7 +140,7 @@
                             <div class="content">
                                 <ul>
                                 {list:hot  row="20" col="1" order="hot"}
-                                <li><a href="{sys:siteurl}[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
+                                <li><a href="[hot:url]" title="">[hot:title len="15" lenext="..."]</a></li>
 								{/list:hot}
                                 </ul>
                             </div>

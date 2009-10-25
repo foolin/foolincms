@@ -15,10 +15,16 @@
 
 注意：
    
-  本模板是有Foolin设计&制作，模板以及图片版权归Foolin（负零）所有。
+  1、本模板是有Foolin设计&制作，模板以及图片版权归Foolin（负零）所有。
   
-  本模板最后更新于：2009年10月13日，获取更多模板，请访问：http://www.eekku.com
+  2、获取更多模板，请访问：http://www.eekku.com
   
+
+本模板最后更新于2009年10月25日，更新记录如下：
+  
+  1、将留言模板提交路径{sys:saveurl /}改为{sys:pluginurl /}guestbook/save.asp  ({sys:pluginurl /}适合E酷CMS v1.0.5版本)
+  
+  2、将图片列表模板[pic:picpath]改为[pic:SmallPicPath]，即是列表显示缩略图，而非大图，有利于载入速度。
 
 =========================================================
   

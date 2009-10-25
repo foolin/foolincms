@@ -1,5 +1,6 @@
 <!--#include file="../inc/config.asp"-->
 <!--#include file="../inc/const.asp"-->
+<!--#include file="../inc/func_file.asp"-->
 <%
 Dim act : act = LCase(Request("action"))
 Dim SUCCESS,FAIL
@@ -201,7 +202,7 @@ function update(form){
             </div>
         </div>
         <div class="btn">
-        	<form action="update.asp" method="post">
+        	<form action="" method="post">
             	<input type="hidden" name="action" value="update" />
                 <input type="button" value="Éý¼¶"  onclick="update(this.form);"/>
             </form>

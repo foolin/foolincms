@@ -3,6 +3,7 @@ E酷CMS更新记录：
 E酷CMS V1.0.5 build20091025
   增加自动生成缩略图（需要AspJpeg组件支持）
   后台验证方式更改为Cookies验证方式，解决Session超时的问题。
+  增加自动删除30天以前的管理操作记录。
   增加如果网站安装目录配置不正确，后台首页会自动检测且给出提示。
   增加系统标签{sys:keywords /}、{sys:description /}，代替了{sys:sitekeywords /}（网站关键词）和{sys:sitedesc /}（网站描述）。
   增加添加管理员时验证提示.

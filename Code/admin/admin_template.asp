@@ -141,7 +141,7 @@ Fileurl =  replace(request("file"),"//","/")
 	%>
 </table>
 
-					<div style="color:green; padding:10px;">温馨提示：如果要选择模板，请到【<a href="admin_config.asp">系统配置 → 模板目录 </a>】进行设置！</div>
+					<div style="color:green; padding:10px;">温馨提示：如果要选择模板，请到【<a href="admin_config.asp">系统配置 → 模板目录 </a>】进行设置！【<a href="http://www.eekku.com" target="_blank">获取更多模板>></a>】</div>
                </div>
             </td>
         </tr>

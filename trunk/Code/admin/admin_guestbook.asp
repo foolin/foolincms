@@ -254,7 +254,7 @@ Sub List()
                      	<span class="red"><a href="?id=<%=Rs.Data("ID")%>&action=setstate&state=pass" title="Í¨¹ýÉóºË">Î´ÉóºË</a></span>
                      <%End If%>
                      <a href="?id=<%=Rs.Data("ID")%>&action=recomment">[»Ø¸´] </a>
-                     <a href="?id=<%=Rs.Data("ID")%>&action=dodelete">[É¾³ý]</a>
+                     <a href="?id=<%=Rs.Data("ID")%>&action=dodelete" onclick="return confirm('È·¶¨É¾³ý¸ÃÁôÑÔ£¿')">[É¾³ý]</a>
                 </span>
                 </div>
             </div> 

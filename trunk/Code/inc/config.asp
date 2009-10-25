@@ -10,7 +10,7 @@ Dim CHARSET: CHARSET = "GB2312"		'±àÂëÃû³Æutf-8|gb2312
 ' Auhtor: 		Foolin
 ' E-mail: 		Foolin@126.com
 ' Created on: 	2009-9-9 10:27:17
-' Update on: 	2009-10-21 19:49:19
+' Update on: 	2009-10-21 23:24:44
 ' Copyright (c) 2009 E¿á¹¤×÷ÊÒ£¨Foolin£©All Rights Reserved
 '=========================================================
 

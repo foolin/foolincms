@@ -4,7 +4,7 @@
  If LCase(Request("action")) = "update" Then
 	Dim rRs
 	Dim rUsername, rNickname, rOldPassword, rPassword
-	rUsername = GetCookies("AdminName")
+	rUsername = GetLogin("AdminName")
 	rNickname = Req("fNickname")
 	rOldPassword = Req("fOldPassword")
 	If Req("fPassword") <> "" Then
@@ -21,7 +21,7 @@
 	rRs.Update
 	rRs.Close: Set rRs = Nothing
 	Call WebLog("管理员["& rUsername &"]修改资料成功！", "SESSION")
-	Call MsgAndGo("修改资料成功！", "BACK")
+	Call MsgBox("修改资料成功！请重新登录...", "Logout.asp")
  End If
  
  Dim objRs

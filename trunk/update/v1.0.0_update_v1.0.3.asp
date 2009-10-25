@@ -28,7 +28,7 @@ If act = "update" Then
 	If Err Then FAIL = FAIL & "错误：" & Err.Description & "(" & Now() & ")<br />": Err.Clear
 	
 	If FAIL = "" Then
-		SUCCESS = "恭喜，升级成功！请务必立刻把本升级文件(install/update.asp)删除！(" & Now() & ")"
+		SUCCESS = "恭喜，升级成功！请务必立刻把本升级文件("& Request.ServerVariables("Path_Info") &")删除！(" & Now() & ")"
 	End If
 End If
 %>
@@ -120,7 +120,7 @@ function update(form){
                 <li>本文件升级只是对数据库增加字段，其余升级请看升级说明。</li>
                 <li><span class="red">请先备份您网站的所有数据。</span></li>
                 <li>系统检测您的系统版本为：<span class="blue"><%=Sys%></span></li>
-                <li>升级完成之后，请立刻把<span class="blue">本升级文件（update.asp）</span>删除！</li>
+                <li>升级完成之后，请立刻把<span class="blue">本升级文件（<%=Request.ServerVariables("Path_Info")%>）</span>删除！</li>
                 <li>如果有任何升级不成功或者升级出错，请到官方：http://www.eekku.com论坛进行反馈。</li>
            	</ol>
             <div class="result">

@@ -1,3 +1,26 @@
+EekkuCMS V1.0.3升级到V1.0.5说明：
+
+	1、请备份您的网站全部数据。
+	
+	2、保留Database文件夹以及里面文件
+	
+	3、保留inc/config.asp文件
+	
+	4、保留Template文件夹以及里面文件
+	
+	5、保留Upload文件夹以及里面所有文件
+	
+	6、其余文件全部覆盖更新。
+	
+	7、上传update.asp到install目录下。
+	
+	8、运行：http://您网站网址/install/v1.0.3_update_v1.0.5.asp
+	
+	9、升级完成后，把update.asp文件删除。
+	
+	10、完成升级。
+
+
 
 EekkuCMS V1.0.0升级到V1.0.3说明：
 
@@ -15,7 +38,7 @@ EekkuCMS V1.0.0升级到V1.0.3说明：
 	
 	7、上传update.asp到install目录下。
 	
-	8、运行：http://您网站网址/install/update.asp
+	8、运行：http://您网站网址/install/v1.0.0_update_v1.0.3.asp
 	
 	9、升级完成后，把update.asp文件删除。
 	

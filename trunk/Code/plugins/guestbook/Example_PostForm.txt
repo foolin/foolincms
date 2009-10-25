@@ -1,4 +1,4 @@
-  <form action="{sys:saveurl /}" method="post">
+  <form action="{sys:pluginurl /}guestbook/save.asp" method="post">
       <table width="100%">
         <tr>
             <th colspan="2">«©–¥¡Ù—‘</th>

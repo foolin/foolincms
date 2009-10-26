@@ -6,7 +6,7 @@ End If
 
 '打开数据库连接
 Dim ConnStr, Conn
-ConnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath(InstallDir & "/" & DBPath)
+ConnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath(Replace(InstallDir & "/" & DBPath,"//","/"))
 Set   Conn=Server.CreateObject("ADODB.Connection")  
 Conn.Open ConnStr
 If Err Then

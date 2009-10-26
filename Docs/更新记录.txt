@@ -1,5 +1,8 @@
 E酷CMS更新记录：
 
+E酷CMS V1.0.5 build20091026
+	修正网站为根目录，无法连接数据库的bug.
+
 E酷CMS V1.0.5 build20091025
   增加自动生成缩略图（需要AspJpeg组件支持）
   后台验证方式更改为Cookies验证方式，解决Session超时的问题。
